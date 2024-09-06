@@ -1,0 +1,11 @@
+.env
+.env.app
+__pycache__
+*.pyc
+.venv
+.git
+.gitignore
+compose.yaml
+note.txt
+*.db
+wavemocards-firebase.json
