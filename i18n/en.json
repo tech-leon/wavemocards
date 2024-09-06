@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "app": "Wave Emotion Cards",
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "emotions": "Emotions",
+    "emotioncards": "Emotion Cards",
+    "login": "Login to Wave Emotion Cards",
+    "logout": "Logout",
+    "register": "Register for Wave Emotion Cards",
+    "myrecord": "My Emotion Records",
+    "profile": "Profile"
+  },
+  "footer": {
+    "titles": {
+      "report": "Report an Issue"
+    },
+    "contributors": {
+      "title": "Team",
+      "position": {
+        "pm": "Project Manager",
+        "pd": "Project Designer",
+        "fd": "Frontend Developer",
+        "fc": "Frontend Consultant",
+        "db": "Database Developer",
+        "bd": "Backend Developer",
+        "sd": "System Designer",
+        "gd": "Illustrator"
+      },
+      "name": {
+        "elma": "Shu-Ping Yu",
+        "wei": "Wei-Kai Lin",
+        "leon": "Leon Wu",
+        "yi": "Yi-Wen Fang"
+      },
+      "url": {
+        "elma": "https://www.linkedin.com/in/shu-ping-yu-238655268/",
+        "wei": "https://www.linkedin.com/in/%E5%81%89%E5%87%B1-%E6%9E%97-668aaa204/",
+        "leon": "https://theleon.at",
+        "yi": "https://a8607125167.wixsite.com/mysite/about"
+      }
+    },
+    "usefulLinks": {
+      "title": "Useful Links",
+      "list": {
+        "report": "Report an Issue"
+      },
+      "url": {
+        "elma": "https://www.linkedin.com/in/shu-ping-yu-238655268/",
+        "wei": "https://www.linkedin.com/in/%E5%81%89%E5%87%B1-%E6%9E%97-668aaa204/",
+        "leon": "https://theleon.at",
+        "yi": "https://a8607125167.wixsite.com/mysite/about"
+      }
+    },
+    "subtitle": "Your wave of emotions",
+    "copyright": "Wave Emotion Cards | Wave Emotion Cards",
+    "email": "mailto:info@wavemocards.com"
+  },
+  "pages": {
+    "home": {
+      "title": "Your wave",
+      "subtitle": "of emotions"
+    },
+    "about": {
+      "title": "About Wave Emotion Cards",
+      "subtitle": "We're from Taiwan"
+    },
+    "emotions": {
+      "title": {
+        "h1": "Emotions",
+        "aboutEmotions": "What are Emotions?",
+        "6emotions": "Six Basic Emotions",
+        "emotionRange": "Emotions Have No Good or Bad",
+        "emotionsHealth": "The Healthy Way of Emotions"
+      },
+      "content": {
+        "aboutEmotions": "Emotion, in English, represents the energy flowing through our bodies. When we are stimulated, it triggers inner feelings, physical reactions, thoughts, and actions - that's emotion. For example, when someone enters a back alley and encounters a fierce-looking dog (stimulus), they feel very scared and worry about being bitten (inner feelings and thoughts), their heart rate increases and they start trembling (physical reactions), and ultimately decide to quickly leave by taking a detour (action).",
+        "6emotions": {
+          "happy": "Happiness",
+          "sadness": "Sadness",
+          "fear": "Fear",
+          "disgust": "Disgust",
+          "anger": "Anger",
+          "surprise": "Surprise",
+          "context": "Naturalist Darwin mentioned that humans have six basic emotions, including happiness, sadness, fear, disgust, anger, and surprise, which are instinctive emotions that help increase human survival chances. Other complex emotions such as excitement, grievance, inferiority, jealousy, guilt, loneliness, etc., are derived from a mixture of basic emotions and are produced after learning and socialization."
+        },
+        "emotionRange": "People generally tend to categorize emotions as positive or negative, considering happiness as a positive emotion, while sadness, anger, and fear are seen as harmful to people. In fact, emotions have no good or bad distinctions; each emotion has its unique significance. For example, feeling fear and anxiety about an unfamiliar environment reflects a desire for security and reminds us to stay away from danger. When sad and vulnerable, crying can attract care and support, promoting interpersonal connections.",
+        "emotionsHealth": "If we have biases against emotions, denying and suppressing our true feelings, pretending to be happy when we're sad, or silently enduring when we're angry, it can easily lead to physical and mental health problems. Emotional health doesn't mean constantly maintaining a happy mood, but rather having the ability to recognize our different emotions, understand our inner needs, and express and adjust them in healthy and appropriate ways, allowing our minds to return to a state of calm."
+      },
+      "reference": "Source: Hong Kong Federation of Youth Groups | Wellness Mind Centre (Kowloon)",
+      "refurl": "https://wmc.hkfyg.org.hk/emo1"
+    },
+    "login": {
+      "title": "Welcome back! 👋",
+      "subtitle": "How was your day?",
+      "email": "Email:",
+      "password": "Password:",
+      "login": "Login",
+      "error": "Error:",
+      "forget": "Forgot password?",
+      "register": "Don't have an account? Register"
+    },
+    "userProfile": {
+      "title": "My Account",
+      "subtitle": "Personal Information",
+      "email": "Email:",
+      "name": "Name:",
+      "photoURL": "Photo URL:",
+      "role": "Role:",
+      "birthday": "Birthday:",
+      "password": "Password:",
+      "oldPassword": "Password:",
+      "newPassword": "Password:",
+      "confirmPassword": "Confirm Password:",
+      "save": "Confirm Changes",
+      "creationTime": "Creation Date:",
+      "lastSignInTime": "Last Sign-in Time:",
+      "error": "Error"
+    },
+    "emotionCards": {
+      "title": "Emotion Cards",
+      "subtitle": "Personal Information",
+      "category": {
+        "happy": "Happy",
+        "expectation": "Expectation",
+        "peaceOfMind": "Peace of Mind",
+        "uneasiness": "Uneasiness",
+        "surprise": "Surprise",
+        "depressed": "Depressed",
+        "hate": "Hate",
+        "anger": "Anger",
+        "others": "Others"
+      },
+      "categoryColors": {
+        "happy": "快樂",
+        "expectation": "期待",
+        "peaceOfMind": "安心",
+        "uneasiness": "不安",
+        "surprise": "驚訝",
+        "depressed": "低落",
+        "hate": "討厭",
+        "anger": "憤怒",
+        "others": "其他"
+      }
+    },
+    "register": {
+      "title": "Register a account",
+      "subtitle": "Personal Information",
+      "form": {
+        "email": "Email",
+        "name": "Name",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "birthday": "dd / mm / yyyy",
+        "occupations": "Occupation",
+        "submit": "Register",
+        "emailEmptyError": "Email cannot be empty",
+        "emailSyntaxError": "Invalid email format",
+        "nameEmptyError": "Name cannot be empty",
+        "passwordEmptyError": "Password cannot be empty",
+        "passwordRequirementError": "Password requirements:\nAt least 8 characters\nAt least 1 uppercase letter\nAt least 1 lowercase letter\nAt least 1 number\nAt least 1 special character",
+        "confirmPasswordError": "Passwords do not match"
+      }
+    },
+    "myRecord": {
+      "title": "My Emotion Records",
+      "subtitle": "Coming Soon",
+      "table": {
+        "date": "Date",
+        "emotionAndIntensity": "Emotion and Intensity",
+        "story": "Emotion Story"
+      }
+    },
+    "myRecordAnalysis": {
+      "title": "Record Analysis",
+      "subtitle": "Coming Soon",
+      "analysis": "Analysis"
+    }
+  },
+  "element": {
+    "cardDescription": "Meaning:",
+    "cardExample": "Example sentence:"
+  }
+}

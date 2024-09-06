@@ -1,0 +1,38 @@
+{
+  "1": {
+    "name": "喜び",
+    "color": "#FFE589"
+  },
+  "2": {
+    "name": "期待",
+    "color": "#F8C18F"
+  },
+  "3": {
+    "name": "安心",
+    "color": "#CEE5AF"
+  },
+  "4": {
+    "name": "不安",
+    "color": "#E0CACA"
+  },
+  "5": {
+    "name": "驚き",
+    "color": "#B4B9E7"
+  },
+  "6": {
+    "name": "落ち込み",
+    "color": "#C5DDE8"
+  },
+  "7": {
+    "name": "嫌い",
+    "color": "#D6CAC0"
+  },
+  "8": {
+    "name": "怒り",
+    "color": "#E0AEAE"
+  },
+  "9": {
+    "name": "その他",
+    "color": "#e5e7eb"
+  }  
+}

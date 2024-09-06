@@ -1,0 +1,188 @@
+{
+  "nav": {
+    "app": "浪潮情緒卡",
+    "home": "首頁",
+    "about": "關於我們",
+    "contact": "聯絡我們",
+    "emotions": "認識情緒",
+    "emotioncards": "情緒卡",
+    "login": "登入浪潮情緒卡",
+    "logout": "登出",
+    "register": "註冊浪潮情緒卡",
+    "myrecord": "我的情緒紀錄",
+    "notFoundPage": "404: 未找到頁面",
+    "profile": "個人資料"
+  },
+  "footer": {
+    "titles": {
+      "report": "回報問題"
+    },
+    "contributors": {
+      "title": "Team",
+      "position": {
+        "pm": "Project Manager",
+        "pd": "Project Designer",
+        "fd": "Frontend Developer",
+        "fc": "Frontend Consultant",
+        "db": "Database Developer",
+        "bd": "Backend Developer",
+        "sd": "System Designer",
+        "gd": "Illustrator"
+      },
+      "name": {
+        "elma": "Shu-Ping Yu",
+        "wei": "Wei-Kai Lin",
+        "leon": "Leon Wu",
+        "yi": "Yi-Wen Fang"
+      },
+      "url": {
+        "elma": "https://www.linkedin.com/in/shu-ping-yu-238655268/",
+        "wei": "https://www.linkedin.com/in/%E5%81%89%E5%87%B1-%E6%9E%97-668aaa204/",
+        "leon": "https://theleon.at",
+        "yi": "https://a8607125167.wixsite.com/mysite/about"
+      }
+    },
+    "usefulLinks": {
+      "title":"相關連結",
+      "list": {
+        "report": "回報問題"
+      },
+      "url": {
+        "elma": "https://www.linkedin.com/in/shu-ping-yu-238655268/",
+        "wei": "https://www.linkedin.com/in/%E5%81%89%E5%87%B1-%E6%9E%97-668aaa204/",
+        "leon": "https://theleon.at",
+        "yi": "https://a8607125167.wixsite.com/mysite/about"
+      }
+    },
+    "subtitle": "尋找自我情緒的浪潮",
+    "copyright": "浪潮情緒卡 | Wave Emotion Cards",
+    "email": "mailto:info@wavemocards.com"
+  },
+  "pages": {
+    "home": {
+      "title": "尋找自我",
+      "subtitle": "情緒的浪潮"
+    },
+    "about": {
+      "title": "關於浪潮情緒卡",
+      "subtitle": "我們來自台灣"
+    },
+    "emotions": {
+      "title": {
+        "h1": "認識情緒",
+        "aboutEmotions": "什麼是情緒？",
+        "6emotions": "六大基本情緒",
+        "emotionRange": "情緒無分好與壞",
+        "emotionsHealth": "情緒的健康之道"
+      },
+      "content": {
+        "aboutEmotions": "情緒英文是emotion，代表流動在我們身體的能量。當我們受到刺激，引發出內心感受、身體反應、想法與行動，就是情緒。例如某人踏進後巷時，遇到一隻看來很兇惡的狗（刺激），覺得十分害怕，擔心自己被咬傷（內心感受和想法），不禁心跳加速和顫抖（身體反應），最終決定急步繞路離開（行動）。",
+        "6emotions": {
+          "happy": "快樂",
+          "sadness": "悲傷",
+          "fear": "恐懼",
+          "disgust": "厭惡",
+          "anger": "憤怒",
+          "surprise": "驚訝",
+          "context": "博物學家達爾文提及過人類有六種基本情緒，包括快樂（happiness）、悲傷（sadness）、恐懼（fear）、厭惡（disgust）、憤怒（anger）和驚訝（surprise），屬於有助人類提高生存機會的本能情緒。其他複雜情緒如興奮、委屈、自卑、妒忌、內疚、寂寞等，則是由基本情緒混合衍生而成，並且經過學習與社會化之後產生。"
+        },
+        "emotionRange": "一般人習慣將情緒分為正負面，覺得快樂屬於正面情緒，悲傷、憤怒、恐懼則對人有害。其實情緒無分好與壞，每一種情緒都有其獨特意義。例如對於陌生環境感到恐懼不安，反映著對安全感的渴求，提醒我們遠離危險。悲傷時脆弱流淚，則可吸引關顧與扶持，促進人際聯繫。",
+        "emotionsHealth": "假如對情緒存在偏見，否定和壓抑自己的真正感覺，明明傷心卻扮開心，明明生氣卻默默忍受，很容易令身心健康出現問題。所謂情緒健康，不代表要時刻保持愉快心情，而是要有能力覺察自己的不同情緒，了解內心需要，並以健康恰當的方式去表達和調適，讓心靈回復平靜。"
+      },
+      "reference": "引用來源：香港青年協會｜全健空間（九龍）",
+      "refurl": "https://wmc.hkfyg.org.hk/emo1"
+    },
+    "login": {
+      "title": "歡迎回來！ 👋",
+      "subtitle": "今天過得好嗎？",
+      "email": "信箱:",  
+      "password": "密碼:",
+      "login": "登入",
+      "error": "錯誤:",
+      "forget": "忘記密碼？",
+      "register": "還沒有帳號？ 註冊"
+    },
+    "userProfile": {
+      "title": "我的帳戶",
+      "subtitle": "個人資料",
+      "email": "信箱：",
+      "name": "名稱：",
+      "photoURL": "照片網址：",
+      "role": "角色：",  
+      "birthday": "生日：",  
+      "password": "密碼：",
+      "oldPassword": "密碼：",
+      "newPassword": "密碼：",
+      "confirmPassword": "確認密碼：",
+      "save": "確認修改",
+      "creationTime": "創建日期：",
+      "lastSignInTime": "上次登入時間：",
+      "timezone": "時區：",
+      "valueEmpty": "未設定",  
+      "error": "錯誤"
+    },
+    "emotionCards": {
+      "title": "情緒卡",
+      "subtitle": "個人資料",
+      "category": {
+        "happy": "快樂",
+        "expectation": "期待",
+        "peaceOfMind": "安心",
+        "uneasiness": "不安",
+        "surprise": "驚訝",
+        "depressed": "低落",
+        "hate": "討厭",
+        "anger": "憤怒",
+        "others": "其他"        
+      },
+      "categoryColors": {
+        "happy": "快樂",
+        "expectation": "期待",
+        "peaceOfMind": "安心",
+        "uneasiness": "不安",
+        "surprise": "驚訝",
+        "depressed": "低落",
+        "hate": "討厭",
+        "anger": "憤怒",
+        "others": "其他"
+      }
+    },
+    "register": {
+      "title": "註冊 ✏️",
+      "subtitle": "為你的心情留下紀錄",
+      "form": {
+        "email": "信箱",  
+        "name": "姓名",  
+        "password": "密碼",
+        "confirmPassword": "確認密碼",
+        "birthday": "dd / mm / yyyy",
+        "occupations": "職業",
+        "submit": "註冊",
+        "emailEmptyError": "信箱不可為空",
+        "emailSyntaxError": "信箱格式錯誤",
+        "nameEmptyError": "姓名不可為空",
+        "passwordEmptyError": "密碼不可為空",
+        "passwordRequirementError": "密碼須符合以下要求：\n最少 8 個字元\n至少 1 個大寫字母\n至少 1 個小寫字母\n至少 1 個數字\n至少 1 個特殊字元",
+        "confirmPasswordError": "與密碼不相符"
+      }
+    },
+    "myRecord": {
+      "title": "我的情緒紀錄",
+      "subtitle": "Coming Soon",
+      "table": {
+        "date": "日期",  
+        "emotionAndIntensity": "情緒與強度",  
+        "story": "情緒故事"
+      }
+    },
+    "myRecordAnalysis": {
+      "title": "情緒紀錄分析",
+      "subtitle": "Coming Soon",
+      "analysis": "分析"
+    }
+  },
+  "element": {
+    "cardDescription": "意思：",
+    "cardExample": "例句："
+  }
+}
