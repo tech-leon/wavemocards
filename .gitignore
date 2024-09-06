@@ -8,6 +8,9 @@
 
 # testing
 /coverage
+backend_code
+*.bk
+*.sql
 
 # next.js
 /.next/
@@ -15,6 +18,12 @@
 
 # production
 /build
+
+# python
+test.py
+*.db
+__pycache__/
+*.pyc
 
 # misc
 .DS_Store
@@ -26,7 +35,19 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+.env.app
+.env.server
+.env.compose
+.venv
+*.zip
+note*
+wavemocards.json
+*.sqlite3*
 
 # vercel
 .vercel
