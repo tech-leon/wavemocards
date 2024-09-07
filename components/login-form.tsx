@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ export default function LoginForm() {
     theme === "dark" ? `url('${bgDark.src}')` : `url('${bgLight.src}')`;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full lg:grid min-h-screen lg:grid-cols-2 -my-20">
+    <div className="flex flex-col justify-center w-full lg:grid min-h-screen lg:grid-cols-2 -my-20">
       <div className="flex items-center justify-center py-12 order-last">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
