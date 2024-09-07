@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import { useTheme } from "next-themes";
 import bgDark from "@/app/assets/img/bg/bg-login-dark.svg";
 import bgLight from "@/app/assets/img/bg/bg-login-light.svg";
@@ -28,17 +28,15 @@ export default function LoginForm() {
           </div>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email"> {t("pages.login.email")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder={t("pages.login.email")}
                 required
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password"> {t("pages.login.password")}</Label>
                 <Link
                   href="/forgot-password"
                   className="ml-auto inline-block text-sm underline"
@@ -46,7 +44,11 @@ export default function LoginForm() {
                   {t("pages.login.forget")}{" "}
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input 
+              id="password" 
+              type="password" 
+              placeholder={t("pages.login.password")}
+              required />
             </div>
             <Button type="submit" className="w-full">
               {t("pages.login.login")}

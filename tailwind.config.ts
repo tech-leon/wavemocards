@@ -17,9 +17,28 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+			transitionDuration: {
+        DEFAULT: "300ms",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "ease-in-out",
+      },
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addBase, theme }: { addBase: StringConstructor, theme: StringConstructor }) {
+      addBase({
+        "a, button, input, select, textarea": {
+          transition:
+            "all " +
+            theme("transitionDuration.DEFAULT") +
+            " " +
+            theme("transitionTimingFunction.DEFAULT"),
+        },
+      });
+    },
+  ],
 };
 export default config;
