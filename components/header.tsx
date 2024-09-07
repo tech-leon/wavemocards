@@ -93,18 +93,21 @@ export default function Header() {
               <div className="space-y-2 py-6">
                 <Link
                   href="/"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
                 >
                   {t("nav.home")}
                 </Link>
                 <Link
                   href="/about-emotions"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
                 >
                   {t("nav.emotions")}
                 </Link>
                 <Link
-                  href="/emotioncards"
+                  href="/emotion-cards"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
                 >
                   {t("nav.emotioncards")}
@@ -113,6 +116,7 @@ export default function Header() {
               <div className="py-6">
                 <Link
                   href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50"
                 >
                   {t("pages.login.login")}
