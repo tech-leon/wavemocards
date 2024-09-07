@@ -19,7 +19,7 @@ export default function LoginForm() {
   return (
     <div className="flex flex-col justify-center w-full lg:grid min-h-screen lg:grid-cols-2 -my-20">
       <div className="flex items-center justify-center py-12 order-last">
-        <div className="mx-auto grid w-[350px] gap-6">
+        <div className="mx-auto grid w-[350px] gap-16">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">{t("pages.login.title")}</h1>
             <p className="text-balance text-zinc-500 dark:text-zinc-400">
@@ -32,35 +32,31 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 placeholder={t("pages.login.email")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  {t("pages.login.forget")}{" "}
-                </Link>
-              </div>
-              <Input 
-              id="password" 
-              type="password" 
-              placeholder={t("pages.login.password")}
-              required />
+              <Input
+                id="password"
+                type="password"
+                placeholder={t("pages.login.password")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
+                required
+              />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" variant="loginSignup">
               {t("pages.login.login")}
             </Button>
             {/* <Button variant="outline" className="w-full">
               Login with Google
             </Button> */}
+          <div className="flex mt-2 justify-center items-center text-sm">
+            <Link href="/forgot-password">{t("pages.login.forget")} </Link>
           </div>
-          <div className="mt-4 text-center text-sm">
-            <Link href="/signup" className="underline">
-              {t("pages.login.register")}{" "}
-            </Link>
+          </div>
+          <div className="text-center text-sm">
+            <Link href="/signup">{t("pages.login.register")} </Link>
           </div>
         </div>
       </div>
