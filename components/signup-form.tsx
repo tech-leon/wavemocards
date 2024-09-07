@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useTheme } from "next-themes";
 import bgDark from "@/app/assets/img/bg/bg-login-dark.svg";
 import bgLight from "@/app/assets/img/bg/bg-login-light.svg";
@@ -28,55 +27,61 @@ export default function SignupForm() {
           </div>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email"> {t("pages.login.email")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder={t("pages.login.email")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="email"> {t("pages.register.form.name")}</Label>
               <Input
                 id="name"
                 type="text"
-                // placeholder="m@example.com"
+                placeholder={t("pages.register.form.name")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password"> {t("pages.register.form.password")}</Label>
-              </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                placeholder={t("pages.register.form.password")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
+                required
+              />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password"> {t("pages.register.form.confirmPassword")}</Label>
-              </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                placeholder={t("pages.register.form.confirmPassword")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
+                required
+              />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="email"> {t("pages.register.form.birthday")}</Label>
               <Input
                 id="birthday"
                 type="text"
-                // placeholder="m@example.com"
+                placeholder={t("pages.register.form.birthday")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="email"> {t("pages.register.form.occupations")}</Label>
               <Input
                 id="occupation"
                 type="text"
-                // placeholder="m@example.com"
+                placeholder={t("pages.register.form.occupations")}
+                className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 required
               />
             </div>
-            <Button type="submit" className="w-full">
-            {t("pages.register.form.submit")}
+            <Button type="submit" className="w-full" variant="loginSignup">
+              {t("pages.register.form.submit")}
             </Button>
           </div>
         </div>
