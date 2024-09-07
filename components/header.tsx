@@ -5,17 +5,17 @@ import Image from "next/image";
 import logo from "@/app/assets/img/logo/logo.png";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LangToggle } from "@/components/lang-toggle";
-import { UserToggle } from "@/components/user-toggle";
+// import { UserToggle } from "@/components/user-toggle";
 
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import {
-  ArrowPathIcon,
+  // ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
+  // ChartPieIcon,
+  // CursorArrowRaysIcon,
+  // FingerPrintIcon,
+  // SquaresPlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
@@ -56,7 +56,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:justify-end lg:w-68">
           <Link
             href="/login"
-            className="flex w-16 items-center justify-center rounded-full hover:bg-gray-200 transition-all duration-300"
+            className="flex w-16 items-center justify-center rounded-full hover:bg-gray-200"
           >
             {t("pages.login.login")}
           </Link>
@@ -71,17 +71,18 @@ export default function Header() {
         className="lg:hidden"
       >
         <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-gray-100 dark:bg-gray-900">
+        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-1/2 overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-gray-100 dark:bg-gray-900">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+            <a href="/" className="-m-1.5 p-1.5">
+              <Image className="size-9" src={logo} alt="logo" />
+              <span className="sr-only">Wave Emotion Cards</span>
             </a>
             <ModeToggle />
             <LangToggle />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 dark:text-gray-200"
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon aria-hidden="true" className="h-6 w-6" />
