@@ -1,31 +1,36 @@
 'use client'
 import { useTranslation } from "react-i18next";
-import EmoCard from "@/components/emoCards/card";
+import { useCardData, useCategoryData } from "@/lib/data/cardData";
+import CategorySection from "@/components/emoCards/CategorySection";
 
 export default function EmotionCardsPage() {
   const { t } = useTranslation(['translation', 'cards', 'category']);
-  
-  const cardIds = Array.from({ length: 65 }, (_, i) => i + 1);
+  const cards = useCardData();
+  const categories = useCategoryData();
+
+  if (!cards) {
+    return <p>{t('loading')}</p>;
+  }
+  if (cards.length === 0) {
+    return <p>No Cards</p>;
+  }
 
   return (
-    <div>
-      <h1>{t("pages.emotionCards.title")}</h1>
-      {cardIds.map(id => (
-        <div key={id} className="flex">
-          <EmoCard 
-            ID={id} 
-            name={t(`cards:${id}.name`)} 
-            color={t(`category:${t(`cards:${id}.categoryID`)}.color`)} 
-            description={t(`cards:${id}.description`)} 
-            example={t(`cards:${id}.example`)} 
+    <div className="p-4 min-h-screen max-w-7xl px-16">
+      <h1 className="text-3xl font-bold mb-6 text-left">{t("pages.emotionCards.title")}</h1>
+      <div className="border border-slate-300"></div>
+      <div className="mt-4 space-y-4">
+        {categories.map(category => (
+          <CategorySection
+            key={category.ID}
+            name={category.name}
+            color={category.color}
+            ID={category.ID}
+            cards={cards.filter(card => card.categoryID === String(category.ID))
+              .map(card => ({ ...card, color: category.color }))}
           />
-          {/* <h2>{t(`cards:${id}.name`)}</h2>
-          <p>{t(`category:${t(`cards:${id}.categoryID`)}.name`)}</p>
-          <p>{t(`category:${t(`cards:${id}.categoryID`)}.color`)}</p>
-          <p>{t(`cards:${id}.description`)}</p>
-          <p>{t(`cards:${id}.example`)}</p> */}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

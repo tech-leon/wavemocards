@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 
@@ -28,7 +28,8 @@ const EmoCard = ({ name, description, example, ID, color }: CardProps) => {
         onClick={toggleCard}
       >
         <div
-          className={`shadow-md border border-gray-400 rounded-2xl p-4 ${color}`}
+          className={`shadow-md border border-gray-400 rounded-2xl p-4`}
+          style={{ backgroundColor: color }} 
         >
           <Image
             src={`/assets/img/card/${ID}.svg`}
@@ -47,7 +48,8 @@ const EmoCard = ({ name, description, example, ID, color }: CardProps) => {
           onClick={toggleCard}
         >
           <div
-            className={`flex items-center w-5/6 max-w-2xl p-10 rounded-2xl ${color}`}
+            className={`flex items-center w-5/6 max-w-2xl p-10 rounded-2xl`}
+            style={{ backgroundColor: color }} 
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col-reverse md:flex-row w-full">
