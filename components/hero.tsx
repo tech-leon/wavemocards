@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "next-themes";
 import bgDark from "@/app/assets/img/bg/bg-dark.svg";
