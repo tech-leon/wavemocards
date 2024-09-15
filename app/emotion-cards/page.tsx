@@ -16,8 +16,8 @@ export default function EmotionCardsPage() {
   }
 
   return (
-    <div className="p-4 min-h-screen max-w-7xl px-16">
-      <h1 className="text-3xl font-bold mb-6 text-left">{t("pages.emotionCards.title")}</h1>
+    <div className="p-4 min-h-screen max-w-8xl px-16">
+      <h1 className="text-3xl font-bold mb-6 ">{t("pages.emotionCards.title")}</h1>
       <div className="border border-slate-300"></div>
       <div className="mt-4 space-y-4">
         {categories.map(category => (
