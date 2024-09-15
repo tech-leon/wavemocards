@@ -5,7 +5,9 @@ import Image from "next/image";
 import logo from "@/app/assets/img/logo/logo.png";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LangToggle } from "@/components/lang-toggle";
-// import { UserToggle } from "@/components/user-toggle";
+import { UserToggle } from "@/components/user-toggle";
+import { useAuth } from "@/lib/auth/authContext";
+import { AuthProvider } from "@/lib/auth/authContext";
 
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -22,7 +24,7 @@ import {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useTranslation();
-
+  const { user } = useAuth() || { user: String};
   return (
     <header className="sticky top-0 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-md z-10">
       <nav
@@ -54,13 +56,18 @@ export default function Header() {
           </button>
         </div>
         <div className="hidden lg:flex lg:justify-end lg:w-68">
-          <Link
-            href="/login"
-            className="flex w-16 items-center justify-center rounded-full hover:bg-gray-200"
-          >
-            {t("pages.login.login")}
-          </Link>
-          {/* <UserToggle /> */}
+          <AuthProvider>
+            {user ? (
+              <UserToggle />
+            ) : (
+              <Link
+                href="/login"
+                className="flex w-16 items-center justify-center rounded-full hover:bg-gray-200"
+              >
+                {t("pages.login.login")}
+              </Link>
+            )}
+          </AuthProvider>
           <LangToggle />
           <ModeToggle />
         </div>
