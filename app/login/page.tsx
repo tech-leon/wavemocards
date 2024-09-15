@@ -1,12 +1,11 @@
-'use client'
-// import { useTranslation } from "react-i18next";
+"use client";
 import LoginForm from "@/components/login-form";
+import { AuthProvider } from "@/lib/auth/authContext";
 
 export default function AuthPage() {
-  // const { t } = useTranslation();
   return (
-    <div>
+    <AuthProvider>
       <LoginForm />
-    </div>
-  ); 
+    </AuthProvider>
+  );
 }
