@@ -1,7 +1,7 @@
 'use client'
 import { useTranslation } from "react-i18next";
 import { useCardData, useCategoryData } from "@/lib/data/cardData";
-import CategorySection from "../../components/emoCards/CategorySection";
+import CategorySection from "@/components/emoCards/CategorySection";
 
 export default function EmotionCardsPage() {
   const { t } = useTranslation(['translation', 'cards', 'category']);

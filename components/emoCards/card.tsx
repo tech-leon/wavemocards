@@ -12,6 +12,7 @@ export interface CardProps {
   color: string;
 }
 
+
 const EmoCard = ({ name, description, example, ID, color }: CardProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
