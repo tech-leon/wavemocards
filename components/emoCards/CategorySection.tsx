@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import EmoCard, { CardProps } from "@/components/emoCards/Card";
+import EmoCard, { CardProps } from "./Card";
 import {
   ArrowDownRightIcon,
   ArrowLeftIcon,
