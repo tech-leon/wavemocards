@@ -29,7 +29,8 @@ const CategorySection = ({ name, color, cards }: CategorySectionProps) => {
   // Check if scrolling is needed
   const checkForScrolling = () => {
     if (scrollContainerRef.current) {
-      const { scrollWidth, clientWidth, scrollLeft } = scrollContainerRef.current;
+      const { scrollWidth, clientWidth, scrollLeft } =
+        scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
@@ -38,14 +39,14 @@ const CategorySection = ({ name, color, cards }: CategorySectionProps) => {
   // Scroll left
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
     }
   };
 
   // Scroll right
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
     }
   };
 
@@ -53,8 +54,8 @@ const CategorySection = ({ name, color, cards }: CategorySectionProps) => {
   useEffect(() => {
     if (isExpanded) {
       checkForScrolling();
-      window.addEventListener('resize', checkForScrolling);
-      return () => window.removeEventListener('resize', checkForScrolling);
+      window.addEventListener("resize", checkForScrolling);
+      return () => window.removeEventListener("resize", checkForScrolling);
     }
   }, [isExpanded]);
 
