@@ -1,8 +1,6 @@
-// CategorySection.tsx
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import EmoCard from "./Card";
-import { CardProps } from "./Card";
+import EmoCard, { CardProps } from "@/components/emoCards/Card";
 import {
   ArrowDownRightIcon,
   ArrowLeftIcon,
