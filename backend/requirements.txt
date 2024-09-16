@@ -1,9 +1,0 @@
-fastapi==0.112.0
-uvicorn==0.30.5
-sqlalchemy==2.0.31
-firebase-admin==6.5.0
-aiosqlite==0.20.0
-python-dotenv==1.0.1
-pytz==2024.1
-pydantic==2.8.2
-email_validator==2.2.0
