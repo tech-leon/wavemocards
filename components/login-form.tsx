@@ -18,7 +18,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState(String);
   const [password, setPassword] = useState(String);
   const [error, setError] = useState(String);
-  const { user, loading } = useAuth() || { user: null, loading: null };
+  const { user, loading } = useAuth();
   const { t } = useTranslation();
   const { theme } = useTheme();
   const handelImg =
@@ -67,6 +67,7 @@ export default function LoginForm() {
                 placeholder={t("pages.login.email")}
                 className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)} // {{ edit_1 }}
                 required
               />
             </div>
@@ -77,6 +78,7 @@ export default function LoginForm() {
                 placeholder={t("pages.login.password")}
                 className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)} // {{ edit_2 }}
                 required
               />
             </div>
@@ -88,9 +90,6 @@ export default function LoginForm() {
             >
               {t("pages.login.login")}
             </Button>
-            {/* <Button variant="outline" className="w-full">
-              Login with Google
-            </Button> */}
             <div className="flex mt-2 justify-center items-center text-sm">
               <Link href="/forgot-password">{t("pages.login.forget")} </Link>
             </div>

@@ -23,7 +23,7 @@ import {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useTranslation();
-  const { user, loading } = useAuth() || { user: null, loading: null };
+  const { user, loading } = useAuth();
 
   return (
     <>

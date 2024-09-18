@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 // import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -12,8 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/lib/auth/authContext";
 
 export function UserToggle() {
+  const { logout } = useAuth();
   return (
     <>
       <DropdownMenu>
@@ -36,7 +38,7 @@ export function UserToggle() {
             <DropdownMenuItem>Keyboard shortcuts</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Log out</DropdownMenuItem>
+          <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

@@ -55,7 +55,7 @@ export default function SignupForm() {
             </div>
             <div className="grid gap-2">
               <Input
-                id="password"
+                id="confirmPassword"
                 type="password"
                 placeholder={t("pages.register.form.confirmPassword")}
                 className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"

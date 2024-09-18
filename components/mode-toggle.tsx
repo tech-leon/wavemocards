@@ -29,7 +29,12 @@ export function ModeToggle() {
   }
 
   return (
-    <Button className="shadow-none bg-transparent text-gray-800 hover:text-[#3c9daeff] dark:bg-transparent dark:text-gray-100 dark:hover:bg-yellow-100 dark:hover:text-black rounded-full duration-500" variant="default" size="icon" onClick={toggleTheme}>
+    <Button
+      className="shadow-none bg-transparent text-gray-800 hover:text-[#3c9daeff] dark:bg-transparent dark:text-gray-100 dark:hover:bg-yellow-100 dark:hover:text-black rounded-full duration-500"
+      variant="default"
+      size="icon"
+      onClick={toggleTheme}
+    >
       {theme === "dark" ? (
         <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] scale-0 dark:scale-100" />
       ) : (

@@ -44,6 +44,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(null);
   };
 
+  // if (!user) return null;
+
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
