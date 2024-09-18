@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { auth } from "@/lib/auth/firebase";
 
@@ -15,27 +16,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Listen for authentication state changes
+    // console.log("AuthProvider: Setting up auth state listener");
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      // console.log("AuthProvider: Auth state changed", user);
       if (user) {
+        // console.log("AuthProvider: User logged in", user);
         setUser(user);
         localStorage.setItem("authUser", JSON.stringify(user));
-
-        // Automatically update token
         await user.getIdToken(true);
       } else {
+        // console.log("AuthProvider: User logged out");
         localStorage.removeItem("authUser");
         setUser(null);
       }
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      // console.log("AuthProvider: Cleaning up auth state listener");
+      unsubscribe();
+    };
   }, []);
 
   const logout = async () => {
     await signOut(auth);
-    localStorage.removeItem('authUser');
+    localStorage.removeItem("authUser");
     setUser(null);
   };
 
@@ -45,4 +50,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     </AuthContext.Provider>
   );
 };
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === null) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

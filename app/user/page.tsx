@@ -1,11 +1,8 @@
-'use client'
-import { useTranslation } from "react-i18next";
-
+"use client";
 export default function UserPage() {
-  const { t } = useTranslation();
   return (
     <div>
-      <h1>{t("userPage.title")}</h1>
+      <h1>User page</h1>
     </div>
   );
 }

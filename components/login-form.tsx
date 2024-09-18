@@ -29,7 +29,7 @@ export default function LoginForm() {
       if (process.env.NODE_ENV !== "production") {
         console.log(user);
       }
-      router.push("/user/profile");
+      router.push("/");
     }
   }, [user, loading, router]);
 
