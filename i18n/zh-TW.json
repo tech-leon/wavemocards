@@ -156,7 +156,7 @@
         "password": "密碼",
         "confirmPassword": "確認密碼",
         "birthday": "dd / mm / yyyy",
-        "occupations": "職業",
+        "occupation": "職業",
         "submit": "註冊",
         "emailEmptyError": "信箱不可為空",
         "emailSyntaxError": "信箱格式錯誤",
@@ -164,6 +164,16 @@
         "passwordEmptyError": "密碼不可為空",
         "passwordRequirementError": "密碼須符合以下要求：\n最少 8 個字元\n至少 1 個大寫字母\n至少 1 個小寫字母\n至少 1 個數字\n至少 1 個特殊字元",
         "confirmPasswordError": "與密碼不相符"
+      },
+      "occupations": {
+        "engineer": "工程師",
+        "doctor": "醫生",
+        "teacher": "教師",
+        "student": "學生",
+        "artist": "藝術家",
+        "lawyer": "律師",
+        "businessman": "商人",
+        "other": "其他"
       }
     },
     "myRecord": {

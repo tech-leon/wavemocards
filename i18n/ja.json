@@ -153,7 +153,7 @@
         "password": "パスワード",
         "confirmPassword": "パスワードの確認",
         "birthday": "dd / mm / yyyy",
-        "occupations": "職業",
+        "occupation": "職業",
         "submit": "登録",
         "emailEmptyError": "メールアドレスを入力してください",
         "emailSyntaxError": "メールアドレスの形式が正しくありません",
@@ -161,6 +161,16 @@
         "passwordEmptyError": "パスワードを入力してください",
         "passwordRequirementError": "パスワードは以下の要件を満たす必要があります：\n最低8文字\n少なくとも1つの大文字\n少なくとも1つの小文字\n少なくとも1つの数字\n少なくとも1つの特殊文字",
         "confirmPasswordError": "パスワードが一致しません"
+      },
+      "occupations": {
+        "engineer": "エンジニア",
+        "doctor": "医者",
+        "teacher": "教師",
+        "student": "学生",
+        "artist": "芸術家",
+        "lawyer": "弁護士",
+        "businessman": "商人",
+        "other": "その他"
       }
     },
     "myRecord": {
