@@ -6,10 +6,10 @@ from fastapi import HTTPException
 
 load_dotenv('.env.app')
 
-cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
+cred_path = os.getenv('CREDENTIALS_PATH')
 
 if not cred_path:
-    raise ValueError("FIREBASE_CREDENTIALS_PATH not set in .env.app file")
+    raise ValueError("CREDENTIALS_PATH not set in .env.app file")
 
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)

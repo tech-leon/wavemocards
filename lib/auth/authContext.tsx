@@ -1,12 +1,21 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
+import { preSignUp } from "@/lib/api";
 import { auth } from "@/lib/auth/firebase";
 
 export const AuthContext = createContext<{
   user: User | null;
   loading: boolean;
   logout: () => void;
+  signUp: (
+    email: string,
+    password: string,
+    name: string,
+    birthdate: string,
+    occupation: string,
+    timezone: string
+  ) => void;
 } | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -38,20 +47,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
   }, []);
 
+  const signUp = async (
+    email: string,
+    password: string,
+    name: string,
+    birthdate: string,
+    occupation: string,
+    timezone: string
+  ) => {
+    try {
+      console.log(email, password, name, birthdate, occupation, timezone);
+      await preSignUp(email, password, name, birthdate, occupation, timezone);
+      // 這裡可以選擇在註冊成功後自動登入或更新用戶狀態
+    } catch (error) {
+      console.error("Sign up error:", error);
+      alert("註冊失敗，請檢查您的資料。");
+    }
+  };
+
   const logout = async () => {
     await signOut(auth);
     localStorage.removeItem("authUser");
     setUser(null);
   };
 
-  // if (!user) return null;
-
   return (
-    <AuthContext.Provider value={{ user, loading, logout }}>
+    <AuthContext.Provider value={{ user, loading, logout, signUp }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === null) {

@@ -22,6 +22,7 @@ async def register_user(
     user: schemas.UserCreate, 
     db: Session = Depends(database.get_db)
     ):
+    print(user)
     # 檢查用戶是否已存在
     db_user = crud.get_user_by_email(db, email=user.email)
     if db_user:
