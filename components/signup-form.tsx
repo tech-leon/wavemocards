@@ -35,9 +35,11 @@ export default function SignupForm() {
     useState(false);
   const [occupation, setOccupation] = useState("");
   const [birthday, setBirthday] = useState<Date | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -66,6 +68,7 @@ export default function SignupForm() {
 
     if (!validation.isValid) {
       setErrors(validation.errors);
+      setIsLoading(false);
       return;
     }
 
@@ -82,6 +85,7 @@ export default function SignupForm() {
       console.error("Sign up error:", error);
       alert("註冊失敗，請檢查您的資料。");
     } finally {
+      setIsLoading(false);
       router.push("/");
     }
   };
@@ -208,9 +212,33 @@ export default function SignupForm() {
                   <p className={cn("text-red-500 text-sm")}>{errors.occupation}</p>
                 )}
               </div>
-              <Button type="submit" className={cn("w-full")} variant="loginSignup">
-                {t("pages.register.form.submit")}
+              <Button
+                type="submit"
+                className={cn("w-full")}
+                variant="loginSignup"
+                disabled={isLoading}
+              >
+                {isLoading ? t("pages.register.form.loading") : t("pages.register.form.submit")}
               </Button>
+              {isLoading && (
+                <div className="mt-4 flex justify-center">
+                  <svg className="animate-spin h-5 w-5 text-teal-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    ></path>
+                  </svg>
+                </div>
+              )}
             </div>
           </div>
         </div>

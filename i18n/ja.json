@@ -161,6 +161,7 @@
         "passwordEmptyError": "パスワードを入力してください",
         "passwordRequirementError": "パスワードは以下の要件を満たす必要があります：\n最低8文字\n少なくとも1つの大文字\n少なくとも1つの小文字\n少なくとも1つの数字\n少なくとも1つの特殊文字",
         "confirmPasswordError": "パスワードが一致しません",
+        "loading": "登録中...",
         "month": {
           "january": "一月",
           "february": "二月",

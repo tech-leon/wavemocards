@@ -161,6 +161,7 @@
         "passwordEmptyError": "Password cannot be empty",
         "passwordRequirementError": "Password requirements:\nAt least 8 characters\nAt least 1 uppercase letter\nAt least 1 lowercase letter\nAt least 1 number\nAt least 1 special character",
         "confirmPasswordError": "Passwords do not match",
+        "loading": "Registering...",
         "month": {
           "january": "January",
           "february": "February",
