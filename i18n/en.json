@@ -160,7 +160,21 @@
         "nameEmptyError": "Name cannot be empty",
         "passwordEmptyError": "Password cannot be empty",
         "passwordRequirementError": "Password requirements:\nAt least 8 characters\nAt least 1 uppercase letter\nAt least 1 lowercase letter\nAt least 1 number\nAt least 1 special character",
-        "confirmPasswordError": "Passwords do not match"
+        "confirmPasswordError": "Passwords do not match",
+        "month": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        }
       },
       "occupations": {
         "engineer": "Engineer",

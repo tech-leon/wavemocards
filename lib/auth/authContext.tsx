@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, User, signOut } from "firebase/auth";
+import { onAuthStateChanged, User, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { preSignUp } from "@/lib/api";
 import { auth } from "@/lib/auth/firebase";
 
@@ -56,9 +56,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     timezone: string
   ) => {
     try {
-      console.log(email, password, name, birthdate, occupation, timezone);
       await preSignUp(email, password, name, birthdate, occupation, timezone);
-      // 這裡可以選擇在註冊成功後自動登入或更新用戶狀態
+      
+      // 註冊成功後自動登入
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user);
+      localStorage.setItem("authUser", JSON.stringify(userCredential.user));
+      
     } catch (error) {
       console.error("Sign up error:", error);
       alert("註冊失敗，請檢查您的資料。");

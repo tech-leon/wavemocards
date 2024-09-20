@@ -160,7 +160,21 @@
         "nameEmptyError": "名前を入力してください",
         "passwordEmptyError": "パスワードを入力してください",
         "passwordRequirementError": "パスワードは以下の要件を満たす必要があります：\n最低8文字\n少なくとも1つの大文字\n少なくとも1つの小文字\n少なくとも1つの数字\n少なくとも1つの特殊文字",
-        "confirmPasswordError": "パスワードが一致しません"
+        "confirmPasswordError": "パスワードが一致しません",
+        "month": {
+          "january": "一月",
+          "february": "二月",
+          "march": "三月",
+          "april": "四月",
+          "may": "五月",
+          "june": "六月",
+          "july": "七月",
+          "august": "八月",
+          "september": "九月",
+          "october": "十月",
+          "november": "十一月",
+          "december": "十二月"
+        }
       },
       "occupations": {
         "engineer": "エンジニア",

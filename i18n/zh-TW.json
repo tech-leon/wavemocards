@@ -163,7 +163,21 @@
         "nameEmptyError": "姓名不可為空",
         "passwordEmptyError": "密碼不可為空",
         "passwordRequirementError": "密碼須符合以下要求：\n最少 8 個字元\n至少 1 個大寫字母\n至少 1 個小寫字母\n至少 1 個數字\n至少 1 個特殊字元",
-        "confirmPasswordError": "與密碼不相符"
+        "confirmPasswordError": "與密碼不相符",
+        "month": {
+          "january": "一月",
+          "february": "二月",
+          "march": "三月",
+          "april": "四月",
+          "may": "五月",
+          "june": "六月",
+          "july": "七月",
+          "august": "八月",
+          "september": "九月",
+          "october": "十月",
+          "november": "十一月",
+          "december": "十二月"
+        }
       },
       "occupations": {
         "engineer": "工程師",

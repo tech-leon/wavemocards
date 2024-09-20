@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { validateSignup, ValidationResult } from "@/lib/auth/validateSignup";
 import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,9 +19,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-import { DatePicker } from "@nextui-org/react";
-import { I18nProvider } from "@react-aria/i18n";
-import { DateValue, getLocalTimeZone, today } from "@internationalized/date";
+import { CustomDatePicker } from "@/components/ui/custom-datepicker";
 
 export default function SignupForm() {
   const { t } = useTranslation();
@@ -28,14 +27,14 @@ export default function SignupForm() {
   const { signUp } = useAuth();
   const handelImg =
     theme === "dark" ? `url('${bgDark.src}')` : `url('${bgLight.src}')`;
-
+  
+  const router = useRouter();
   const [errors, setErrors] = useState<ValidationResult["errors"]>({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
   const [occupation, setOccupation] = useState("");
-  const defaultDate = today(getLocalTimeZone());
-  const [birthday, setBirthday] = useState<DateValue | null>(defaultDate);
+  const [birthday, setBirthday] = useState<Date | undefined>(undefined);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,8 +47,8 @@ export default function SignupForm() {
     const confirmPassword = formData.get("confirmPassword") as string;
 
     const formattedBirthday = birthday
-      ? `${birthday.year}-${String(birthday.month).padStart(2, "0")}-${String(
-          birthday.day
+      ? `${birthday.getFullYear()}-${String(birthday.getMonth() + 1).padStart(2, "0")}-${String(
+          birthday.getDate()
         ).padStart(2, "0")}`
       : "";
 
@@ -82,6 +81,8 @@ export default function SignupForm() {
     } catch (error) {
       console.error("Sign up error:", error);
       alert("註冊失敗，請檢查您的資料。");
+    } finally {
+      router.push("/");
     }
   };
 
@@ -168,18 +169,11 @@ export default function SignupForm() {
                 )}
               </div>
               <div className={cn("flex flex-col gap-4")}>
-                <I18nProvider locale="en">
-                  <DatePicker
-                    label={t("pages.register.form.birthday")}
-                    showMonthAndYearPickers
-                    variant="bordered"
-                    value={birthday}
-                    onChange={(dateValue) => {
-                      setBirthday(dateValue);
-                    }}
-                    className={cn("rounded-xl border-2")}
-                  />
-                </I18nProvider>
+                <CustomDatePicker
+                  value={birthday}
+                  onChange={(date) => setBirthday(date)}
+                  placeholder={t("pages.register.form.birthday")}
+                />
                 {errors.birthday && (
                   <p className={cn("text-red-500 text-sm")}>{errors.birthday}</p>
                 )}

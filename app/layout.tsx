@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/lib/auth/authContext";
 import "@/i18n/config";
+import { NextUIProvider } from "@nextui-org/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,8 +36,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="flex flex-col flex-grow">
-              <Header />
-              {children}
+              <NextUIProvider>
+                <Header />
+                {children}{" "}
+              </NextUIProvider>
             </div>
             <Footer />
           </ThemeProvider>{" "}
