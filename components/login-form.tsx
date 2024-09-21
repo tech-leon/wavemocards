@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/auth/firebase";
-import { useAuth } from "@/lib/auth/authContext";
+import { useAuth } from "@/lib/auth/authContext"; // 更新 import
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -15,10 +13,10 @@ import bgLight from "@/app/assets/img/bg/bg-login-light.svg";
 
 export default function LoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState(String);
-  const [password, setPassword] = useState(String);
-  const [error, setError] = useState(String);
-  const { user, loading } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { user, loading, login } = useAuth();
   const { t } = useTranslation();
   const { theme } = useTheme();
   const handelImg =
@@ -37,10 +35,14 @@ export default function LoginForm() {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
+      await login(email, password);
+    } catch (err: unknown) {
       console.error("Login error:", err);
-      setError("Login failed. Please check your email and password.");
+      if (err instanceof Error) {
+        setError(err.message || "登入失敗，請檢查您的電子郵件和密碼。");
+      } else {
+        setError("登入失敗，請檢查您的電子郵件和密碼。");
+      }
     }
   };
 
@@ -66,8 +68,9 @@ export default function LoginForm() {
                 type="email"
                 placeholder={t("pages.login.email")}
                 className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)} // {{ edit_1 }}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
                 required
               />
             </div>
@@ -77,8 +80,9 @@ export default function LoginForm() {
                 type="password"
                 placeholder={t("pages.login.password")}
                 className="rounded-xl border-2 focus-visible:ring-teal-600 dark:focus-visible:ring-teal-200"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)} // {{ edit_2 }}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
                 required
               />
             </div>

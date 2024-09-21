@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { onIdTokenChanged, User, signOut, signInWithEmailAndPassword } from "firebase/auth";
-import { preSignUp } from "@/lib/api";
+import { preSignUp, getUserData } from "@/lib/api";
 import { auth } from "@/lib/auth/firebase";
 import { FirebaseError } from "firebase/app";
 
@@ -17,6 +17,7 @@ export const AuthContext = createContext<{
     occupation: string,
     timezone: string
   ) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>; 
 } | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -68,9 +69,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const login = async (email: string, password: string) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userData = await getUserData(userCredential.user.uid);
+      setUser(userCredential.user);
+      localStorage.setItem("userData", JSON.stringify(userData));
+      localStorage.setItem("authUser", JSON.stringify(userCredential.user));
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        let message = "登入失敗，請檢查您的電子郵件和密碼。";
+        if (error.code === "auth/user-not-found") {
+          message = "找不到使用者，請檢查您的電子郵件。";
+        } else if (error.code === "auth/wrong-password") {
+          message = "密碼錯誤，請再試一次。";
+        }
+        throw new Error(message);
+      } else {
+        throw new Error("登入時發生未知錯誤。");
+      }
+    }
+  };
+
   const logout = async () => {
     await signOut(auth);
     localStorage.removeItem("authUser");
+    localStorage.removeItem("userData");
     setUser(null);
   };
 
@@ -79,6 +103,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     logout,
     signUp,
+    login,
   }), [user, loading]);
 
   return (
@@ -100,10 +125,11 @@ export const useAuth = (): {
     occupation: string,
     timezone: string
   ) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>; 
 } => {
   const context = useContext(AuthContext);
   if (context === null) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useAuth 必須在 AuthProvider 內使用");
   }
   return context;
 };
