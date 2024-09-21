@@ -101,7 +101,7 @@
       "forget": "パスワードをお忘れですか？",
       "register": "アカウントをお持ちでない方は こちら"
     },
-    "userProfile": {
+    "user": {
       "title": "マイアカウント",
       "subtitle": "個人情報",
       "email": "メールアドレス：",

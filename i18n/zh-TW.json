@@ -102,7 +102,7 @@
       "forget": "忘記密碼？",
       "register": "還沒有帳號？ 註冊"
     },
-    "userProfile": {
+    "user": {
       "title": "我的帳戶",
       "subtitle": "個人資料",
       "email": "信箱：",

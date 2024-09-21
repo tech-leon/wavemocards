@@ -28,7 +28,7 @@ export function UserToggle() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link className="group" href="/user/profile">
+            <Link className="group" href="/user">
               <DropdownMenuItem>
                 <p className="group-hover:text-[#3c9daeff]">Profile</p>
               </DropdownMenuItem>

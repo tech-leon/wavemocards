@@ -101,7 +101,7 @@
       "forget": "Forgot password?",
       "register": "Don't have an account? Register"
     },
-    "userProfile": {
+    "user": {
       "title": "My Account",
       "subtitle": "Personal Information",
       "email": "Email:",
