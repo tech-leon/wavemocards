@@ -107,7 +107,7 @@
       "email": "メールアドレス：",
       "name": "名前：",
       "photoURL": "プロフィール写真URL：",
-      "role": "役割：",
+      "occupation": "職業：",
       "birthday": "誕生日：",
       "password": "パスワード：",
       "oldPassword": "現在のパスワード：",

@@ -7,25 +7,28 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import userDark from "@/app/assets/img/illustration/profile-dark.svg";
 import userLight from "@/app/assets/img/illustration/profile-light.svg";
-// interface AuthUser {
-//   email: string;
-//   displayName: string;
-// }
+
+interface UserData {
+  birthday: string;
+  occupation: string;
+  sign_up_day: string;
+  timezone: string;
+}
 
 export default function UserPage() {
   const router = useRouter();
   const { t } = useTranslation();
   const { user, loading } = useAuth();
-  // const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const { theme } = useTheme();
   const handelImg = theme === "dark" ? userDark.src : userLight.src;
 
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("authUser");
-  //   if (storedUser) {
-  //     setAuthUser(JSON.parse(storedUser));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userData");
+    if (storedUser) {
+      setUserData(JSON.parse(storedUser));
+    }
+  }, []);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -57,25 +60,18 @@ export default function UserPage() {
           <p>
             {t("pages.user.name")} {user?.displayName || "Not set"}
           </p>
-          {/* <p>
-            {t("pages.userProfile.role")} {userLocal?.occupation || t("pages.userProfile.valueEmpty")}
+          <p>
+            {t("pages.user.occupation")} {userData?.occupation || t("pages.user.valueEmpty")}
           </p>
           <p>
-            {t("pages.userProfile.birthday")} {userLocal?.birthday || t("pages.userProfile.valueEmpty")}
+            {t("pages.user.birthday")} {userData?.birthday.slice(0, 10) || t("pages.user.valueEmpty")}
           </p>
-          <p>
-            {t("pages.userProfile.timezone")} {userLocal?.timezone || t("pages.userProfile.valueEmpty")}
-          </p> */}
           {/* <p>
             {t("pages.userProfile.photoURL")} {user?.photoURL || "Not set"}
           </p> */}
           <p>
             {t("pages.user.creationTime")}{" "}
-            {user?.metadata.creationTime || "Not set"}
-          </p>
-          <p>
-            {t("pages.user.lastSignInTime")}{" "}
-            {user?.metadata.lastSignInTime || "Not set"}
+            {userData?.sign_up_day.slice(0, 10) || "Not set"}
           </p>
         </div>
       </div>
@@ -87,20 +83,5 @@ export default function UserPage() {
         from <a href="https://icons8.com/illustrations">Ouch</a>!
       </p>
     </div>
-    // <main className="flex h-full flex-col items-center justify-center">
-    //   <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md max-w-md w-full">
-    //     <h1 className="text-2xl font-bold mb-6 text-center">{t("user.profile")}</h1>
-    //     <div className="space-y-4">
-    //       <div>
-    //         <label className="block text-sm font-medium mb-1">{t("user.email")}</label>
-    //         <p className="bg-gray-100 dark:bg-gray-700 p-2 rounded">{authUser?.email || user?.email}</p>
-    //       </div>
-    //       <div>
-    //         <label className="block text-sm font-medium mb-1">{t("user.name")}</label>
-    //         <p className="bg-gray-100 dark:bg-gray-700 p-2 rounded">{authUser?.displayName || user?.displayName || t("user.noName")}</p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </main>
   );
 }
