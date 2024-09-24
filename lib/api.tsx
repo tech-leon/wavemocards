@@ -5,7 +5,7 @@ import axios from "axios";
 const APIPATH = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 const SIGNUP = process.env.NEXT_PUBLIC_API_URL_REGISTER_USER;
 const USERDATA = process.env.NEXT_PUBLIC_API_URL_GET_USER;
-
+const EMOTION_RECORDS = process.env.NEXT_PUBLIC_API_URL_GET_EMOTION_RECORDS;
 export const api = axios.create({
   baseURL: APIPATH,
   withCredentials: true,
@@ -57,5 +57,10 @@ export const preSignUp = async (
 export const getUserData = async (userID: string) => {
   const response = await api.get(`${USERDATA}${userID}`);
   localStorage.setItem("userData", JSON.stringify(response.data));
+  return response.data;
+};
+
+export const getEmotionRecords = async (userID: string) => {
+  const response = await api.get(`${EMOTION_RECORDS}`);
   return response.data;
 };
