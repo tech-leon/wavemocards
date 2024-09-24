@@ -33,9 +33,11 @@ export function UserToggle() {
                 <p className="group-hover:text-[#3c9daeff]">Profile</p>
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Keyboard shortcuts</DropdownMenuItem>
+            <Link className="group" href="/records">
+              <DropdownMenuItem>
+                <p className="group-hover:text-[#3c9daeff]">My Emotions</p>
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
