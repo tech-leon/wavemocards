@@ -33,9 +33,21 @@ export default function Header() {
           className="mx-auto flex max-w-7xl items-center justify-between p-5 lg:px-8"
         >
           <div className="hidden lg:flex lg:gap-x-5 lg:w-68">
-            <Link href="/">{t("nav.home")}</Link>
-            <Link href="/about-emotions">{t("nav.emotions")}</Link>
-            <Link href="/emotion-cards">{t("nav.emotioncards")}</Link>
+            <Link href="/" className="transition-colors duration-300">
+              {t("nav.home")}
+            </Link>
+            <Link
+              href="/about-emotions"
+              className="transition-colors duration-300"
+            >
+              {t("nav.emotions")}
+            </Link>
+            <Link
+              href="/emotion-cards"
+              className="transition-colors duration-300"
+            >
+              {t("nav.emotioncards")}
+            </Link>
           </div>
           <Link
             href="/"
@@ -64,7 +76,7 @@ export default function Header() {
                 ) : (
                   <Link
                     href="/login"
-                    className="flex w-16 items-center justify-center rounded-full hover:bg-gray-200"
+                    className="flex w-16 items-center justify-center rounded-full transition-colors duration-300"
                   >
                     {t("pages.login.login")}
                   </Link>
@@ -123,7 +135,7 @@ export default function Header() {
                     {t("nav.emotioncards")}
                   </Link>
                 </div>
-                <div className="py-6">
+                <div>
                   {!loading && (
                     <>
                       {user ? (
@@ -132,7 +144,7 @@ export default function Header() {
                         <Link
                           href="/login"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50"
+                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
                         >
                           {t("pages.login.login")}
                         </Link>
