@@ -61,6 +61,6 @@ export const getUserData = async (userID: string) => {
 };
 
 export const getEmotionRecords = async (userID: string) => {
-  const response = await api.get(`${EMOTION_RECORDS}`);
+  const response = await api.get(`${EMOTION_RECORDS}/${userID}`);
   return response.data;
 };
