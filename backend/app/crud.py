@@ -51,3 +51,14 @@ def count_user_emotions(db: Session, user_id: str) -> int:
     return db.query(models.Emotion)\
             .filter(models.Emotion.owner_id == user_id)\
             .count()
+            
+def get_emotions_lists(db: Session, user_id: str) -> List[schemas.EmotionListsResponse]:
+    return db.query(
+        models.Emotion.id,
+        models.Emotion.card1,
+        models.Emotion.card2,
+        models.Emotion.card3,
+        models.Emotion.after_card1_level,
+        models.Emotion.after_card2_level,
+        models.Emotion.after_card3_level
+    ).filter(models.Emotion.owner_id == user_id).all()

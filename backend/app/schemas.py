@@ -70,13 +70,13 @@ class UserUpdate(BaseModel):
     occupation: Optional[str] = Field(None, max_length=100)
     timezone: Optional[str] = None
 
-    @validator('timezone')
+    @field_validator('timezone')
     def validate_timezone(cls, v):
         if v is not None and v not in pytz.all_timezones:
             raise ValueError('Invalid timezone')
         return v
 
-    @validator('*', pre=True)
+    @field_validator('*', mode='before')
     def empty_str_to_none(cls, v: Any) -> Any:
         if v == "":
             return None
@@ -172,3 +172,15 @@ class EmotionBase(BaseModel):
 class EmotionsReadResponse(BaseModel):
     emotions: List[EmotionBase]
     more_emotions: bool
+    
+class EmotionListsResponse(BaseModel):
+    id: int
+    card1: int
+    card2: int
+    card3: int
+    after_card1_level: int
+    after_card2_level: int
+    after_card3_level: int    
+
+    class Config:
+        orm_mode = True
