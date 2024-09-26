@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional, Any, List
 from datetime import datetime
 import pytz
@@ -34,7 +34,7 @@ class UserCreate(BaseModel):
     occupation: Optional[str] = Field(None, max_length=100)
     timezone: str = 'UTC'
 
-    @validator('timezone')
+    @field_validator('timezone')
     def validate_timezone(cls, v):
         if v not in pytz.all_timezones:
             raise ValueError('Invalid timezone')
