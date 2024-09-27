@@ -2,7 +2,7 @@
 services:
   newwavemocards:
     build: ./backend/
-    image: wavemocards-backend:1.5
+    image: wavemocards-backend:1.6
     container_name: wavemocards_backend
     restart: unless-stopped
     env_file: .env.compose
