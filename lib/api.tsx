@@ -6,6 +6,7 @@ const APIPATH = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 const SIGNUP = process.env.NEXT_PUBLIC_API_URL_REGISTER_USER;
 const USERDATA = process.env.NEXT_PUBLIC_API_URL_GET_USER;
 const EMOTION_RECORDS = process.env.NEXT_PUBLIC_API_URL_GET_EMOTION_RECORDS;
+const EMOTION_LISTS = process.env.NEXT_PUBLIC_API_URL_GET_EMOTION_LISTS;
 export const api = axios.create({
   baseURL: APIPATH,
   withCredentials: true,
@@ -62,5 +63,10 @@ export const getUserData = async (userID: string) => {
 
 export const getEmotionRecords = async (userID: string) => {
   const response = await api.get(`${EMOTION_RECORDS}/${userID}`);
+  return response.data;
+};
+
+export const getEmotionLists = async (userID: string) => {
+  const response = await api.get(`${EMOTION_LISTS}?user_id=${userID}`);
   return response.data;
 };
