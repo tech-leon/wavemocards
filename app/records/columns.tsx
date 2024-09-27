@@ -1,7 +1,6 @@
 "use client";
-
+import { EmotionList } from "@/lib/data/emoData";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -15,16 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<EmotionList>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -33,7 +23,9 @@ export const columns: ColumnDef<Payment>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value: boolean) => table.toggleAllPageRowsSelected(value)}
+        onCheckedChange={(value: boolean) =>
+          table.toggleAllPageRowsSelected(value)
+        }
         aria-label="Select all"
       />
     ),
@@ -46,40 +38,36 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "status",
+    accessorKey: "create",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Create" />
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "cards",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
-    ),
-  },
-  {
-    accessorKey: "amount",
-    header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title="Amount"
-        className="justify-end -mr-7"
-      />
+      <DataTableColumnHeader column={column} title="Cards" />
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      const cards = row.getValue("cards") as { [key: string]: number }[];
+      return (
+        <div className="flex items-center justify-start gap-3">
+          {cards.map((card, index) => {
+            const [name, level] = Object.entries(card)[0];
+            return (
+              <div key={index}>
+                {name}: {level}
+              </div>
+            );
+          })}
+        </div>
+      );
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const emotionList = row.original;
 
       return (
         <DropdownMenu>
@@ -92,9 +80,11 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() =>
+                navigator.clipboard.writeText(emotionList.id.toString())
+              }
             >
-              Copy payment ID
+              Copy emotion list ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>

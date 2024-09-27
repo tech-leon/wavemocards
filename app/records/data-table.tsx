@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { EmotionList } from "@/lib/data/emoData";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
 import { DataTableViewOptions } from "@/components/table/dataTableViewOptions";
@@ -24,12 +25,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,6 +35,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const { t } = useTranslation(["translation", "cards", "category"]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -62,6 +58,7 @@ export function DataTable<TData, TValue>({
       rowSelection,
     },
   });
+
 
   return (
     <div>
