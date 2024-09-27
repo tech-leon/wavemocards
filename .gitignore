@@ -18,6 +18,7 @@ backend_code
 
 # production
 /build
+backendx.sh
 
 # python
 test.py

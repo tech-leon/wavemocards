@@ -12,5 +12,5 @@ rm -rf ./backend_code
 cp ../newenv/.env.compose .
 docker compose up -d
 
-chown -R ubuntu:ubuntu ./backend_code
+sudo chown -R ubuntu:ubuntu ./backend_code
 cp ../newenv/wavemocards.json ../newenv/.env.app ./backend_code/
