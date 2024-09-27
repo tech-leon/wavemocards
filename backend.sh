@@ -4,7 +4,7 @@
 docker compose down
 
 # 移除鏡像
-docker rmi wavemocards-backend:1.5
+docker rmi wavemocards-backend:1.6
 
 rm -rf ./backend_code
 
@@ -12,4 +12,5 @@ rm -rf ./backend_code
 cp ../newenv/.env.compose .
 docker compose up -d
 
+chown -R ubuntu:ubuntu ./backend_code
 cp ../newenv/wavemocards.json ../newenv/.env.app ./backend_code/
