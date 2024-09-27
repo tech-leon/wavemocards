@@ -180,7 +180,8 @@ class EmotionListsResponse(BaseModel):
     card3: int
     after_card1_level: int
     after_card2_level: int
-    after_card3_level: int    
+    after_card3_level: int
+    create: datetime
 
     class Config:
         orm_mode = True

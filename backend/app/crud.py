@@ -60,5 +60,6 @@ def get_emotions_lists(db: Session, user_id: str) -> List[schemas.EmotionListsRe
         models.Emotion.card3,
         models.Emotion.after_card1_level,
         models.Emotion.after_card2_level,
-        models.Emotion.after_card3_level
+        models.Emotion.after_card3_level,
+        models.Emotion.create
     ).filter(models.Emotion.owner_id == user_id).all()
