@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
       </div>
-      <div className="flex bottom-0 items-center justify-center space-x-2 pt-5">
+      <div className="pt-5">
         <DataTablePagination table={table} />
       </div>
     </div>
