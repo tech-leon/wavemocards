@@ -35,6 +35,9 @@ interface DataTableProps<TData extends Identifiable, TValue> {
   data: TData[];
 }
 
+// 引入自訂過濾函數
+import { filterCards } from "./columns";
+
 export function DataTable<TData extends Identifiable, TValue>({
   columns,
   data,
@@ -61,6 +64,9 @@ export function DataTable<TData extends Identifiable, TValue>({
       columnVisibility,
       rowSelection,
     },
+    filterFns: {
+      cards: filterCards,
+    },
   });
 
   const handleRowClick = (row: Row<TData>) => {
@@ -72,10 +78,10 @@ export function DataTable<TData extends Identifiable, TValue>({
       <div className="">
         <div className="flex items-center py-4">
           <Input
-            placeholder="Filter date..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            placeholder="Filter emotion and intensity..."
+            value={(table.getColumn("cards")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
+              table.getColumn("cards")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />

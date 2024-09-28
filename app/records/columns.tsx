@@ -1,6 +1,6 @@
 "use client";
 import { EmotionList } from "@/lib/data/emoData";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, FilterFn } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+export const filterCards: FilterFn<EmotionList> = (row, columnId, filterValue) => {
+  const cards = row.getValue(columnId) as { [key: string]: number }[];
+  return cards.some(card => {
+    const [name, level] = Object.entries(card)[0];
+    return (
+      name.toLowerCase().includes(filterValue.toLowerCase()) ||
+      level.toString().includes(filterValue)
+    );
+  });
+};
 
 export const columns: ColumnDef<EmotionList>[] = [
   {
@@ -63,6 +74,7 @@ export const columns: ColumnDef<EmotionList>[] = [
         </div>
       );
     },
+    filterFn: filterCards,
   },
   {
     id: "actions",
