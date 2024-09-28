@@ -83,19 +83,19 @@ export function DataTable<TData extends Identifiable, TValue>({
             onChange={(event) =>
               table.getColumn("cards")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-xs"
           />
           <DataTableViewOptions table={table} />
         </div>
         <div className="flex flex-col flex-grow min-h-[33.5rem]">
           <div className="flex flex-col rounded-md border h-fit">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-[#91d6e2] dark:bg-[#348897] dark:text-white">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       return (
-                        <TableHead key={header.id}>
+                        <TableHead key={header.id} className="text-white">
                           {header.isPlaceholder
                             ? null
                             : flexRender(
