@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { EmotionList } from "@/lib/data/emoData";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
 import { DataTableViewOptions } from "@/components/table/dataTableViewOptions";
@@ -28,8 +27,7 @@ import {
 } from "@/components/ui/table";
 
 interface Identifiable {
-  id: number; // 或其他適當的類型
-  // 其他屬性
+  id: number;
 }
 
 interface DataTableProps<TData extends Identifiable, TValue> {
@@ -41,7 +39,7 @@ export function DataTable<TData extends Identifiable, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const { t } = useTranslation(["translation", "cards", "category"]);
+  // const { t } = useTranslation(["translation", "cards", "category"]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
