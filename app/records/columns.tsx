@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { EmotionList } from "@/lib/data/emoData";
 import { ColumnDef, FilterFn } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -66,7 +67,7 @@ export const columns: ColumnDef<EmotionList>[] = [
     cell: ({ row }) => {
       const cards = row.getValue("cards") as { [key: string]: number }[];
       return (
-        <div className="flex items-center justify-start gap-3">
+        <div className={cn("flex items-center justify-start gap-3")}>
           {cards.map((card, index) => {
             const [name, level] = Object.entries(card)[0];
             return (
@@ -88,9 +89,9 @@ export const columns: ColumnDef<EmotionList>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
+            <Button variant="ghost" className={cn("h-8 w-8 p-0")}>
+              <span className={cn("sr-only")}>Open menu</span>
+              <MoreHorizontal className={cn("h-4 w-4")} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

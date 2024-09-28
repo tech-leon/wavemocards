@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { filterCards } from "./columns";
 // import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/utils";
 import { DatePickerWithRange } from "@/components/ui/datePickerWithRange";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
@@ -88,9 +89,9 @@ export function DataTable<TData extends Identifiable, TValue>({
   };
 
   return (
-    <div className="flex flex-col flex-grow justify-between h-full">
-      <div className="">
-        <div className="flex items-center justify-between py-4">
+    <div className={cn("flex flex-col flex-grow justify-between h-full")}>
+      <div>
+        <div className={cn("flex items-center justify-between py-4")}>
           <DatePickerWithRange onDateRangeChange={handleDateRangeChange} />
           <Input
             placeholder="Filter emotion and intensity..."
@@ -98,19 +99,19 @@ export function DataTable<TData extends Identifiable, TValue>({
             onChange={(event) =>
               table.getColumn("cards")?.setFilterValue(event.target.value)
             }
-            className="max-w-xs"
+            className={cn("max-w-xs")}
           />
           <DataTableViewOptions table={table} />
         </div>
-        <div className="flex flex-col flex-grow min-h-[33.5rem]">
-          <div className="flex flex-col rounded-md border h-fit">
+        <div className={cn("flex flex-col flex-grow min-h-[33.5rem]")}>
+          <div className={cn("flex flex-col rounded-md border h-fit")}>
             <Table>
-              <TableHeader className="bg-[#91d6e2] dark:bg-[#348897] dark:text-white">
+              <TableHeader className={cn("bg-[#91d6e2] dark:bg-[#348897] dark:text-white")}>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       return (
-                        <TableHead key={header.id} className="text-white">
+                        <TableHead key={header.id} className={cn("text-white")}>
                           {header.isPlaceholder
                             ? null
                             : flexRender(
@@ -129,7 +130,7 @@ export function DataTable<TData extends Identifiable, TValue>({
                     <TableRow
                       key={row.id}
                       data-state={row.getIsSelected() && "selected"}
-                      className="cursor-pointer"
+                      className={cn("cursor-pointer")}
                       onClick={() => handleRowClick(row)}
                     >
                       {row.getVisibleCells().map((cell) => (
@@ -146,7 +147,7 @@ export function DataTable<TData extends Identifiable, TValue>({
                   <TableRow>
                     <TableCell
                       colSpan={columns.length}
-                      className="h-24 text-center"
+                      className={cn("h-24 text-center")}
                     >
                       無結果。
                     </TableCell>
@@ -157,7 +158,7 @@ export function DataTable<TData extends Identifiable, TValue>({
           </div>
         </div>
       </div>
-      <div className="pt-5">
+      <div className={cn("pt-5")}>
         <DataTablePagination table={table} />
       </div>
     </div>
