@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
 import { DataTableViewOptions } from "@/components/table/dataTableViewOptions";
 import {
+  Row,
   ColumnDef,
   ColumnFiltersState,
   SortingState,
@@ -26,12 +27,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<TData, TValue> {
+interface Identifiable {
+  id: number; // 或其他適當的類型
+  // 其他屬性
+}
+
+interface DataTableProps<TData extends Identifiable, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends Identifiable, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -59,12 +65,16 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const handleRowClick = (row: Row<TData>) => {
+    console.log("資料的 ID:", row.original.id);
+  };
+
   return (
     <div className="flex flex-col flex-grow justify-between h-full">
       <div className="">
         <div className="flex items-center py-4">
           <Input
-            placeholder="Filter emails..."
+            placeholder="Filter date..."
             value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("email")?.setFilterValue(event.target.value)
@@ -100,6 +110,8 @@ export function DataTable<TData, TValue>({
                     <TableRow
                       key={row.id}
                       data-state={row.getIsSelected() && "selected"}
+                      className="cursor-pointer"
+                      onClick={() => handleRowClick(row)}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id}>
