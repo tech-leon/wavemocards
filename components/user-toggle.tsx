@@ -38,6 +38,11 @@ export function UserToggle() {
                 <p className="group-hover:text-[#3c9daeff]">My Emotions</p>
               </DropdownMenuItem>
             </Link>
+            <Link className="group" href="/find-my-emotions">
+              <DropdownMenuItem>
+                <p className="group-hover:text-[#3c9daeff]">Find My Emotions</p>
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
