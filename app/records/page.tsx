@@ -22,7 +22,7 @@ export default function RecordsPage() {
 
   return (
     <div>
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 min-h-min">
         <DataTable columns={columns} data={emotionList} />
       </div>
     </div>
