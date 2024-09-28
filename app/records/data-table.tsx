@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { filterCards } from "./columns";
 // import { useTranslation } from "react-i18next";
-import { DatePickerWithRange } from "@/components/ui/datepickerWithRange";
+import { DatePickerWithRange } from "@/components/ui/datePickerWithRange";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
 import { DataTableViewOptions } from "@/components/table/dataTableViewOptions";
@@ -35,9 +36,6 @@ interface DataTableProps<TData extends Identifiable, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
-
-// 引入自訂過濾函數
-import { filterCards } from "./columns";
 
 export function DataTable<TData extends Identifiable, TValue>({
   columns,
@@ -77,7 +75,7 @@ export function DataTable<TData extends Identifiable, TValue>({
   return (
     <div className="flex flex-col flex-grow justify-between h-full">
       <div className="">
-        <div className="flex items-center py-4">
+        <div className="flex items-center justify-between py-4">
           <DatePickerWithRange />
           <Input
             placeholder="Filter emotion and intensity..."
