@@ -9,7 +9,7 @@ rm -rf ./backend_code
 cp ../newenv/.env.compose .
 docker compose up -d
 
-sleep 5
+sleep 1
 
 sudo chown -R ubuntu:ubuntu ./backend_code
 cp ../newenv/wavemocards.json ../newenv/.env.app ./backend_code/
