@@ -14,9 +14,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const filterCards: FilterFn<EmotionList> = (row, columnId, filterValue) => {
+export const filterCards: FilterFn<EmotionList> = (
+  row,
+  columnId,
+  filterValue
+) => {
   const cards = row.getValue(columnId) as { [key: string]: number }[];
-  return cards.some(card => {
+  return cards.some((card) => {
     const [name, level] = Object.entries(card)[0];
     return (
       name.toLowerCase().includes(filterValue.toLowerCase()) ||

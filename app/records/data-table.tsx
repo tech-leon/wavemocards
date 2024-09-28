@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { filterCards } from "./columns";
 // import { useTranslation } from "react-i18next";
 import { DatePickerWithRange } from "@/components/ui/datePickerWithRange";
@@ -27,9 +27,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DateRange } from "react-day-picker";
 
 interface Identifiable {
   id: number;
+  create: string | Date;
 }
 
 interface DataTableProps<TData extends Identifiable, TValue> {
@@ -41,13 +43,26 @@ export function DataTable<TData extends Identifiable, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  // const { t } = useTranslation(["translation", "cards", "category"]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
+
+  const handleDateRangeChange = useCallback((range: DateRange | undefined) => {
+    setDateRange(range);
+  }, []);
+
+  const filteredData = useMemo(() => {
+    if (!dateRange || !dateRange.from || !dateRange.to) return data;
+    return data.filter((item) => {
+      const itemDate = new Date(item.create);
+      return itemDate >= dateRange.from! && itemDate <= dateRange.to!;
+    });
+  }, [data, dateRange]);
+
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -76,7 +91,7 @@ export function DataTable<TData extends Identifiable, TValue>({
     <div className="flex flex-col flex-grow justify-between h-full">
       <div className="">
         <div className="flex items-center justify-between py-4">
-          <DatePickerWithRange />
+          <DatePickerWithRange onDateRangeChange={handleDateRangeChange} />
           <Input
             placeholder="Filter emotion and intensity..."
             value={(table.getColumn("cards")?.getFilterValue() as string) ?? ""}
@@ -133,7 +148,7 @@ export function DataTable<TData extends Identifiable, TValue>({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      無結果。
                     </TableCell>
                   </TableRow>
                 )}
