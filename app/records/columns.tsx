@@ -40,13 +40,13 @@ export const columns: ColumnDef<EmotionList>[] = [
   {
     accessorKey: "create",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Create" />
+      <DataTableColumnHeader column={column} title="Date" />
     ),
   },
   {
     accessorKey: "cards",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Cards" />
+      <DataTableColumnHeader column={column} title="Emotion and Intensity" />
     ),
     cell: ({ row }) => {
       const cards = row.getValue("cards") as { [key: string]: number }[];
