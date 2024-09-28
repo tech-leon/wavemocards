@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 // import { useTranslation } from "react-i18next";
+import { DatePickerWithRange } from "@/components/ui/datepickerWithRange";
 import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "@/components/table/dataTablePagination";
 import { DataTableViewOptions } from "@/components/table/dataTableViewOptions";
@@ -77,6 +78,7 @@ export function DataTable<TData extends Identifiable, TValue>({
     <div className="flex flex-col flex-grow justify-between h-full">
       <div className="">
         <div className="flex items-center py-4">
+          <DatePickerWithRange />
           <Input
             placeholder="Filter emotion and intensity..."
             value={(table.getColumn("cards")?.getFilterValue() as string) ?? ""}
