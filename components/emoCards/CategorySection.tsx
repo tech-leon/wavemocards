@@ -91,6 +91,7 @@ const CategorySection = ({ name, color, cards }: CategorySectionProps) => {
               example={card.example}
               ID={card.ID}
               color={color}
+              choosable={card.choosable}
             />
           ))}
         </div>

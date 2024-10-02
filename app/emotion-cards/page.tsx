@@ -26,8 +26,9 @@ export default function EmotionCardsPage() {
             name={category.name}
             color={category.color}
             ID={category.ID}
-            cards={cards.filter(card => card.categoryID === String(category.ID))
-              .map(card => ({ ...card, color: category.color }))}
+            cards={cards
+              .filter(card => card.categoryID === String(category.ID))
+              .map(card => ({ ...card, color: category.color, choosable: false }))}
           />
         ))}
       </div>

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-// import { cn } from "@/lib/utils";
+import { useEmoFormContext } from '@/components/emoForm/formContext'; // 引入表單上下文
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
+import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid"; // 引入加號和減號圖示
 
 export interface CardProps {
   name: string;
@@ -10,27 +11,60 @@ export interface CardProps {
   example: string;
   ID: number;
   color: string;
+  choosable: boolean;
 }
 
-
-const EmoCard = ({ name, description, example, ID, color }: CardProps) => {
+const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const { emoFormData, updateEmoFormData } = useEmoFormContext();
 
   const toggleCard = () => {
     setIsOpen(!isOpen);
+  };
+
+  const isSelected = emoFormData.emotionCards.includes(ID);
+
+  const handleSelection = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isSelected) {
+      // 取消選取
+      const updatedCards = emoFormData.emotionCards.filter((c) => c !== ID);
+      updateEmoFormData({ emotionCards: updatedCards });
+    } else {
+      // 選取
+      if (emoFormData.emotionCards.length < 3) {
+        updateEmoFormData({ emotionCards: [...emoFormData.emotionCards, ID] });
+      } else {
+        // 可以選擇提示用戶最多只能選擇3張卡片
+        alert(t("您最多只能選擇三張卡片"));
+      }
+    }
   };
 
   return (
     <>
       <div
         key={ID}
-        className="group group w-[10.8rem] px-2 cursor-pointer"
+        className={`group group w-[10.8rem] px-2 cursor-pointer relative ${isSelected ? 'opacity-50' : ''}`}
         onClick={toggleCard}
       >
+        {/* 加號/減號按鈕 */}
+        {choosable && (
+          <button
+            onClick={handleSelection}
+            className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"
+          >
+            {isSelected ? (
+              <MinusIcon className="h-5 w-5 text-red-500" />
+            ) : (
+              <PlusIcon className="h-5 w-5 text-green-500" />
+            )}
+          </button>
+        )}
         <div
           className={`shadow-md border border-gray-400 rounded-2xl p-4`}
-          style={{ backgroundColor: color }} 
+          style={{ backgroundColor: color }}
         >
           <Image
             src={`/assets/img/card/${ID}.svg`}
@@ -50,7 +84,7 @@ const EmoCard = ({ name, description, example, ID, color }: CardProps) => {
         >
           <div
             className={`flex items-center w-5/6 max-w-2xl p-10 rounded-2xl`}
-            style={{ backgroundColor: color }} 
+            style={{ backgroundColor: color }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col-reverse md:flex-row w-full">
