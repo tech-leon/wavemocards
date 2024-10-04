@@ -17,8 +17,12 @@ export interface CardProps {
 const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const { emoFormData, updateEmoFormData } = useEmoFormContext();
+  const { emoFormData, updateEmoFormData, isLoading } = useEmoFormContext();
   const isSelected = emoFormData.emotionCards.includes(ID);
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
 
   const toggleCard = () => {
     setIsOpen(!isOpen);

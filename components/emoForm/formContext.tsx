@@ -1,5 +1,5 @@
-'use client';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+"use client";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface EmoFormData {
   emotionCards: number[];
@@ -8,7 +8,7 @@ interface EmoFormData {
   thoughtsAction: string;
   consequences: string;
   feelingOfConsequences: string;
-  resultOfExpect: 'yes' | 'no' | 'unclear';
+  resultOfExpect: "yes" | "no" | "unclear";
   takeOut: string;
   finalIntensity: number[];
 }
@@ -18,49 +18,83 @@ interface EmoFormContextType {
   updateEmoFormData: (data: Partial<EmoFormData>) => void;
   currentStep: number;
   setCurrentStep: (step: number) => void;
+  isLoading: boolean;
 }
 
 const FormContext = createContext<EmoFormContextType | undefined>(undefined);
 
-export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [emoFormData, setEmoFormData] = useState<EmoFormData>({
     emotionCards: [],
     emotionIntensity: [],
-    story: '',
-    thoughtsAction: '',
-    consequences: '',
-    feelingOfConsequences: '',
-    resultOfExpect: 'unclear',
-    takeOut: '',
+    story: "",
+    thoughtsAction: "",
+    consequences: "",
+    feelingOfConsequences: "",
+    resultOfExpect: "unclear",
+    takeOut: "",
     finalIntensity: [],
   });
-
   const [currentStep, setCurrentStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Load data from localStorage
-    const savedData = localStorage.getItem('emoFormData');
-    if (savedData) {
-      setEmoFormData(JSON.parse(savedData));
-    }
-    const savedStep = localStorage.getItem('currentStep');
-    if (savedStep) {
-      setCurrentStep(parseInt(savedStep, 10));
-    }
+    const loadSavedData = () => {
+      try {
+        const savedData = localStorage.getItem("emoFormData");
+        if (savedData) {
+          const parsedData = JSON.parse(savedData);
+          setEmoFormData((prevData) => ({
+            ...prevData,
+            ...parsedData,
+          }));
+        }
+
+        const savedStep = localStorage.getItem("currentStep");
+        if (savedStep) {
+          setCurrentStep(parseInt(savedStep, 10));
+        }
+      } catch (error) {
+        console.error("加載 emoFormData 時發生錯誤:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadSavedData();
   }, []);
 
   useEffect(() => {
-    // Save data to localStorage
-    localStorage.setItem('emoFormData', JSON.stringify(emoFormData));
-    localStorage.setItem('currentStep', currentStep.toString());
-  }, [emoFormData, currentStep]);
+    if (!isLoading) {
+      localStorage.setItem("emoFormData", JSON.stringify(emoFormData));
+      localStorage.setItem("currentStep", currentStep.toString());
+    }
+  }, [emoFormData, currentStep, isLoading]);
 
   const updateEmoFormData = (data: Partial<EmoFormData>) => {
-    setEmoFormData(prev => ({ ...prev, ...data }));
+    setEmoFormData((prev) => {
+      const updatedData = { ...prev, ...data };
+      localStorage.setItem("emoFormData", JSON.stringify(updatedData));
+      return updatedData;
+    });
   };
 
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
   return (
-    <FormContext.Provider value={{ emoFormData, updateEmoFormData, currentStep, setCurrentStep }}>
+    <FormContext.Provider
+      value={{
+        emoFormData,
+        updateEmoFormData,
+        currentStep,
+        setCurrentStep,
+        isLoading,
+      }}
+    >
       {children}
     </FormContext.Provider>
   );
@@ -69,7 +103,7 @@ export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({ child
 export const useEmoFormContext = () => {
   const context = useContext(FormContext);
   if (context === undefined) {
-    throw new Error('useEmoFormContext must be used within a FormProvider');
+    throw new Error("useEmoFormContext must be used within a FormProvider");
   }
   return context;
 };

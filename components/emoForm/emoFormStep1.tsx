@@ -3,14 +3,15 @@ import { cn } from "@/lib/utils";
 import { useCardData, useCategoryData } from "@/lib/data/cardData";
 import CategorySection from "@/components/emoCards/CategorySection";
 import { useTranslation } from 'react-i18next';
-
+import { useEmoFormContext } from '@/components/emoForm/formContext';
 
 export const EmoFormStep1: React.FC = () => {  
   const { t } = useTranslation();
   const cards = useCardData();
   const categories = useCategoryData();
+  const { isLoading } = useEmoFormContext();
 
-  if (!cards) {
+  if (isLoading || !cards) {
     return <p>{t("loading")}</p>;
   }
   if (cards.length === 0) {

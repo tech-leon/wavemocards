@@ -16,7 +16,7 @@ export const EmoFormStep2: React.FC = () => {
 
   return (
     <div>
-      <h2>選擇三張情緒卡</h2>
+      <h2>1 到 5 分的強度，1 為最弱 5 為最強</h2>
       <div className={cn("mt-4 space-y-4")}>
         {selectedCards.map((card) => (
             <EmoCard
