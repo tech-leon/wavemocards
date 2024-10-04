@@ -3,7 +3,6 @@ import { useEmoFormContext } from "@/components/emoForm/formContext";
 import { cn } from "@/lib/utils";
 import { useCardData } from "@/lib/data/cardData";
 import EmoCard from "@/components/emoCards/Card";
-// import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 
 export const EmoFormStep2: React.FC = () => {

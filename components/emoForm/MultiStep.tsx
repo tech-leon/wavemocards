@@ -3,7 +3,6 @@ import { useEmoFormContext } from "@/components/emoForm/formContext";
 import { EmoFormStep1 } from "./emoFormStep1";
 import { EmoFormStep2 } from "./emoFormStep2";
 import { Button } from "@/components/ui/button";
-import { divider } from "@nextui-org/react";
 
 const steps = [EmoFormStep1, EmoFormStep2];
 
@@ -52,7 +51,6 @@ export const MultiStepForm: React.FC = () => {
   return (
     <div>
       <div className="my-4 flex">
-        {/* <div className="flex basis-1/2"></div> */}
         <div className="flex justify-between w-full">
           {currentStep > 0 ? (
             <Button onClick={handlePrevious}>上一步</Button>
