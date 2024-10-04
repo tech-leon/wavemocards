@@ -26,31 +26,28 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
 
   const handleSelection = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log(emoFormData.emotionCards, ID);
     if (isSelected) {
-      // 取消選取
+      // Cancel selection
       const updatedCards = emoFormData.emotionCards.filter((c) => c !== ID);
-      console.log(updatedCards);
       updateEmoFormData({ emotionCards: updatedCards });
     } else {
-      // 選取
+      // Select
       if (emoFormData.emotionCards.length < 3) {
         updateEmoFormData({ emotionCards: [...emoFormData.emotionCards, ID] });
       } else {
-        // 可以選擇提示用戶最多只能選擇3張卡片
-        alert(t("您最多只能選擇三張卡片"));
+        alert(t("You can only select three cards"));
       }
     }
+    console.log(emoFormData.emotionCards, ID);
   };
 
   return (
     <>
       <div
         key={ID}
-        className={`group group w-[10.8rem] px-2 cursor-pointer relative ${isSelected ? 'opacity-50' : ''}`}
+        className={`group w-[10.8rem] px-2 cursor-pointer relative ${choosable && isSelected ? 'opacity-50' : ''}`}
         onClick={toggleCard}
-      >
-        {/* 加號/減號按鈕 */}
+        >
         {choosable && (
           <button
             onClick={handleSelection}
@@ -79,7 +76,7 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
       </div>
       {isOpen && (
         <div
-          key={ID}
+          key={ID - 1}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={toggleCard}
         >
@@ -106,7 +103,7 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
                   height={5}
                 />
               </div>
-            </div>{" "}
+            </div>
           </div>
         </div>
       )}

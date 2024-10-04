@@ -2,14 +2,11 @@ import React from 'react';
 import { useEmoFormContext } from '@/components/emoForm/formContext';
 import { EmoFormStep1 } from './emoFormStep1';
 import { EmoFormStep2 } from './emoFormStep2';
-// 導入其他步驟組件
 import { Button } from '@/components/ui/button';
 
 const steps = [
   EmoFormStep1,
   EmoFormStep2
-  // Step2EmotionIntensity,
-  // 添加其他步驟組件
 ];
 
 export const MultiStepForm: React.FC = () => {
