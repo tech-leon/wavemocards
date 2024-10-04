@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { useEmoFormContext } from '@/components/emoForm/formContext'; // 引入表單上下文
+import { useEmoFormContext } from '@/components/emoForm/formContext';
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid"; // 引入加號和減號圖示
+import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
 
 export interface CardProps {
   name: string;
@@ -18,18 +18,19 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { emoFormData, updateEmoFormData } = useEmoFormContext();
+  const isSelected = emoFormData.emotionCards.includes(ID);
 
   const toggleCard = () => {
     setIsOpen(!isOpen);
   };
 
-  const isSelected = emoFormData.emotionCards.includes(ID);
-
   const handleSelection = (e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log(emoFormData.emotionCards, ID);
     if (isSelected) {
       // 取消選取
       const updatedCards = emoFormData.emotionCards.filter((c) => c !== ID);
+      console.log(updatedCards);
       updateEmoFormData({ emotionCards: updatedCards });
     } else {
       // 選取
@@ -53,12 +54,12 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
         {choosable && (
           <button
             onClick={handleSelection}
-            className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"
+            className="absolute top-0 right-1 bg-white rounded-full p-1 shadow-md z-10"
           >
             {isSelected ? (
-              <MinusIcon className="h-5 w-5 text-red-500" />
+              <MinusIcon className="h-8 w-8 text-red-500 stroke-red-500 stroke-2" />
             ) : (
-              <PlusIcon className="h-5 w-5 text-green-500" />
+              <PlusIcon className="h-8 w-8 text-green-500 stroke-green-500 stroke-2" />
             )}
           </button>
         )}
