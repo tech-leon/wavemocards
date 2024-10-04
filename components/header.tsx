@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-md z-10">
+      <header className="sticky top-0 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-md z-20">
         <nav
           aria-label="Global"
           className="mx-auto flex max-w-7xl items-center justify-between p-5 lg:px-8"
