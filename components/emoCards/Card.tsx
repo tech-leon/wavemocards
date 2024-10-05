@@ -33,7 +33,9 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
     if (isSelected) {
       // Cancel selection
       const updatedCards = emoFormData.emotionCards.filter((c) => c !== ID);
-      updateEmoFormData({ emotionCards: updatedCards });
+      const updatedIntensity = { ...emoFormData.emotionIntensity };
+      delete updatedIntensity[ID];
+      updateEmoFormData({ emotionCards: updatedCards, emotionIntensity: updatedIntensity });
     } else {
       // Select
       if (emoFormData.emotionCards.length < 3) {
