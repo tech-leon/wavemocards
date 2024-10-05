@@ -3,14 +3,14 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface EmoFormData {
   emotionCards: number[];
-  emotionIntensity: number[];
+  emotionIntensity: { [cardID: number]: number };
   story: string;
   thoughtsAction: string;
   consequences: string;
   feelingOfConsequences: string;
   resultOfExpect: "yes" | "no" | "unclear";
   takeOut: string;
-  finalIntensity: number[];
+  finalIntensity: { [cardID: number]: number };
 }
 
 interface EmoFormContextType {
@@ -28,7 +28,7 @@ export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [emoFormData, setEmoFormData] = useState<EmoFormData>({
     emotionCards: [],
-    emotionIntensity: [],
+    emotionIntensity: {},
     story: "",
     thoughtsAction: "",
     consequences: "",
