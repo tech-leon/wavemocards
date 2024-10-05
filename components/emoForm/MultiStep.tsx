@@ -2,9 +2,10 @@ import React from "react";
 import { useEmoFormContext } from "@/components/emoForm/formContext";
 import { EmoFormStep1 } from "./emoFormStep1";
 import { EmoFormStep2 } from "./emoFormStep2";
+import { EmoFormStep3 } from "./emoFormStep3";
 import { Button } from "@/components/ui/button";
 
-const steps = [EmoFormStep1, EmoFormStep2];
+const steps = [EmoFormStep1, EmoFormStep2, EmoFormStep3];
 
 export const MultiStepForm: React.FC = () => {
   const { currentStep, setCurrentStep, emoFormData } = useEmoFormContext();
@@ -37,7 +38,6 @@ export const MultiStepForm: React.FC = () => {
         localStorage.removeItem("emoFormData");
         localStorage.removeItem("currentStep");
         // 導航到感謝頁面
-        // 使用 Next.js 的路由導航
         // router.push('/thank-you');
       } else {
         throw new Error("提交失敗");
