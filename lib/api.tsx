@@ -1,38 +1,31 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
+// import { useAuth } from "@/lib/auth/authContext";
 
-const APIPATH = process.env.NEXT_PUBLIC_API_URL
+const APIPATH = process.env.NEXT_PUBLIC_API_URL;
 // const APIPATH = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 const SIGNUP = process.env.NEXT_PUBLIC_API_URL_REGISTER_USER;
 const USERDATA = process.env.NEXT_PUBLIC_API_URL_GET_USER;
 const EMOTION_RECORDS = process.env.NEXT_PUBLIC_API_URL_EMOTION_RECORDS;
 const EMOTION_LISTS = process.env.NEXT_PUBLIC_API_URL_EMOTION_LISTS;
-export const api = axios.create({
-  baseURL: APIPATH,
-  withCredentials: true,
-});
+// export const api = axios.create({
+//   baseURL: APIPATH,
+//   withCredentials: true,
+// });
 
-const getTokenFromStorage = () => {
-  const authUser = localStorage.getItem("authUser");
-  if (authUser) {
-    const user = JSON.parse(authUser);
-    return user.stsTokenManager.accessToken;
-  }
-  return null;
-};
-
-api.interceptors.request.use(
-  (config) => {
-    const token = getTokenFromStorage();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+export const createApiClient = (userToken: string | null) => {
+  const axiosInstance: AxiosInstance = axios.create({
+    baseURL: APIPATH,
+  });
+  axiosInstance.interceptors.request.use((config) => {
+    if (userToken) {
+      config.headers.Authorization = `Bearer ${userToken}`;
     }
     return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  });
+
+  return axiosInstance;
+};
 
 export const preSignUp = async (
   email: string,
@@ -42,31 +35,39 @@ export const preSignUp = async (
   occupation: string,
   timezone: string
 ) => {
-  const response = await api.post(`${SIGNUP}`, {
-    email,
-    password,
-    name,
-    birthday,
-    occupation,
-    timezone,
-  });
-  console.log(response.data);
-  localStorage.setItem("userData", JSON.stringify(response.data));
-  return response.data;
+  const api = createApiClient(null);
+  try {
+    const response = await api.post(`${SIGNUP}`, {
+      email,
+      password,
+      name,
+      birthday,
+      occupation,
+      timezone,
+    });
+    localStorage.setItem("userData", JSON.stringify(response.data));
+    return response.data;
+  } catch (error) {
+    console.error("註冊失敗:", error);
+    throw error;
+  }
 };
 
-export const getUserData = async (userID: string) => {
+export const getUserData = async (userID: string, userToken: string) => {
+  const api = createApiClient(userToken);
   const response = await api.get(`${USERDATA}${userID}`);
   localStorage.setItem("userData", JSON.stringify(response.data));
   return response.data;
 };
 
-export const getEmotionRecords = async (userID: string) => {
+export const getEmotionRecords = async (userID: string, userToken: string) => {
+  const api = createApiClient(userToken);
   const response = await api.get(`${EMOTION_RECORDS}/${userID}`);
   return response.data;
 };
 
-export const getEmotionLists = async (userID: string) => {
+export const getEmotionLists = async (userID: string, userToken: string) => {
+  const api = createApiClient(userToken);
   const response = await api.get(`${EMOTION_LISTS}?user_id=${userID}`);
   return response.data;
 };

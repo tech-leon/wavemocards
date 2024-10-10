@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useAuth } from "@/lib/auth/authContext"; // 更新 import
+import { useAuth } from "@/lib/auth/authContext"; 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";

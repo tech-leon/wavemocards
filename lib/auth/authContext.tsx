@@ -1,12 +1,20 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
-import { onIdTokenChanged, User, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
+import { User } from "firebase/auth";
+import { userStateListener, signInUser, signUserOut } from "@/lib/auth/utils";
 import { preSignUp, getUserData } from "@/lib/api";
-import { auth } from "@/lib/auth/firebase";
 import { FirebaseError } from "firebase/app";
 
 export const AuthContext = createContext<{
   user: User | null;
+  userData: string | null;
+  userToken: string | null;
   loading: boolean;
   logout: () => Promise<void>;
   signUp: (
@@ -17,21 +25,29 @@ export const AuthContext = createContext<{
     occupation: string,
     timezone: string
   ) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>; 
+  login: (email: string, password: string) => Promise<void>;
 } | null>(null);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<string | null>(null);
+  const [userToken, setUserToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onIdTokenChanged(auth, async (user) => {
+    const unsubscribe = userStateListener(async (user) => {
       if (user) {
         setUser(user);
-        localStorage.setItem("authUser", JSON.stringify(user));
-        await user.getIdToken(true);
+        if (process.env.NODE_ENV !== "production") {
+          localStorage.setItem("authUser", JSON.stringify(user));
+        }
+        await user.getIdToken(true).then((token) => {
+          setUserToken(token);
+        });
       } else {
-        localStorage.removeItem("authUser");
+        localStorage.clear();
         setUser(null);
       }
       setLoading(false);
@@ -52,9 +68,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   ) => {
     try {
       await preSignUp(email, password, name, birthdate, occupation, timezone);
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInUser(email, password);
       setUser(userCredential.user);
-      localStorage.setItem("authUser", JSON.stringify(userCredential.user));
+      const token = await userCredential.user.getIdToken();
+      const userData = await getUserData(userCredential.user.uid, token);
+      setUserData(userData);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("註冊錯誤:", error.message);
@@ -71,11 +89,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const userData = await getUserData(userCredential.user.uid);
+      const userCredential = await signInUser(email, password);
+      const token = await userCredential.user.getIdToken();
+      const userData = await getUserData(userCredential.user.uid, token);
       setUser(userCredential.user);
-      localStorage.setItem("userData", JSON.stringify(userData));
-      localStorage.setItem("authUser", JSON.stringify(userCredential.user));
+      setUserData(userData);
+      setUserToken(token);
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         let message = "登入失敗，請檢查您的電子郵件和密碼。";
@@ -86,30 +105,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
         throw new Error(message);
       } else {
-        throw new Error("登入時發生未知錯誤。");
+        throw new Error(`登入時發生未知錯誤: ${error}`);
       }
     }
   };
 
   const logout = async () => {
-    await signOut(auth);
+    await signUserOut();
     localStorage.removeItem("authUser");
     localStorage.removeItem("userData");
     setUser(null);
   };
 
-  const contextValue = useMemo(() => ({
-    user,
-    loading,
-    logout,
-    signUp,
-    login,
-  }), [user, loading]);
+  const contextValue = useMemo(
+    () => ({
+      user,
+      loading,
+      logout,
+      signUp,
+      login,
+      userToken,
+      userData,
+    }),
+    [user, loading, userToken, userData]
+  );
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
@@ -125,11 +147,12 @@ export const useAuth = (): {
     occupation: string,
     timezone: string
   ) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>; 
+  login: (email: string, password: string) => Promise<void>;
+  userToken: string | null;
 } => {
   const context = useContext(AuthContext);
   if (context === null) {
-    throw new Error("useAuth 必須在 AuthProvider 內使用");
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

@@ -3,9 +3,18 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { EmoFormProvider } from "@/components/emoForm/formContext";
 import { MultiStepForm } from "@/components/emoForm/multiStep";
+import { useAuth } from "@/lib/auth/authContext";
+import { useRouter } from "next/navigation";
 
 export default function FindMyEmotionsPage() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const router = useRouter();
+  
+  if (!user) {
+    router.push("/login");
+    return null;
+  }
 
   return (
     <EmoFormProvider>
