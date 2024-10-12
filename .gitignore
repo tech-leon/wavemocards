@@ -11,6 +11,7 @@
 backend_code
 *.bk
 *.sql
+.cursorrules
 
 # next.js
 /.next/
