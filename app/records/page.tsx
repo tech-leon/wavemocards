@@ -9,7 +9,7 @@ export default function RecordsPage() {
   const { t } = useTranslation();
   const userDataString = typeof window !== 'undefined' ? localStorage.getItem("authUser") : null;
   const userData = userDataString ? JSON.parse(userDataString) : null;
-  const { emotionList, isLoading, error } = useEmotionList(userData?.uid);
+  const { emotionList, isLoading, error } = useEmotionList(userData?.uid, userData?.stsTokenManager.accessToken);
 
   if (isLoading) {
     return <div>正在加載數據...</div>;

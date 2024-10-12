@@ -36,7 +36,7 @@ export const useCardData = (): CardProps[] => {
   // useMemo(() => {}, []);
 };
 
-export const useEmotionList = (userID: string | undefined) => {
+export const useEmotionList = (userID: string | undefined, token: string | undefined) => {
   const { t } = useTranslation();
   const [emotionList, setEmotionList] = useState<EmotionList[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,14 +44,14 @@ export const useEmotionList = (userID: string | undefined) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!userID) {
+      if (!userID || !token) {
         setIsLoading(false);
         return;
       }
 
       try {
         setIsLoading(true);
-        const data = await getEmotionLists(userID);
+        const data = await getEmotionLists(userID, token);
 
         const formattedData = data.map((item: EmotionList) => {
           return {
