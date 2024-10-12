@@ -3,9 +3,10 @@ import { useEmoFormContext } from "@/components/emoForm/formContext";
 import { EmoFormStep1 } from "./emoFormStep1";
 import { EmoFormStep2 } from "./emoFormStep2";
 import { EmoFormStep3 } from "./emoFormStep3";
+import { EmoFormStep4 } from "./emoFormStep4";
 import { Button } from "@/components/ui/button";
 
-const steps = [EmoFormStep1, EmoFormStep2, EmoFormStep3];
+const steps = [EmoFormStep1, EmoFormStep2, EmoFormStep3, EmoFormStep4];
 
 export const MultiStepForm: React.FC = () => {
   const { currentStep, setCurrentStep, emoFormData } = useEmoFormContext();
