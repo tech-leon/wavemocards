@@ -1,27 +1,27 @@
-"use client";
-import React, { createContext, useContext, useState, useEffect } from "react";
+"use client"
+import React, { createContext, useContext, useState, useEffect } from "react"
 
 interface EmoFormData {
-  emotionCards: number[];
-  emotionIntensity: { [cardID: number]: number };
-  story: string;
-  thoughtsAction: string;
-  consequences: string;
-  feelingOfConsequences: string;
-  resultOfExpect: "yes" | "no" | "unclear";
-  takeOut: string;
-  finalIntensity: { [cardID: number]: number };
+  emotionCards: number[]
+  emotionIntensity: { [cardID: number]: number }
+  story: string
+  thoughtsAction: string
+  consequences: string
+  feelingOfConsequences: string
+  resultOfExpect: "yes" | "no" | "unclear"
+  takeOut: string
+  finalIntensity: { [cardID: number]: number }
 }
 
 interface EmoFormContextType {
-  emoFormData: EmoFormData;
-  updateEmoFormData: (data: Partial<EmoFormData>) => void;
-  currentStep: number;
-  setCurrentStep: (step: number) => void;
-  isLoading: boolean;
+  emoFormData: EmoFormData
+  updateEmoFormData: (data: Partial<EmoFormData>) => void
+  currentStep: number
+  setCurrentStep: (step: number) => void
+  isLoading: boolean
 }
 
-const FormContext = createContext<EmoFormContextType | undefined>(undefined);
+const FormContext = createContext<EmoFormContextType | undefined>(undefined)
 
 export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -36,53 +36,53 @@ export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
     resultOfExpect: "unclear",
     takeOut: "",
     finalIntensity: [],
-  });
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  })
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const loadSavedData = () => {
       try {
-        const savedData = localStorage.getItem("emoFormData");
+        const savedData = localStorage.getItem("emoFormData")
         if (savedData) {
-          const parsedData = JSON.parse(savedData);
+          const parsedData = JSON.parse(savedData)
           setEmoFormData((prevData) => ({
             ...prevData,
             ...parsedData,
-          }));
+          }))
         }
 
-        const savedStep = localStorage.getItem("currentStep");
+        const savedStep = localStorage.getItem("currentStep")
         if (savedStep) {
-          setCurrentStep(parseInt(savedStep, 10));
+          setCurrentStep(parseInt(savedStep, 10))
         }
       } catch (error) {
-        console.error("加載 emoFormData 時發生錯誤:", error);
+        console.error("加載 emoFormData 時發生錯誤:", error)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    loadSavedData();
-  }, []);
+    loadSavedData()
+  }, [])
 
   useEffect(() => {
     if (!isLoading) {
-      localStorage.setItem("emoFormData", JSON.stringify(emoFormData));
-      localStorage.setItem("currentStep", currentStep.toString());
+      localStorage.setItem("emoFormData", JSON.stringify(emoFormData))
+      localStorage.setItem("currentStep", currentStep.toString())
     }
-  }, [emoFormData, currentStep, isLoading]);
+  }, [emoFormData, currentStep, isLoading])
 
   const updateEmoFormData = (data: Partial<EmoFormData>) => {
     setEmoFormData((prev) => {
-      const updatedData = { ...prev, ...data };
-      localStorage.setItem("emoFormData", JSON.stringify(updatedData));
-      return updatedData;
-    });
-  };
+      const updatedData = { ...prev, ...data }
+      localStorage.setItem("emoFormData", JSON.stringify(updatedData))
+      return updatedData
+    })
+  }
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <div>loading...</div>
   }
 
   return (
@@ -93,17 +93,16 @@ export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
         currentStep,
         setCurrentStep,
         isLoading,
-      }}
-    >
+      }}>
       {children}
     </FormContext.Provider>
-  );
-};
+  )
+}
 
 export const useEmoFormContext = () => {
-  const context = useContext(FormContext);
+  const context = useContext(FormContext)
   if (context === undefined) {
-    throw new Error("useEmoFormContext must be used within a FormProvider");
+    throw new Error("useEmoFormContext must be used within a FormProvider")
   }
-  return context;
-};
+  return context
+}
