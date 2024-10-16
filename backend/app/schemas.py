@@ -104,9 +104,9 @@ class EmotionCreate(BaseModel):
     after_card1_level: int = Field(..., ge=1, le=5, description="After card 1 level, range 1-5")
     after_card2_level: int = Field(..., ge=1, le=5, description="After card 2 level, range 1-5")
     after_card3_level: int = Field(..., ge=1, le=5, description="After card 3 level, range 1-5")
-
+ 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "id": "12345",
                 "before_card1_level": 5,
@@ -145,7 +145,7 @@ class EmotionResponse(BaseModel):
     create: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 class EmotionBase(BaseModel):
     id: int
@@ -184,4 +184,4 @@ class EmotionListsResponse(BaseModel):
     create: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
