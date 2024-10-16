@@ -1,29 +1,36 @@
-import React from "react";
-import { useEmoFormContext } from "@/components/emoForm/formContext";
-import { EmoFormStep1 } from "./emoFormStep1";
-import { EmoFormStep2 } from "./emoFormStep2";
-import { EmoFormStep3 } from "./emoFormStep3";
-import { EmoFormStep4 } from "./emoFormStep4";
-import { Button } from "@/components/ui/button";
+import React from "react"
+import { useEmoFormContext } from "@/components/emoForm/formContext"
+import { EmoFormStep1 } from "./emoFormStep1"
+import { EmoFormStep2 } from "./emoFormStep2"
+import { EmoFormStep3 } from "./emoFormStep3"
+import { EmoFormStep4 } from "./emoFormStep4"
+import { EmoFormStep5 } from "./emoFormStep5"
+import { Button } from "@/components/ui/button"
 
-const steps = [EmoFormStep1, EmoFormStep2, EmoFormStep3, EmoFormStep4];
+const steps = [
+  EmoFormStep1,
+  EmoFormStep2,
+  EmoFormStep3,
+  EmoFormStep4,
+  EmoFormStep5,
+]
 
 export const MultiStepForm: React.FC = () => {
-  const { currentStep, setCurrentStep, emoFormData } = useEmoFormContext();
+  const { currentStep, setCurrentStep, emoFormData } = useEmoFormContext()
 
-  const CurrentStepComponent = steps[currentStep];
+  const CurrentStepComponent = steps[currentStep]
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
+      setCurrentStep(currentStep + 1)
     }
-  };
+  }
 
   const handlePrevious = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep(currentStep - 1)
     }
-  };
+  }
 
   const handleSubmit = async () => {
     try {
@@ -33,21 +40,21 @@ export const MultiStepForm: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(emoFormData),
-      });
+      })
       if (response.ok) {
         // 清除 localStorage
-        localStorage.removeItem("emoFormData");
-        localStorage.removeItem("currentStep");
+        localStorage.removeItem("emoFormData")
+        localStorage.removeItem("currentStep")
         // 導航到感謝頁面
         // router.push('/thank-you');
       } else {
-        throw new Error("提交失敗");
+        throw new Error("提交失敗")
       }
     } catch (error) {
-      console.error("提交表單時發生錯誤:", error);
+      console.error("提交表單時發生錯誤:", error)
       // 處理錯誤，例如顯示錯誤消息給用戶
     }
-  };
+  }
 
   return (
     <div>
@@ -67,5 +74,5 @@ export const MultiStepForm: React.FC = () => {
       </div>
       <CurrentStepComponent />
     </div>
-  );
-};
+  )
+}

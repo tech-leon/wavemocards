@@ -12,7 +12,7 @@ const EMOTION_LISTS = process.env.NEXT_PUBLIC_API_URL_EMOTION_LISTS;
 //   baseURL: APIPATH,
 //   withCredentials: true,
 // });
-
+ 
 export const createApiClient = (userToken: string | null) => {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: APIPATH,
