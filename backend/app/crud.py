@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from . import models, schemas
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
@@ -34,8 +34,7 @@ def create_emotion(db: Session, emotion: schemas.EmotionCreate):
         after_card1_level=emotion.after_card1_level,
         after_card2_level=emotion.after_card2_level,
         after_card3_level=emotion.after_card3_level,
-        create=datetime.utcnow()
-
+        create=datetime.now(timezone.utc)
     )
     db.add(db_emotion)
     db.commit()
