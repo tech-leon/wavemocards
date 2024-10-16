@@ -6,6 +6,7 @@ from app.auth import verify_token
 from sqlalchemy.orm import Session
 from datetime import datetime
 from . import user
+import logging
 
 router = APIRouter()
 TAGS = "emotion"
@@ -16,15 +17,23 @@ async def new_emotion(
     db: Session = Depends(database.get_db),
     current_user: str = Depends(user.get_current_user)
     ):
+    logging.info(f"Received emotion data: {emotion}")
+    
     result_of_expect_answer = ["yes","no","unclear"]
     # 檢查用戶是否已存在
     db_user = crud.get_user(db, emotion.id)
     if not db_user:
         raise HTTPException(status_code=400, detail="User id invalid")
-    if not emotion.result_of_expect in result_of_expect_answer:
+    if emotion.result_of_expect and emotion.result_of_expect not in result_of_expect_answer:
         raise HTTPException(status_code=400, detail="result of expect = yes, no or unclear")
     
-    return crud.create_emotion(db=db, emotion=emotion)
+    # 確保 card1, card2, card3 字段存在且為整數
+    if not all(isinstance(getattr(emotion, f'card{i}'), int) for i in range(1, 4)):
+        raise HTTPException(status_code=400, detail="card1, card2, and card3 must be integers")
+    
+    created_emotion = crud.create_emotion(db=db, emotion=emotion)
+    logging.info(f"Created emotion: {created_emotion}")
+    return created_emotion
 
 @router.get("/v1/user/emotions", response_model=schemas.EmotionsReadResponse, tags=[TAGS])
 def get_emotions(

@@ -19,6 +19,9 @@ def create_user(db: Session, user: models.User):
 def create_emotion(db: Session, emotion: schemas.EmotionCreate):
     db_emotion = models.Emotion(
         owner_id=emotion.id,
+        card1=emotion.card1,
+        card2=emotion.card2,
+        card3=emotion.card3,
         before_card1_level=emotion.before_card1_level,
         before_card2_level=emotion.before_card2_level,
         before_card3_level=emotion.before_card3_level,
@@ -32,8 +35,8 @@ def create_emotion(db: Session, emotion: schemas.EmotionCreate):
         after_card2_level=emotion.after_card2_level,
         after_card3_level=emotion.after_card3_level,
         create=datetime.utcnow()
+
     )
-    
     db.add(db_emotion)
     db.commit()
     db.refresh(db_emotion)
