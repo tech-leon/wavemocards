@@ -6,7 +6,11 @@ import { EmoFormStep3 } from "./emoFormStep3"
 import { EmoFormStep4 } from "./emoFormStep4"
 import { EmoFormStep5 } from "./emoFormStep5"
 import { Button } from "@/components/ui/button"
-
+import { submitEmoForm } from "@/lib/api"
+import { catchError } from "@/lib/utils"
+import { useAuth } from "@/lib/auth/authContext";
+import { useRouter } from "next/navigation";
+import { initialEmoFormData } from "@/components/emoForm/formContext";
 const steps = [
   EmoFormStep1,
   EmoFormStep2,
@@ -16,8 +20,9 @@ const steps = [
 ]
 
 export const MultiStepForm: React.FC = () => {
-  const { currentStep, setCurrentStep, emoFormData } = useEmoFormContext()
-
+  const { currentStep, setCurrentStep, emoFormData, updateEmoFormData } = useEmoFormContext()
+  const { user } = useAuth()
+  const router = useRouter()
   const CurrentStepComponent = steps[currentStep]
 
   const handleNext = () => {
@@ -33,24 +38,18 @@ export const MultiStepForm: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    try {
-      const response = await fetch("/api/submit-form", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(emoFormData),
-      })
-      if (response.ok) {
-        // 清除 localStorage
-        localStorage.removeItem("emoFormData")
-        localStorage.removeItem("currentStep")
-        // 導航到感謝頁面
-        // router.push('/thank-you');
-      } else {
-        throw new Error("提交失敗")
-      }
-    } catch (error) {
+    const [response, error] = await catchError(
+      submitEmoForm(emoFormData, user)
+    )
+    if (response) {
+      // 導航到感謝頁面
+      router.push('/find-my-emotions/you-are-the-best');
+      // localStorage.removeItem("emoFormData")
+      // localStorage.removeItem("currentStep")
+      updateEmoFormData(initialEmoFormData)
+      setCurrentStep(0)
+    }
+    if (error) {
       console.error("提交表單時發生錯誤:", error)
       // 處理錯誤，例如顯示錯誤消息給用戶
     }

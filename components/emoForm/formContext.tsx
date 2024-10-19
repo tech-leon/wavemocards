@@ -1,7 +1,7 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from "react"
 
-interface EmoFormData {
+export interface EmoFormData {
   emotionCards: number[]
   emotionIntensity: { [cardID: number]: number }
   story: string
@@ -11,6 +11,18 @@ interface EmoFormData {
   resultOfExpect: "yes" | "no" | "unclear"
   takeOut: string
   finalIntensity: { [cardID: number]: number }
+}
+
+export const initialEmoFormData: EmoFormData = {
+  emotionCards: [],
+  emotionIntensity: {},
+  story: "",
+  thoughtsAction: "",
+  consequences: "",
+  feelingOfConsequences: "",
+  resultOfExpect: "unclear",
+  takeOut: "",
+  finalIntensity: {},
 }
 
 interface EmoFormContextType {
@@ -26,17 +38,7 @@ const FormContext = createContext<EmoFormContextType | undefined>(undefined)
 export const EmoFormProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [emoFormData, setEmoFormData] = useState<EmoFormData>({
-    emotionCards: [],
-    emotionIntensity: {},
-    story: "",
-    thoughtsAction: "",
-    consequences: "",
-    feelingOfConsequences: "",
-    resultOfExpect: "unclear",
-    takeOut: "",
-    finalIntensity: [],
-  })
+  const [emoFormData, setEmoFormData] = useState<EmoFormData>(initialEmoFormData)
   const [currentStep, setCurrentStep] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
