@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { EmoFormProvider } from "@/components/emoForm/formContext";
-import { MultiStepForm } from "@/components/emoForm/multiStep";
+import { MultiStepForm } from "@/components/emoForm/multiStepForm";
 import { useAuth } from "@/lib/auth/authContext";
 import { useRouter } from "next/navigation";
 
