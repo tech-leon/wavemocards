@@ -92,6 +92,6 @@ export const submitEmoForm = async (emoFormData: EmoFormData, user: User | null)
     return response.data;
   } catch (error) {
     console.error('提交情緒表單時發生錯誤:', error);
-    throw error;
+    return error;
   }
 };
