@@ -89,9 +89,9 @@ class UserUpdate(BaseModel):
 
 class EmotionCreate(BaseModel):
     id: str
-    card1: int = Field(..., ge=1, le=5, description="Card 1")
-    card2: int = Field(..., ge=1, le=5, description="Card 2")
-    card3: int = Field(..., ge=1, le=5, description="Card 3")
+    card1: int = Field(..., ge=1, le=65, description="Card 1")
+    card2: int = Field(..., ge=1, le=65, description="Card 2")
+    card3: int = Field(..., ge=1, le=65, description="Card 3")
     before_card1_level: int = Field(..., ge=1, le=5, description="Before card 1 level, range 1-5")
     before_card2_level: int = Field(..., ge=1, le=5, description="Before card 2 level, range 1-5")
     before_card3_level: int = Field(..., ge=1, le=5, description="Before card 3 level, range 1-5")
