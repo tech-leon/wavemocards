@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/lib/auth/authContext"
 import "@/i18n/config"
 import { NextUIProvider } from "@nextui-org/react"
+import { Toaster } from "@/components/ui/toaster"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
               <NextUIProvider>
                 <Header />
                 {children}
+                <Toaster />
               </NextUIProvider>
             </div>
             <Footer />

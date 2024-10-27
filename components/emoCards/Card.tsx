@@ -38,11 +38,11 @@ const EmoCard = ({ name, description, example, ID, color, choosable }: CardProps
       updateEmoFormData({ emotionCards: updatedCards, emotionIntensity: updatedIntensity });
     } else {
       // Select
-      if (emoFormData.emotionCards.length < 3) {
+      // if (emoFormData.emotionCards.length < 3) {
         updateEmoFormData({ emotionCards: [...emoFormData.emotionCards, ID] });
-      } else {
-        alert(t("You can only select three cards"));
-      }
+      // } else {
+        // alert(t("You can only select three cards"));
+      // }
     }
     console.log(emoFormData.emotionCards, ID);
   };
