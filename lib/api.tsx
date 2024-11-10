@@ -5,8 +5,8 @@ import { EmoFormData } from '@/components/emoForm/formContext';
 import { User } from "firebase/auth";
 import { preSubmitEmoForm } from "./utils";
 
-// const APIPATH = process.env.NEXT_PUBLIC_API_URL;
-const APIPATH = process.env.NEXT_PUBLIC_API_URL_LOCAL;
+const APIPATH = process.env.NEXT_PUBLIC_API_URL;
+// const APIPATH = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 const SIGNUP = process.env.NEXT_PUBLIC_API_URL_REGISTER_USER;
 const USERDATA = process.env.NEXT_PUBLIC_API_URL_GET_USER;
 const EMOTION_RECORDS = process.env.NEXT_PUBLIC_API_URL_EMOTION_RECORDS;
