@@ -11,7 +11,6 @@ import { catchError } from "@/lib/utils"
 import { useAuth } from "@/lib/auth/authContext"
 import { useRouter } from "next/navigation"
 import { initialEmoFormData } from "@/components/emoForm/formContext"
-// import NotificationTrigger from "@/components/notification-trigger"
 import { useToast } from "@/hooks/use-toast"
 import { validateEmoFormStep } from "@/lib/validators/emoFormValidators"
 
