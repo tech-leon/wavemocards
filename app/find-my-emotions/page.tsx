@@ -8,10 +8,14 @@ import { useRouter } from "next/navigation";
 
 export default function FindMyEmotionsPage() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   
-  if (!user) {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!loading && !user) {
     router.push("/login");
     return null;
   }
