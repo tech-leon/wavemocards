@@ -219,7 +219,7 @@ export function AccountProfile() {
             <h2 className="text-2xl font-bold">我的帳戶</h2>
 
             {/* Action buttons */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {!isEditing ? (
                 <Button
                   variant="outline"
@@ -256,7 +256,7 @@ export function AccountProfile() {
       <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4 pb-20">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-16">
           {/* Left: Illustration */}
-          <div className="w-full max-w-[300px] md:max-w-[280px] flex-shrink-0">
+          <div className="w-full max-w-[300px] md:max-w-[280px] shrink-0">
             <Image
               src="/images/account_illu.svg"
               alt="Account illustration"

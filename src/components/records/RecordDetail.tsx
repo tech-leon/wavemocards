@@ -243,7 +243,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             </h2>
 
             {/* Action buttons */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {!isEditing ? (
                 <>
                   <button

@@ -285,7 +285,6 @@ export function RecordsList() {
                   </th>
                   <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">日期</th>
                   <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">情緒與強度</th>
-                  <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">情緒故事</th>
                 </tr>
               </thead>
               <tbody>
@@ -294,11 +293,12 @@ export function RecordsList() {
                   return (
                     <tr
                       key={record.id}
-                      className={`text-center border-b border-gray-200 hover:bg-main-tint03/50 transition-colors ${
+                      onClick={() => router.push(`/records/${record.id}`)}
+                      className={`text-center border-b border-gray-200 hover:bg-main-tint03/50 transition-colors cursor-pointer ${
                         index % 2 !== 0 ? 'bg-main-tint03/30' : ''
                       }`}
                     >
-                      <td className="py-3 px-3">
+                      <td className="py-3 px-3" onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={selectedIds.has(record.id)}
@@ -318,14 +318,6 @@ export function RecordsList() {
                             </span>
                           ))}
                         </div>
-                      </td>
-                      <td className="py-3 px-3">
-                        <button
-                          onClick={() => router.push(`/records/${record.id}`)}
-                          className="text-main font-bold hover:underline text-sm"
-                        >
-                          由此進入
-                        </button>
                       </td>
                     </tr>
                   );
