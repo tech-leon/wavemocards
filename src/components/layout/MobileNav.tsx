@@ -27,7 +27,7 @@ export function MobileNav({ user }: MobileNavProps) {
       {/* Mobile Menu Button */}
       <button
         onClick={toggleMenu}
-        className="md:hidden p-2 text-gray-550 hover:text-main transition-colors"
+        className="lg:hidden p-2 text-gray-550 hover:text-main transition-colors"
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -38,7 +38,7 @@ export function MobileNav({ user }: MobileNavProps) {
           <>
             {/* Mobile Menu Overlay */}
             <motion.div
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
               onClick={closeMenu}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -48,7 +48,7 @@ export function MobileNav({ user }: MobileNavProps) {
 
             {/* Mobile Menu */}
             <motion.div
-              className="fixed top-[60px] right-0 h-full w-64 bg-white shadow-lg z-50 md:hidden"
+              className="fixed top-[70px] right-0 h-full w-64 bg-white shadow-lg z-50 lg:hidden"
               role="dialog"
               aria-modal="true"
               aria-label="行動裝置導覽選單"
@@ -168,7 +168,7 @@ export function MobileNav({ user }: MobileNavProps) {
                     </li>
                     <li>
                       <Link href="/signup" onClick={closeMenu}>
-                        <Button className="w-full rounded-full bg-main hover:bg-main-dark text-white font-bold">
+                        <Button className="w-full rounded-full bg-pink hover:bg-pink-dark text-white font-bold">
                           註冊
                         </Button>
                       </Link>
