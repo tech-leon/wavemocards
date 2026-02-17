@@ -16,7 +16,7 @@ export function ExploreEntryContent() {
 
   return (
     <main className="px-3 sm:px-0">
-      <div className="container mx-auto max-w-6xl py-4 pt-8" id="top">
+      <div className="container mx-auto py-4 pt-8" id="top">
         {/* Title bar */}
         <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between">
           <h2 className="text-2xl font-bold">探索情緒</h2>

@@ -9,17 +9,17 @@ import { useExploreStore } from '@/store/exploreStore';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import type { EmotionCategory, EmotionCard } from '@/lib/emotions';
 
-// Category colors mapping
-const categoryBgColors: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relieved: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
+// Category colors mapping (matching EmoCardsContent)
+const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
+  happy: { bg: 'bg-happy', hoverBorder: 'hover:border-[#EBD175]' },
+  expectation: { bg: 'bg-expectation', hoverBorder: 'hover:border-[#EAB27E]' },
+  relieved: { bg: 'bg-relived', hoverBorder: 'hover:border-[#B0CC8B]' },
+  unstable: { bg: 'bg-unstable', hoverBorder: 'hover:border-[#D7B3B3]' },
+  amazed: { bg: 'bg-amazed', hoverBorder: 'hover:border-[#969DD7]' },
+  sadness: { bg: 'bg-sadness', hoverBorder: 'hover:border-[#A2C5D6]' },
+  hate: { bg: 'bg-hate', hoverBorder: 'hover:border-[#C1B1A4]' },
+  anger: { bg: 'bg-anger', hoverBorder: 'hover:border-[#D19292]' },
+  others: { bg: 'bg-others', hoverBorder: 'hover:border-[#CBCBCB]' },
 };
 
 interface ExploreCategoryCardsContentProps {
@@ -49,7 +49,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
     <main>
       {/* Sticky header */}
       <div className="sticky top-[64px] z-30 pb-1 bg-white">
-        <div className="container mx-auto max-w-6xl pt-4 px-3 sm:px-0">
+        <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <Link
@@ -77,10 +77,14 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
         </div>
       </div>
 
-      <div className="container mx-auto max-w-6xl py-4 px-3 sm:px-0">
-        <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 mb-16">
+      <div className="container mx-auto py-4 px-3 sm:px-0">
+        <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 pt-2 pr-2 mb-16">
           {cards.map((card) => {
             const isAdded = hasCard(card.id);
+            const styles = categoryStyles[slug] || {
+              bg: 'bg-gray-200',
+              hoverBorder: 'hover:border-gray-400',
+            };
             return (
               <div key={card.id} className="relative">
                 {!isAdded && (
@@ -97,24 +101,27 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
                   type="button"
                   onClick={() => setModalCard(card)}
                   className={cn(
-                    'min-w-[130px] max-w-[130px] h-[90px] sm:min-w-[180px] sm:max-w-[180px] sm:h-[110px]',
-                    'flex items-center justify-center p-3 rounded-xl transition-all',
-                    categoryBgColors[slug] || 'bg-gray-200',
+                    'group w-[140px] h-[140px] rounded-xl',
+                    'flex flex-col items-center justify-center p-3',
+                    'transition-all duration-200',
+                    styles.bg,
+                    styles.hoverBorder,
+                    'hover:border-4 hover:p-2',
                     isAdded && 'opacity-50'
                   )}
                 >
-                  <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900">
+                  <p className="text-lg font-bold text-gray-900 mb-2">
                     {card.name.length === 2
                       ? `${card.name[0]}\u00A0${card.name[1]}`
                       : card.name}
                   </p>
-                  <div className="w-1/2 rounded-full overflow-hidden">
+                  <div className="w-16 h-16 rounded-full overflow-hidden">
                     <Image
                       src={card.image_path || `/images/emoCards/${card.id}.svg`}
                       alt={card.name}
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-cover"
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                     />
                   </div>
                 </button>

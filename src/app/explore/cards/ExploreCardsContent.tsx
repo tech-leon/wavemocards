@@ -24,17 +24,17 @@ const categoryRepCards: Record<string, number> = {
   others: 55,
 };
 
-// Emotion category color classes
-const categoryBgColors: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relieved: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
+// Category colors mapping (matching EmoCardsContent)
+const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
+  happy: { bg: 'bg-happy', hoverBorder: 'hover:border-[#EBD175]' },
+  expectation: { bg: 'bg-expectation', hoverBorder: 'hover:border-[#EAB27E]' },
+  relieved: { bg: 'bg-relived', hoverBorder: 'hover:border-[#B0CC8B]' },
+  unstable: { bg: 'bg-unstable', hoverBorder: 'hover:border-[#D7B3B3]' },
+  amazed: { bg: 'bg-amazed', hoverBorder: 'hover:border-[#969DD7]' },
+  sadness: { bg: 'bg-sadness', hoverBorder: 'hover:border-[#A2C5D6]' },
+  hate: { bg: 'bg-hate', hoverBorder: 'hover:border-[#C1B1A4]' },
+  anger: { bg: 'bg-anger', hoverBorder: 'hover:border-[#D19292]' },
+  others: { bg: 'bg-others', hoverBorder: 'hover:border-[#CBCBCB]' },
 };
 
 const categoryBtnColors: Record<string, string> = {
@@ -47,18 +47,6 @@ const categoryBtnColors: Record<string, string> = {
   hate: 'bg-hate/70 hover:bg-hate',
   anger: 'bg-anger/70 hover:bg-anger',
   others: 'bg-others/70 hover:bg-others',
-};
-
-const categoryHeadColors: Record<string, string> = {
-  happy: 'bg-happy/80 hover:bg-happy',
-  expectation: 'bg-expectation/80 hover:bg-expectation',
-  relieved: 'bg-relived/80 hover:bg-relived',
-  unstable: 'bg-unstable/80 hover:bg-unstable',
-  amazed: 'bg-amazed/80 hover:bg-amazed',
-  sadness: 'bg-sadness/80 hover:bg-sadness',
-  hate: 'bg-hate/80 hover:bg-hate',
-  anger: 'bg-anger/80 hover:bg-anger',
-  others: 'bg-others/80 hover:bg-others',
 };
 
 interface ExploreCardsContentProps {
@@ -107,7 +95,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
     <main>
       {/* Sticky header */}
       <div className="sticky top-[64px] z-30 pb-1 bg-white">
-        <div className="container mx-auto max-w-6xl pt-4 px-3 sm:px-0">
+        <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
               <h2 className="text-2xl font-bold md:hidden">探索情緒</h2>
@@ -173,7 +161,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         </div>
       </div>
 
-      <div className="container mx-auto max-w-6xl py-4 px-3 sm:px-0">
+      <div className="container mx-auto py-4 px-3 sm:px-0">
         {/* Guide accordion */}
         <div className="mb-9">
           <div className="border-2 border-main-tint02 rounded-lg bg-white">
@@ -221,29 +209,40 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
 
         {/* Expanded View */}
         {viewMode === 'expanded' && (
-          <div>
+          <div className="space-y-6">
             {categories.map((cat) => {
               const slug = getCategorySlug(cat);
               const catCards = cardsByCategory.get(cat.id) || [];
+              const styles = categoryStyles[slug] || {
+                bg: 'bg-gray-200',
+                hoverBorder: 'hover:border-gray-400',
+              };
+
               return (
-                <div key={cat.id} className="mb-5 flex flex-nowrap">
+                <div key={cat.id} className="flex flex-nowrap gap-3">
+                  {/* Category Header */}
                   <Link
                     href={`/explore/cards/${slug}`}
                     className={cn(
-                      'shrink-0 w-[60px] sm:w-[80px] mr-4 mt-5 rounded-xl flex flex-col items-center justify-center py-3',
-                      'text-gray-900 font-bold text-base sm:text-lg transition-all hover:shadow-md',
-                      categoryHeadColors[slug]
+                      'flex-shrink-0 w-[72px] h-[140px] mt-3 rounded-xl',
+                      'flex flex-col items-center justify-center',
+                      'font-bold text-gray-900 text-lg',
+                      'transition-colors duration-200',
+                      styles.bg,
+                      styles.hoverBorder,
+                      'hover:border-4'
                     )}
                   >
-                    {cat.name.split('').map((char, i) => (
-                      <span key={i}>{char}</span>
-                    ))}
+                    <span>{cat.name[0]}</span>
+                    <span>{cat.name[1]}</span>
                   </Link>
-                  <div className="flex overflow-x-auto pt-5 gap-7 pb-2">
+
+                  {/* Cards Horizontal Scroll */}
+                  <div className="flex gap-4 overflow-x-auto pt-3 pr-2 pb-2">
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
                       return (
-                        <div key={card.id} className="relative shrink-0">
+                        <div key={card.id} className="relative flex-shrink-0">
                           {/* Add button */}
                           {!isAdded && (
                             <button
@@ -259,24 +258,27 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                             type="button"
                             onClick={() => setModalCard(card)}
                             className={cn(
-                              'min-w-[130px] max-w-[130px] h-[90px] sm:min-w-[180px] sm:max-w-[180px] sm:h-[110px]',
-                              'flex items-center justify-center p-3 rounded-xl transition-all',
-                              categoryBgColors[slug],
+                              'group w-[140px] h-[140px] rounded-xl',
+                              'flex flex-col items-center justify-center p-3',
+                              'transition-all duration-200',
+                              styles.bg,
+                              styles.hoverBorder,
+                              'hover:border-4 hover:p-2',
                               isAdded && 'opacity-50'
                             )}
                           >
-                            <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900">
+                            <p className="text-lg font-bold text-gray-900 mb-2">
                               {card.name.length === 2
                                 ? `${card.name[0]}\u00A0${card.name[1]}`
                                 : card.name}
                             </p>
-                            <div className="w-1/2 rounded-full overflow-hidden">
+                            <div className="w-16 h-16 rounded-full overflow-hidden">
                               <Image
                                 src={card.image_path || `/images/emoCards/${card.id}.svg`}
                                 alt={card.name}
-                                width={80}
-                                height={80}
-                                className="w-full h-full object-cover"
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                               />
                             </div>
                           </button>
@@ -293,36 +295,41 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {/* Folded View - Category cards */}
         {viewMode === 'folded' && (
           <div className="mt-6 mb-16">
-            <p className="mb-6 text-gray-550 text-sm">
-              🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。
-            </p>
+            <ul className="mb-9 text-gray-550 text-sm">
+              <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
+            </ul>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               {categories.map((cat) => {
                 const slug = getCategorySlug(cat);
+                const styles = categoryStyles[slug] || {
+                  bg: 'bg-gray-200',
+                  hoverBorder: 'hover:border-gray-400',
+                };
                 const repCardId = categoryRepCards[slug];
+
                 return (
                   <Link
                     key={cat.id}
                     href={`/explore/cards/${slug}`}
                     className={cn(
-                      'group min-w-[130px] max-w-[130px] h-[90px] sm:min-w-[180px] sm:max-w-[180px] sm:h-[110px]',
-                      'flex items-center justify-center p-3 rounded-xl transition-all',
-                      'hover:p-1.5 hover:border-4 hover:shadow-md',
-                      categoryBgColors[slug]
+                      'group w-[140px] h-[140px] rounded-xl',
+                      'flex flex-col items-center justify-center p-3',
+                      'transition-all duration-200',
+                      styles.bg,
+                      styles.hoverBorder,
+                      'hover:border-4 hover:p-2'
                     )}
                   >
-                    <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900">
-                      {cat.name.length === 2
-                        ? `${cat.name[0]}\u00A0${cat.name[1]}`
-                        : cat.name}
+                    <p className="text-lg font-bold text-gray-900 mb-2">
+                      {cat.name[0]}&nbsp;{cat.name[1]}
                     </p>
-                    <div className="w-1/2 rounded-full overflow-hidden">
+                    <div className="w-16 h-16 rounded-full overflow-hidden">
                       <Image
                         src={`/images/emoCards/${repCardId}.svg`}
                         alt={cat.name}
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                       />
                     </div>
                   </Link>

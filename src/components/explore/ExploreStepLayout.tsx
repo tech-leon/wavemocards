@@ -23,7 +23,7 @@ export function ExploreStepLayout({
     <>
       {/* Sticky header area */}
       <div className="sticky top-[64px] z-30 pb-2 bg-white">
-        <div className="container mx-auto max-w-6xl px-3 sm:px-0">
+        <div className="container mx-auto px-3 sm:px-0">
           {showProgressBar && <ProgressBar currentStep={currentStep} />}
 
           {/* Title bar */}
@@ -51,7 +51,7 @@ export function ExploreStepLayout({
       </div>
 
       {/* Content area */}
-      <div className="container mx-auto max-w-6xl px-3 sm:px-0 pb-20">
+      <div className="container mx-auto px-3 sm:px-0 pb-20">
         {children}
       </div>
     </>

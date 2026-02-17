@@ -136,10 +136,10 @@ export function EmoCardsContent({
           </div>
 
           {/* Instructions Accordion */}
-          <Accordion type="single" collapsible defaultValue="instructions" className="mb-12">
+          <Accordion type="single" collapsible className="mb-12">
             <AccordionItem
               value="instructions"
-              className="border-2 border-main-tint02 rounded-lg bg-white"
+              className="border-2 border-main-tint02 rounded-lg bg-white last:border-b-2"
             >
               <AccordionTrigger className="px-4 py-3 text-main font-bold hover:no-underline">
                 瀏覽情緒卡的方法
