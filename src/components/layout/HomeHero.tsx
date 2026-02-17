@@ -12,7 +12,7 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
       <main className="homepage flex flex-col justify-center items-center min-h-[calc(100vh-64px)] bg-[url('/images/homepage.svg')] bg-cover bg-center bg-no-repeat">
         <div className="container px-4 md:px-[72px]">
           <motion.h2
-            className="pt-14 text-white text-nowrap text-center md:text-left text-3xl md:text-8xl font-bold"
+            className="pt-14 text-white text-nowrap text-left md:text-left text-5xl md:text-8xl font-bold"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
@@ -20,7 +20,7 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
             找尋自我
           </motion.h2>
           <motion.h2
-            className="text-white text-nowrap text-center md:text-right mb-8 text-3xl md:text-8xl font-bold"
+            className="pt-6 text-white text-nowrap text-right md:text-right mb-8 text-5xl md:text-8xl font-bold"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
