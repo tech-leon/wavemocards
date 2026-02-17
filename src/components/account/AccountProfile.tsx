@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { handleSignIn } from '@/lib/auth';
 
 interface ProfileData {
   id: string;
@@ -192,12 +193,8 @@ export function AccountProfile() {
     }
   };
 
-  // Handle password reset - redirect to WorkOS
-  const handleResetPassword = () => {
-    // Navigate to login page which will trigger WorkOS auth flow
-    // Users can use WorkOS "forgot password" from the sign-in page
-    window.location.href = '/login';
-  };
+  // Handle password reset - redirect to WorkOS sign-in page
+  // Users can use WorkOS "forgot password" from the sign-in page
 
   if (loading) {
     return (
@@ -304,12 +301,14 @@ export function AccountProfile() {
               <div className="flex justify-between items-center">
                 <p className="ml-1 text-base font-bold">********</p>
                 {!isEditing && (
-                  <button
-                    onClick={handleResetPassword}
-                    className="px-4 py-1 text-sm rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors"
-                  >
-                    重設密碼
-                  </button>
+                  <form action={handleSignIn}>
+                    <button
+                      type="submit"
+                      className="px-4 py-1 text-sm rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors cursor-pointer"
+                    >
+                      重設密碼
+                    </button>
+                  </form>
                 )}
               </div>
             </div>

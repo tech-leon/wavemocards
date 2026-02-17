@@ -5,8 +5,6 @@ export default authkitMiddleware();
 export const config = {
   matcher: [
     "/",
-    "/login",
-    "/signup",
     "/about-emotions",
     "/emo-cards",
     "/emo-cards/(.*)",

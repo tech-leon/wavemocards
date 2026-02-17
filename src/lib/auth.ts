@@ -1,12 +1,16 @@
 "use server";
 
-import { signOut as workosSignOut, getSignInUrl, withAuth } from "@workos-inc/authkit-nextjs";
+import {
+  signOut as workosSignOut,
+  getSignInUrl,
+  getSignUpUrl,
+  withAuth,
+} from "@workos-inc/authkit-nextjs";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 /**
  * Server action to sign out the user.
- * Uses returnTo to redirect the user back to the app homepage after sign out,
- * avoiding the WorkOS "app-homepage-url-not-found" error.
  */
 export async function handleSignOut() {
   const headersList = await headers();
@@ -41,6 +45,31 @@ export async function getUser() {
     // User is not authenticated
     return null;
   }
+}
+
+/**
+ * Server action to redirect the user to the WorkOS sign-in page.
+ */
+export async function handleSignIn() {
+  const signInUrl = await getSignInUrl();
+  redirect(signInUrl);
+}
+
+/**
+ * Redirect unauthenticated users to the WorkOS sign-in page.
+ * Use this in server components that require authentication.
+ */
+export async function redirectToSignIn(): Promise<never> {
+  const signInUrl = await getSignInUrl();
+  redirect(signInUrl);
+}
+
+/**
+ * Server action to redirect the user to the WorkOS sign-up page.
+ */
+export async function handleSignUp() {
+  const signUpUrl = await getSignUpUrl();
+  redirect(signUpUrl);
 }
 
 /**

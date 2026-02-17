@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { redirect } from 'next/navigation';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { redirectToSignIn } from '@/lib/auth';
 
 const RecordAnalysis = dynamic(() =>
   import('@/components/records').then((mod) => ({ default: mod.RecordAnalysis })),
@@ -24,7 +24,7 @@ export default async function RecordAnalysisPage() {
   const { user } = await withAuth();
 
   if (!user) {
-    redirect('/login');
+    await redirectToSignIn();
   }
 
   return <RecordAnalysis />;

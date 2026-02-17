@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { handleSignOut } from '@/lib/auth';
+import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
 import { MobileNav } from './MobileNav';
 
 interface HeaderProps {
@@ -85,21 +85,23 @@ export function Header({ user }: HeaderProps) {
               >
                 認識情緒
               </Link>
-              <Link href="/login">
+              <form action={handleSignIn}>
                 <Button 
+                  type="submit"
                   variant="outline" 
                   className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                 >
                   登入
                 </Button>
-              </Link>
-              <Link href="/signup">
+              </form>
+              <form action={handleSignUp}>
                 <Button 
+                  type="submit"
                   className="rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
                 >
                   註冊
                 </Button>
-              </Link>
+              </form>
             </nav>
             )}
           </div>

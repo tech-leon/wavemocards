@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Settings, LogOut, Home, Heart, BookOpen, FolderOpen } from 'lucide-react';
-import { handleSignOut } from '@/lib/auth';
+import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 
@@ -157,21 +157,25 @@ export function MobileNav({ user }: MobileNavProps) {
                       </Link>
                     </li>
                     <li className="pt-4 border-t border-gray-300">
-                      <Link href="/login" onClick={closeMenu}>
+                      <form action={handleSignIn}>
                         <Button
+                          type="submit"
                           variant="outline"
                           className="w-full rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                         >
                           登入
                         </Button>
-                      </Link>
+                      </form>
                     </li>
                     <li>
-                      <Link href="/signup" onClick={closeMenu}>
-                        <Button className="w-full rounded-full bg-pink hover:bg-pink-dark text-white font-bold">
+                      <form action={handleSignUp}>
+                        <Button
+                          type="submit"
+                          className="w-full rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
+                        >
                           註冊
                         </Button>
-                      </Link>
+                      </form>
                     </li>
                   </ul>
                 )}

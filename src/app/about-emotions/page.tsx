@@ -127,14 +127,22 @@ export default async function AboutEmotionsPage() {
   );
 }
 
-// Client component for login modal
+// Redirect to WorkOS sign-in when not logged in
 function EmoCardsLoginButton() {
   return (
-    <Link
-      href="/login"
-      className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
-    >
-      情緒卡
-    </Link>
+    <form action={async () => {
+      'use server';
+      const { getSignInUrl } = await import("@workos-inc/authkit-nextjs");
+      const { redirect } = await import("next/navigation");
+      const signInUrl = await getSignInUrl();
+      redirect(signInUrl);
+    }}>
+      <button
+        type="submit"
+        className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium cursor-pointer"
+      >
+        情緒卡
+      </button>
+    </form>
   );
 }

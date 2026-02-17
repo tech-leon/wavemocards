@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from '@/components/ui/motion';
+import { handleSignUp } from '@/lib/auth';
 
 interface HomeHeroProps {
   isLoggedIn: boolean;
@@ -41,12 +42,14 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
                 認識情緒
               </Link>
             ) : (
-              <Link
-                href="/signup"
-                className="px-12 py-3 bg-pink hover:bg-pink-dark text-white font-bold text-2xl md:text-3xl rounded-full transition-colors"
-              >
-                前往註冊
-              </Link>
+              <form action={handleSignUp}>
+                <button
+                  type="submit"
+                  className="px-12 py-3 bg-pink hover:bg-pink-dark text-white font-bold text-2xl md:text-3xl rounded-full transition-colors cursor-pointer"
+                >
+                  前往註冊
+                </button>
+              </form>
             )}
           </motion.div>
         </div>

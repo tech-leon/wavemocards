@@ -1,5 +1,5 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirect } from 'next/navigation';
+import { redirectToSignIn } from '@/lib/auth';
 import { ExploreEntryContent } from './ExploreEntryContent';
 
 export const metadata = {
@@ -17,7 +17,7 @@ export default async function ExplorePage() {
   }
 
   if (!user) {
-    redirect('/login');
+    await redirectToSignIn();
   }
 
   return <ExploreEntryContent />;
