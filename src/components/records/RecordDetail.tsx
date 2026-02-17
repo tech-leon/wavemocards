@@ -233,7 +233,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
     <>
       {/* Sticky title bar */}
       <div className="sticky top-[64px] z-30 pb-2 bg-white">
-        <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4">
+          <div className="container mx-auto max-w-6xl px-6 pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
             <h2 className="text-2xl font-bold hidden md:block">我的紀錄｜情緒故事</h2>
@@ -293,7 +293,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto max-w-6xl px-3 sm:px-0 pb-20">
+      <div className="container mx-auto max-w-6xl px-6 pb-20">
         {/* Date and emotion strength section */}
         <div className="mt-4 space-y-2">
           {/* Date */}

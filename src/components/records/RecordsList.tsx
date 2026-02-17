@@ -184,7 +184,7 @@ export function RecordsList() {
   };
 
   return (
-    <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4 pb-16">
+    <div className="container mx-auto max-w-6xl px-6 pt-4 pb-16">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
         <h2 className="text-2xl font-bold">我的紀錄</h2>
@@ -204,68 +204,65 @@ export function RecordsList() {
       </div>
 
       {/* Search area */}
-      <div className="w-full mb-3 md:mb-6 flex flex-col lg:flex-row justify-between items-end lg:items-center gap-3">
-        <div className="w-full flex flex-col lg:flex-row items-center lg:items-center gap-3">
-          {/* Date range */}
-          <div className="flex flex-col sm:flex-row items-center gap-2">
-            <input
-              type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
-              value={startDate}
-              max={today}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-            <span className="text-main-tint01">～</span>
-            <input
-              type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
-              value={endDate}
-              max={today}
-              min={startDate || undefined}
-              disabled={!startDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </div>
-
-          {/* Keyword search */}
-          <div className="w-full sm:w-auto flex flex-col sm:flex-row items-end sm:items-center gap-2">
-            <div className="relative w-full sm:w-auto">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
-              <input
-                type="search"
-                className="w-full sm:w-[280px] pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm placeholder:text-gray-400"
-                placeholder="請輸入關鍵字，以「空格」做區隔"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              />
-            </div>
-            <div className="flex items-center gap-3">
-              <Button
-                onClick={handleSearch}
-                className="bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 text-sm font-bold"
-              >
-                搜尋
-              </Button>
-              <button
-                onClick={handleReset}
-                className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-                title="重整｜顯示全部"
-              >
-                <RotateCcw className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+      <div className="w-full mb-3 md:mb-6 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
+        {/* Date range */}
+        <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
+          <input
+            type="date"
+            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+            value={startDate}
+            max={today}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <span className="text-main-tint01">～</span>
+          <input
+            type="date"
+            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+            value={endDate}
+            max={today}
+            min={startDate || undefined}
+            disabled={!startDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
         </div>
 
-        {/* Delete button */}
-        <button
-          onClick={handleBatchDelete}
-          className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-          title="刪除"
-        >
-          <Trash2 className="w-5 h-5" />
-        </button>
+        {/* Keyword search + actions */}
+        <div className="flex w-full sm:flex-1 min-w-0 items-center gap-2">
+          <div className="relative flex-1 min-w-0">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
+            <input
+              type="search"
+              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm placeholder:text-gray-400"
+              placeholder="請輸入關鍵字，以「空格」做區隔"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            />
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <Button
+              onClick={handleSearch}
+              className="bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 text-sm font-bold"
+            >
+              搜尋
+            </Button>
+            <button
+              onClick={handleReset}
+              className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
+              title="重整｜顯示全部"
+            >
+              <RotateCcw className="w-5 h-5" />
+            </button>
+            {/* Delete button */}
+            <button
+              onClick={handleBatchDelete}
+              className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
+              title="刪除"
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Table */}

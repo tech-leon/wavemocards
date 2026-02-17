@@ -112,7 +112,7 @@ export function RecordAnalysis() {
   };
 
   return (
-    <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4 pb-16">
+    <div className="container mx-auto max-w-6xl px-6 pt-4 pb-16">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
         <h2 className="text-2xl font-bold">我的紀錄｜分析</h2>
