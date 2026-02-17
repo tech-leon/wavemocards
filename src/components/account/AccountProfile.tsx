@@ -213,8 +213,8 @@ export function AccountProfile() {
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-white">
-        <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4">
+      <div className="sticky top-[64px] z-30 pb-2 bg-white px-3 sm:px-0">
+          <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             <h2 className="text-2xl font-bold">我的帳戶</h2>
 
@@ -253,7 +253,8 @@ export function AccountProfile() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto max-w-6xl px-3 sm:px-0 pt-4 pb-20">
+      <div className="px-3 sm:px-0">
+      <div className="container mx-auto pt-4 pb-20">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-16">
           {/* Left: Illustration */}
           <div className="w-full max-w-[300px] md:max-w-[280px] shrink-0">
@@ -401,6 +402,7 @@ export function AccountProfile() {
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Cancel Confirmation Modal */}

@@ -232,8 +232,8 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-white">
-          <div className="container mx-auto max-w-6xl px-6 pt-4">
+      <div className="sticky top-[64px] z-30 pb-2 bg-white px-3 sm:px-0">
+          <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
             <h2 className="text-2xl font-bold hidden md:block">我的紀錄｜情緒故事</h2>
@@ -243,7 +243,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             </h2>
 
             {/* Action buttons */}
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-2 sm:gshrink-0">
               {!isEditing ? (
                 <>
                   <button
@@ -293,7 +293,8 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto max-w-6xl px-6 pb-20">
+      <div className="px-3 sm:px-0">
+      <div className="container mx-auto pb-20">
         {/* Date and emotion strength section */}
         <div className="mt-4 space-y-2">
           {/* Date */}
@@ -405,6 +406,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             />
           </div>
         </div>
+      </div>
       </div>
 
       {/* Delete Confirmation Dialog */}
