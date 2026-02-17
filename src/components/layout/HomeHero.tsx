@@ -9,8 +9,7 @@ interface HomeHeroProps {
 
 export function HomeHero({ isLoggedIn }: HomeHeroProps) {
   return (
-    <div className="min-h-screen">
-      <main className="homepage flex flex-col justify-center items-center min-h-[calc(100vh)] bg-[url('/images/homepage.svg')] bg-cover bg-center bg-no-repeat">
+      <main className="homepage flex flex-col justify-center items-center min-h-[calc(100vh-64px)] bg-[url('/images/homepage.svg')] bg-cover bg-center bg-no-repeat">
         <div className="container px-4 md:px-[72px]">
           <motion.h2
             className="pt-14 text-white text-nowrap text-center md:text-left text-3xl md:text-8xl font-bold"
@@ -44,7 +43,7 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
             ) : (
               <Link
                 href="/signup"
-                className="px-12 py-3 bg-pink hover:bg-pink-dark text-white font-bold rounded-full transition-colors"
+                className="px-12 py-3 bg-pink hover:bg-pink-dark text-white font-bold text-2xl md:text-3xl rounded-full transition-colors"
               >
                 前往註冊
               </Link>
@@ -52,6 +51,5 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
           </motion.div>
         </div>
       </main>
-    </div>
   );
 }
