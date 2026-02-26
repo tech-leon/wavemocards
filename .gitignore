@@ -30,19 +30,18 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
 !.env.example
-MIGRATION_PLAN.md
+PLAN.md
+.clinerules/
 
 # vercel
 .vercel
 
-# migration scripts output (contains sensitive data)
+# migrations
 /scripts/
 /scripts/output/
-
-# migration files
 supabase/migrations/
 
 # typescript
