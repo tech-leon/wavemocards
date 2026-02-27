@@ -3,6 +3,7 @@ import { Noto_Sans_TC } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { MainLayout } from "@/components/layout";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ThemeSyncer } from "@/components/theme/ThemeSyncer";
 import { getUser } from "@/lib/auth";
 import "./globals.css";
 
@@ -67,6 +68,7 @@ export default async function RootLayout({
     <html lang="zh-TW" suppressHydrationWarning>
       <body className={`${notoSansTC.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeSyncer userId={user?.id ?? null} />
           <MainLayout user={user}>
             {children}
           </MainLayout>
