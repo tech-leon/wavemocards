@@ -25,7 +25,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
       <div className="mb-2 px-3 w-[320px] sm:w-[380px]">
         <div className="relative m-1">
           {/* Background line */}
-          <div className="h-[2px] bg-gray-300 w-full" />
+          <div className="h-[2px] bg-border w-full" />
           {/* Progress line */}
           <div
             className="absolute top-0 left-0 h-[2px] bg-main-tint01 transition-all duration-300"
@@ -57,8 +57,8 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                   'flex items-center justify-center',
                   'transition-all duration-200',
                   isCompleted && 'bg-main-tint01 text-white cursor-pointer hover:bg-main',
-                  isCurrent && 'bg-white border-2 border-main-tint01 text-main-tint01',
-                  !isCompleted && !isCurrent && 'bg-white border-2 border-gray-450 text-gray-450',
+                  isCurrent && 'bg-background border-2 border-main-tint01 text-main-tint01',
+                  !isCompleted && !isCurrent && 'bg-background border-2 border-muted-foreground/50 text-muted-foreground/50',
                   isClickable && 'cursor-pointer'
                 )}
                 style={{ left: `${position}%` }}

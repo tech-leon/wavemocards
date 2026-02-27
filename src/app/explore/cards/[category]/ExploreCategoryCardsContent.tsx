@@ -48,13 +48,13 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   return (
     <main>
       {/* Sticky header */}
-      <div className="sticky top-[64px] z-30 pb-1 bg-white">
+      <div className="sticky top-[64px] z-30 pb-1 bg-background">
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <Link
                 href="/explore/cards"
-                className="text-gray-500 hover:text-main transition-colors"
+                className="text-muted-foreground hover:text-main transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>

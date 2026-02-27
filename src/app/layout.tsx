@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_TC } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { MainLayout } from "@/components/layout";
 import { getUser } from "@/lib/auth";
 import "./globals.css";
@@ -63,12 +64,14 @@ export default async function RootLayout({
   const user = await getUser();
 
   return (
-    <html lang="zh-TW">
+    <html lang="zh-TW" suppressHydrationWarning>
       <body className={`${notoSansTC.variable} font-sans antialiased`}>
-        <MainLayout user={user}>
-          {children}
-        </MainLayout>
-        <Toaster />
+        <ThemeProvider>
+          <MainLayout user={user}>
+            {children}
+          </MainLayout>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

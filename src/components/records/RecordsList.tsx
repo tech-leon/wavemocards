@@ -233,7 +233,7 @@ export function RecordsList() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
             <input
               type="search"
-              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm placeholder:text-gray-400"
+              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm bg-background placeholder:text-muted-foreground"
               placeholder="請輸入關鍵字，以「空格」做區隔"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
@@ -272,7 +272,7 @@ export function RecordsList() {
           <div className="w-8 h-8 border-4 border-main-tint02 border-t-main rounded-full animate-spin" />
         </div>
       ) : records.length === 0 ? (
-        <div className="py-20 text-center text-gray-400 text-lg">
+        <div className="py-20 text-center text-muted-foreground text-lg">
           目前沒有紀錄
         </div>
       ) : (
@@ -295,7 +295,7 @@ export function RecordsList() {
                     <tr
                       key={record.id}
                       onClick={() => router.push(`/records/${record.id}`)}
-                      className={`text-center border-b border-gray-200 hover:bg-main-tint03/50 transition-colors cursor-pointer ${
+                      className={`text-center border-b border-border hover:bg-main-tint03/50 transition-colors cursor-pointer ${
                         index % 2 !== 0 ? 'bg-main-tint03/30' : ''
                       }`}
                     >
@@ -314,7 +314,7 @@ export function RecordsList() {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1">
                           {emotions.map((emo, i) => (
                             <span key={i}>
-                              {i > 0 && <span className="hidden sm:inline text-gray-400">・</span>}
+                              {i > 0 && <span className="hidden sm:inline text-muted-foreground">・</span>}
                               {emo.name} {emo.level}
                             </span>
                           ))}
@@ -380,9 +380,9 @@ export function RecordsList() {
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-card rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-700">
+            <p className="mb-4 text-sm text-card-foreground">
               您選擇刪除
               <span className="px-1 text-pink font-bold">{selectedIds.size} 筆</span>
               資料，刪除後便

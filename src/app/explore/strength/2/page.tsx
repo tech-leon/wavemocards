@@ -92,15 +92,15 @@ export default function ExploreStrength2Page() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-9 text-gray-550 text-sm space-y-1">
+      <ul className="ml-1 mt-3 mb-9 text-muted-foreground text-sm space-y-1">
         <li>在覺察與記錄情緒故事後，不知道你現在的情緒還好嗎？</li>
         <li>
           <span className="text-main font-medium">
             邀請你再次深呼吸，並問問心中的自己，現在的情緒強度分別如何呢？
           </span>
-          <span className="text-xs text-gray-500">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
+          <span className="text-xs text-muted-foreground">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
         </li>
-        <li className="text-gray-500 text-xs">若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」</li>
+        <li className="text-muted-foreground text-xs">若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」</li>
       </ul>
 
       {/* Strength selectors for each card */}
@@ -148,12 +148,12 @@ export default function ExploreStrength2Page() {
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowConfirm(false)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-card rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="text-2xl font-bold text-main mb-3">確定完成了嗎？</p>
-            <p className="text-sm text-gray-700 mb-1">
+            <p className="text-sm text-card-foreground mb-1">
               點擊「確定完成」後，將會儲存您的紀錄，並且<span className="text-main">無法再返回到此頁面</span>。
             </p>
-            <p className="text-sm text-gray-700 mb-4">若想再繼續編輯的話，請點擊「返回」</p>
+            <p className="text-sm text-card-foreground mb-4">若想再繼續編輯的話，請點擊「返回」</p>
             <Image src="/images/sureToSave.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
             <div className="flex justify-center gap-4">
               <button
@@ -180,12 +180,12 @@ export default function ExploreStrength2Page() {
       {saveResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center">
+          <div className="relative bg-card rounded-2xl max-w-sm w-full p-6 text-center">
             <p className={cn('text-2xl font-bold mb-3', saveResult === 'success' ? 'text-main' : 'text-pink')}>
               {saveResult === 'success' ? '儲存成功' : '儲存失敗'}
             </p>
             {saveResult === 'error' && (
-              <p className="text-sm text-gray-700 mb-4">
+              <p className="text-sm text-card-foreground mb-4">
                 很抱歉，儲存紀錄失敗，請確認您的網路狀態，並重新點擊「儲存紀錄」。
               </p>
             )}

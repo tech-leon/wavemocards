@@ -64,7 +64,7 @@ export default function ExploreStrength1Page() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-9 text-gray-550 text-sm space-y-1">
+      <ul className="ml-1 mt-3 mb-9 text-muted-foreground text-sm space-y-1">
         <li>謝謝你努力地找尋到屬於自己的情緒卡。</li>
         <li>
           接下來，想邀請你，再次{' '}
@@ -73,7 +73,7 @@ export default function ExploreStrength1Page() {
         <li className="mt-4">
           在深呼吸的過程中，感受心中的自己，
           <span className="text-main font-medium">挑選的情緒，其強度分別如何呢？</span>
-          <span className="text-xs text-gray-500">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
+          <span className="text-xs text-muted-foreground">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
         </li>
       </ul>
 
@@ -124,9 +124,9 @@ export default function ExploreStrength1Page() {
       {showError && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowError(false)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-card rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="text-2xl font-bold text-pink mb-3">尚未完成</p>
-            <p className="text-sm text-gray-700 mb-4">每張情緒卡的情緒強度皆須選填。</p>
+            <p className="text-sm text-card-foreground mb-4">每張情緒卡的情緒強度皆須選填。</p>
             <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
             <button
               type="button"
