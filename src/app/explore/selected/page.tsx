@@ -88,7 +88,7 @@ export default function ExploreSelectedPage() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-9 text-gray-550 text-sm space-y-1">
+      <ul className="ml-1 mt-3 mb-9 text-gray-800 dark:text-gray-100 text-sm space-y-1">
         <li>
           🔎 請 <span className="text-main font-bold">留下</span> 最符合您現在狀態的情緒卡「
           <span className="text-main font-bold text-base">3</span> 張」。
@@ -104,7 +104,7 @@ export default function ExploreSelectedPage() {
 
       {/* Cards grid */}
       {selectedCards.length === 0 ? (
-        <div className="mb-16 py-16 flex flex-col items-center justify-center text-gray-400">
+        <div className="mb-16 py-16 flex flex-col items-center justify-center text-gray-500 dark:text-gray-300">
           <p className="text-lg mb-2">尚未選擇任何情緒卡</p>
           <button
             type="button"
@@ -136,7 +136,7 @@ export default function ExploreSelectedPage() {
                     categoryBgColors[slug] || 'bg-gray-200'
                   )}
                 >
-                  <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900">
+                  <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-900">
                     {card.name.length === 2
                       ? `${card.name[0]}\u00A0${card.name[1]}`
                       : card.name}
@@ -161,12 +161,12 @@ export default function ExploreSelectedPage() {
       {showDeleteConfirm !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowDeleteConfirm(null)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="text-2xl font-bold mb-3">確定要移除嗎？</p>
-            <p className="text-sm text-gray-700 mb-2">
+            <p className="text-sm text-gray-800 dark:text-gray-100 mb-2">
               若確定要移除此張情緒卡的話，請點擊「確定」
             </p>
-            <p className="text-sm text-gray-700 mb-4">
+            <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">
               反之，則請點擊「取消」。
             </p>
             <Image src="/images/sureToDelete.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
@@ -194,9 +194,9 @@ export default function ExploreSelectedPage() {
       {showClearConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowClearConfirm(false)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="text-2xl font-bold text-pink mb-3">確定要清空嗎？</p>
-            <p className="text-sm text-gray-700 mb-4">
+            <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">
               點擊確定後，將會<span className="text-pink">移除所有卡片</span>，並且無法復原。
             </p>
             <Image src="/images/sureToDelete.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
@@ -224,14 +224,14 @@ export default function ExploreSelectedPage() {
       {showError && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowError(null)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-white rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="text-2xl font-bold text-pink mb-3">{showError}</p>
             {showError === '卡片數量不足' ? (
-              <p className="text-sm text-gray-700 mb-4">
+              <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">
                 請<span className="text-pink font-bold">至少挑選 1 </span>張卡片。
               </p>
             ) : (
-              <div className="text-sm text-gray-700 mb-4">
+              <div className="text-sm text-gray-800 dark:text-gray-100 mb-4">
                 <p>卡片數量<span className="text-pink font-bold">最多 3 </span>張。</p>
                 <p>請篩選出最貼近您的情緒的卡片。</p>
               </div>

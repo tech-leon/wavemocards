@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
 import { MobileNav } from './MobileNav';
 
@@ -20,7 +21,7 @@ export function Header({ user }: HeaderProps) {
   const pathname = usePathname();
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50" role="banner">
+    <header className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900 shadow-md" role="banner">
       <div className="container mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -40,25 +41,25 @@ export function Header({ user }: HeaderProps) {
               <nav className="flex items-center gap-4" aria-label="主導覽">
                 <Link 
                   href="/about-emotions"
-                  className="px-4 py-2 text-gray-550 hover:text-main transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
                 >
                   認識情緒
                 </Link>
                 <Link 
                   href="/explore"
-                  className="px-4 py-2 text-gray-550 hover:text-main transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
                 >
                   探索情緒
                 </Link>
                 <Link 
                   href="/records"
-                  className="px-4 py-2 text-gray-550 hover:text-main transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
                 >
                   我的紀錄
                 </Link>
                 <Link 
                   href="/account"
-                  className="px-4 py-2 text-gray-550 hover:text-main transition-colors group"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors group"
                 >
                   <Settings 
                     className="w-6 h-6" 
@@ -69,19 +70,20 @@ export function Header({ user }: HeaderProps) {
                 <form action={handleSignOut}>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-gray-550 hover:text-main transition-colors"
+                    className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                   >
                     <LogOut className="w-6 h-6" />
                     <span className="sr-only">登出</span>
                   </button>
                 </form>
+                <ThemeToggle />
               </nav>
           ) : (
             // Logged out state
             <nav className="flex items-center gap-4" aria-label="主導覽">
               <Link 
                 href="/about-emotions"
-                className="text-gray-550 hover:text-main transition-colors font-medium hidden sm:block"
+                className="text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium hidden sm:block"
               >
                 認識情緒
               </Link>
@@ -102,12 +104,16 @@ export function Header({ user }: HeaderProps) {
                   註冊
                 </Button>
               </form>
+              <ThemeToggle />
             </nav>
             )}
           </div>
 
           {/* Mobile Navigation */}
-          <MobileNav user={user} />
+          <div className="flex items-center gap-1 lg:hidden">
+            <ThemeToggle />
+            <MobileNav user={user} />
+          </div>
         </div>
       </div>
     </header>

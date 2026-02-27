@@ -66,7 +66,7 @@ export function CategoryCardsContent({
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{category.name}</h2>
+            <h2 className="text-2xl font-bold text-[#3C9DAE]">{category.name}</h2>
             <div className="flex justify-end">
               <Link
                 href="/emo-cards"
@@ -92,7 +92,7 @@ export function CategoryCardsContent({
                   'hover:border-4 hover:p-2'
                 )}
               >
-                <p className="text-lg font-bold text-gray-900 mb-2">
+                <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
                   {card.name.length === 2
                     ? `${card.name[0]}\u00A0${card.name[1]}`
                     : card.name}

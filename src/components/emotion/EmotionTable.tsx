@@ -70,7 +70,7 @@ export function EmotionTable({
               className={cn(
                 'flex-shrink-0 w-16 h-10 rounded-lg',
                 'flex items-center justify-center',
-                'font-bold text-gray-900 text-sm',
+                'font-bold text-gray-900 dark:text-gray-900 text-sm',
                 'transition-colors duration-200',
                 categoryStyle
               )}
@@ -86,7 +86,7 @@ export function EmotionTable({
                   onClick={() => onCardClick(card, category.slug)}
                   className={cn(
                     'flex-shrink-0 px-3 py-2 rounded-lg',
-                    'font-medium text-gray-800 text-sm whitespace-nowrap',
+                    'font-medium text-gray-800 dark:text-gray-900 text-sm whitespace-nowrap',
                     'transition-colors duration-200',
                     cardStyle
                   )}

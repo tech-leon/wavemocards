@@ -116,7 +116,7 @@ export function RecordAnalysis() {
     <div className="container mx-auto pt-4 pb-16">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2 className="text-2xl font-bold">我的紀錄｜分析</h2>
+        <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄｜分析</h2>
         <div className="flex gap-2">
           <Link href="/records">
             <Button
@@ -138,7 +138,7 @@ export function RecordAnalysis() {
           <div className="flex flex-col sm:flex-row items-center gap-2">
             <input
               type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
@@ -146,7 +146,7 @@ export function RecordAnalysis() {
             <span className="text-main-tint01">～</span>
             <input
               type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               required
@@ -164,7 +164,7 @@ export function RecordAnalysis() {
 
       {/* No data message */}
       {noData && (
-        <div className="text-center text-2xl text-gray-400 py-12">
+        <div className="text-center text-2xl text-gray-500 dark:text-gray-300 py-12">
           這段期間沒有資料
         </div>
       )}
@@ -177,10 +177,10 @@ export function RecordAnalysis() {
             <h3 className="mb-2 py-1 text-lg font-bold text-main border-b border-main-tint02">
               情緒類組次數
             </h3>
-            <p className="mb-1 text-sm text-gray-550">
+            <p className="mb-1 text-sm text-gray-800 dark:text-gray-100">
               下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數的長條圖。
             </p>
-            <p className="mb-8 text-sm text-gray-550">
+            <p className="mb-8 text-sm text-gray-800 dark:text-gray-100">
               若您想看該類別出現的次數，您可將游標停留在該類別的長條上。
             </p>
             <div className="w-full h-[350px]">
@@ -220,10 +220,10 @@ export function RecordAnalysis() {
             <h3 className="mb-2 py-1 text-lg font-bold text-main border-b border-main-tint02">
               情緒類組比例
             </h3>
-            <p className="mb-1 text-sm text-gray-550">
+            <p className="mb-1 text-sm text-gray-800 dark:text-gray-100">
               下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數比例的圓餅圖。
             </p>
-            <p className="mb-8 text-sm text-gray-550">
+            <p className="mb-8 text-sm text-gray-800 dark:text-gray-100">
               若您想看該類別所佔的比例，您可將游標停留在圓餅圖中該類別的色塊上。
             </p>
             <div className="w-full h-[350px]">
@@ -253,7 +253,7 @@ export function RecordAnalysis() {
                     verticalAlign="bottom"
                     iconType="circle"
                     formatter={(value: string) => (
-                      <span className="text-sm text-gray-700">{value}</span>
+                      <span className="text-sm text-gray-800 dark:text-gray-100">{value}</span>
                     )}
                   />
                 </PieChart>
@@ -270,10 +270,10 @@ export function RecordAnalysis() {
             <Image src="/images/lime-analyze.svg" alt="分析" width={300} height={300} className="max-w-[300px]" />
           </div>
           <div className="text-right mb-12">
-            <span className="text-gray-500 text-xs">
+            <span className="text-gray-500 dark:text-gray-300 text-xs">
               Illustration by{' '}
               <a
-                className="text-gray-500 hover:underline"
+                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] hover:underline"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noreferrer"
@@ -282,7 +282,7 @@ export function RecordAnalysis() {
               </a>{' '}
               from{' '}
               <a
-                className="text-gray-500 hover:underline"
+                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] hover:underline"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noreferrer"

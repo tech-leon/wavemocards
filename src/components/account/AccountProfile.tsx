@@ -206,17 +206,17 @@ export function AccountProfile() {
 
   if (!profile) {
     return (
-      <div className="py-20 text-center text-gray-400 text-lg">無法載入帳戶資料</div>
+      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">無法載入帳戶資料</div>
     );
   }
 
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-white px-3 sm:px-0">
+      <div className="sticky top-[64px] z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0">
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
-            <h2 className="text-2xl font-bold">我的帳戶</h2>
+            <h2 className="text-2xl font-bold text-[#3C9DAE]">我的帳戶</h2>
 
             {/* Action buttons */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -224,7 +224,7 @@ export function AccountProfile() {
                 <Button
                   variant="outline"
                   onClick={handleEdit}
-                  className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+                  className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 text-sm font-bold"
                 >
                   編輯
                 </Button>
@@ -233,7 +233,7 @@ export function AccountProfile() {
                   <Button
                     variant="outline"
                     onClick={handleCancelClick}
-                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 text-sm font-bold"
                     disabled={saving}
                   >
                     取消
@@ -266,10 +266,10 @@ export function AccountProfile() {
               className="w-full mb-4"
               priority
             />
-            <p className="text-gray-500 text-xs">
+            <p className="text-gray-800 dark:text-gray-100 text-xs">
               Illustration by{' '}
               <a
-                className="text-gray-500 hover:text-gray-700 underline"
+                className="text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] underline"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -278,7 +278,7 @@ export function AccountProfile() {
               </a>{' '}
               from{' '}
               <a
-                className="text-gray-500 hover:text-gray-700 underline"
+                className="text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] underline"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -292,13 +292,13 @@ export function AccountProfile() {
           <div className="w-full flex-1">
             {/* Email - always read only */}
             <div className="mb-6">
-              <span className="block mb-2 text-gray-700 text-sm">Email</span>
+              <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">Email</span>
               <p className="ml-1 text-base font-bold">{email}</p>
             </div>
 
             {/* Password */}
             <div className="mb-6">
-              <span className="block mb-2 text-gray-700 text-sm">密碼</span>
+              <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">密碼</span>
               <div className="flex justify-between items-center">
                 <p className="ml-1 text-base font-bold">********</p>
                 {!isEditing && (
@@ -318,12 +318,12 @@ export function AccountProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
               {/* Last Name (姓) */}
               <div className="mb-6">
-                <span className="block mb-2 text-gray-700 text-sm">姓</span>
+                <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">姓</span>
                 {isEditing ? (
                   <div>
                     <input
                       type="text"
-                      className="w-full px-5 py-2 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-main transition-colors"
+                      className="w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full text-base bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
                       value={formLastName}
                       onChange={(e) => {
                         setFormLastName(e.target.value);
@@ -342,12 +342,12 @@ export function AccountProfile() {
 
               {/* First Name (名) */}
               <div className="mb-6">
-                <span className="block mb-2 text-gray-700 text-sm">名</span>
+                <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">名</span>
                 {isEditing ? (
                   <div>
                     <input
                       type="text"
-                      className="w-full px-5 py-2 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-main transition-colors"
+                      className="w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full text-base bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
                       value={formFirstName}
                       onChange={(e) => {
                         setFormFirstName(e.target.value);
@@ -369,11 +369,11 @@ export function AccountProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
               {/* Birthday */}
               <div className="mb-6">
-                <span className="block mb-2 text-gray-700 text-sm">生日</span>
+                <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">生日</span>
                 {isEditing ? (
                   <input
                     type="date"
-                    className="w-full px-5 py-2 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-main transition-colors"
+                    className="w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full text-base bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
                     value={formBirthday}
                     onChange={(e) => setFormBirthday(e.target.value)}
                   />
@@ -384,10 +384,10 @@ export function AccountProfile() {
 
               {/* Title (身份) */}
               <div className="mb-6">
-                <span className="block mb-2 text-gray-700 text-sm">身份</span>
+                <span className="block mb-2 text-gray-800 dark:text-gray-100 text-sm">身份</span>
                 {isEditing ? (
                   <select
-                    className="w-full px-5 py-2 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-main transition-colors bg-white"
+                    className="w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full text-base bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
                   >
@@ -408,9 +408,9 @@ export function AccountProfile() {
       {/* Cancel Confirmation Modal */}
       {showCancelModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className="mb-3 text-2xl font-bold text-pink">確定要取消編輯嗎？</p>
-            <p className="mb-4 text-sm text-gray-700">
+            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
               取消編輯後，
               <span className="text-pink pl-1">將不會儲存</span>
               您所做的變更，確定要取消編輯嗎？
@@ -424,13 +424,13 @@ export function AccountProfile() {
                 className="w-full"
               />
             </div>
-            <span className="text-gray-400 text-xs mb-4">
+            <span className="text-gray-500 dark:text-gray-300 text-xs mb-4">
               Illustration by{' '}
-              <a className="text-gray-400" href="https://blush.design/artists/RyUTVuP8G4QeAAEEQgug/pablo-stanley" target="_blank" rel="noopener noreferrer">
+              <a className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]" href="https://blush.design/artists/RyUTVuP8G4QeAAEEQgug/pablo-stanley" target="_blank" rel="noopener noreferrer">
                 Pablo Stanley
               </a>{' '}
               from{' '}
-              <a className="text-gray-400" href="https://blush.design/" target="_blank" rel="noopener noreferrer">
+              <a className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]" href="https://blush.design/" target="_blank" rel="noopener noreferrer">
                 blush design
               </a>
             </span>
@@ -456,16 +456,16 @@ export function AccountProfile() {
       {/* Save Result Modal */}
       {showSaveResultModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className={`mb-3 text-2xl font-bold ${saveSuccess ? 'text-main' : 'text-pink'}`}>
               {saveSuccess ? '儲存成功' : '儲存失敗'}
             </p>
             {!saveSuccess && (
               <>
-                <p className="mt-3 text-sm text-gray-700">
+                <p className="mt-3 text-sm text-gray-800 dark:text-gray-100">
                   很抱歉儲存失敗，請確認您所輸入的內容是否有無錯誤。
                 </p>
-                <p className="mt-2 text-sm text-gray-700">
+                <p className="mt-2 text-sm text-gray-800 dark:text-gray-100">
                   若無法排除問題，請{' '}
                   <a className="text-pink hover:underline" href="mailto:info@wavemocards.com">
                     與我們聯繫

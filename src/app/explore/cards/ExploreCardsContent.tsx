@@ -94,12 +94,12 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   return (
     <main>
       {/* Sticky header */}
-      <div className="sticky top-[64px] z-30 pb-1 bg-white">
+      <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
-              <h2 className="text-2xl font-bold md:hidden">探索情緒</h2>
-              <h2 className="text-2xl font-bold hidden md:block">探索情緒｜情緒卡</h2>
+              <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden">探索情緒</h2>
+              <h2 className="text-2xl font-bold text-[#3C9DAE] hidden md:block">探索情緒｜情緒卡</h2>
             </div>
             <div className="flex flex-col md:flex-row justify-end items-end md:items-center gap-2">
               <div className="flex items-center gap-2">
@@ -110,7 +110,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   className={cn(
                     'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
                     viewMode === 'expanded'
-                      ? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
+                      ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
@@ -123,7 +123,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   className={cn(
                     'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
                     viewMode === 'folded'
-                      ? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
+                      ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
@@ -136,7 +136,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   className={cn(
                     'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
                     viewMode === 'table'
-                      ? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
+                      ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
@@ -151,7 +151,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                 <FolderOpen className="w-4 h-4 hidden group-hover:block" />
                 <span>我的情緒卡夾</span>
                 {selectedCards.length > 0 && (
-                  <span className="ml-1 bg-white text-main text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="ml-1 bg-gray-100 dark:bg-gray-900 text-main text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     {selectedCards.length}
                   </span>
                 )}
@@ -164,7 +164,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
       <div className="container mx-auto py-4 px-3 sm:px-0">
         {/* Guide accordion */}
         <div className="mb-9">
-          <div className="border-2 border-main-tint02 rounded-lg bg-white">
+          <div className="border-2 border-main-tint02 rounded-lg bg-gray-100 dark:bg-gray-900">
             <button
               type="button"
               onClick={() => setShowGuide(!showGuide)}
@@ -175,8 +175,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
             </button>
             {showGuide && (
               <div className="px-4 pb-4 text-sm">
-                <h3 className="mb-1 font-bold text-gray-700">探索步驟</h3>
-                <ol className="pl-6 mb-6 text-gray-600 list-decimal space-y-1">
+                <h3 className="mb-1 font-bold text-gray-800 dark:text-gray-100">探索步驟</h3>
+                <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
                   <li>下滑頁面，開始瀏覽情緒卡。</li>
                   <li>
                     點擊情緒卡右上方的「
@@ -191,8 +191,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     」按鈕，進行<span className="text-main font-bold">下一步</span>的內容。
                   </li>
                 </ol>
-                <h3 className="mb-1 font-bold text-gray-700">瀏覽情緒卡的方法</h3>
-                <ol className="pl-6 mb-4 text-gray-600 list-decimal space-y-1">
+                <h3 className="mb-1 font-bold text-gray-800 dark:text-gray-100">瀏覽情緒卡的方法</h3>
+                <ol className="pl-6 mb-4 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
                   <li>
                     點擊右上方的「<span className="text-main font-bold">收合</span>」或「
                     <span className="text-main font-bold">展開</span>」按鈕，可以轉換情緒卡的展示方式。
@@ -226,7 +226,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     className={cn(
                       'shrink-0 w-[72px] h-[140px] mt-3 rounded-xl',
                       'flex flex-col items-center justify-center',
-                      'font-bold text-gray-900 text-lg',
+                      'font-bold text-gray-900 dark:text-gray-900 text-lg',
                       'transition-colors duration-200',
                       styles.bg,
                       styles.hoverBorder,
@@ -267,7 +267,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                               isAdded && 'opacity-50'
                             )}
                           >
-                            <p className="text-lg font-bold text-gray-900 mb-2">
+                            <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
                               {card.name.length === 2
                                 ? `${card.name[0]}\u00A0${card.name[1]}`
                                 : card.name}
@@ -295,7 +295,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {/* Folded View - Category cards */}
         {viewMode === 'folded' && (
           <div className="mt-6 mb-16">
-            <ul className="mb-9 text-gray-550 text-sm">
+            <ul className="mb-9 text-gray-800 dark:text-gray-100 text-sm">
               <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
             </ul>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -320,7 +320,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                       'hover:border-4 hover:p-2'
                     )}
                   >
-                    <p className="text-lg font-bold text-gray-900 mb-2">
+                    <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
                       {cat.name[0]}&nbsp;{cat.name[1]}
                     </p>
                     <div className="w-16 h-16 rounded-full overflow-hidden">
@@ -342,7 +342,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {/* Table View - Emotion word buttons */}
         {viewMode === 'table' && (
           <div className="mt-6 mb-16">
-            <p className="mb-8 px-1 md:px-3 text-gray-550 text-sm">
+            <p className="mb-8 px-1 md:px-3 text-gray-800 dark:text-gray-100 text-sm">
               🔎 請點擊下方各個情緒名詞，可以展開觀看詳細的情緒資訊。
             </p>
             {categories.map((cat) => {

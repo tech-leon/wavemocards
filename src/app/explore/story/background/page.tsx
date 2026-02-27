@@ -45,10 +45,10 @@ export default function ExploreStoryBackgroundPage() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-6 text-gray-550 text-sm space-y-1">
+      <ul className="ml-1 mt-3 mb-6 text-gray-800 dark:text-gray-100 text-sm space-y-1">
         <li>謝謝你，真誠地感受自己的情緒。</li>
         <li>接下來，想邀請你慢慢地潛入自己的情緒故事中，找尋自己情緒的源頭。</li>
-        <li className="text-gray-500 text-xs">若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」</li>
+        <li className="text-gray-500 dark:text-gray-300 text-xs">若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」</li>
       </ul>
 
       {/* Question */}
@@ -60,7 +60,7 @@ export default function ExploreStoryBackgroundPage() {
               <span className="px-0.5">{cardNamesStr}</span>
               」的情緒之前，發生了什麼事情呢？
             </p>
-            <p className="text-gray-550 text-sm">
+            <p className="text-gray-800 dark:text-gray-100 text-sm">
               請在下欄中，試著寫下你覺得可能是讓你有這些情緒的原因或是事情、背景故事等。
             </p>
           </label>
@@ -68,7 +68,7 @@ export default function ExploreStoryBackgroundPage() {
             id="whatHappened"
             value={storyBackground}
             onChange={(e) => setStoryBackground(e.target.value)}
-            className="w-full mb-3 mx-0 p-3 border rounded border-gray-500 text-gray-900 min-h-[120px] resize-y"
+            className="w-full mb-3 mx-0 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[120px] resize-y"
             placeholder="在這裡寫下你的故事..."
           />
         </div>
@@ -84,13 +84,13 @@ export default function ExploreStoryBackgroundPage() {
       </div>
 
       {/* Credit */}
-      <div className="text-right text-gray-500 text-[10px] mb-16">
+      <div className="text-right text-gray-500 dark:text-gray-300 text-[10px] mb-16">
         Illustration by{' '}
-        <a className="text-gray-500" href="https://icons8.com/illustrations/author/iAdLsFJOKDrk" target="_blank" rel="noopener noreferrer">
+        <a className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]" href="https://icons8.com/illustrations/author/iAdLsFJOKDrk" target="_blank" rel="noopener noreferrer">
           Tanya Krasutska
         </a>{' '}
         from{' '}
-        <a className="text-gray-500" href="https://icons8.com/illustrations" target="_blank" rel="noopener noreferrer">
+        <a className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]" href="https://icons8.com/illustrations" target="_blank" rel="noopener noreferrer">
           Ouch!
         </a>
       </div>

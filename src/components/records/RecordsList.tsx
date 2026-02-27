@@ -188,7 +188,7 @@ export function RecordsList() {
     <div className="container mx-auto pt-4 pb-16">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2 className="text-2xl font-bold">我的紀錄</h2>
+        <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄</h2>
         <div className="flex gap-2">
           <div className="px-4 py-2 text-sm font-bold text-white bg-main rounded-full cursor-default">
             紀錄
@@ -210,7 +210,7 @@ export function RecordsList() {
         <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
             value={startDate}
             max={today}
             onChange={(e) => setStartDate(e.target.value)}
@@ -218,7 +218,7 @@ export function RecordsList() {
           <span className="text-main-tint01">～</span>
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm"
+            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
             value={endDate}
             max={today}
             min={startDate || undefined}
@@ -233,7 +233,7 @@ export function RecordsList() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
             <input
               type="search"
-              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm placeholder:text-gray-400"
+              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               placeholder="請輸入關鍵字，以「空格」做區隔"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
@@ -272,7 +272,7 @@ export function RecordsList() {
           <div className="w-8 h-8 border-4 border-main-tint02 border-t-main rounded-full animate-spin" />
         </div>
       ) : records.length === 0 ? (
-        <div className="py-20 text-center text-gray-400 text-lg">
+        <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">
           目前沒有紀錄
         </div>
       ) : (
@@ -295,7 +295,7 @@ export function RecordsList() {
                     <tr
                       key={record.id}
                       onClick={() => router.push(`/records/${record.id}`)}
-                      className={`text-center border-b border-gray-200 hover:bg-main-tint03/50 transition-colors cursor-pointer ${
+                      className={`text-center border-b border-gray-200 dark:border-gray-700 hover:bg-main-tint03/50 transition-colors cursor-pointer ${
                         index % 2 !== 0 ? 'bg-main-tint03/30' : ''
                       }`}
                     >
@@ -380,9 +380,9 @@ export function RecordsList() {
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-700">
+            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
               您選擇刪除
               <span className="px-1 text-pink font-bold">{selectedIds.size} 筆</span>
               資料，刪除後便

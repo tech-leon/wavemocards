@@ -225,19 +225,19 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
   if (!record) {
     return (
-      <div className="py-20 text-center text-gray-400 text-lg">找不到此紀錄</div>
+      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">找不到此紀錄</div>
     );
   }
 
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-white px-3 sm:px-0">
+      <div className="sticky top-[64px] z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0">
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
-            <h2 className="text-2xl font-bold hidden md:block">我的紀錄｜情緒故事</h2>
-            <h2 className="text-2xl font-bold md:hidden flex flex-col">
+            <h2 className="text-2xl font-bold text-[#3C9DAE] hidden md:block">我的紀錄｜情緒故事</h2>
+            <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden flex flex-col">
               <span>我的紀錄</span>
               <span>情緒故事</span>
             </h2>
@@ -302,7 +302,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
               日期
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 rounded-sm text-sm">
+            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
               {formatDate(record.created_at)}
             </div>
           </div>
@@ -312,7 +312,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
               情緒強度｜第一次
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 rounded-sm text-sm">
+            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -329,7 +329,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
               情緒強度｜第二次
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 rounded-sm text-sm">
+            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -388,7 +388,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
               <div className="lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm text-sm flex items-center">
                 結果是否是我所期待的？
               </div>
-              <div className="lg:w-3/4 px-3 py-2 bg-gray-200 rounded-sm text-sm flex items-center">
+              <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm flex items-center">
                 {getExpectText(record.expect)}
               </div>
             </div>
@@ -412,9 +412,9 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-700">
+            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
               刪除後便
               <span className="pl-1 text-pink font-bold">不可再復原</span>
               ，確定要刪除嗎？
@@ -474,7 +474,7 @@ function StoryField({
           />
         </div>
       ) : (
-        <div className="lg:w-3/4 px-3 py-2 bg-gray-200 rounded-sm text-sm min-h-[40px] flex items-center">
+        <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm min-h-[40px] flex items-center">
           {value || '—'}
         </div>
       )}

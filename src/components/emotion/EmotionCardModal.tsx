@@ -98,10 +98,10 @@ export function EmotionCardModal({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
               aria-label="關閉"
             >
-              <X className="w-5 h-5 text-gray-700" />
+              <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
             </button>
 
             {/* Add to holder button */}
@@ -133,22 +133,22 @@ export function EmotionCardModal({
                 </div>
 
                 {/* Title */}
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-5 text-center sm:text-left">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-5 text-center sm:text-left">
                   {card.name}
                 </h2>
 
                 {/* Description */}
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">意思：</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1">意思：</h3>
+                  <p className="text-gray-700 dark:text-gray-100 leading-relaxed">
                     {card.description || '暫無描述'}
                   </p>
                 </div>
 
                 {/* Example */}
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">例句：</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1">例句：</h3>
+                  <p className="text-gray-700 dark:text-gray-100 leading-relaxed">
                     {card.example || '暫無例句'}
                   </p>
                 </div>

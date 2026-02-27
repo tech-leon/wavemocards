@@ -29,7 +29,7 @@ export function StrengthSelector({ value, onChange }: StrengthSelectorProps) {
               'flex items-center justify-center',
               isSelected
                 ? 'bg-main text-white shadow-md scale-110'
-                : 'bg-white border-2 border-gray-400 text-gray-500 hover:border-main-tint01 hover:text-main-tint01'
+                : 'bg-gray-100 dark:bg-gray-900 border-2 border-gray-400 text-gray-600 dark:text-gray-200 hover:border-main-tint01 hover:text-main-tint01'
             )}
           >
             {level}

@@ -68,7 +68,7 @@ export function EmotionCard({
         )}
         onClick={onClick}
       >
-        <p className="w-1/2 text-6xl font-bold text-gray-900 mr-4">
+        <p className="w-1/2 text-6xl font-bold text-gray-900 dark:text-gray-900 mr-4">
           {card.name}
         </p>
         <div className="w-1/2 rounded-full overflow-hidden">
@@ -98,7 +98,7 @@ export function EmotionCard({
       onClick={onClick}
     >
       <p className={cn(
-        'w-1/2 px-2 text-[28px] font-bold text-gray-900 transition-all duration-200',
+        'w-1/2 px-2 text-[28px] font-bold text-gray-900 dark:text-gray-900 transition-all duration-200',
         !selected && 'group-hover:w-[40%] group-hover:text-[32px] group-hover:px-0'
       )}>
         {card.name}

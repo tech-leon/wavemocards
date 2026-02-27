@@ -13,7 +13,7 @@ export function SignOutButton({
     <form action={handleSignOut}>
       <button
         type="submit"
-        className={`px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors ${className}`}
+        className={`px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors ${className}`}
       >
         {children}
       </button>

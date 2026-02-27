@@ -27,7 +27,7 @@ export function MobileNav({ user }: MobileNavProps) {
       {/* Mobile Menu Button */}
       <button
         onClick={toggleMenu}
-        className="lg:hidden p-2 text-gray-550 hover:text-main transition-colors"
+        className="lg:hidden p-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -48,7 +48,7 @@ export function MobileNav({ user }: MobileNavProps) {
 
             {/* Mobile Menu */}
             <motion.div
-              className="fixed top-[70px] right-0 h-full w-64 bg-white shadow-lg z-50 lg:hidden"
+              className="fixed top-[70px] right-0 h-full w-64 bg-gray-100 dark:bg-gray-900 shadow-lg z-50 lg:hidden border-l border-gray-200 dark:border-gray-700"
               role="dialog"
               aria-modal="true"
               aria-label="行動裝置導覽選單"
@@ -65,7 +65,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/about-emotions"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <BookOpen className="w-5 h-5" />
                         <span>認識情緒</span>
@@ -75,7 +75,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/explore"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <Heart className="w-5 h-5" />
                         <span>探索情緒</span>
@@ -85,7 +85,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/records"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <FolderOpen className="w-5 h-5" />
                         <span>我的紀錄</span>
@@ -95,17 +95,17 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/emo-cards"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <BookOpen className="w-5 h-5" />
                         <span>情緒卡</span>
                       </Link>
                     </li>
-                    <li className="pt-4 border-t border-gray-300">
+                    <li className="pt-4 border-t border-gray-300 dark:border-gray-700">
                       <Link
                         href="/account"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <Settings className="w-5 h-5" />
                         <span>帳戶設定</span>
@@ -115,7 +115,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <form action={handleSignOut}>
                         <button
                           type="submit"
-                          className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors w-full"
+                          className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors w-full"
                         >
                           <LogOut className="w-5 h-5" />
                           <span>登出</span>
@@ -130,7 +130,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <Home className="w-5 h-5" />
                         <span>首頁</span>
@@ -140,7 +140,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/about-emotions"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <BookOpen className="w-5 h-5" />
                         <span>認識情緒</span>
@@ -150,13 +150,13 @@ export function MobileNav({ user }: MobileNavProps) {
                       <Link
                         href="/emo-cards"
                         onClick={closeMenu}
-                        className="flex items-center gap-3 text-gray-700 hover:text-main transition-colors"
+                        className="flex items-center gap-3 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
                       >
                         <BookOpen className="w-5 h-5" />
                         <span>情緒卡</span>
                       </Link>
                     </li>
-                    <li className="pt-4 border-t border-gray-300">
+                    <li className="pt-4 border-t border-gray-300 dark:border-gray-700">
                       <form action={handleSignIn}>
                         <Button
                           type="submit"

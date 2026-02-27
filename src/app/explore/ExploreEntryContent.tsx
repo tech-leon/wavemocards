@@ -19,13 +19,13 @@ export function ExploreEntryContent() {
       <div className="container mx-auto py-4 pt-8" id="top">
         {/* Title bar */}
         <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between">
-          <h2 className="text-2xl font-bold">探索情緒</h2>
+          <h2 className="text-2xl font-bold text-[#3C9DAE]">探索情緒</h2>
         </div>
 
         <div className="flex flex-col md:flex-row items-center">
           {/* Guide text */}
           <FadeIn className="md:w-2/3 mb-6 md:mb-0" delay={0.1}>
-            <div className="h-full px-5 sm:px-9 py-4 sm:py-6 bg-main-tint03 rounded-lg text-md text-gray-700 flex flex-col justify-center gap-1 md:gap-3">
+            <div className="h-full px-5 sm:px-9 py-4 sm:py-6 bg-main-tint03 rounded-lg text-md text-gray-800 dark:text-gray-100 flex flex-col justify-center gap-1 md:gap-3">
               <p>你在情緒的世界裡迷航了嗎？</p>
               <p>沒關係，讓我們一起在浪潮情緒卡中，探索自己的情緒。</p>
               <p>
@@ -75,10 +75,10 @@ export function ExploreEntryContent() {
               className="w-48 md:w-60"
             />
             {/* Illustration credit */}
-            <div className="mt-4 mb-16 md:mb-2 flex justify-center text-gray-500 text-[10px]">
+            <div className="mt-4 mb-16 md:mb-2 flex justify-center text-gray-500 dark:text-gray-300 text-[10px]">
               Illustration by{" "}
               <a
-                className="text-gray-500 ml-1"
+                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] ml-1"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -87,7 +87,7 @@ export function ExploreEntryContent() {
               </a>{" "}
               <span className="mx-1">from</span>
               <a
-                className="text-gray-500"
+                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noopener noreferrer"
