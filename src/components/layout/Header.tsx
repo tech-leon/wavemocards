@@ -19,6 +19,7 @@ interface HeaderProps {
 
 export function Header({ user }: HeaderProps) {
   const pathname = usePathname();
+  const isAuthenticated = Boolean(user);
 
   return (
     <header className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900 shadow-md" role="banner">
@@ -41,25 +42,25 @@ export function Header({ user }: HeaderProps) {
               <nav className="flex items-center gap-4" aria-label="主導覽">
                 <Link 
                   href="/about-emotions"
-                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-main transition-colors font-medium"
                 >
                   認識情緒
                 </Link>
                 <Link 
                   href="/explore"
-                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-main transition-colors font-medium"
                 >
                   探索情緒
                 </Link>
                 <Link 
                   href="/records"
-                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-main transition-colors font-medium"
                 >
                   我的紀錄
                 </Link>
                 <Link 
                   href="/account"
-                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors group"
+                  className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-main transition-colors group"
                 >
                   <Settings 
                     className="w-6 h-6" 
@@ -70,20 +71,20 @@ export function Header({ user }: HeaderProps) {
                 <form action={handleSignOut}>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors"
+                    className="px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-main transition-colors"
                   >
                     <LogOut className="w-6 h-6" />
                     <span className="sr-only">登出</span>
                   </button>
                 </form>
-                <ThemeToggle />
+                <ThemeToggle isAuthenticated={isAuthenticated} />
               </nav>
           ) : (
             // Logged out state
             <nav className="flex items-center gap-4" aria-label="主導覽">
               <Link 
                 href="/about-emotions"
-                className="text-gray-800 dark:text-gray-100 hover:text-[#3C9DAE] transition-colors font-medium hidden sm:block"
+                className="text-gray-800 dark:text-gray-100 hover:text-main transition-colors font-medium hidden sm:block"
               >
                 認識情緒
               </Link>
@@ -104,14 +105,14 @@ export function Header({ user }: HeaderProps) {
                   註冊
                 </Button>
               </form>
-              <ThemeToggle />
+              <ThemeToggle isAuthenticated={isAuthenticated} />
             </nav>
             )}
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex items-center gap-1 lg:hidden">
-            <ThemeToggle />
+            <ThemeToggle isAuthenticated={isAuthenticated} />
             <MobileNav user={user} />
           </div>
         </div>
