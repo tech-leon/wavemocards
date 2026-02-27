@@ -110,6 +110,7 @@ export interface Database {
           id: string;
           workos_user_id: string;
           email: string;
+          theme_preference: 'light' | 'dark' | 'system';
           title: string | null;
           first_name: string | null;
           last_name: string | null;
@@ -125,6 +126,7 @@ export interface Database {
           id?: string;
           workos_user_id: string;
           email: string;
+          theme_preference?: 'light' | 'dark' | 'system';
           title?: string | null;
           first_name?: string | null;
           last_name?: string | null;
@@ -140,6 +142,7 @@ export interface Database {
           id?: string;
           workos_user_id?: string;
           email?: string;
+          theme_preference?: 'light' | 'dark' | 'system';
           title?: string | null;
           first_name?: string | null;
           last_name?: string | null;
