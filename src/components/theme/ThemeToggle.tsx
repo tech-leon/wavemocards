@@ -95,7 +95,7 @@ export function ThemeToggle({ className, isAuthenticated = false }: ThemeToggleP
       }}
       disabled={isSavingTheme}
       className={cn(
-        "text-gray-800 hover:text-[#3C9DAE] dark:text-gray-100 dark:hover:bg-yellow-100 dark:hover:text-black",
+        "text-gray-800 rounded-full hover:text-main hover:bg-black dark:text-gray-100 dark:hover:bg-yellow-100 dark:hover:text-black dark:rounded-full",
         className
       )}
     >

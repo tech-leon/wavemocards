@@ -70,12 +70,12 @@ export default async function AboutEmotionsPage() {
               <div className="mb-3 flex flex-wrap justify-center gap-6 md:gap-8">
                 {basicEmotions.map((emotion) => (
                   <div key={emotion.name} className="flex flex-col items-center mb-5">
-                    <div className="w-20 h-20 md:w-24 md:h-24 mb-2">
+                    <div className="w-25 h-25 md:w-30 md:h-30 mb-2">
                       <Image
                         src={`/images/aboutEmotions/${emotion.image}`}
                         alt={emotion.name}
-                        width={96}
-                        height={96}
+                        width={150}
+                        height={150}
                         className="w-full h-full object-contain"
                       />
                     </div>

@@ -14,7 +14,7 @@ interface MainLayoutProps {
 
 export function MainLayout({ children, user }: MainLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
@@ -23,7 +23,7 @@ export function MainLayout({ children, user }: MainLayoutProps) {
         跳到主要內容
       </a>
       <Header user={user} />
-      <main id="main-content" className="grow" role="main">
+      <main id="main-content" className="grow bg-gray-100 dark:bg-gray-900" role="main">
         {children}
       </main>
       <Footer />
