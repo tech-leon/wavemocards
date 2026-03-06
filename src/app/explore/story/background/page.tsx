@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useExploreStore } from '@/store/exploreStore';
-import { ExploreStepLayout } from '@/components/explore';
+import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
 
 export default function ExploreStoryBackgroundPage() {
   const router = useRouter();
@@ -64,11 +64,11 @@ export default function ExploreStoryBackgroundPage() {
               請在下欄中，試著寫下你覺得可能是讓你有這些情緒的原因或是事情、背景故事等。
             </p>
           </label>
-          <textarea
+          <StoryTextarea
             id="whatHappened"
             value={storyBackground}
             onChange={(e) => setStoryBackground(e.target.value)}
-            className="w-full mb-3 mx-0 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[120px] resize-y"
+            className="min-h-[120px] resize-y"
             placeholder="在這裡寫下你的故事..."
           />
         </div>

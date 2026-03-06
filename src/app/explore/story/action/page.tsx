@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useExploreStore } from '@/store/exploreStore';
-import { ExploreStepLayout } from '@/components/explore';
+import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
 
 export default function ExploreStoryActionPage() {
   const router = useRouter();
@@ -77,11 +77,11 @@ export default function ExploreStoryActionPage() {
                 例如：在感受到心中的焦慮後，我在日記本寫下各種心中所擔憂的事情。
               </p>
             </label>
-            <textarea
+            <StoryTextarea
               id="storyAction"
               value={storyAction}
               onChange={(e) => setStoryAction(e.target.value)}
-              className="w-full mb-3 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[100px] resize-y"
+              className="min-h-[100px] resize-y"
             />
           </div>
           <div className="md:w-1/3 lg:w-1/4 flex justify-center md:justify-end items-center">
@@ -103,11 +103,11 @@ export default function ExploreStoryActionPage() {
                 在上述你所做的反應後，帶來了什麼樣的結果呢？
               </p>
             </label>
-            <textarea
+            <StoryTextarea
               id="storyResult"
               value={storyResult}
               onChange={(e) => setStoryResult(e.target.value)}
-              className="w-full mb-3 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[100px] resize-y"
+              className="min-h-[100px] resize-y"
             />
           </div>
         </div>
@@ -123,11 +123,11 @@ export default function ExploreStoryActionPage() {
                 對於上述發生的結果，你有什麼樣的感受呢？
               </p>
             </label>
-            <textarea
+            <StoryTextarea
               id="storyFeeling"
               value={storyFeeling}
               onChange={(e) => setStoryFeeling(e.target.value)}
-              className="w-full mb-3 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[100px] resize-y"
+              className="min-h-[100px] resize-y"
             />
           </div>
           <div className="md:w-1/3 lg:w-1/4 hidden md:flex justify-center md:justify-end items-center">
@@ -196,11 +196,11 @@ export default function ExploreStoryActionPage() {
                 </li>
               </ul>
             </label>
-            <textarea
+            <StoryTextarea
               id="betterAction"
               value={storyBetterAction}
               onChange={(e) => setStoryBetterAction(e.target.value)}
-              className="w-full mb-3 p-3 border rounded border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-[100px] resize-y"
+              className="min-h-[100px] resize-y"
             />
           </div>
           <div className="md:w-1/3 lg:w-1/4 hidden md:flex justify-center md:justify-end items-center">
