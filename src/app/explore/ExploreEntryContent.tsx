@@ -15,8 +15,8 @@ export function ExploreEntryContent() {
   };
 
   return (
-    <main className="px-3 sm:px-0 mx-15">
-      <div className="container mx-auto py-4 pt-8" id="top">
+    <section className="mx-15 px-3 sm:px-0" aria-label="探索情緒入口">
+      <div className="container mx-auto py-4 pt-8 pb-10 md:pb-12" id="top">
         {/* Title bar */}
         <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between">
           <h2 className="text-2xl font-bold text-main">探索情緒</h2>
@@ -75,7 +75,7 @@ export function ExploreEntryContent() {
               className="w-48 md:w-60"
             />
             {/* Illustration credit */}
-            <div className="mt-4 mb-16 md:mb-2 flex justify-center text-gray-500 dark:text-gray-300 text-[10px]">
+            <div className="mt-4 mb-8 flex justify-center text-[10px] text-gray-500 dark:text-gray-300 md:mb-0">
               Illustration by{" "}
               <a
                 className="text-gray-500 dark:text-gray-300 hover:text-main ml-1"
@@ -114,6 +114,6 @@ export function ExploreEntryContent() {
           </FadeIn>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

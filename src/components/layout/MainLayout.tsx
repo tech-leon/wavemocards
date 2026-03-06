@@ -16,7 +16,7 @@ interface MainLayoutProps {
 
 export function MainLayout({ children, locale, user }: MainLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
+    <div className="grid min-h-dvh grid-rows-[auto_minmax(0,1fr)_auto] bg-gray-100 dark:bg-gray-900">
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
@@ -25,7 +25,7 @@ export function MainLayout({ children, locale, user }: MainLayoutProps) {
         跳到主要內容
       </a>
       <Header locale={locale} user={user} />
-      <main id="main-content" className="grow bg-gray-100 dark:bg-gray-900" role="main">
+      <main id="main-content" className="min-h-0 bg-gray-100 dark:bg-gray-900" role="main">
         {children}
       </main>
       <Footer locale={locale} />

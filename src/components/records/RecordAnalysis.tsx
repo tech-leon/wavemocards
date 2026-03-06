@@ -113,7 +113,7 @@ export function RecordAnalysis() {
 
   return (
     <div className="px-3 sm:px-0">
-    <div className="container mx-auto pt-4 pb-16">
+    <div className="container mx-auto pt-4 pb-10 md:pb-12">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
         <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄｜分析</h2>
@@ -269,7 +269,7 @@ export function RecordAnalysis() {
           <div className="flex justify-end">
             <Image src="/images/lime-analyze.svg" alt="分析" width={300} height={300} className="max-w-[300px]" />
           </div>
-          <div className="text-right mb-12">
+          <div className="text-right mb-8">
             <span className="text-gray-500 dark:text-gray-300 text-xs">
               Illustration by{' '}
               <a

@@ -127,7 +127,9 @@ export function Footer({ locale }: FooterProps) {
       </div>
 
       <div className="bg-slate-300 text-slate-700 dark:bg-slate-900 dark:text-slate-100">
-        <div className="mx-auto max-w-7xl px-6 py-4 text-center text-sm">© 2023 - {year} 浪潮情緒卡 | Wave Emotion Cards 版權所有</div>
+        <div className="mx-auto flex h-12 max-w-7xl items-center justify-center px-4 text-center text-xs whitespace-nowrap sm:px-6 sm:text-sm">
+          © 2023 - {year} 浪潮情緒卡 | Wave Emotion Cards 版權所有
+        </div>
       </div>
     </footer>
   );

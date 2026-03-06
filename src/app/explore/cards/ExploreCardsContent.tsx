@@ -59,10 +59,10 @@ interface ExploreCardsContentProps {
 
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
-  const [showGuide, setShowGuide] = useState(true);
+  const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
 
-  const { selectedCards, addCard, hasCard } = useExploreStore();
+  const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
 
   // Group cards by category
   const cardsByCategory = new Map<number, EmotionCard[]>();
@@ -87,7 +87,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   const getCategorySlug = (cat: EmotionCategory) => cat.slug;
 
   return (
-    <main>
+    <section aria-label="探索情緒卡">
       {/* Sticky header */}
       <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
         <div className="container mx-auto pt-4 px-3 sm:px-0">
@@ -243,7 +243,11 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                           onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
                           action={
                             isAdded
-                              ? { kind: 'added', label: '已加入卡夾' }
+                              ? {
+                                  kind: 'remove',
+                                  label: '移出卡夾',
+                                  onClick: () => removeCard(card.id),
+                                }
                               : {
                                   kind: 'add',
                                   label: '加入卡夾',
@@ -383,6 +387,6 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
           }
         />
       )}
-    </main>
+    </section>
   );
 }

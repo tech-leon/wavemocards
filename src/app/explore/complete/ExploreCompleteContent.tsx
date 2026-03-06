@@ -58,7 +58,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       </div>
 
       {/* Credit */}
-      <div className="text-right text-gray-500 dark:text-gray-300 text-[10px] mb-16">
+      <div className="text-right text-[10px] text-gray-500 dark:text-gray-300">
         Illustration by{' '}
         <a
           className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]"

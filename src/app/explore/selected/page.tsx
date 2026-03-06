@@ -85,7 +85,7 @@ export default function ExploreSelectedPage() {
 
       {/* Cards grid */}
       {selectedCards.length === 0 ? (
-        <div className="mb-16 py-16 flex flex-col items-center justify-center text-gray-500 dark:text-gray-300">
+        <div className="mb-8 flex flex-col items-center justify-center py-10 text-gray-500 dark:text-gray-300">
           <p className="text-lg mb-2">尚未選擇任何情緒卡</p>
           <button
             type="button"
@@ -96,7 +96,7 @@ export default function ExploreSelectedPage() {
           </button>
         </div>
       ) : (
-        <div className="mb-16 flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10">
+        <div className="mb-8 flex flex-wrap justify-center gap-6 sm:gap-10 md:justify-start">
           {selectedCards.map((card) => {
             return (
               <EmotionCard

@@ -185,7 +185,7 @@ export function RecordsList() {
 
   return (
     <div className="px-3 sm:px-0">
-    <div className="container mx-auto pt-4 pb-16">
+    <div className="container mx-auto pt-4 pb-10 md:pb-12">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
         <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄</h2>

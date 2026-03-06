@@ -8,6 +8,7 @@ export const metadata = {
 
 export default async function ExploreCompletePage() {
   const { user } = await withAuth({ ensureSignedIn: true });
+  const userName = user.firstName?.trim() || '你';
 
-  return <ExploreCompleteContent userName={user.firstName || ''} />;
+  return <ExploreCompleteContent userName={userName} />;
 }
