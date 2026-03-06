@@ -7,9 +7,9 @@ import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
-import { EmotionCard } from '@/components/emotion/EmotionCard';
+import { EmotionCard as EmotionCardComponent } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
-import type { EmotionCategory, EmotionCard } from '@/lib/emotions';
+import type { EmotionCategory, EmotionCard as EmotionCardRecord } from '@/lib/emotions';
 import type { EmotionCardData } from '@/types/emotion-card';
 
 type ViewMode = 'expanded' | 'folded' | 'table';
@@ -54,7 +54,7 @@ const categoryBtnColors: Record<string, string> = {
 
 interface ExploreCardsContentProps {
   categories: EmotionCategory[];
-  cards: EmotionCard[];
+  cards: EmotionCardRecord[];
 }
 
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
@@ -65,14 +65,14 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
 
   // Group cards by category
-  const cardsByCategory = new Map<number, EmotionCard[]>();
+  const cardsByCategory = new Map<number, EmotionCardRecord[]>();
   cards.forEach((card) => {
     const arr = cardsByCategory.get(card.category_id) || [];
     arr.push(card);
     cardsByCategory.set(card.category_id, arr);
   });
 
-  const handleAddCard = (card: EmotionCard) => {
+  const handleAddCard = (card: EmotionCardRecord) => {
     const cat = categories.find((c) => c.id === card.category_id);
     const isAdded = hasCard(card.id);
 
@@ -237,7 +237,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
                       return (
-                        <EmotionCard
+                        <EmotionCardComponent
                           key={card.id}
                           card={toEmotionCardData(card, slug)}
                           onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
@@ -350,7 +350,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                           )}
                           <button
                             type="button"
-                            onClick={() => setModalCard(card)}
+                            onClick={() => setModalCard(toEmotionCardData(card, slug))}
                             className={cn(
                               'px-3 py-1 rounded-full text-sm whitespace-nowrap transition-colors',
                               categoryBtnColors[slug],

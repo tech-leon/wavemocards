@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { ArrowLeft, Folder, FolderOpen } from 'lucide-react';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
-import { EmotionCard } from '@/components/emotion/EmotionCard';
+import { EmotionCard as EmotionCardComponent } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
-import type { EmotionCategory, EmotionCard } from '@/lib/emotions';
+import type { EmotionCategory, EmotionCard as EmotionCardRecord } from '@/lib/emotions';
 import type { EmotionCardData } from '@/types/emotion-card';
 
 interface ExploreCategoryCardsContentProps {
   category: EmotionCategory;
-  cards: EmotionCard[];
+  cards: EmotionCardRecord[];
 }
 
 export function ExploreCategoryCardsContent({ category, cards }: ExploreCategoryCardsContentProps) {
@@ -20,7 +20,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
   const slug = category.slug;
 
-  const handleAddCard = (card: EmotionCard) => {
+  const handleAddCard = (card: EmotionCardRecord) => {
     if (hasCard(card.id)) return;
     addCard(toEmotionCardData(card, slug));
   };
@@ -62,7 +62,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
           {cards.map((card) => {
             const isAdded = hasCard(card.id);
             return (
-              <EmotionCard
+              <EmotionCardComponent
                 key={card.id}
                 card={toEmotionCardData(card, slug)}
                 onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
