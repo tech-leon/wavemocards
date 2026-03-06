@@ -13,6 +13,7 @@ export default async function proxy(request: NextRequest) {
   return handleAuthkitHeaders(request, headers);
 }
 
+
 export const config = {
   matcher: [
     "/",
