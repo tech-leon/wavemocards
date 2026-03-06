@@ -60,7 +60,7 @@ export default function ExploreStoryBackgroundPage() {
               <span className="px-0.5">{cardNamesStr}</span>
               」的情緒之前，發生了什麼事情呢？
             </p>
-            <p className="text-gray-800 dark:text-gray-100 text-sm">
+            <p className="text-gray-800 text-sm">
               請在下欄中，試著寫下你覺得可能是讓你有這些情緒的原因或是事情、背景故事等。
             </p>
           </label>

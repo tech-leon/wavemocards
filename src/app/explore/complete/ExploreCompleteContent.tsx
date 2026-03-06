@@ -26,6 +26,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       <ul className="ml-1 mt-3 mb-9 space-y-1">
         <li className="text-gray-800 dark:text-gray-100 text-lg">
           親愛的<span className="px-0.5 text-main font-bold">{userName}</span>，
+          紀錄已成功儲存。
         </li>
         <li className="text-gray-800 dark:text-gray-100 text-lg">
           謝謝你為了自己花了時間、心思，做覺察、紀錄與省思。

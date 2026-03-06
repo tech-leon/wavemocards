@@ -180,7 +180,7 @@ export default function ExploreStoryActionPage() {
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="betterAction" className="block py-3 px-4">
               <p className="mb-1 text-gray-800 text-xs">第 5 題</p>
-              <ul className="list-disc pl-5 space-y-2">
+              <ul className="list-disc space-y-2">
                 <li>
                   <p className="text-gray-800">
                     如果這次的<span className="text-main font-medium">結果不如你所期待</span>的話，你覺得

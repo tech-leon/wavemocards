@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
+import { cn } from '@/lib/utils';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StrengthSelector } from '@/components/explore';
 
@@ -11,15 +12,15 @@ export default function ExploreStrength2Page() {
   const router = useRouter();
   const store = useExploreStore();
   const { selectedCards, afterLevels, setAfterLevel } = store;
-  const [showConfirm, setShowConfirm] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [saveResult, setSaveResult] = useState<'success' | 'error' | null>(null);
 
   const handleBack = () => {
     router.push('/explore/story/action');
   };
 
   const handleSave = async () => {
+    if (saving) return;
+
     setSaving(true);
     try {
       const body = {
@@ -41,16 +42,16 @@ export default function ExploreStrength2Page() {
       });
 
       if (res.ok) {
-        setSaveResult('success');
+        toast.success('儲存成功');
         store.reset();
+        router.push('/explore/complete');
       } else {
-        setSaveResult('error');
+        toast.error('很抱歉，儲存紀錄失敗，請稍後再試。');
       }
     } catch {
-      setSaveResult('error');
+      toast.error('儲存時發生錯誤，請確認網路狀態後再試一次。');
     } finally {
       setSaving(false);
-      setShowConfirm(false);
     }
   };
 
@@ -70,10 +71,14 @@ export default function ExploreStrength2Page() {
           </button>
           <button
             type="button"
-            onClick={() => setShowConfirm(true)}
-            className="px-6 py-1.5 text-sm font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
+            onClick={handleSave}
+            disabled={saving}
+            className={cn(
+              'px-6 py-1.5 text-sm font-bold rounded-full bg-main text-white transition-colors',
+              saving ? 'cursor-not-allowed opacity-60' : 'hover:bg-main-dark'
+            )}
           >
-            儲存紀錄
+            {saving ? '儲存中...' : '儲存紀錄'}
           </button>
         </>
       }
@@ -108,79 +113,6 @@ export default function ExploreStrength2Page() {
           );
         })}
       </div>
-
-      {/* Confirm save modal */}
-      {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowConfirm(false)}>
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
-            <p className="text-2xl font-bold text-main mb-3">確定完成了嗎？</p>
-            <p className="text-sm text-gray-800 dark:text-gray-100 mb-1">
-              點擊「確定完成」後，將會儲存您的紀錄，並且<span className="text-main">無法再返回到此頁面</span>。
-            </p>
-            <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">若想再繼續編輯的話，請點擊「返回」</p>
-            <Image src="/images/sureToSave.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
-            <div className="flex justify-center gap-4">
-              <button
-                type="button"
-                onClick={() => setShowConfirm(false)}
-                className="px-6 py-2 rounded-full border-2 border-main-tint01 text-main-tint01 font-bold text-sm hover:bg-main-tint03"
-              >
-                返回
-              </button>
-              <button
-                type="button"
-                onClick={handleSave}
-                disabled={saving}
-                className="px-6 py-2 rounded-full bg-main hover:bg-main-dark text-white font-bold text-sm disabled:opacity-50"
-              >
-                {saving ? '儲存中...' : '確定完成'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Save result modal */}
-      {saveResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center">
-            <p className={cn('text-2xl font-bold mb-3', saveResult === 'success' ? 'text-main' : 'text-pink')}>
-              {saveResult === 'success' ? '儲存成功' : '儲存失敗'}
-            </p>
-            {saveResult === 'error' && (
-              <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">
-                很抱歉，儲存紀錄失敗，請確認您的網路狀態，並重新點擊「儲存紀錄」。
-              </p>
-            )}
-            <Image
-              src={saveResult === 'success' ? '/images/addCardSuccess.svg' : '/images/addCardFail.svg'}
-              alt=""
-              width={150}
-              height={150}
-              className="mx-auto mb-4"
-            />
-            {saveResult === 'success' ? (
-              <button
-                type="button"
-                onClick={() => router.push('/explore/complete')}
-                className="px-6 py-2 rounded-full bg-main hover:bg-main-dark text-white font-bold text-sm"
-              >
-                前往最後一個步驟
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setSaveResult(null)}
-                className="px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold text-sm"
-              >
-                我知道了
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </ExploreStepLayout>
   );
 }
