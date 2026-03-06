@@ -3,22 +3,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StrengthSelector } from '@/components/explore';
-
-// Category colors mapping
-const categoryBgColors: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relieved: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
-};
 
 export default function ExploreStrength1Page() {
   const router = useRouter();
@@ -80,35 +67,13 @@ export default function ExploreStrength1Page() {
       {/* Strength selectors for each card */}
       <div className="space-y-10">
         {selectedCards.map((card) => {
-          const slug = card.categoryName;
           return (
             <div
               key={card.id}
               className="flex flex-col md:flex-row md:justify-between items-center gap-4"
             >
               {/* Card */}
-              <div
-                className={cn(
-                  'min-w-[130px] max-w-[130px] h-[90px] sm:min-w-[180px] sm:max-w-[180px] sm:h-[110px]',
-                  'flex items-center justify-center p-3 rounded-xl',
-                  categoryBgColors[slug] || 'bg-gray-200'
-                )}
-              >
-                <p className="w-1/2 text-lg sm:text-xl font-bold text-main">
-                  {card.name.length === 2
-                    ? `${card.name[0]}\u00A0${card.name[1]}`
-                    : card.name}
-                </p>
-                <div className="w-1/2 rounded-full overflow-hidden">
-                  <Image
-                    src={card.imagePath || `/images/emoCards/${card.id}.svg`}
-                    alt={card.name}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              <EmotionCard card={card} />
 
               {/* Strength selector */}
               <StrengthSelector

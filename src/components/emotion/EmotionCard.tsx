@@ -1,120 +1,112 @@
 'use client';
 
 import Image from 'next/image';
+import { Check, PlusCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-export interface EmotionCardData {
-  id: number;
-  name: string;
-  categoryId: number;
-  categoryName: string;
-  description?: string;
-  example?: string;
-  imagePath?: string;
-}
+import type { EmotionCardAction, EmotionCardData } from '@/types/emotion-card';
+import {
+  formatEmotionCardName,
+  getEmotionCardCategoryStyle,
+  getEmotionCardImageSrc,
+} from './emotion-card-config';
 
 interface EmotionCardProps {
   card: EmotionCardData;
-  variant?: 'default' | 'large' | 'selectable';
-  selected?: boolean;
-  onClick?: () => void;
+  onCardClick?: () => void;
+  action?: EmotionCardAction;
+  disabled?: boolean;
+  dimmed?: boolean;
   className?: string;
 }
 
-// Emotion category colors mapping
-const categoryColors: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relived: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
-};
+function EmotionCardActionButton({ action }: { action: EmotionCardAction }) {
+  const icon =
+    action.kind === 'add' ? (
+      <PlusCircle className="w-5 h-5" />
+    ) : action.kind === 'remove' ? (
+      <XCircle className="w-5 h-5" />
+    ) : (
+      <Check className="w-4 h-4" />
+    );
 
-const categoryBorders: Record<string, string> = {
-  happy: 'border-[#EBD175]',
-  expectation: 'border-[#EAB27E]',
-  relived: 'border-[#B0CC8B]',
-  unstable: 'border-[#D7B3B3]',
-  amazed: 'border-[#969DD7]',
-  sadness: 'border-[#A2C5D6]',
-  hate: 'border-[#C1B1A4]',
-  anger: 'border-[#D19292]',
-  others: 'border-[#CBCBCB]',
-};
+  const toneClass =
+    action.kind === 'added'
+      ? 'bg-gray-800/80 dark:bg-gray-100/80 text-white dark:text-gray-900 cursor-default'
+      : 'bg-pink-tint01 hover:bg-pink text-white';
+
+  return (
+    <button
+      type="button"
+      onClick={(event) => {
+        event.stopPropagation();
+        action.onClick?.();
+      }}
+      disabled={!action.onClick}
+      aria-label={action.label}
+      title={action.label}
+      className={cn(
+        'absolute -top-2 -right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full shadow transition-colors',
+        toneClass
+      )}
+    >
+      {icon}
+    </button>
+  );
+}
 
 export function EmotionCard({
   card,
-  variant = 'default',
-  selected = false,
-  onClick,
+  onCardClick,
+  action,
+  disabled = false,
+  dimmed = false,
   className,
 }: EmotionCardProps) {
   const categorySlug = card.categoryName.toLowerCase();
-  const bgColor = categoryColors[categorySlug] || 'bg-gray-200';
-  const borderColor = categoryBorders[categorySlug] || 'border-gray-400';
-
-  if (variant === 'large') {
-    return (
-      <div
-        className={cn(
-          'min-w-[480px] p-9 rounded-xl flex items-center gap-4 transition-all duration-200',
-          bgColor,
-          onClick && 'cursor-pointer hover:shadow-lg',
-          className
-        )}
-        onClick={onClick}
-      >
-        <p className="w-1/2 text-6xl font-bold text-main mr-4">
-          {card.name}
-        </p>
-        <div className="w-1/2 rounded-full overflow-hidden">
-          <Image
-            src={card.imagePath || `/images/emoCards/${card.id}.svg`}
-            alt={card.name}
-            width={200}
-            height={200}
-            className="w-full h-full object-cover transition-transform duration-250 hover:scale-110"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={cn(
-        'min-w-[236px] max-w-[236px] h-[140px] flex items-center justify-center p-5 rounded-xl mb-4',
-        'transition-all duration-200',
-        bgColor,
-        onClick && 'cursor-pointer',
-        selected && `border-4 ${borderColor}`,
-        !selected && 'border-0 hover:p-2 hover:border-4 ' + borderColor,
-        className
-      )}
-      onClick={onClick}
-    >
-      <p className={cn(
-        'w-1/2 px-2 text-[28px] font-bold text-main transition-all duration-200',
-        !selected && 'group-hover:w-[40%] group-hover:text-[32px] group-hover:px-0'
-      )}>
-        {card.name}
-      </p>
-      <div className={cn(
-        'w-1/2 rounded-full overflow-hidden transition-all duration-200',
-        !selected && 'group-hover:w-[55%]'
-      )}>
+  const styles = getEmotionCardCategoryStyle(categorySlug);
+  const interactive = Boolean(onCardClick) && !disabled;
+  const bodyClassName = cn(
+    'group flex h-[140px] w-[140px] flex-col items-center justify-center rounded-xl border-4 border-transparent p-3 text-left transition-all duration-200',
+    styles.bg,
+    interactive && ['cursor-pointer', styles.hoverBorder, 'hover:p-2'],
+    dimmed && 'opacity-50',
+    disabled && 'cursor-not-allowed'
+  );
+  const bodyContent = (
+    <>
+      <div className="h-16 w-16 rounded-full overflow-hidden">
         <Image
-          src={card.imagePath || `/images/emoCards/${card.id}.svg`}
+          src={getEmotionCardImageSrc(card)}
           alt={card.name}
-          width={120}
-          height={120}
-          className="w-full h-full object-cover transition-transform duration-250 hover:scale-120"
+          width={64}
+          height={64}
+          className={cn(
+            'h-full w-full object-cover transition-transform duration-200',
+            interactive && 'group-hover:scale-110'
+          )}
         />
       </div>
+      <p className="mt-2 text-center text-lg font-bold text-main">
+        {formatEmotionCardName(card.name)}
+      </p>
+    </>
+  );
+
+  return (
+    <div className={cn('relative shrink-0', className)}>
+      {action ? <EmotionCardActionButton action={action} /> : null}
+      {onCardClick ? (
+        <button
+          type="button"
+          onClick={onCardClick}
+          disabled={disabled}
+          className={bodyClassName}
+        >
+          {bodyContent}
+        </button>
+      ) : (
+        <div className={bodyClassName}>{bodyContent}</div>
+      )}
     </div>
   );
 }

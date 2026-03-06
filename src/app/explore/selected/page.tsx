@@ -4,27 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { XCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout } from '@/components/explore';
-
-// Category colors mapping
-const categoryBgColors: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relieved: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
-};
 
 export default function ExploreSelectedPage() {
   const router = useRouter();
   const { selectedCards, removeCard, clearCards } = useExploreStore();
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showError, setShowError] = useState<string | null>(null);
 
@@ -47,11 +33,6 @@ export default function ExploreSelectedPage() {
   const handleClear = () => {
     clearCards();
     setShowClearConfirm(false);
-  };
-
-  const handleDelete = (cardId: number) => {
-    removeCard(cardId);
-    setShowDeleteConfirm(null);
   };
 
   return (
@@ -117,76 +98,18 @@ export default function ExploreSelectedPage() {
       ) : (
         <div className="mb-16 flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10">
           {selectedCards.map((card) => {
-            const slug = card.categoryName;
             return (
-              <div key={card.id} className="relative">
-                {/* Delete button */}
-                <button
-                  type="button"
-                  onClick={() => setShowDeleteConfirm(card.id)}
-                  className="absolute -top-2 -right-2 z-10 w-7 h-7 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
-                  title="移除"
-                >
-                  <XCircle className="w-5 h-5" />
-                </button>
-                <div
-                  className={cn(
-                    'min-w-[130px] max-w-[130px] h-[90px] sm:min-w-[180px] sm:max-w-[180px] sm:h-[110px]',
-                    'flex items-center justify-center p-3 rounded-xl',
-                    categoryBgColors[slug] || 'bg-gray-200'
-                  )}
-                >
-                  <p className="w-1/2 text-lg sm:text-xl font-bold text-main">
-                    {card.name.length === 2
-                      ? `${card.name[0]}\u00A0${card.name[1]}`
-                      : card.name}
-                  </p>
-                  <div className="w-1/2 rounded-full overflow-hidden">
-                    <Image
-                      src={card.imagePath || `/images/emoCards/${card.id}.svg`}
-                      alt={card.name}
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              <EmotionCard
+                key={card.id}
+                card={card}
+                action={{
+                  kind: 'remove',
+                  label: '移除',
+                  onClick: () => removeCard(card.id),
+                }}
+              />
             );
           })}
-        </div>
-      )}
-
-      {/* Delete confirm modal */}
-      {showDeleteConfirm !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowDeleteConfirm(null)}>
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
-            <p className="text-2xl font-bold mb-3">確定要移除嗎？</p>
-            <p className="text-sm text-gray-800 dark:text-gray-100 mb-2">
-              若確定要移除此張情緒卡的話，請點擊「確定」
-            </p>
-            <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">
-              反之，則請點擊「取消」。
-            </p>
-            <Image src="/images/sureToDelete.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
-            <div className="flex justify-center gap-4">
-              <button
-                type="button"
-                onClick={() => setShowDeleteConfirm(null)}
-                className="px-6 py-2 rounded-full border-2 border-pink-tint01 text-pink-tint01 font-bold text-sm hover:bg-pink-tint02/20"
-              >
-                取消
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDelete(showDeleteConfirm)}
-                className="px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold text-sm"
-              >
-                確定
-              </button>
-            </div>
-          </div>
         </div>
       )}
 

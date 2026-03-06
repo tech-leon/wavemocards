@@ -5,15 +5,8 @@ import Image from 'next/image';
 import { X, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from '@/components/ui/motion';
-
-interface EmotionCardData {
-  id: number;
-  name: string;
-  category_id: number;
-  description?: string | null;
-  example?: string | null;
-  image_path?: string | null;
-}
+import type { EmotionCardData } from '@/types/emotion-card';
+import { getEmotionCardCategoryStyle, getEmotionCardImageSrc } from './emotion-card-config';
 
 interface EmotionCardModalProps {
   card: EmotionCardData | null;
@@ -22,19 +15,6 @@ interface EmotionCardModalProps {
   onClose: () => void;
   onAdd?: () => void;
 }
-
-// Category colors mapping
-const categoryStyles: Record<string, string> = {
-  happy: 'bg-happy',
-  expectation: 'bg-expectation',
-  relieved: 'bg-relived',
-  unstable: 'bg-unstable',
-  amazed: 'bg-amazed',
-  sadness: 'bg-sadness',
-  hate: 'bg-hate',
-  anger: 'bg-anger',
-  others: 'bg-others',
-};
 
 export function EmotionCardModal({
   card,
@@ -62,7 +42,7 @@ export function EmotionCardModal({
     };
   }, [isOpen, onClose]);
 
-  const bgColor = categoryStyles[categorySlug] || 'bg-gray-200';
+  const bgColor = getEmotionCardCategoryStyle(categorySlug).bg;
 
   return (
     <AnimatePresence>
@@ -123,7 +103,7 @@ export function EmotionCardModal({
                 <div className="flex sm:hidden justify-center mb-4">
                   <div className="w-32 h-32 rounded-full overflow-hidden">
                     <Image
-                      src={card.image_path || `/images/emoCards/${card.id}.svg`}
+                      src={getEmotionCardImageSrc(card)}
                       alt={card.name}
                       width={128}
                       height={128}
@@ -158,7 +138,7 @@ export function EmotionCardModal({
               <div className="hidden sm:block order-1 sm:order-2 shrink-0">
                 <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden">
                   <Image
-                    src={card.image_path || `/images/emoCards/${card.id}.svg`}
+                    src={getEmotionCardImageSrc(card)}
                     alt={card.name}
                     width={192}
                     height={192}

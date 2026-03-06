@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { EmotionCardData } from '@/components/emotion/EmotionCard';
+import type { EmotionCardData } from '@/types/emotion-card';
 
 /**
  * Explore flow state management

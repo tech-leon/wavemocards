@@ -4,11 +4,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { toEmotionCardData } from '@/lib/emotion-card';
 import { categoryRepresentativeCards } from '@/lib/emotions';
+import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
+import { getEmotionCardCategoryStyle } from '@/components/emotion/emotion-card-config';
 import { EmotionTable } from '@/components/emotion/EmotionTable';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
+import type { EmotionCardData } from '@/types/emotion-card';
 import {
   Accordion,
   AccordionContent,
@@ -40,26 +44,13 @@ interface EmoCardsContentProps {
   locale: Locale;
 }
 
-// Category colors mapping
-const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
-  happy: { bg: 'bg-happy', hoverBorder: 'hover:border-[#EBD175]' },
-  expectation: { bg: 'bg-expectation', hoverBorder: 'hover:border-[#EAB27E]' },
-  relieved: { bg: 'bg-relived', hoverBorder: 'hover:border-[#B0CC8B]' },
-  unstable: { bg: 'bg-unstable', hoverBorder: 'hover:border-[#D7B3B3]' },
-  amazed: { bg: 'bg-amazed', hoverBorder: 'hover:border-[#969DD7]' },
-  sadness: { bg: 'bg-sadness', hoverBorder: 'hover:border-[#A2C5D6]' },
-  hate: { bg: 'bg-hate', hoverBorder: 'hover:border-[#C1B1A4]' },
-  anger: { bg: 'bg-anger', hoverBorder: 'hover:border-[#D19292]' },
-  others: { bg: 'bg-others', hoverBorder: 'hover:border-[#CBCBCB]' },
-};
-
 export function EmoCardsContent({
   categories,
   cardsByCategoryObj,
   locale,
 }: EmoCardsContentProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
-  const [selectedCard, setSelectedCard] = useState<EmotionCard | null>(null);
+  const [selectedCard, setSelectedCard] = useState<EmotionCardData | null>(null);
   const [selectedCategorySlug, setSelectedCategorySlug] = useState<string>('');
 
   // Convert object to Map for EmotionTable
@@ -69,7 +60,7 @@ export function EmoCardsContent({
   });
 
   const handleCardClick = (card: EmotionCard, categorySlug: string) => {
-    setSelectedCard(card);
+    setSelectedCard(toEmotionCardData(card, categorySlug));
     setSelectedCategorySlug(categorySlug);
   };
 
@@ -196,10 +187,7 @@ export function EmoCardsContent({
             <div className="space-y-6">
               {categories.map((category) => {
                 const cards = cardsByCategoryObj[category.id] || [];
-                const styles = categoryStyles[category.slug] || {
-                  bg: 'bg-gray-200',
-                  hoverBorder: 'hover:border-gray-400',
-                };
+                const styles = getEmotionCardCategoryStyle(category.slug);
 
                 return (
                   <div key={category.id} className="flex flex-nowrap gap-3">
@@ -223,33 +211,11 @@ export function EmoCardsContent({
                     {/* Cards Horizontal Scroll */}
                     <div className="flex gap-4 overflow-x-auto pb-2">
                       {cards.map((card) => (
-                        <button
+                        <EmotionCard
                           key={card.id}
-                          onClick={() => handleCardClick(card, category.slug)}
-                          className={cn(
-                            'group shrink-0 w-[120px] h-[140px] rounded-xl',
-                            'flex flex-col items-center justify-center p-3',
-                            'transition-all duration-200',
-                            styles.bg,
-                            styles.hoverBorder,
-                            'hover:border-4 hover:p-2'
-                          )}
-                        >
-                          <div className="w-16 h-16 rounded-full overflow-hidden">
-                            <Image
-                              src={card.image_path || `/images/emoCards/${card.id}.svg`}
-                              alt={card.name}
-                              width={64}
-                              height={64}
-                              className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
-                            />
-                          </div>
-                          <p className="text-lg font-bold text-main mt-2">
-                            {card.name.length === 2
-                              ? `${card.name[0]}\u00A0${card.name[1]}`
-                              : card.name}
-                          </p>
-                        </button>
+                          card={toEmotionCardData(card, category.slug)}
+                          onCardClick={() => handleCardClick(card, category.slug)}
+                        />
                       ))}
                     </div>
                   </div>
@@ -266,10 +232,7 @@ export function EmoCardsContent({
               </ul>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 {categories.map((category) => {
-                  const styles = categoryStyles[category.slug] || {
-                    bg: 'bg-gray-200',
-                    hoverBorder: 'hover:border-gray-400',
-                  };
+                  const styles = getEmotionCardCategoryStyle(category.slug);
                   const representativeCardId =
                     categoryRepresentativeCards[category.slug] || category.id;
 

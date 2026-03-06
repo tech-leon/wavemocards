@@ -1,26 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { PlusCircle, ArrowLeft, Folder, FolderOpen } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { ArrowLeft, Folder, FolderOpen } from 'lucide-react';
+import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
+import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import type { EmotionCategory, EmotionCard } from '@/lib/emotions';
-
-// Category colors mapping (matching EmoCardsContent)
-const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
-  happy: { bg: 'bg-happy', hoverBorder: 'hover:border-[#EBD175]' },
-  expectation: { bg: 'bg-expectation', hoverBorder: 'hover:border-[#EAB27E]' },
-  relieved: { bg: 'bg-relived', hoverBorder: 'hover:border-[#B0CC8B]' },
-  unstable: { bg: 'bg-unstable', hoverBorder: 'hover:border-[#D7B3B3]' },
-  amazed: { bg: 'bg-amazed', hoverBorder: 'hover:border-[#969DD7]' },
-  sadness: { bg: 'bg-sadness', hoverBorder: 'hover:border-[#A2C5D6]' },
-  hate: { bg: 'bg-hate', hoverBorder: 'hover:border-[#C1B1A4]' },
-  anger: { bg: 'bg-anger', hoverBorder: 'hover:border-[#D19292]' },
-  others: { bg: 'bg-others', hoverBorder: 'hover:border-[#CBCBCB]' },
-};
+import type { EmotionCardData } from '@/types/emotion-card';
 
 interface ExploreCategoryCardsContentProps {
   category: EmotionCategory;
@@ -28,21 +16,13 @@ interface ExploreCategoryCardsContentProps {
 }
 
 export function ExploreCategoryCardsContent({ category, cards }: ExploreCategoryCardsContentProps) {
-  const [modalCard, setModalCard] = useState<EmotionCard | null>(null);
+  const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
   const { selectedCards, addCard, hasCard } = useExploreStore();
   const slug = category.slug;
 
   const handleAddCard = (card: EmotionCard) => {
     if (hasCard(card.id)) return;
-    addCard({
-      id: card.id,
-      name: card.name,
-      categoryId: card.category_id,
-      categoryName: slug,
-      description: card.description || undefined,
-      example: card.example || undefined,
-      imagePath: card.image_path || undefined,
-    });
+    addCard(toEmotionCardData(card, slug));
   };
 
   return (
@@ -81,51 +61,22 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
         <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 pt-2 pr-2 mb-16">
           {cards.map((card) => {
             const isAdded = hasCard(card.id);
-            const styles = categoryStyles[slug] || {
-              bg: 'bg-gray-200',
-              hoverBorder: 'hover:border-gray-400',
-            };
             return (
-              <div key={card.id} className="relative">
-                {!isAdded && (
-                  <button
-                    type="button"
-                    onClick={() => handleAddCard(card)}
-                    className="absolute -top-2 -right-2 z-10 w-7 h-7 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
-                    title="加入卡夾"
-                  >
-                    <PlusCircle className="w-5 h-5" />
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={() => setModalCard(card)}
-                  className={cn(
-                    'group w-[140px] h-[140px] rounded-xl',
-                    'flex flex-col items-center justify-center p-3',
-                    'transition-all duration-200',
-                    styles.bg,
-                    styles.hoverBorder,
-                    'hover:border-4 hover:p-2',
-                    isAdded && 'opacity-50'
-                )}
-              >
-                  <div className="w-16 h-16 rounded-full overflow-hidden">
-                    <Image
-                      src={card.image_path || `/images/emoCards/${card.id}.svg`}
-                      alt={card.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
-                    />
-                  </div>
-                  <p className="text-lg font-bold text-main mt-2">
-                    {card.name.length === 2
-                      ? `${card.name[0]}\u00A0${card.name[1]}`
-                      : card.name}
-                  </p>
-                </button>
-              </div>
+              <EmotionCard
+                key={card.id}
+                card={toEmotionCardData(card, slug)}
+                onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
+                action={
+                  isAdded
+                    ? { kind: 'added', label: '已加入卡夾' }
+                    : {
+                        kind: 'add',
+                        label: '加入卡夾',
+                        onClick: () => handleAddCard(card),
+                      }
+                }
+                dimmed={isAdded}
+              />
             );
           })}
         </div>
@@ -141,7 +92,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
           onAdd={
             !hasCard(modalCard.id)
               ? () => {
-                  handleAddCard(modalCard);
+                  addCard(modalCard);
                   setModalCard(null);
                 }
               : undefined

@@ -5,9 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
+import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import type { EmotionCategory, EmotionCard } from '@/lib/emotions';
+import type { EmotionCardData } from '@/types/emotion-card';
 
 type ViewMode = 'expanded' | 'folded' | 'table';
 
@@ -57,7 +60,7 @@ interface ExploreCardsContentProps {
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [showGuide, setShowGuide] = useState(true);
-  const [modalCard, setModalCard] = useState<EmotionCard | null>(null);
+  const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
 
   const { selectedCards, addCard, hasCard } = useExploreStore();
 
@@ -78,15 +81,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
       return;
     }
 
-    addCard({
-      id: card.id,
-      name: card.name,
-      categoryId: card.category_id,
-      categoryName: cat?.slug || 'others',
-      description: card.description || undefined,
-      example: card.example || undefined,
-      imagePath: card.image_path || undefined,
-    });
+    addCard(toEmotionCardData(card, cat?.slug || 'others'));
   };
 
   const getCategorySlug = (cat: EmotionCategory) => cat.slug;
@@ -98,8 +93,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
-              <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden">探索情緒</h2>
-              <h2 className="text-2xl font-bold text-[#3C9DAE] hidden md:block">探索情緒｜情緒卡</h2>
+              <h2 className="text-2xl font-bold text-main md:hidden">探索情緒</h2>
+              <h2 className="text-2xl font-bold text-main hidden md:block">探索情緒｜情緒卡</h2>
             </div>
             <div className="flex flex-col md:flex-row justify-end items-end md:items-center gap-2">
               <div className="flex items-center gap-2">
@@ -242,47 +237,21 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
                       return (
-                        <div key={card.id} className="relative shrink-0">
-                          {/* Add button */}
-                          {!isAdded && (
-                            <button
-                              type="button"
-                              onClick={() => handleAddCard(card)}
-                              className="absolute -top-2 -right-2 z-10 w-7 h-7 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
-                              title="加入卡夾"
-                            >
-                              <PlusCircle className="w-5 h-5" />
-                            </button>
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => setModalCard(card)}
-                            className={cn(
-                              'group w-[140px] h-[140px] rounded-xl',
-                              'flex flex-col items-center justify-center p-3',
-                              'transition-all duration-200',
-                              styles.bg,
-                              styles.hoverBorder,
-                              'hover:border-4 hover:p-2',
-                              isAdded && 'opacity-50'
-                            )}
-                          >
-                            <div className="w-16 h-16 rounded-full overflow-hidden">
-                              <Image
-                                src={card.image_path || `/images/emoCards/${card.id}.svg`}
-                                alt={card.name}
-                                width={64}
-                                height={64}
-                                className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
-                              />
-                            </div>
-                            <p className="text-lg font-bold text-main mt-2">
-                              {card.name.length === 2
-                                ? `${card.name[0]}\u00A0${card.name[1]}`
-                                : card.name}
-                            </p>
-                          </button>
-                        </div>
+                        <EmotionCard
+                          key={card.id}
+                          card={toEmotionCardData(card, slug)}
+                          onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
+                          action={
+                            isAdded
+                              ? { kind: 'added', label: '已加入卡夾' }
+                              : {
+                                  kind: 'add',
+                                  label: '加入卡夾',
+                                  onClick: () => handleAddCard(card),
+                                }
+                          }
+                          dimmed={isAdded}
+                        />
                       );
                     })}
                   </div>
@@ -401,13 +370,13 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
       {modalCard && (
         <EmotionCardModal
           card={modalCard}
-          categorySlug={categories.find((c) => c.id === modalCard.category_id)?.slug || 'others'}
+          categorySlug={modalCard.categoryName}
           isOpen={!!modalCard}
           onClose={() => setModalCard(null)}
           onAdd={
             !hasCard(modalCard.id)
               ? () => {
-                  handleAddCard(modalCard);
+                  addCard(modalCard);
                   setModalCard(null);
                 }
               : undefined
