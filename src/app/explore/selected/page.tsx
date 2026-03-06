@@ -136,7 +136,7 @@ export default function ExploreSelectedPage() {
                     categoryBgColors[slug] || 'bg-gray-200'
                   )}
                 >
-                  <p className="w-1/2 text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-900">
+                  <p className="w-1/2 text-lg sm:text-xl font-bold text-main">
                     {card.name.length === 2
                       ? `${card.name[0]}\u00A0${card.name[1]}`
                       : card.name}

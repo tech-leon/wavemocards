@@ -206,7 +206,7 @@ export function EmoCardsContent({
                       className={cn(
                         'flex-shrink-0 w-[72px] h-[140px] rounded-xl',
                         'flex flex-col items-center justify-center',
-                        'font-bold text-gray-900 dark:text-gray-900 text-lg',
+                        'font-bold text-main text-lg',
                         'transition-colors duration-200',
                         styles.bg,
                         styles.hoverBorder,
@@ -224,7 +224,7 @@ export function EmoCardsContent({
                           key={card.id}
                           onClick={() => handleCardClick(card, category.slug)}
                           className={cn(
-                            'group flex-shrink-0 w-[140px] h-[140px] rounded-xl',
+                            'group shrink-0 w-[120px] h-[140px] rounded-xl',
                             'flex flex-col items-center justify-center p-3',
                             'transition-all duration-200',
                             styles.bg,
@@ -232,11 +232,6 @@ export function EmoCardsContent({
                             'hover:border-4 hover:p-2'
                           )}
                         >
-                          <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
-                            {card.name.length === 2
-                              ? `${card.name[0]}\u00A0${card.name[1]}`
-                              : card.name}
-                          </p>
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <Image
                               src={card.image_path || `/images/emoCards/${card.id}.svg`}
@@ -246,6 +241,11 @@ export function EmoCardsContent({
                               className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                             />
                           </div>
+                          <p className="text-lg font-bold text-main mt-2">
+                            {card.name.length === 2
+                              ? `${card.name[0]}\u00A0${card.name[1]}`
+                              : card.name}
+                          </p>
                         </button>
                       ))}
                     </div>
@@ -283,9 +283,6 @@ export function EmoCardsContent({
                         'hover:border-4 hover:p-2'
                       )}
                     >
-                      <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
-                        {category.name[0]}&nbsp;{category.name[1]}
-                      </p>
                       <div className="w-16 h-16 rounded-full overflow-hidden">
                         <Image
                           src={`/images/emoCards/${representativeCardId}.svg`}
@@ -295,6 +292,9 @@ export function EmoCardsContent({
                           className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                         />
                       </div>
+                      <p className="text-lg font-bold text-main mt-2">
+                        {category.name[0]}&nbsp;{category.name[1]}
+                      </p>
                     </Link>
                   );
                 })}

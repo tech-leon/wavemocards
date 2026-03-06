@@ -110,11 +110,6 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
                     isAdded && 'opacity-50'
                 )}
               >
-                  <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
-                    {card.name.length === 2
-                      ? `${card.name[0]}\u00A0${card.name[1]}`
-                      : card.name}
-                  </p>
                   <div className="w-16 h-16 rounded-full overflow-hidden">
                     <Image
                       src={card.image_path || `/images/emoCards/${card.id}.svg`}
@@ -124,6 +119,11 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
                       className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                     />
                   </div>
+                  <p className="text-lg font-bold text-main mt-2">
+                    {card.name.length === 2
+                      ? `${card.name[0]}\u00A0${card.name[1]}`
+                      : card.name}
+                  </p>
                 </button>
               </div>
             );

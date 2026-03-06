@@ -133,29 +133,29 @@ export function EmotionCardModal({
                 </div>
 
                 {/* Title */}
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-5 text-center sm:text-left">
+                <h2 className="text-3xl md:text-5xl font-bold text-main mb-5 text-center sm:text-left">
                   {card.name}
                 </h2>
 
                 {/* Description */}
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1">意思：</h3>
-                  <p className="text-gray-700 dark:text-gray-100 leading-relaxed">
+                  <h3 className="text-xl font-bold text-main mb-1">意思：</h3>
+                  <p className="text-gray-700 leading-relaxed">
                     {card.description || '暫無描述'}
                   </p>
                 </div>
 
                 {/* Example */}
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1">例句：</h3>
-                  <p className="text-gray-700 dark:text-gray-100 leading-relaxed">
+                  <h3 className="text-xl font-bold text-main mb-1">例句：</h3>
+                  <p className="text-gray-700 leading-relaxed">
                     {card.example || '暫無例句'}
                   </p>
                 </div>
               </div>
 
               {/* Desktop Image */}
-              <div className="hidden sm:block order-1 sm:order-2 flex-shrink-0">
+              <div className="hidden sm:block order-1 sm:order-2 shrink-0">
                 <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden">
                   <Image
                     src={card.image_path || `/images/emoCards/${card.id}.svg`}

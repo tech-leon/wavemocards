@@ -226,7 +226,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     className={cn(
                       'shrink-0 w-[72px] h-[140px] mt-3 rounded-xl',
                       'flex flex-col items-center justify-center',
-                      'font-bold text-gray-900 dark:text-gray-900 text-lg',
+                      'font-bold text-main text-lg',
                       'transition-colors duration-200',
                       styles.bg,
                       styles.hoverBorder,
@@ -267,11 +267,6 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                               isAdded && 'opacity-50'
                             )}
                           >
-                            <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
-                              {card.name.length === 2
-                                ? `${card.name[0]}\u00A0${card.name[1]}`
-                                : card.name}
-                            </p>
                             <div className="w-16 h-16 rounded-full overflow-hidden">
                               <Image
                                 src={card.image_path || `/images/emoCards/${card.id}.svg`}
@@ -281,6 +276,11 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                                 className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                               />
                             </div>
+                            <p className="text-lg font-bold text-main mt-2">
+                              {card.name.length === 2
+                                ? `${card.name[0]}\u00A0${card.name[1]}`
+                                : card.name}
+                            </p>
                           </button>
                         </div>
                       );
@@ -320,9 +320,6 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                       'hover:border-4 hover:p-2'
                     )}
                   >
-                    <p className="text-lg font-bold text-gray-900 dark:text-gray-900 mb-2">
-                      {cat.name[0]}&nbsp;{cat.name[1]}
-                    </p>
                     <div className="w-16 h-16 rounded-full overflow-hidden">
                       <Image
                         src={`/images/emoCards/${repCardId}.svg`}
@@ -332,6 +329,9 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                         className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                       />
                     </div>
+                    <p className="text-lg font-bold text-main mt-2">
+                      {cat.name[0]}&nbsp;{cat.name[1]}
+                    </p>
                   </Link>
                 );
               })}
