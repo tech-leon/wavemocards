@@ -1,5 +1,4 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import { ExploreCompleteContent } from './ExploreCompleteContent';
 
 export const metadata = {
@@ -8,18 +7,7 @@ export const metadata = {
 };
 
 export default async function ExploreCompletePage() {
-  let user = null;
-  try {
-    const auth = await withAuth();
-    user = auth.user;
-  } catch {
-    // not authenticated
-  }
-
-  if (!user) {
-    await redirectToSignIn();
-    return null;
-  }
+  const { user } = await withAuth({ ensureSignedIn: true });
 
   return <ExploreCompleteContent userName={user.firstName || ''} />;
 }

@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { getUser } from '@/lib/auth';
+import { buildAuthHref } from '@/lib/auth-routing';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
 import { localizeHref } from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
@@ -56,7 +58,7 @@ export default async function AboutEmotionsPage() {
                   情緒卡
                 </Link>
               ) : (
-                <EmoCardsLoginButton />
+                <EmoCardsLoginButton href={buildAuthHref('sign-in', emoCardsHref)} />
               )}
             </div>
           </div>
@@ -135,22 +137,13 @@ export default async function AboutEmotionsPage() {
   );
 }
 
-// Redirect to WorkOS sign-in when not logged in
-function EmoCardsLoginButton() {
+function EmoCardsLoginButton({ href }: { href: string }) {
   return (
-    <form action={async () => {
-      'use server';
-      const { getSignInUrl } = await import("@workos-inc/authkit-nextjs");
-      const { redirect } = await import("next/navigation");
-      const signInUrl = await getSignInUrl();
-      redirect(signInUrl);
-    }}>
-      <button
-        type="submit"
-        className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium cursor-pointer"
-      >
-        情緒卡
-      </button>
-    </form>
+    <AuthNavigationButton
+      href={href}
+      className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
+    >
+      情緒卡
+    </AuthNavigationButton>
   );
 }

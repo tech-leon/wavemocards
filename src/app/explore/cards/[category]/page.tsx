@@ -1,6 +1,5 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { notFound } from 'next/navigation';
-import { redirectToSignIn } from '@/lib/auth';
 import {
   getEmotionCardsByCategoryId,
   getEmotionCategoryBySlug,
@@ -23,18 +22,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function ExploreCategoryPage({ params }: PageProps) {
   const { category } = await params;
-
-  let user = null;
-  try {
-    const auth = await withAuth();
-    user = auth.user;
-  } catch {
-    // not authenticated
-  }
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   const categoryData = await getEmotionCategoryBySlug(category);
   if (!categoryData) {

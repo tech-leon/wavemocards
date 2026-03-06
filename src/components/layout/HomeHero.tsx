@@ -2,9 +2,11 @@
 
 import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { motion } from '@/components/ui/motion';
-import { handleSignUp } from '@/lib/auth';
+import { buildAuthHref, buildCurrentReturnTo } from '@/lib/auth-routing';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
 interface HomeHeroProps {
@@ -13,6 +15,8 @@ interface HomeHeroProps {
 }
 
 export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { resolvedTheme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -25,6 +29,7 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
       ? "url('/images/bg-dark.svg')"
       : "url('/images/bg-light.svg')";
   const aboutHref = localizeHref('/about-emotions', locale);
+  const signUpHref = buildAuthHref('sign-up', buildCurrentReturnTo(pathname, searchParams));
 
   return (
     <main
@@ -62,14 +67,12 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
               認識情緒
             </Link>
           ) : (
-            <form action={handleSignUp}>
-              <button
-                type="submit"
-                className="cursor-pointer rounded-full bg-pink px-12 py-3 text-2xl font-bold text-white transition-colors hover:bg-pink-dark md:text-3xl"
-              >
-                前往註冊
-              </button>
-            </form>
+            <AuthNavigationButton
+              href={signUpHref}
+              className="rounded-full bg-pink px-12 py-3 text-2xl font-bold text-white transition-colors hover:bg-pink-dark md:text-3xl"
+            >
+              前往註冊
+            </AuthNavigationButton>
           )}
         </motion.div>
       </div>

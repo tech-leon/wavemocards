@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Settings, LogOut } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
-import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
+import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
 import { MobileNav } from './MobileNav';
 
@@ -21,9 +21,14 @@ interface HeaderProps {
 
 export function Header({ locale, user }: HeaderProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const isAuthenticated = Boolean(user);
   const aboutHref = localizeHref('/about-emotions', locale);
   const homeHref = localizeHref('/', locale);
+  const currentReturnTo = buildCurrentReturnTo(pathname, searchParams);
+  const signInHref = buildAuthHref('sign-in', currentReturnTo);
+  const signUpHref = buildAuthHref('sign-up', currentReturnTo);
+  const signOutHref = buildSignOutHref(homeHref);
 
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -85,32 +90,28 @@ export function Header({ locale, user }: HeaderProps) {
                   <Settings className="size-5" strokeWidth={pathname === '/account' ? 2.5 : 2} />
                   <span className="sr-only">帳戶設定</span>
                 </Link>
-                <form action={handleSignOut}>
-                  <button
-                    type="submit"
-                    className="inline-flex rounded-md p-2 text-slate-800 transition-colors hover:text-main dark:text-slate-100 dark:hover:text-main-tint01"
-                  >
-                    <LogOut className="size-5" />
-                    <span className="sr-only">登出</span>
-                  </button>
-                </form>
+                <AuthNavigationButton
+                  href={signOutHref}
+                  className="inline-flex rounded-md p-2 text-slate-800 transition-colors hover:text-main dark:text-slate-100 dark:hover:text-main-tint01"
+                >
+                  <LogOut className="size-5" />
+                  <span className="sr-only">登出</span>
+                </AuthNavigationButton>
               </>
             ) : (
               <>
-                <form action={handleSignIn}>
-                  <Button
-                    type="submit"
-                    variant="outline"
-                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-slate-900"
-                  >
-                    登入
-                  </Button>
-                </form>
-                <form action={handleSignUp}>
-                  <Button type="submit" className="rounded-full bg-pink text-white hover:bg-pink-dark">
-                    註冊
-                  </Button>
-                </form>
+                <AuthNavigationButton
+                  href={signInHref}
+                  className="inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-sm font-medium text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-slate-900"
+                >
+                  登入
+                </AuthNavigationButton>
+                <AuthNavigationButton
+                  href={signUpHref}
+                  className="inline-flex h-9 items-center justify-center rounded-full bg-pink px-4 py-2 text-sm font-medium text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
+                >
+                  註冊
+                </AuthNavigationButton>
               </>
             )}
             <ThemeToggle isAuthenticated={isAuthenticated} />

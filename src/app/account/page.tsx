@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import { AccountProfile } from '@/components/account';
 
 export const metadata: Metadata = {
@@ -9,12 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AccountPage() {
-  // Require authentication
-  const { user } = await withAuth();
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   return <AccountProfile />;
 }

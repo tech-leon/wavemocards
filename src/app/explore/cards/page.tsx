@@ -1,5 +1,4 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import {
   getEmotionCards,
   getEmotionCategories,
@@ -12,17 +11,7 @@ export const metadata = {
 };
 
 export default async function ExploreCardsPage() {
-  let user = null;
-  try {
-    const auth = await withAuth();
-    user = auth.user;
-  } catch {
-    // not authenticated
-  }
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   const [categories, cards] = await Promise.all([
     getEmotionCategories(),

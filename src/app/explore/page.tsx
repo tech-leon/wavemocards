@@ -1,5 +1,4 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import { ExploreEntryContent } from './ExploreEntryContent';
 
 export const metadata = {
@@ -8,17 +7,7 @@ export const metadata = {
 };
 
 export default async function ExplorePage() {
-  let user = null;
-  try {
-    const auth = await withAuth();
-    user = auth.user;
-  } catch {
-    // not authenticated
-  }
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   return <ExploreEntryContent />;
 }

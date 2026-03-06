@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { handleSignIn } from '@/lib/auth';
+import { buildAuthHref, buildCurrentReturnTo } from '@/lib/auth-routing';
 
 interface ProfileData {
   id: string;
@@ -35,6 +37,8 @@ function getTitleDisplay(title: string | null): string {
 }
 
 export function AccountProfile() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(true);
@@ -55,6 +59,9 @@ export function AccountProfile() {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSaveResultModal, setShowSaveResultModal] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const passwordResetHref = buildAuthHref('sign-in', buildCurrentReturnTo(pathname, searchParams), {
+    force: true,
+  });
 
   useEffect(() => {
     fetchProfile();
@@ -302,14 +309,12 @@ export function AccountProfile() {
               <div className="flex justify-between items-center">
                 <p className="ml-1 text-base font-bold">********</p>
                 {!isEditing && (
-                  <form action={handleSignIn}>
-                    <button
-                      type="submit"
-                      className="px-4 py-1 text-sm rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors cursor-pointer"
-                    >
-                      重設密碼
-                    </button>
-                  </form>
+                  <AuthNavigationButton
+                    href={passwordResetHref}
+                    className="px-4 py-1 text-sm rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors"
+                  >
+                    重設密碼
+                  </AuthNavigationButton>
                 )}
               </div>
             </div>

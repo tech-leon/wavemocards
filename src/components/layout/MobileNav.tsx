@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Menu, X, Settings, LogOut, Home, Heart, BookOpen, FolderOpen } from 'lucide-react';
-import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
-import { Button } from '@/components/ui/button';
+import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
+import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
@@ -20,9 +21,15 @@ interface MobileNavProps {
 
 export function MobileNav({ locale, user }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const aboutHref = localizeHref('/about-emotions', locale);
   const emoCardsHref = localizeHref('/emo-cards', locale);
   const homeHref = localizeHref('/', locale);
+  const currentReturnTo = buildCurrentReturnTo(pathname, searchParams);
+  const signInHref = buildAuthHref('sign-in', currentReturnTo);
+  const signUpHref = buildAuthHref('sign-up', currentReturnTo);
+  const signOutHref = buildSignOutHref(homeHref);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
@@ -113,12 +120,14 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                       </Link>
                     </li>
                     <li>
-                      <form action={handleSignOut}>
-                        <button type="submit" onClick={closeMenu} className={`${mobileItemClass} w-full`}>
+                      <AuthNavigationButton
+                        href={signOutHref}
+                        onNavigate={closeMenu}
+                        className={`${mobileItemClass} w-full`}
+                      >
                           <LogOut className="size-5" />
                           <span>登出</span>
-                        </button>
-                      </form>
+                      </AuthNavigationButton>
                     </li>
                   </ul>
                 ) : (
@@ -142,23 +151,22 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                       </Link>
                     </li>
                     <li className="mt-4 border-t border-gray-300 pt-4 dark:border-gray-700">
-                      <form action={handleSignIn}>
-                        <Button
-                          type="submit"
-                          onClick={closeMenu}
-                          variant="outline"
-                          className="w-full rounded-full border-2 border-main text-main hover:bg-main hover:text-white"
-                        >
-                          登入
-                        </Button>
-                      </form>
+                      <AuthNavigationButton
+                        href={signInHref}
+                        onNavigate={closeMenu}
+                        className="inline-flex h-9 w-full items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-sm font-medium text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main"
+                      >
+                        登入
+                      </AuthNavigationButton>
                     </li>
                     <li>
-                      <form action={handleSignUp}>
-                        <Button type="submit" onClick={closeMenu} className="w-full rounded-full bg-pink text-white hover:bg-pink-dark">
-                          註冊
-                        </Button>
-                      </form>
+                      <AuthNavigationButton
+                        href={signUpHref}
+                        onNavigate={closeMenu}
+                        className="inline-flex h-9 w-full items-center justify-center rounded-full bg-pink px-4 py-2 text-sm font-medium text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
+                      >
+                        註冊
+                      </AuthNavigationButton>
                     </li>
                   </ul>
                 )}

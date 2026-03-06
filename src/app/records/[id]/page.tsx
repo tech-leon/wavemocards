@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import { RecordDetail } from '@/components/records';
 
 export const metadata: Metadata = {
@@ -13,12 +12,7 @@ export default async function RecordDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  // Require authentication
-  const { user } = await withAuth();
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   const { id } = await params;
 

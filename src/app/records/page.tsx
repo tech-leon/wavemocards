@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { redirectToSignIn } from '@/lib/auth';
 import { RecordsList } from '@/components/records';
 
 export const metadata: Metadata = {
@@ -9,12 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RecordsPage() {
-  // Require authentication
-  const { user } = await withAuth();
-
-  if (!user) {
-    await redirectToSignIn();
-  }
+  await withAuth({ ensureSignedIn: true });
 
   return <RecordsList />;
 }
