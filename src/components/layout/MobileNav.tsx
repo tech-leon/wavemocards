@@ -6,8 +6,10 @@ import { Menu, X, Settings, LogOut, Home, Heart, BookOpen, FolderOpen } from 'lu
 import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from '@/components/ui/motion';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
 interface MobileNavProps {
+  locale: Locale;
   user?: {
     id: string;
     email: string;
@@ -16,8 +18,11 @@ interface MobileNavProps {
   } | null;
 }
 
-export function MobileNav({ user }: MobileNavProps) {
+export function MobileNav({ locale, user }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const aboutHref = localizeHref('/about-emotions', locale);
+  const emoCardsHref = localizeHref('/emo-cards', locale);
+  const homeHref = localizeHref('/', locale);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
@@ -78,7 +83,7 @@ export function MobileNav({ user }: MobileNavProps) {
                 {user ? (
                   <ul className="space-y-2">
                     <li>
-                      <Link href="/about-emotions" onClick={closeMenu} className={mobileItemClass}>
+                      <Link href={aboutHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
                         <span>認識情緒</span>
                       </Link>
@@ -96,7 +101,7 @@ export function MobileNav({ user }: MobileNavProps) {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/emo-cards" onClick={closeMenu} className={mobileItemClass}>
+                      <Link href={emoCardsHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
                         <span>情緒卡</span>
                       </Link>
@@ -119,19 +124,19 @@ export function MobileNav({ user }: MobileNavProps) {
                 ) : (
                   <ul className="space-y-2">
                     <li>
-                      <Link href="/" onClick={closeMenu} className={mobileItemClass}>
+                      <Link href={homeHref} onClick={closeMenu} className={mobileItemClass}>
                         <Home className="size-5" />
                         <span>首頁</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/about-emotions" onClick={closeMenu} className={mobileItemClass}>
+                      <Link href={aboutHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
                         <span>認識情緒</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/emo-cards" onClick={closeMenu} className={mobileItemClass}>
+                      <Link href={emoCardsHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
                         <span>情緒卡</span>
                       </Link>

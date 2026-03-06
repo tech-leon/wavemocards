@@ -2,14 +2,20 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getUser } from '@/lib/auth';
+import { createPublicMetadata } from '@/lib/i18n/metadata';
+import { localizeHref } from '@/lib/i18n/locale';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { getAboutEmotions } from '@/lib/emotions';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
 
-export const metadata: Metadata = {
-  title: '浪潮情緒卡｜認識情緒',
-  description: '了解什麼是情緒、六種基本情緒、情緒無分好壞、以及情緒的健康之道',
-  keywords: ['情緒', '基本情緒', '情緒健康', '心理健康', '情緒管理'],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPublicMetadata({
+    pathname: '/about-emotions',
+    title: '浪潮情緒卡｜認識情緒',
+    description: '了解什麼是情緒、六種基本情緒、情緒無分好壞、以及情緒的健康之道',
+    keywords: ['情緒', '基本情緒', '情緒健康', '心理健康', '情緒管理'],
+  });
+}
 
 // Basic emotions for display
 const basicEmotions = [
@@ -24,6 +30,8 @@ const basicEmotions = [
 export default async function AboutEmotionsPage() {
   const user = await getUser();
   const aboutEmotions = await getAboutEmotions();
+  const locale = await getRequestLocale();
+  const emoCardsHref = localizeHref('/emo-cards', locale);
 
   // Get content from database or use defaults
   const whatIsEmotion = aboutEmotions.find(e => e.key === 'whatIsEmotion');
@@ -42,7 +50,7 @@ export default async function AboutEmotionsPage() {
               <span className="px-4 py-2 text-gray-500 dark:text-gray-300 font-medium">認識情緒</span>
               {user ? (
                 <Link
-                  href="/emo-cards"
+                  href={emoCardsHref}
                   className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
                 >
                   情緒卡

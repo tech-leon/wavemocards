@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
+import { type Locale } from '@/lib/i18n/locale';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
 interface MainLayoutProps {
   children: ReactNode;
+  locale: Locale;
   user?: {
     id: string;
     email: string;
@@ -12,7 +14,7 @@ interface MainLayoutProps {
   } | null;
 }
 
-export function MainLayout({ children, user }: MainLayoutProps) {
+export function MainLayout({ children, locale, user }: MainLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
       {/* Skip to content link for accessibility */}
@@ -22,11 +24,11 @@ export function MainLayout({ children, user }: MainLayoutProps) {
       >
         跳到主要內容
       </a>
-      <Header user={user} />
+      <Header locale={locale} user={user} />
       <main id="main-content" className="grow bg-gray-100 dark:bg-gray-900" role="main">
         {children}
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }

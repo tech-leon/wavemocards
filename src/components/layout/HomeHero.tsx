@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { motion } from '@/components/ui/motion';
 import { handleSignUp } from '@/lib/auth';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
 interface HomeHeroProps {
   isLoggedIn: boolean;
+  locale: Locale;
 }
 
-export function HomeHero({ isLoggedIn }: HomeHeroProps) {
+export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
   const { resolvedTheme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -22,6 +24,7 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
     mounted && resolvedTheme === 'dark'
       ? "url('/images/bg-dark.svg')"
       : "url('/images/bg-light.svg')";
+  const aboutHref = localizeHref('/about-emotions', locale);
 
   return (
     <main
@@ -53,7 +56,7 @@ export function HomeHero({ isLoggedIn }: HomeHeroProps) {
         >
           {isLoggedIn ? (
             <Link
-              href="/about-emotions"
+              href={aboutHref}
               className="rounded-full border-4 border-white bg-pink px-12 py-3 text-2xl font-bold text-white transition-colors hover:bg-pink-dark md:text-3xl"
             >
               認識情緒

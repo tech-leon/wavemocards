@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
 const CONTRIBUTORS = [
   {
@@ -46,15 +47,21 @@ const CONTRIBUTORS = [
 const REPORT_ISSUE_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdiAQt45Pzuha3aj9OYdS-2-ljOcEcwEDwZjjls_ufdXHkQNw/viewform?usp=sharing';
 
-export function Footer() {
+interface FooterProps {
+  locale: Locale;
+}
+
+export function Footer({ locale }: FooterProps) {
   const year = new Date().getFullYear();
+  const homeHref = localizeHref('/', locale);
+  const aboutHref = localizeHref('/about-emotions', locale);
 
   return (
     <footer className="border-t border-slate-300 dark:border-slate-700" role="contentinfo">
       <div className="bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-10 md:flex-row md:items-start md:justify-between">
           <div className="mx-auto flex w-full max-w-sm flex-col items-center text-center md:mx-0 md:items-start md:text-left">
-            <Link href="/" className="block h-[45px] w-[200px]">
+            <Link href={homeHref} className="block h-[45px] w-[200px]">
               <span className="sr-only">Wavemocards</span>
               <span
                 aria-hidden="true"
@@ -94,7 +101,7 @@ export function Footer() {
               <h3 className="mb-3 border-b border-slate-300 pb-2 text-lg font-semibold text-main dark:border-slate-600">實用連結</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/about-emotions" className="inline-flex transition-colors hover:text-main">
+                  <Link href={aboutHref} className="inline-flex transition-colors hover:text-main">
                     認識情緒
                   </Link>
                 </li>

@@ -8,6 +8,7 @@ import { categoryRepresentativeCards } from '@/lib/emotions';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import { EmotionTable } from '@/components/emotion/EmotionTable';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 import {
   Accordion,
   AccordionContent,
@@ -36,6 +37,7 @@ interface EmotionCard {
 interface EmoCardsContentProps {
   categories: EmotionCategory[];
   cardsByCategoryObj: Record<number, EmotionCard[]>;
+  locale: Locale;
 }
 
 // Category colors mapping
@@ -54,6 +56,7 @@ const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
 export function EmoCardsContent({
   categories,
   cardsByCategoryObj,
+  locale,
 }: EmoCardsContentProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [selectedCard, setSelectedCard] = useState<EmotionCard | null>(null);
@@ -84,7 +87,7 @@ export function EmoCardsContent({
             <h2 className="text-2xl font-bold text-[#3C9DAE]">認識情緒</h2>
             <div className="flex justify-end gap-4">
               <Link
-                href="/about-emotions"
+                href={localizeHref('/about-emotions', locale)}
                 className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
               >
                 認識情緒
@@ -202,7 +205,7 @@ export function EmoCardsContent({
                   <div key={category.id} className="flex flex-nowrap gap-3">
                     {/* Category Header */}
                     <Link
-                      href={`/emo-cards/${category.slug}`}
+                      href={localizeHref(`/emo-cards/${category.slug}`, locale)}
                       className={cn(
                         'flex-shrink-0 w-[72px] h-[140px] rounded-xl',
                         'flex flex-col items-center justify-center',
@@ -273,7 +276,7 @@ export function EmoCardsContent({
                   return (
                     <Link
                       key={category.id}
-                      href={`/emo-cards/${category.slug}`}
+                      href={localizeHref(`/emo-cards/${category.slug}`, locale)}
                       className={cn(
                         'group w-[140px] h-[140px] rounded-xl',
                         'flex flex-col items-center justify-center p-3',
@@ -308,6 +311,7 @@ export function EmoCardsContent({
               <EmotionTable
                 categories={categories}
                 cardsByCategory={cardsByCategory}
+                locale={locale}
                 onCardClick={handleCardClick}
               />
             </div>

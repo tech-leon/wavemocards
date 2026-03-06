@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 
 interface EmotionCategory {
   id: number;
@@ -26,6 +27,7 @@ interface EmotionCard {
 interface CategoryCardsContentProps {
   category: EmotionCategory;
   cards: EmotionCard[];
+  locale: Locale;
 }
 
 // Category colors mapping
@@ -44,6 +46,7 @@ const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
 export function CategoryCardsContent({
   category,
   cards,
+  locale,
 }: CategoryCardsContentProps) {
   const [selectedCard, setSelectedCard] = useState<EmotionCard | null>(null);
 
@@ -69,7 +72,7 @@ export function CategoryCardsContent({
             <h2 className="text-2xl font-bold text-[#3C9DAE]">{category.name}</h2>
             <div className="flex justify-end">
               <Link
-                href="/emo-cards"
+                href={localizeHref('/emo-cards', locale)}
                 className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
               >
                 返回

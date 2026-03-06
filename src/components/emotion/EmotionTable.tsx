@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 import { cn } from '@/lib/utils';
 
 interface EmotionCard {
@@ -22,6 +23,7 @@ interface EmotionCategory {
 interface EmotionTableProps {
   categories: EmotionCategory[];
   cardsByCategory: Map<number, EmotionCard[]>;
+  locale: Locale;
   onCardClick: (card: EmotionCard, categorySlug: string) => void;
 }
 
@@ -53,6 +55,7 @@ const cardButtonStyles: Record<string, string> = {
 export function EmotionTable({
   categories,
   cardsByCategory,
+  locale,
   onCardClick,
 }: EmotionTableProps) {
   return (
@@ -66,7 +69,7 @@ export function EmotionTable({
           <div key={category.id} className="flex flex-nowrap items-start gap-3">
             {/* Category Header Button */}
             <Link
-              href={`/emo-cards/${category.slug}`}
+              href={localizeHref(`/emo-cards/${category.slug}`, locale)}
               className={cn(
                 'shrink-0 w-16 h-10 rounded-lg',
                 'flex items-center justify-center',

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { createPublicMetadata } from '@/lib/i18n/metadata';
+import { getRequestLocale } from '@/lib/i18n/request';
 import {
   getEmotionCategoryBySlug,
   getEmotionCardsByCategoryId,
@@ -17,11 +19,12 @@ export async function generateMetadata({
   const { category: slug } = await params;
   const categoryName = categoryNames[slug] || slug;
 
-  return {
+  return createPublicMetadata({
+    pathname: `/emo-cards/${slug}`,
     title: `浪潮情緒卡｜認識情緒｜${categoryName}`,
     description: `瀏覽${categoryName}類的情緒卡，了解各種${categoryName}情緒的意思和例句`,
     keywords: ['情緒卡', categoryName, '情緒詞彙', '情緒分類'],
-  };
+  });
 }
 
 // Generate static params for all categories
@@ -33,6 +36,7 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: slug } = await params;
+  const locale = await getRequestLocale();
 
   // Get category data
   const category = await getEmotionCategoryBySlug(slug);
@@ -48,6 +52,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <CategoryCardsContent
       category={category}
       cards={cards}
+      locale={locale}
     />
   );
 }

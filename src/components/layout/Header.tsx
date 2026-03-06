@@ -6,9 +6,11 @@ import { Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { handleSignOut, handleSignIn, handleSignUp } from '@/lib/auth';
+import { localizeHref, type Locale } from '@/lib/i18n/locale';
 import { MobileNav } from './MobileNav';
 
 interface HeaderProps {
+  locale: Locale;
   user?: {
     id: string;
     email: string;
@@ -17,9 +19,11 @@ interface HeaderProps {
   } | null;
 }
 
-export function Header({ user }: HeaderProps) {
+export function Header({ locale, user }: HeaderProps) {
   const pathname = usePathname();
   const isAuthenticated = Boolean(user);
+  const aboutHref = localizeHref('/about-emotions', locale);
+  const homeHref = localizeHref('/', locale);
 
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -40,7 +44,7 @@ export function Header({ user }: HeaderProps) {
           <nav className="flex items-center gap-1" aria-label="主導覽">
             {user ? (
               <>
-                <Link href="/about-emotions" className={navLinkClass('/about-emotions')}>
+                <Link href={aboutHref} className={navLinkClass(aboutHref)}>
                   認識情緒
                 </Link>
                 <Link href="/explore" className={navLinkClass('/explore')}>
@@ -51,14 +55,14 @@ export function Header({ user }: HeaderProps) {
                 </Link>
               </>
             ) : (
-              <Link href="/about-emotions" className={navLinkClass('/about-emotions')}>
+              <Link href={aboutHref} className={navLinkClass(aboutHref)}>
                 認識情緒
               </Link>
             )}
           </nav>
 
           <h1>
-            <Link href="/" className="group block h-[45px] w-[200px]">
+            <Link href={homeHref} className="group block h-[45px] w-[200px]">
               <span className="sr-only">Wavemocards</span>
               <span
                 aria-hidden="true"
@@ -114,7 +118,7 @@ export function Header({ user }: HeaderProps) {
         </div>
 
         <div className="flex items-center justify-between lg:hidden">
-          <Link href="/" className="block h-[36px] w-[150px]">
+          <Link href={homeHref} className="block h-[36px] w-[150px]">
             <span className="sr-only">Wavemocards</span>
             <span
               aria-hidden="true"
@@ -123,7 +127,7 @@ export function Header({ user }: HeaderProps) {
           </Link>
           <div className="flex items-center gap-1">
             <ThemeToggle isAuthenticated={isAuthenticated} />
-            <MobileNav user={user} />
+            <MobileNav locale={locale} user={user} />
           </div>
         </div>
       </div>
