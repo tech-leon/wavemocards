@@ -2,7 +2,7 @@ import { authkit, handleAuthkitHeaders } from "@workos-inc/authkit-nextjs";
 import type { NextRequest } from "next/server";
 import { LOCALE_COOKIE_NAME, LOCALE_HEADER_NAME, normalizePathname, resolveLocale } from "@/lib/i18n/locale";
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { headers } = await authkit(request);
   const pathname = normalizePathname(request.nextUrl.pathname);
   const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
