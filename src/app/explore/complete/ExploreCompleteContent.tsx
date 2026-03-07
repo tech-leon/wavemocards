@@ -17,32 +17,32 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       actions={
         <Link
           href="/records"
-          className="px-8 py-1.5 text-base font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
+          className="type-button px-8 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
         >
           完成
         </Link>
       }
     >
       <ul className="ml-1 mt-3 mb-9 space-y-1">
-        <li className="text-gray-800 dark:text-gray-100 text-lg">
+        <li className="type-subsection-title text-gray-800 dark:text-gray-100">
           親愛的<span className="px-0.5 text-main font-bold">{userName}</span>，
           紀錄已成功儲存。
         </li>
-        <li className="text-gray-800 dark:text-gray-100 text-lg">
+        <li className="type-subsection-title text-gray-800 dark:text-gray-100">
           謝謝你為了自己花了時間、心思，做覺察、紀錄與省思。
         </li>
-        <li className="text-gray-800 dark:text-gray-100 text-lg mb-3">想邀請你對自己說：</li>
-        <li className="text-main text-lg font-medium">我想謝謝自己，</li>
-        <li className="text-main text-lg font-medium hidden md:block">
+        <li className="type-subsection-title mb-3 text-gray-800 dark:text-gray-100">想邀請你對自己說：</li>
+        <li className="type-subsection-title font-medium">我想謝謝自己，</li>
+        <li className="type-subsection-title hidden md:block font-medium">
           我願意覺察、擁抱情緒與我自己，這樣的我已經很棒了！
         </li>
-        <li className="text-main text-lg font-medium md:hidden">
+        <li className="type-subsection-title md:hidden font-medium">
           我願意覺察、擁抱情緒與我自己
         </li>
-        <li className="text-main text-lg font-medium md:hidden">
+        <li className="type-subsection-title md:hidden font-medium">
           這樣的我已經很棒了！
         </li>
-        <li className="text-gray-500 dark:text-gray-300 text-xs mt-2">
+        <li className="type-caption mt-2 text-gray-500 dark:text-gray-300">
           您可以點擊右上方的「完成」，前往「我的紀錄」觀看紀錄內容。
         </li>
       </ul>
@@ -58,10 +58,10 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       </div>
 
       {/* Credit */}
-      <div className="text-right text-[10px] text-gray-500 dark:text-gray-300">
+      <div className="type-caption text-right text-gray-500 dark:text-gray-300">
         Illustration by{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]"
+          className="text-gray-500 dark:text-gray-300 hover:text-main"
           href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
           target="_blank"
           rel="noopener noreferrer"
@@ -70,7 +70,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
         </a>{' '}
         from{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE]"
+          className="text-gray-500 dark:text-gray-300 hover:text-main"
           href="https://icons8.com/illustrations"
           target="_blank"
           rel="noopener noreferrer"

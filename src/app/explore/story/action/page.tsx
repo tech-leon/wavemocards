@@ -43,14 +43,14 @@ export default function ExploreStoryActionPage() {
           <button
             type="button"
             onClick={handleBack}
-            className="px-6 py-1.5 text-sm font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
+            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             上一步
           </button>
           <button
             type="button"
             onClick={handleNext}
-            className="px-6 py-1.5 text-sm font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
+            className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
             下一步
           </button>
@@ -58,10 +58,10 @@ export default function ExploreStoryActionPage() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-6 text-gray-800 dark:text-gray-100 text-sm space-y-1">
+      <ul className="type-body-sm ml-1 mt-3 mb-6 text-gray-800 dark:text-gray-100 space-y-1">
         <li>謝謝你，努力地回想了情緒發生的背景、原因。</li>
         <li>接下來，想邀請你一起回想在情緒浪潮來臨之後⋯⋯</li>
-        <li className="text-gray-500 dark:text-gray-300 text-xs">若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」</li>
+        <li className="type-caption text-gray-500 dark:text-gray-300">若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」</li>
       </ul>
 
       {/* Q1: What did you do? */}
@@ -69,11 +69,11 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="storyAction" className="block py-3 px-4">
-              <p className="mb-1 text-gray-800 text-xs">第 1 題</p>
+              <p className="type-caption mb-1 text-gray-800">第 1 題</p>
               <p className="mb-1 text-main font-medium">
                 在感受到「<span className="px-0.5">{cardNamesStr}</span>」的情緒後，你有什麼反應呢？或是做了什麼事情呢？
               </p>
-              <p className="text-gray-800 text-sm">
+              <p className="type-body-sm text-gray-800">
                 例如：在感受到心中的焦慮後，我在日記本寫下各種心中所擔憂的事情。
               </p>
             </label>
@@ -98,7 +98,7 @@ export default function ExploreStoryActionPage() {
           </div>
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg order-2">
             <label htmlFor="storyResult" className="block py-3 px-4">
-              <p className="mb-1 text-gray-800 text-xs">第 2 題</p>
+              <p className="type-caption mb-1 text-gray-800">第 2 題</p>
               <p className="text-main font-medium">
                 在上述你所做的反應後，帶來了什麼樣的結果呢？
               </p>
@@ -118,7 +118,7 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="storyFeeling" className="block py-3 px-4">
-              <p className="mb-1 text-gray-800 text-xs">第 3 題</p>
+              <p className="type-caption mb-1 text-gray-800">第 3 題</p>
               <p className="text-main font-medium">
                 對於上述發生的結果，你有什麼樣的感受呢？
               </p>
@@ -144,7 +144,7 @@ export default function ExploreStoryActionPage() {
           </div>
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg order-2">
             <label className="block py-3 px-4">
-              <p className="mb-1 text-gray-800 text-xs">第 4 題</p>
+              <p className="type-caption mb-1 text-gray-800">第 4 題</p>
               <p className="text-main font-medium">
                 你覺得這個的結果是否是你所期待的結果呢？
               </p>
@@ -160,7 +160,7 @@ export default function ExploreStoryActionPage() {
                   type="button"
                   onClick={() => setStoryExpect(option.value)}
                   className={cn(
-                    'px-5 py-2 rounded-full text-sm font-bold transition-colors border-2',
+                    'type-button px-5 py-2 rounded-full font-bold transition-colors border-2',
                     storyExpect === option.value
                       ? 'bg-main text-white border-main'
                       : 'border-gray-400 dark:border-gray-500 text-gray-700 hover:border-main-tint01 hover:text-main-tint01'
@@ -179,7 +179,7 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="betterAction" className="block py-3 px-4">
-              <p className="mb-1 text-gray-800 text-xs">第 5 題</p>
+              <p className="type-caption mb-1 text-gray-800">第 5 題</p>
               <ul className="list-disc space-y-2">
                 <li>
                   <p className="text-gray-800">
@@ -210,7 +210,7 @@ export default function ExploreStoryActionPage() {
       </div>
 
       {/* Credit */}
-      <div className="hidden md:block text-right text-gray-500 dark:text-gray-300 text-[10px] mb-16">
+      <div className="type-caption hidden md:block text-right text-gray-500 dark:text-gray-300 mb-16">
         Illustration by{' '}
         <a className="text-gray-500 dark:text-gray-300 hover:text-main" href="https://icons8.com/illustrations/author/iAdLsFJOKDrk" target="_blank" rel="noopener noreferrer">
           Tanya Krasutska

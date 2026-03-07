@@ -47,7 +47,7 @@ export default async function AboutEmotionsPage() {
         <div className="container mx-auto pb-4 pt-9">
           {/* Header */}
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-            <h2 className="text-main text-2xl font-bold">認識情緒</h2>
+            <h2>認識情緒</h2>
             <div className="flex justify-end gap-4">
               <span className="px-4 py-2 text-gray-500 dark:text-gray-300 font-medium">認識情緒</span>
               {user ? (
@@ -67,7 +67,7 @@ export default async function AboutEmotionsPage() {
           <div className="py-4">
             {/* What is Emotion */}
             <section className="mb-14">
-              <h2 className="text-main text-xl font-bold mb-3">什麼是情緒？</h2>
+              <h2 className="type-section-title mb-3">什麼是情緒？</h2>
               <p className="text-gray-800 dark:text-gray-100 leading-relaxed">
                 {whatIsEmotion?.content || 
                   '情緒英文是emotion，代表流動在我們身體的能量。當我們受到刺激，引發出內心感受、身體反應、想法與行動，就是情緒。例如某人踏進後巷時，遇到一隻看來很兇惡的狗（刺激），覺得十分害怕，擔心自己被咬傷（內心感受和想法），不禁心跳加速和顫抖（身體反應），最終決定急步繞路離開（行動）。'}
@@ -76,7 +76,7 @@ export default async function AboutEmotionsPage() {
 
             {/* 6 Basic Emotions */}
             <section className="mb-14">
-              <h2 className="text-main text-xl font-bold mb-3">6大基本情緒</h2>
+              <h2 className="type-section-title mb-3">6大基本情緒</h2>
               <div className="mb-3 flex flex-wrap justify-center gap-6 md:gap-8">
                 {basicEmotions.map((emotion) => (
                   <div key={emotion.name} className="flex flex-col items-center mb-5">
@@ -101,7 +101,7 @@ export default async function AboutEmotionsPage() {
 
             {/* Good or Bad */}
             <section className="mb-14">
-              <h2 className="text-main text-xl font-bold mb-3">情緒無分好與壞</h2>
+              <h2 className="type-section-title mb-3">情緒無分好與壞</h2>
               <p className="text-gray-800 dark:text-gray-100 leading-relaxed">
                 {goodOrBad?.content ||
                   '一般人習慣將情緒分為正負面，覺得快樂屬於正面情緒，悲傷、憤怒、恐懼則對人有害。其實情緒無分好與壞，每一種情緒都有其獨特意義。例如對於陌生環境感到恐懼不安，反映著對安全感的渴求，提醒我們遠離危險。悲傷時脆弱流淚，則可吸引關顧與扶持，促進人際聯繫。'}
@@ -110,7 +110,7 @@ export default async function AboutEmotionsPage() {
 
             {/* Healthy Emotion */}
             <section className="mb-14">
-              <h2 className="text-main text-xl font-bold mb-3">情緒的健康之道</h2>
+              <h2 className="type-section-title mb-3">情緒的健康之道</h2>
               <p className="text-gray-800 dark:text-gray-100 leading-relaxed">
                 {healthyEmotion?.content ||
                   '假如對情緒存在偏見，否定和壓抑自己的真正感覺，明明傷心卻扮開心，明明生氣卻默默忍受，很容易令身心健康出現問題。所謂情緒健康，不代表要時刻保持愉快心情，而是要有能力覺察自己的不同情緒，了解內心需要，並以健康恰當的方式去表達和調適，讓心靈回復平靜。'}
@@ -123,7 +123,7 @@ export default async function AboutEmotionsPage() {
                 href="https://wmc.hkfyg.org.hk/emo1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] transition-colors"
+                className="type-body-sm text-gray-500 dark:text-gray-300 hover:text-main transition-colors"
               >
                 引用文章來源：香港青年協會｜全健空間（九龍）
               </a>

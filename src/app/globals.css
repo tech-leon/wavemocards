@@ -93,6 +93,21 @@
   --font-sans-en: var(--font-inter), Arial, Helvetica, sans-serif;
   --font-sans-zh: var(--font-noto-sans-tc), "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
   --font-sans-ja: var(--font-noto-sans-jp), "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans CJK JP", sans-serif;
+  --type-h1: 2.25rem;
+  --type-h2: 1.5rem;
+  --type-h3: 1.25rem;
+  --type-h4: 1.125rem;
+  --type-h5: 1rem;
+  --type-h6: 0.875rem;
+  --type-body: 1rem;
+  --type-body-sm: 0.875rem;
+  --type-caption: 0.75rem;
+  --type-hero-display: 3rem;
+  --type-hero-display-md: 6rem;
+  --type-hero-cta: 1.5rem;
+  --type-hero-cta-md: 1.875rem;
+  --type-card-display: 1.875rem;
+  --type-card-display-hover: 2.25rem;
   --background: #F3F4F6;
   --foreground: #111827;
   --card: oklch(1 0 0);
@@ -198,5 +213,110 @@
   :lang(zh-CN),
   :lang(zh) {
     font-family: var(--font-sans-zh);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+h1 {
+  font-size: var(--type-h1);
+}
+
+h2 {
+  font-size: var(--type-h2);
+}
+
+h3 {
+  font-size: var(--type-h3);
+}
+
+h4 {
+  font-size: var(--type-h4);
+}
+
+h5 {
+  font-size: var(--type-h5);
+}
+
+h6 {
+  font-size: var(--type-h6);
+}
+
+.type-page-title {
+  margin-bottom: 0.5rem;
+  font-size: var(--type-h2);
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.type-section-title {
+  font-size: var(--type-h3);
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.type-subsection-title {
+  font-size: var(--type-h4);
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.type-body {
+  font-size: var(--type-body);
+}
+
+.type-body-sm {
+  font-size: var(--type-body-sm);
+}
+
+.type-caption {
+  font-size: var(--type-caption);
+}
+
+.type-button {
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+}
+
+.type-button-lg {
+  font-size: var(--type-h4);
+  font-weight: 700;
+}
+
+.type-hero-display {
+  font-size: var(--type-hero-display);
+}
+
+.type-hero-cta {
+  font-size: var(--type-hero-cta);
+  font-weight: 700;
+}
+
+.type-card-display {
+  font-size: var(--type-card-display);
+  font-weight: 700;
+}
+
+.type-card-display-hover:hover,
+.group:hover .type-card-display-hover {
+  font-size: var(--type-card-display-hover);
+}
+
+@media (min-width: 48rem) {
+  .type-hero-display {
+    font-size: var(--type-hero-display-md);
+  }
+
+  .type-hero-cta {
+    font-size: var(--type-hero-cta-md);
   }
 }

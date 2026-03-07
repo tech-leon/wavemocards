@@ -44,7 +44,7 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
             'w-14 h-14 rounded-full shadow-lg',
             'bg-main-tint01 hover:bg-main transition-colors',
             'flex flex-col items-center justify-center',
-            'text-white font-bold text-xs',
+            'type-caption text-white font-bold',
             className
           )}
           aria-label="回到頂部"

@@ -33,7 +33,7 @@ export function Header({ locale, user }: HeaderProps) {
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   const navLinkClass = (href: string) =>
-    `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+    `type-button rounded-md px-3 py-2 transition-colors ${
       isCurrent(href)
         ? 'text-main'
         : 'text-slate-800 hover:text-main dark:text-slate-100 dark:hover:text-main-tint01'
@@ -102,13 +102,13 @@ export function Header({ locale, user }: HeaderProps) {
               <>
                 <AuthNavigationButton
                   href={signInHref}
-                  className="inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-sm font-medium text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-slate-900"
+                  className="type-button inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-slate-900"
                 >
                   登入
                 </AuthNavigationButton>
                 <AuthNavigationButton
                   href={signUpHref}
-                  className="inline-flex h-9 items-center justify-center rounded-full bg-pink px-4 py-2 text-sm font-medium text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
+                  className="type-button inline-flex h-9 items-center justify-center rounded-full bg-pink px-4 py-2 text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
                 >
                   註冊
                 </AuthNavigationButton>

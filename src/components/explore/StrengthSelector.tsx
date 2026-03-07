@@ -24,7 +24,7 @@ export function StrengthSelector({ value, onChange }: StrengthSelectorProps) {
             type="button"
             onClick={() => onChange(level)}
             className={cn(
-              'w-12 h-12 sm:w-14 sm:h-14 rounded-full text-lg font-bold',
+              'type-button-lg w-12 h-12 sm:w-14 sm:h-14 rounded-full',
               'transition-all duration-200',
               'flex items-center justify-center',
               isSelected

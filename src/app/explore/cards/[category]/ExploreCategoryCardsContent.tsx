@@ -38,17 +38,17 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h2 className="text-2xl font-bold text-[#3C9DAE]">探索情緒｜{category.name}</h2>
+              <h2>探索情緒｜{category.name}</h2>
             </div>
             <Link
               href="/explore/selected"
-              className="group px-4 py-1.5 bg-main hover:bg-main-dark text-white text-sm font-bold rounded-full flex items-center gap-1 transition-colors"
+              className="type-button group px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex items-center gap-1 transition-colors"
             >
               <Folder className="w-4 h-4 group-hover:hidden" />
               <FolderOpen className="w-4 h-4 hidden group-hover:block" />
               <span>我的情緒卡夾</span>
               {selectedCards.length > 0 && (
-                <span className="ml-1 bg-gray-100 dark:bg-gray-900 text-main text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="type-caption ml-1 bg-gray-100 dark:bg-gray-900 text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {selectedCards.length}
                 </span>
               )}

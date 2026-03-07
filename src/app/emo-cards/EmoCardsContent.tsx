@@ -75,7 +75,7 @@ export function EmoCardsContent({
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-[#3C9DAE]">認識情緒</h2>
+            <h2>認識情緒</h2>
             <div className="flex justify-end gap-4">
               <Link
                 href={localizeHref('/about-emotions', locale)}
@@ -138,8 +138,8 @@ export function EmoCardsContent({
               <AccordionTrigger className="px-4 py-3 text-main font-bold hover:no-underline">
                 瀏覽情緒卡的方法
               </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4 text-sm">
-                <h3 className="mb-2 font-bold text-gray-800 dark:text-gray-100">介面的種類</h3>
+              <AccordionContent className="type-body-sm px-4 pb-4">
+                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">介面的種類</h3>
                 <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
                   <li>
                     點擊右上方的「<span className="px-1 font-bold text-main">收合</span>
@@ -151,7 +151,7 @@ export function EmoCardsContent({
                     」，可以快速瀏覽所有情緒詞彙。
                   </li>
                 </ol>
-                <h3 className="mb-2 font-bold text-gray-800 dark:text-gray-100">各個介面的使用說明</h3>
+                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">各個介面的使用說明</h3>
                 <ol className="pl-6 mb-6 text-gray-800 dark:text-gray-100 list-decimal space-y-2">
                   <li>
                     <span className="font-bold">展開</span>：
@@ -175,7 +175,7 @@ export function EmoCardsContent({
                     </p>
                   </li>
                 </ol>
-                <p className="text-gray-700 dark:text-gray-100 text-xs">
+                <p className="type-caption text-gray-700 dark:text-gray-100">
                   💬 透過點擊 標題「瀏覽情緒卡的方法」的區塊，可將此說明收合。
                 </p>
               </AccordionContent>
@@ -197,7 +197,7 @@ export function EmoCardsContent({
                       className={cn(
                         'flex-shrink-0 w-[72px] h-[140px] rounded-xl',
                         'flex flex-col items-center justify-center',
-                        'font-bold text-main text-lg',
+                        'type-subsection-title',
                         'transition-colors duration-200',
                         styles.bg,
                         styles.hoverBorder,
@@ -227,7 +227,7 @@ export function EmoCardsContent({
           {/* Folded View - Category Cards */}
           {viewMode === 'folded' && (
             <div className="mt-6 mb-18">
-              <ul className="mb-9 text-gray-800 dark:text-gray-100 text-sm">
+              <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
                 <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
               </ul>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -258,7 +258,7 @@ export function EmoCardsContent({
                           className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                         />
                       </div>
-                      <p className="text-lg font-bold text-main mt-2">
+                      <p className="type-subsection-title mt-2">
                         {category.name[0]}&nbsp;{category.name[1]}
                       </p>
                     </Link>

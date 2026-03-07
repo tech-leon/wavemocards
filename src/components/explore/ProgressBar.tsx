@@ -53,7 +53,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                 }}
                 className={cn(
                   'absolute top-0 translate-x-[-50%] translate-y-[-50%]',
-                  'w-7 h-7 rounded-full text-xs font-bold',
+                  'type-caption w-7 h-7 rounded-full font-bold',
                   'flex items-center justify-center',
                   'transition-all duration-200',
                   isCompleted && 'bg-main-tint01 text-white cursor-pointer hover:bg-main',

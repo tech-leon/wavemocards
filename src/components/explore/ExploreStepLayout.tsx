@@ -29,15 +29,15 @@ export function ExploreStepLayout({
           {/* Title bar */}
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-4">
             {/* Desktop title */}
-            <h2 className="text-2xl font-bold text-[#3C9DAE] hidden md:block">{title}</h2>
+            <h2 className="hidden md:block">{title}</h2>
             {/* Mobile title */}
             {titleMobile ? (
-              <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden flex flex-col">
+              <h2 className="md:hidden flex flex-col">
                 <span>{titleMobile.line1}</span>
                 <span>{titleMobile.line2}</span>
               </h2>
             ) : (
-              <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden">{title}</h2>
+              <h2 className="md:hidden">{title}</h2>
             )}
 
             {/* Action buttons */}

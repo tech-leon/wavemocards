@@ -225,7 +225,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
   if (!record) {
     return (
-      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">找不到此紀錄</div>
+      <div className="type-subsection-title py-20 text-center text-gray-500 dark:text-gray-300">找不到此紀錄</div>
     );
   }
 
@@ -236,8 +236,8 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
-            <h2 className="text-2xl font-bold text-[#3C9DAE] hidden md:block">我的紀錄｜情緒故事</h2>
-            <h2 className="text-2xl font-bold text-[#3C9DAE] md:hidden flex flex-col">
+            <h2 className="hidden md:block">我的紀錄｜情緒故事</h2>
+            <h2 className="md:hidden flex flex-col">
               <span>我的紀錄</span>
               <span>情緒故事</span>
             </h2>
@@ -256,14 +256,14 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
                   <Button
                     variant="outline"
                     onClick={() => router.push('/records')}
-                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                   >
                     返回
                   </Button>
                   <Button
                     variant="outline"
                     onClick={handleEdit}
-                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                   >
                     編輯
                   </Button>
@@ -273,14 +273,14 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
                   <Button
                     variant="outline"
                     onClick={handleCancel}
-                    className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                     disabled={saving}
                   >
                     取消
                   </Button>
                   <Button
                     onClick={handleSave}
-                    className="rounded-full bg-main hover:bg-main-dark text-white px-6 text-sm font-bold"
+                    className="type-button rounded-full bg-main hover:bg-main-dark text-white px-6 font-bold"
                     disabled={saving}
                   >
                     {saving ? '儲存中...' : '儲存'}
@@ -299,20 +299,20 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
         <div className="mt-4 space-y-2">
           {/* Date */}
           <div className="flex flex-col lg:flex-row gap-0 lg:gap-0">
-            <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
+            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
               日期
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
               {formatDate(record.created_at)}
             </div>
           </div>
 
           {/* Emotion strength 1st */}
           <div className="flex flex-col lg:flex-row gap-0">
-            <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
+            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
               情緒強度｜第一次
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -326,10 +326,10 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
           {/* Emotion strength 2nd */}
           <div className="flex flex-col lg:flex-row gap-0">
-            <div className="lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm text-sm font-medium whitespace-nowrap">
+            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
               情緒強度｜第二次
             </div>
-            <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -344,7 +344,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
         {/* Story Background Section */}
         <div className="mt-6">
-          <div className="px-2 py-1 border-b-2 border-main-tint02 text-main font-bold text-lg mb-4">
+          <div className="type-subsection-title mb-4 border-b-2 border-main-tint02 px-2 py-1">
             情緒故事｜背景篇
           </div>
           <StoryField
@@ -358,7 +358,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
         {/* Story Action Section */}
         <div className="mt-6">
-          <div className="px-2 py-1 border-b-2 border-main-tint02 text-main font-bold text-lg mb-4">
+          <div className="type-subsection-title mb-4 border-b-2 border-main-tint02 px-2 py-1">
             情緒故事｜行動篇
           </div>
           <div className="space-y-2">
@@ -385,10 +385,10 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             />
             {/* Expect - read only */}
             <div className="flex flex-col lg:flex-row gap-0">
-              <div className="lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm text-sm flex items-center">
+              <div className="type-body-sm lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm flex items-center">
                 結果是否是我所期待的？
               </div>
-              <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm flex items-center">
+              <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm flex items-center">
                 {getExpectText(record.expect)}
               </div>
             </div>
@@ -413,8 +413,8 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
-            <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
+            <p className="type-page-title mb-3 text-pink">確定要刪除嗎？</p>
+            <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
               刪除後便
               <span className="pl-1 text-pink font-bold">不可再復原</span>
               ，確定要刪除嗎？
@@ -462,19 +462,19 @@ function StoryField({
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-0">
-      <div className="lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm text-sm flex items-center">
+      <div className="type-body-sm lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm flex items-center">
         {label}
       </div>
       {isEditing ? (
         <div className="lg:w-3/4 px-3">
           <textarea
-            className="w-full py-2 px-2 border-2 border-main-tint02 rounded-sm text-sm min-h-[80px] resize-y focus:outline-none focus:border-main"
+            className="type-body-sm w-full py-2 px-2 border-2 border-main-tint02 rounded-sm min-h-[80px] resize-y focus:outline-none focus:border-main"
             value={editValue}
             onChange={(e) => onChange(e.target.value)}
           />
         </div>
       ) : (
-        <div className="lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm text-sm min-h-[40px] flex items-center">
+        <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm min-h-[40px] flex items-center">
           {value || '—'}
         </div>
       )}

@@ -65,7 +65,7 @@ export default function ExploreStrength2Page() {
           <button
             type="button"
             onClick={handleBack}
-            className="px-6 py-1.5 text-sm font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
+            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             上一步
           </button>
@@ -74,7 +74,7 @@ export default function ExploreStrength2Page() {
             onClick={handleSave}
             disabled={saving}
             className={cn(
-              'px-6 py-1.5 text-sm font-bold rounded-full bg-main text-white transition-colors',
+              'type-button px-6 py-1.5 font-bold rounded-full bg-main text-white transition-colors',
               saving ? 'cursor-not-allowed opacity-60' : 'hover:bg-main-dark'
             )}
           >
@@ -84,15 +84,15 @@ export default function ExploreStrength2Page() {
       }
     >
       {/* Instructions */}
-      <ul className="ml-1 mt-3 mb-9 text-gray-800 dark:text-gray-100 text-sm space-y-1">
+      <ul className="type-body-sm ml-1 mt-3 mb-9 text-gray-800 dark:text-gray-100 space-y-1">
         <li>在覺察與記錄情緒故事後，不知道你現在的情緒還好嗎？</li>
         <li>
           <span className="text-main font-medium">
             邀請你再次深呼吸，並問問心中的自己，現在的情緒強度分別如何呢？
           </span>
-          <span className="text-xs text-gray-500 dark:text-gray-300">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
+          <span className="type-caption text-gray-500 dark:text-gray-300">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
         </li>
-        <li className="text-gray-500 dark:text-gray-300 text-xs">若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」</li>
+        <li className="type-caption text-gray-500 dark:text-gray-300">若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」</li>
       </ul>
 
       {/* Strength selectors for each card */}

@@ -188,15 +188,15 @@ export function RecordsList() {
     <div className="container mx-auto pt-4 pb-10 md:pb-12">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄</h2>
+        <h2>我的紀錄</h2>
         <div className="flex gap-2">
-          <div className="px-4 py-2 text-sm font-bold text-white bg-main rounded-full cursor-default">
+          <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
             紀錄
           </div>
           <Link href="/records/analysis">
             <Button
               variant="outline"
-              className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+              className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
             >
               分析
             </Button>
@@ -210,7 +210,7 @@ export function RecordsList() {
         <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
             value={startDate}
             max={today}
             onChange={(e) => setStartDate(e.target.value)}
@@ -218,7 +218,7 @@ export function RecordsList() {
           <span className="text-main-tint01">～</span>
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
             value={endDate}
             max={today}
             min={startDate || undefined}
@@ -233,7 +233,7 @@ export function RecordsList() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
             <input
               type="search"
-              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               placeholder="請輸入關鍵字，以「空格」做區隔"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
@@ -243,7 +243,7 @@ export function RecordsList() {
           <div className="flex shrink-0 items-center gap-2">
             <Button
               onClick={handleSearch}
-              className="bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 text-sm font-bold"
+              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
             >
               搜尋
             </Button>
@@ -272,7 +272,7 @@ export function RecordsList() {
           <div className="w-8 h-8 border-4 border-main-tint02 border-t-main rounded-full animate-spin" />
         </div>
       ) : records.length === 0 ? (
-        <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">
+        <div className="type-subsection-title py-20 text-center text-gray-500 dark:text-gray-300">
           目前沒有紀錄
         </div>
       ) : (
@@ -284,8 +284,8 @@ export function RecordsList() {
                   <th className="py-2 px-3 w-10">
                     <span className="sr-only">選取</span>
                   </th>
-                  <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">日期</th>
-                  <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">情緒與強度</th>
+                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium">日期</th>
+                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium">情緒與強度</th>
                 </tr>
               </thead>
               <tbody>
@@ -307,10 +307,10 @@ export function RecordsList() {
                           className="w-4 h-4 accent-main cursor-pointer"
                         />
                       </td>
-                      <td className="py-3 px-3 text-sm whitespace-nowrap">
+                      <td className="type-body-sm py-3 px-3 whitespace-nowrap">
                         {formatDate(record.created_at)}
                       </td>
-                      <td className="py-3 px-3 text-sm">
+                      <td className="type-body-sm py-3 px-3">
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1">
                           {emotions.map((emo, i) => (
                             <span key={i}>
@@ -354,7 +354,7 @@ export function RecordsList() {
                   <button
                     key={pageNum}
                     onClick={() => fetchRecords(pageNum)}
-                    className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
+                    className={`type-button w-9 h-9 rounded-full font-medium transition-colors ${
                       pageNum === currentPage
                         ? 'bg-main text-white'
                         : 'text-main hover:bg-main-tint03'
@@ -381,8 +381,8 @@ export function RecordsList() {
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
-            <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
+            <p className="type-page-title mb-3 text-pink">確定要刪除嗎？</p>
+            <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
               您選擇刪除
               <span className="px-1 text-pink font-bold">{selectedIds.size} 筆</span>
               資料，刪除後便
