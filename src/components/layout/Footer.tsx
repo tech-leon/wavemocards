@@ -68,9 +68,9 @@ export function Footer({ locale }: FooterProps) {
                 className="block h-full w-full bg-[url('/images/logo_name.svg')] bg-contain bg-left bg-no-repeat"
               />
             </Link>
-            <p className="type-body-sm mt-3 text-slate-700 dark:text-slate-200">透過情緒卡認識、探索和記錄你的情緒</p>
+            <p className="mt-3 text-slate-700 dark:text-slate-200">透過情緒卡認識、探索和記錄你的情緒</p>
             <a
-              className="type-body-sm mt-1 transition-colors hover:text-main"
+              className="mt-1 transition-colors hover:text-main"
               href="mailto:info@wavemocards.com"
             >
               info@wavemocards.com
@@ -79,8 +79,8 @@ export function Footer({ locale }: FooterProps) {
 
           <div className="grid w-full flex-1 gap-10 md:grid-cols-2 md:pl-8 lg:pl-16">
             <section>
-              <h3 className="type-subsection-title mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">開發團隊</h3>
-              <ul className="type-body-sm space-y-1.5">
+              <h3 className="mb-3 border-b border-slate-300 pb-2 dark:border-slate-600">開發團隊</h3>
+              <ul className="space-y-1.5">
                 {CONTRIBUTORS.map((member) => (
                   <li key={`${member.role}-${member.name}`}>
                     <a
@@ -98,8 +98,8 @@ export function Footer({ locale }: FooterProps) {
             </section>
 
             <section>
-              <h3 className="type-subsection-title mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">實用連結</h3>
-              <ul className="type-body-sm space-y-2">
+              <h3 className="mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">實用連結</h3>
+              <ul className="space-y-2">
                 <li>
                   <Link href={aboutHref} className="inline-flex transition-colors hover:text-main">
                     認識情緒
@@ -127,7 +127,7 @@ export function Footer({ locale }: FooterProps) {
       </div>
 
       <div className="bg-slate-300 text-slate-700 dark:bg-slate-900 dark:text-slate-100">
-        <div className="type-caption mx-auto flex h-12 max-w-7xl items-center justify-center px-4 text-center whitespace-nowrap sm:px-6 sm:[font-size:var(--type-body-sm)]">
+        <div className="mx-auto flex h-12 max-w-7xl items-center justify-center px-4 text-center whitespace-nowrap sm:px-6">
           © 2023 - {year} 浪潮情緒卡 | Wave Emotion Cards 版權所有
         </div>
       </div>
