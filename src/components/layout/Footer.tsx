@@ -58,7 +58,7 @@ export function Footer({ locale }: FooterProps) {
 
   return (
     <footer className="border-t border-slate-300 dark:border-slate-700" role="contentinfo">
-      <div className="bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-white">
+      <div className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-10 md:flex-row md:items-start md:justify-between">
           <div className="mx-auto flex w-full max-w-sm flex-col items-center text-center md:mx-0 md:items-start md:text-left">
             <Link href={homeHref} className="block h-[45px] w-[200px]">
@@ -77,8 +77,8 @@ export function Footer({ locale }: FooterProps) {
             </a>
           </div>
 
-          <div className="grid w-full flex-1 gap-10 md:grid-cols-2 md:pl-8 lg:pl-16">
-            <section>
+          <div className="grid justify-center w-full flex-1 gap-16 lg:grid-cols-2">
+            <section className="w-70">
               <h3 className="mb-3 border-b border-slate-300 pb-2 dark:border-slate-600">開發團隊</h3>
               <ul className="space-y-1.5">
                 {CONTRIBUTORS.map((member) => (
@@ -97,7 +97,7 @@ export function Footer({ locale }: FooterProps) {
               </ul>
             </section>
 
-            <section>
+            <section className="md:max-w-60">
               <h3 className="mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">實用連結</h3>
               <ul className="space-y-2">
                 <li>
