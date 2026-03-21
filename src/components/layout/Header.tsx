@@ -8,6 +8,7 @@ import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileNav } from './MobileNav';
 
 interface HeaderProps {
@@ -117,6 +118,12 @@ export function Header({ locale, user }: HeaderProps) {
                 </AuthNavigationButton>
               </>
             )}
+            <LanguageSwitcher
+              locale={locale}
+              isAuthenticated={isAuthenticated}
+              className="inline-flex"
+              selectClassName="type-button h-9 rounded-full border border-slate-300 bg-transparent px-3 text-slate-800 transition-colors hover:border-main hover:text-main disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:text-slate-100 dark:hover:border-main dark:hover:text-main"
+            />
             <ThemeToggle isAuthenticated={isAuthenticated} />
           </div>
         </div>

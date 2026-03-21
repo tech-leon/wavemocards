@@ -738,6 +738,14 @@
   "theme": {
     "toggle": "Toggle light/dark mode"
   },
+  "languageSwitcher": {
+    "ariaLabel": "Switch language",
+    "options": {
+      "zh-TW": "Traditional Chinese",
+      "en": "English",
+      "ja": "Japanese"
+    }
+  },
   "toast": {
     "account": {
       "loadFailed": "Failed to load account information",

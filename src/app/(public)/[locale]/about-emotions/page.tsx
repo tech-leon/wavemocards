@@ -1,34 +1,48 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
 import { getUser } from '@/lib/auth';
 import { buildAuthHref } from '@/lib/auth-routing';
 import { getAboutEmotions } from '@/lib/emotions';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
-import { localizeHref } from '@/lib/i18n/locale';
+import { localizeHref, resolveLocale } from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
 
-export async function generateMetadata(): Promise<Metadata> {
+interface AboutEmotionsPageProps {
+  params: Promise<{
+    locale: string;
+  }>;
+}
+
+export async function generateMetadata({
+  params,
+}: AboutEmotionsPageProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = resolveLocale('/', rawLocale);
+  const t = await getTranslations({ locale, namespace: 'meta.aboutEmotions' });
+
   return createPublicMetadata({
     pathname: '/about-emotions',
-    title: '浪潮情緒卡｜認識情緒',
-    description: '了解什麼是情緒、六種基本情緒、情緒無分好壞、以及情緒的健康之道',
-    keywords: ['情緒', '基本情緒', '情緒健康', '心理健康', '情緒管理'],
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords') as string[],
   });
 }
 
 const basicEmotions = [
-  { name: '快樂', image: 'aboutEmo_happy.svg' },
-  { name: '悲傷', image: 'aboutEmo_sadness.svg' },
-  { name: '恐懼', image: 'aboutEmo_fear.svg' },
-  { name: '厭惡', image: 'aboutEmo_hate.svg' },
-  { name: '憤怒', image: 'aboutEmo_anger.svg' },
-  { name: '驚訝', image: 'aboutEmo_amazing.svg' },
+  { key: 'happiness', image: 'aboutEmo_happy.svg' },
+  { key: 'sadness', image: 'aboutEmo_sadness.svg' },
+  { key: 'fear', image: 'aboutEmo_fear.svg' },
+  { key: 'disgust', image: 'aboutEmo_hate.svg' },
+  { key: 'anger', image: 'aboutEmo_anger.svg' },
+  { key: 'surprise', image: 'aboutEmo_amazing.svg' },
 ];
 
 export default async function AboutEmotionsPage() {
+  const t = await getTranslations('aboutEmotions');
   const user = await getUser();
   const aboutEmotions = await getAboutEmotions();
   const locale = await getRequestLocale();
@@ -38,74 +52,87 @@ export default async function AboutEmotionsPage() {
   const sixBasicEmotions = aboutEmotions.find(e => e.key === '6BasicEmotions');
   const goodOrBad = aboutEmotions.find(e => e.key === 'goodOrBad');
   const healthyEmotion = aboutEmotions.find(e => e.key === 'healthyEmotion');
+  const getSectionContent = (content: string | undefined, key: string) => {
+    if (locale === 'zh-TW' && content) {
+      return content;
+    }
+
+    return t(key);
+  };
 
   return (
     <>
       <main className="px-3 sm:px-0">
         <div className="container mx-auto pb-4 pt-9">
           <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">
-            <h2>認識情緒</h2>
+            <h2>{t('pageTitle')}</h2>
             <div className="flex justify-end gap-4">
-              <span className="px-4 py-2 font-medium text-gray-500 dark:text-gray-300">認識情緒</span>
+              <span className="px-4 py-2 font-medium text-gray-500 dark:text-gray-300">
+                {t('tabs.aboutEmotions')}
+              </span>
               {user ? (
                 <Link
                   href={emoCardsHref}
                   className="rounded-full border border-main px-4 py-2 font-medium text-main transition-colors hover:bg-main hover:text-white"
                 >
-                  情緒卡
+                  {t('tabs.emoCards')}
                 </Link>
               ) : (
-                <EmoCardsLoginButton href={buildAuthHref('sign-in', emoCardsHref)} />
+                <EmoCardsLoginButton
+                  href={buildAuthHref('sign-in', emoCardsHref)}
+                  label={t('tabs.emoCards')}
+                />
               )}
             </div>
           </div>
 
           <div className="py-4">
             <section className="mb-14">
-              <h2 className="type-section-title mb-3">什麼是情緒？</h2>
+              <h2 className="type-section-title mb-3">{t('sections.whatIsEmotion.title')}</h2>
               <p className="leading-relaxed text-gray-800 dark:text-gray-100">
-                {whatIsEmotion?.content ||
-                  '情緒英文是emotion，代表流動在我們身體的能量。當我們受到刺激，引發出內心感受、身體反應、想法與行動，就是情緒。例如某人踏進後巷時，遇到一隻看來很兇惡的狗（刺激），覺得十分害怕，擔心自己被咬傷（內心感受和想法），不禁心跳加速和顫抖（身體反應），最終決定急步繞路離開（行動）。'}
+                {getSectionContent(whatIsEmotion?.content, 'sections.whatIsEmotion.content')}
               </p>
             </section>
 
             <section className="mb-14">
-              <h2 className="type-section-title mb-3">6大基本情緒</h2>
+              <h2 className="type-section-title mb-3">{t('sections.sixBasicEmotions.title')}</h2>
               <div className="mb-3 flex flex-wrap justify-center gap-6 md:gap-8">
                 {basicEmotions.map((emotion) => (
-                  <div key={emotion.name} className="mb-5 flex flex-col items-center">
+                  <div key={emotion.key} className="mb-5 flex flex-col items-center">
                     <div className="mb-2 h-25 w-25 md:h-30 md:w-30">
                       <Image
                         src={`/images/aboutEmotions/${emotion.image}`}
-                        alt={emotion.name}
+                        alt={t(`basicEmotions.${emotion.key}`)}
                         width={150}
                         height={150}
                         className="h-full w-full object-contain"
                       />
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-100">{emotion.name}</span>
+                    <span className="font-medium text-gray-800 dark:text-gray-100">
+                      {t(`basicEmotions.${emotion.key}`)}
+                    </span>
                   </div>
                 ))}
               </div>
               <p className="leading-relaxed text-gray-800 dark:text-gray-100">
-                {sixBasicEmotions?.content ||
-                  '博物學家達爾文提及過人類有六種基本情緒，包括快樂（happiness）、悲傷（sadness）、恐懼（fear）、厭惡（disgust）、憤怒（anger）和驚訝（surprise），屬於有助人類提高生存機會的本能情緒。其他複雜情緒如興奮、委屈、自卑、妒忌、內疚、寂寞等，則是由基本情緒混合衍生而成，並且經過學習與社會化之後產生。'}
+                {getSectionContent(
+                  sixBasicEmotions?.content,
+                  'sections.sixBasicEmotions.content'
+                )}
               </p>
             </section>
 
             <section className="mb-14">
-              <h2 className="type-section-title mb-3">情緒無分好與壞</h2>
+              <h2 className="type-section-title mb-3">{t('sections.goodOrBad.title')}</h2>
               <p className="leading-relaxed text-gray-800 dark:text-gray-100">
-                {goodOrBad?.content ||
-                  '一般人習慣將情緒分為正負面，覺得快樂屬於正面情緒，悲傷、憤怒、恐懼則對人有害。其實情緒無分好與壞，每一種情緒都有其獨特意義。例如對於陌生環境感到恐懼不安，反映著對安全感的渴求，提醒我們遠離危險。悲傷時脆弱流淚，則可吸引關顧與扶持，促進人際聯繫。'}
+                {getSectionContent(goodOrBad?.content, 'sections.goodOrBad.content')}
               </p>
             </section>
 
             <section className="mb-14">
-              <h2 className="type-section-title mb-3">情緒的健康之道</h2>
+              <h2 className="type-section-title mb-3">{t('sections.healthyEmotion.title')}</h2>
               <p className="leading-relaxed text-gray-800 dark:text-gray-100">
-                {healthyEmotion?.content ||
-                  '假如對情緒存在偏見，否定和壓抑自己的真正感覺，明明傷心卻扮開心，明明生氣卻默默忍受，很容易令身心健康出現問題。所謂情緒健康，不代表要時刻保持愉快心情，而是要有能力覺察自己的不同情緒，了解內心需要，並以健康恰當的方式去表達和調適，讓心靈回復平靜。'}
+                {getSectionContent(healthyEmotion?.content, 'sections.healthyEmotion.content')}
               </p>
             </section>
 
@@ -116,7 +143,7 @@ export default async function AboutEmotionsPage() {
                 rel="noopener noreferrer"
                 className="type-body-sm text-gray-500 transition-colors hover:text-main dark:text-gray-300"
               >
-                引用文章來源：香港青年協會｜全健空間（九龍）
+                {t('sourceLabel')} {t('sourceName')}
               </a>
             </div>
           </div>
@@ -128,13 +155,13 @@ export default async function AboutEmotionsPage() {
   );
 }
 
-function EmoCardsLoginButton({ href }: { href: string }) {
+function EmoCardsLoginButton({ href, label }: { href: string; label: string }) {
   return (
     <AuthNavigationButton
       href={href}
       className="rounded-full border border-main px-4 py-2 font-medium text-main transition-colors hover:bg-main hover:text-white"
     >
-      情緒卡
+      {label}
     </AuthNavigationButton>
   );
 }

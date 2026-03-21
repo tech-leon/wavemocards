@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
@@ -15,6 +16,7 @@ interface HomeHeroProps {
 }
 
 export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
+  const t = useTranslations('home');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { resolvedTheme } = useTheme();
@@ -43,7 +45,7 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
         >
-          找尋自我
+          {t('hero.line1')}
         </motion.h2>
         <motion.h2
           className="type-hero-display mb-8 pt-6 text-right font-bold !text-white text-nowrap"
@@ -51,7 +53,7 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
         >
-          情緒的浪潮
+          {t('hero.line2')}
         </motion.h2>
         <motion.div
           className="flex w-full justify-center"
@@ -64,14 +66,14 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
               href={aboutHref}
               className="type-hero-cta rounded-full border-4 border-white bg-pink px-12 py-3 text-white transition-colors hover:bg-pink-dark"
             >
-              認識情緒
+              {t('cta.aboutEmotions')}
             </Link>
           ) : (
             <AuthNavigationButton
               href={signUpHref}
               className="type-hero-cta rounded-full bg-pink px-12 py-3 text-white transition-colors hover:bg-pink-dark"
             >
-              前往註冊
+              {t('cta.signUp')}
             </AuthNavigationButton>
           )}
         </motion.div>

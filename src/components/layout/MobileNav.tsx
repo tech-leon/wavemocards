@@ -9,6 +9,7 @@ import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface MobileNavProps {
   locale: Locale;
@@ -89,6 +90,15 @@ export function MobileNav({ locale, user }: MobileNavProps) {
               exit={{ x: '100%' }}
               transition={{ duration: 0.26, ease: 'easeOut' }}
             >
+              <div className="mb-4 border-b border-gray-300 pb-4 dark:border-gray-700">
+                <LanguageSwitcher
+                  locale={locale}
+                  isAuthenticated={Boolean(user)}
+                  onChanged={closeMenu}
+                  className="flex w-full"
+                  selectClassName="type-button h-10 w-full rounded-full border border-gray-300 bg-transparent px-4 text-gray-800 transition-colors hover:border-main hover:text-main disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-600 dark:text-gray-100 dark:hover:border-main dark:hover:text-main"
+                />
+              </div>
               <nav aria-label={tAria('mobileNavigation')}>
                 {user ? (
                   <ul className="space-y-2">

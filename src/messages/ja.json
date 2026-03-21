@@ -738,6 +738,14 @@
   "theme": {
     "toggle": "ライト/ダークモードを切り替える"
   },
+  "languageSwitcher": {
+    "ariaLabel": "言語を切り替える",
+    "options": {
+      "zh-TW": "繁體中文",
+      "en": "English",
+      "ja": "日本語"
+    }
+  },
   "toast": {
     "account": {
       "loadFailed": "アカウント情報の読み込みに失敗しました",

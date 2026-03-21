@@ -738,6 +738,14 @@
   "theme": {
     "toggle": "切換亮色/深色模式"
   },
+  "languageSwitcher": {
+    "ariaLabel": "切換語言",
+    "options": {
+      "zh-TW": "繁體中文",
+      "en": "English",
+      "ja": "日本語"
+    }
+  },
   "toast": {
     "account": {
       "loadFailed": "載入帳戶資料失敗",
