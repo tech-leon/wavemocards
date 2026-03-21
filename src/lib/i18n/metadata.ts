@@ -27,7 +27,7 @@ export async function createPublicMetadata({
     alternates: {
       canonical,
       languages: {
-        'zh-TW': pathname,
+        'zh-TW': localizeHref(pathname, 'zh-TW'),
         en: localizeHref(pathname, 'en'),
         ja: localizeHref(pathname, 'ja'),
       },

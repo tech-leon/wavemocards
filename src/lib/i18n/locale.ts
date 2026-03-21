@@ -1,12 +1,12 @@
 export const DEFAULT_LOCALE = 'zh-TW' as const;
-export const PUBLIC_LOCALES = ['en', 'ja'] as const;
-export const SUPPORTED_LOCALES = [DEFAULT_LOCALE, ...PUBLIC_LOCALES] as const;
+export const PUBLIC_LOCALES = [DEFAULT_LOCALE, 'en', 'ja'] as const;
+export const SUPPORTED_LOCALES = PUBLIC_LOCALES;
 
 export const LOCALE_COOKIE_NAME = 'locale';
 export const LOCALE_HEADER_NAME = 'x-wavemocards-locale';
 
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
-export type PublicLocale = (typeof PUBLIC_LOCALES)[number];
+export type PublicLocale = Locale;
 
 const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards'] as const;
 
@@ -26,6 +26,16 @@ export function isPublicLocale(value: string | null | undefined): value is Publi
   return PUBLIC_LOCALES.includes(value as PublicLocale);
 }
 
+function isPublicPathWithoutLocale(pathname: string): boolean {
+  return (
+    pathname === '/' ||
+    PUBLIC_ROUTE_PREFIXES.some(
+      (prefix) =>
+        pathname === prefix || pathname.startsWith(`${prefix}/`)
+    )
+  );
+}
+
 export function stripLocaleFromPathname(pathname: string): { pathname: string; locale: PublicLocale | null } {
   const normalizedPathname = normalizePathname(pathname);
 
@@ -41,23 +51,22 @@ export function stripLocaleFromPathname(pathname: string): { pathname: string; l
   }
 
   const strippedPathname = `/${segments.slice(2).join('/')}`;
+  const normalizedStrippedPathname = normalizePathname(strippedPathname);
+
+  if (!isPublicPathWithoutLocale(normalizedStrippedPathname)) {
+    return { pathname: normalizedPathname, locale: null };
+  }
 
   return {
-    pathname: normalizePathname(strippedPathname),
+    pathname: normalizedStrippedPathname,
     locale: firstSegment,
   };
 }
 
 export function isPublicPath(pathname: string): boolean {
-  const normalizedPathname = normalizePathname(pathname);
+  const { pathname: normalizedPathname } = stripLocaleFromPathname(pathname);
 
-  return (
-    normalizedPathname === '/' ||
-    PUBLIC_ROUTE_PREFIXES.some(
-      (prefix) =>
-        normalizedPathname === prefix || normalizedPathname.startsWith(`${prefix}/`)
-    )
-  );
+  return isPublicPathWithoutLocale(normalizedPathname);
 }
 
 export function resolveLocale(pathname: string, cookieLocale?: string | null): Locale {
@@ -85,7 +94,7 @@ export function localizeHref(href: string, locale: Locale): string {
   const { pathname } = stripLocaleFromPathname(rawPathname);
   const normalizedPathname = normalizePathname(pathname);
 
-  if (!isPublicPath(normalizedPathname) || locale === DEFAULT_LOCALE) {
+  if (!isPublicPath(normalizedPathname)) {
     return `${normalizedPathname}${suffix}`;
   }
 

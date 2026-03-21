@@ -20,6 +20,7 @@ export const config = {
     "/about-emotions",
     "/emo-cards",
     "/emo-cards/(.*)",
+    "/zh-TW/:path*",
     "/en/:path*",
     "/ja/:path*",
     "/account",
