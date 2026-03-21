@@ -2,10 +2,15 @@
 
 import { createServerClient } from "@/lib/supabase";
 import { withAuth } from "@workos-inc/authkit-nextjs";
-import type { Profile, ProfileUpdate } from "@/types/database";
+import type {
+  LocalePreference,
+  Profile,
+  ProfileUpdate,
+} from "@/types/database";
 
 // Re-export the Profile type for convenience
 export type UserProfile = Profile;
+export type UserLocalePreference = LocalePreference;
 
 /**
  * Sync the WorkOS user with Supabase profiles table.

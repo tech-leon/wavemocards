@@ -3,7 +3,12 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 import { createServerClient } from '@/lib/supabase';
 import type { Database } from '@/types/database';
 
+type LocalePreference = 'zh-TW' | 'en' | 'ja';
 type ThemePreference = 'light' | 'dark' | 'system';
+
+function isLocalePreference(value: unknown): value is LocalePreference {
+  return value === 'zh-TW' || value === 'en' || value === 'ja';
+}
 
 function isThemePreference(value: unknown): value is ThemePreference {
   return value === 'light' || value === 'dark' || value === 'system';
@@ -48,6 +53,7 @@ export async function GET() {
           .insert({
             workos_user_id: user.id,
             email: user.email,
+            locale_preference: 'zh-TW',
             first_name: user.firstName || null,
             last_name: user.lastName || null,
           })
@@ -162,6 +168,13 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: '無效的主題偏好' }, { status: 400 });
       }
       updates.theme_preference = payload.theme_preference;
+    }
+
+    if (hasOwn('locale_preference')) {
+      if (!isLocalePreference(payload.locale_preference)) {
+        return NextResponse.json({ error: '無效的語言偏好' }, { status: 400 });
+      }
+      updates.locale_preference = payload.locale_preference;
     }
 
     if (Object.keys(updates).length === 0) {

@@ -11,6 +11,8 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+export type LocalePreference = 'zh-TW' | 'en' | 'ja';
+
 export interface Database {
   public: {
     Tables: {
@@ -110,6 +112,7 @@ export interface Database {
           id: string;
           workos_user_id: string;
           email: string;
+          locale_preference: LocalePreference;
           theme_preference: 'light' | 'dark' | 'system';
           title: string | null;
           first_name: string | null;
@@ -126,6 +129,7 @@ export interface Database {
           id?: string;
           workos_user_id: string;
           email: string;
+          locale_preference?: LocalePreference;
           theme_preference?: 'light' | 'dark' | 'system';
           title?: string | null;
           first_name?: string | null;
@@ -142,6 +146,7 @@ export interface Database {
           id?: string;
           workos_user_id?: string;
           email?: string;
+          locale_preference?: LocalePreference;
           theme_preference?: 'light' | 'dark' | 'system';
           title?: string | null;
           first_name?: string | null;
