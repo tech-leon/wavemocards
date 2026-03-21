@@ -5,12 +5,16 @@ import {
 } from "@workos-inc/authkit-nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { createServerClient } from "@/lib/supabase";
 import {
+  DEFAULT_LOCALE,
   extractLocaleFromPathname,
   isPublicPath,
+  isLocale,
   LOCALE_COOKIE_NAME,
   LOCALE_HEADER_NAME,
   localizeHref,
+  type Locale,
   normalizePathname,
   resolveLocale,
 } from "@/lib/i18n/locale";
@@ -30,16 +34,45 @@ function buildRedirectUrl(request: NextRequest, pathname: string): URL {
   return url;
 }
 
+async function getProfileLocalePreference(
+  workosUserId: string | null | undefined
+): Promise<Locale | null> {
+  if (!workosUserId) {
+    return null;
+  }
+
+  const supabase = createServerClient();
+  if (!supabase) {
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("locale_preference")
+    .eq("workos_user_id", workosUserId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Error fetching locale preference in proxy:", error);
+    return null;
+  }
+
+  return isLocale(data?.locale_preference) ? data.locale_preference : null;
+}
+
 export default async function proxy(request: NextRequest) {
-  const { headers: authkitHeaders } = await authkit(request);
+  const { headers: authkitHeaders, session } = await authkit(request);
   const pathname = normalizePathname(request.nextUrl.pathname);
   const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
   const { pathname: pathnameWithoutLocale, locale: localePrefix } =
     extractLocaleFromPathname(pathname);
   const publicPath = isPublicPath(pathname);
   const privatePath = isPrivatePath(pathnameWithoutLocale);
-
-  const locale = localePrefix ?? resolveLocale(pathname, cookieLocale);
+  const profileLocalePreference = await getProfileLocalePreference(session.user?.id);
+  const locale =
+    profileLocalePreference ??
+    (isLocale(cookieLocale) ? cookieLocale : null) ??
+    (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale));
   const { requestHeaders, responseHeaders } = partitionAuthkitHeaders(
     request,
     authkitHeaders
@@ -64,7 +97,15 @@ export default async function proxy(request: NextRequest) {
     );
   }
 
-  if (publicPath && !localePrefix) {
+  if (publicPath && session.user && localePrefix !== locale) {
+    return finalizeResponse(
+      NextResponse.redirect(
+        buildRedirectUrl(request, localizeHref(pathnameWithoutLocale, locale))
+      )
+    );
+  }
+
+  if (publicPath && !session.user && !localePrefix) {
     return finalizeResponse(
       NextResponse.redirect(
         buildRedirectUrl(request, localizeHref(pathnameWithoutLocale, locale))
