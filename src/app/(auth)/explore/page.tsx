@@ -1,5 +1,5 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { ExploreEntryContent } from './ExploreEntryContent';
+import { ExploreEntryContent } from '@/app/explore/ExploreEntryContent';
 
 export const metadata = {
   title: '探索情緒',

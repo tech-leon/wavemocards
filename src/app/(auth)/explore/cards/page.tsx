@@ -3,7 +3,7 @@ import {
   getEmotionCards,
   getEmotionCategories,
 } from '@/lib/emotions';
-import { ExploreCardsContent } from './ExploreCardsContent';
+import { ExploreCardsContent } from '@/app/explore/cards/ExploreCardsContent';
 
 export const metadata = {
   title: '浪潮情緒卡｜探索情緒｜情緒卡',

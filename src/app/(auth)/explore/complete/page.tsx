@@ -1,5 +1,5 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
-import { ExploreCompleteContent } from './ExploreCompleteContent';
+import { ExploreCompleteContent } from '@/app/explore/complete/ExploreCompleteContent';
 
 export const metadata = {
   title: '浪潮情緒卡｜謝謝自己',

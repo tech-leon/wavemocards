@@ -5,7 +5,7 @@ import {
   getEmotionCategoryBySlug,
   categoryNames,
 } from '@/lib/emotions';
-import { ExploreCategoryCardsContent } from './ExploreCategoryCardsContent';
+import { ExploreCategoryCardsContent } from '@/app/explore/cards/[category]/ExploreCategoryCardsContent';
 
 interface PageProps {
   params: Promise<{ category: string }>;
