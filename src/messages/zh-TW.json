@@ -1,0 +1,800 @@
+{
+  "meta": {
+    "siteName": "浪潮情緒卡 Wavemocards",
+    "siteTitleDefault": "浪潮情緒卡 Wavemocards - 探索你的情緒",
+    "siteTitleTemplate": "%s｜浪潮情緒卡",
+    "siteDescription": "透過情緒卡認識、探索和記錄你的情緒，讓情緒成為你的力量。65 張情緒卡幫助你覺察內心感受，書寫情緒故事，促進心理健康。",
+    "siteKeywords": [
+      "情緒卡",
+      "情緒探索",
+      "心理健康",
+      "情緒管理",
+      "自我覺察",
+      "Wavemocards",
+      "浪潮情緒卡",
+      "情緒教育"
+    ],
+    "home": {
+      "title": "浪潮情緒卡 Wavemocards - 探索你的情緒",
+      "description": "透過情緒卡認識、探索和記錄你的情緒，讓情緒成為你的力量",
+      "keywords": [
+        "情緒卡",
+        "情緒探索",
+        "心理健康",
+        "情緒管理",
+        "自我覺察"
+      ]
+    },
+    "aboutEmotions": {
+      "title": "浪潮情緒卡｜認識情緒",
+      "description": "了解什麼是情緒、六種基本情緒、情緒無分好壞、以及情緒的健康之道",
+      "keywords": [
+        "情緒",
+        "基本情緒",
+        "情緒健康",
+        "心理健康",
+        "情緒管理"
+      ]
+    },
+    "emoCards": {
+      "title": "浪潮情緒卡｜認識情緒｜情緒卡",
+      "description": "瀏覽 65 張情緒卡，了解各種情緒的意思和例句",
+      "keywords": [
+        "情緒卡",
+        "情緒詞彙",
+        "情緒分類",
+        "情緒教育"
+      ]
+    },
+    "explore": {
+      "entry": {
+        "title": "探索情緒",
+        "description": "透過浪潮情緒卡，探索與覺察自己的情緒。"
+      },
+      "cards": {
+        "title": "浪潮情緒卡｜探索情緒｜情緒卡",
+        "description": "瀏覽並選擇情緒卡，放入你的情緒卡夾。"
+      },
+      "selected": {
+        "title": "浪潮情緒卡｜探索情緒｜我的情緒卡夾",
+        "description": "整理你挑選的情緒卡，進入後續探索流程。"
+      },
+      "strength1": {
+        "title": "浪潮情緒卡｜探索情緒｜我的情緒強度｜第一次",
+        "description": "記錄挑選情緒卡的第一次情緒強度。"
+      },
+      "storyBackground": {
+        "title": "浪潮情緒卡｜探索情緒｜我的情緒故事｜背景篇",
+        "description": "回想情緒發生的背景與原因，記錄情緒故事的起點。"
+      },
+      "storyAction": {
+        "title": "浪潮情緒卡｜探索情緒｜我的情緒故事｜行動篇",
+        "description": "回顧情緒之後的反應、結果與感受，整理你的情緒歷程。"
+      },
+      "strength2": {
+        "title": "浪潮情緒卡｜探索情緒｜我的情緒強度｜第二次",
+        "description": "記錄覺察與書寫後的第二次情緒強度。"
+      },
+      "complete": {
+        "title": "浪潮情緒卡｜探索情緒｜謝謝自己與情緒浪潮同在",
+        "description": "你的情緒紀錄已成功儲存，可以前往我的紀錄查看內容。"
+      },
+      "category": {
+        "title": "浪潮情緒卡｜探索情緒｜{category}",
+        "description": "瀏覽 {category} 類情緒卡，選擇放入你的情緒卡夾。"
+      }
+    },
+    "records": {
+      "title": "浪潮情緒卡｜我的紀錄",
+      "description": "查看和管理你的情緒紀錄",
+      "detailTitle": "浪潮情緒卡｜我的紀錄｜情緒故事",
+      "detailDescription": "查看和編輯情緒故事詳情",
+      "analysisTitle": "浪潮情緒卡｜我的紀錄｜分析",
+      "analysisDescription": "從圖表中查看你的情緒紀錄分布與比例。"
+    },
+    "account": {
+      "title": "浪潮情緒卡｜我的帳戶",
+      "description": "管理你的帳戶設定和個人資料"
+    },
+    "ogImageAlt": "浪潮情緒卡 Wavemocards"
+  },
+  "common": {
+    "actions": {
+      "save": "儲存",
+      "saving": "儲存中...",
+      "cancel": "取消",
+      "confirm": "確定",
+      "close": "關閉",
+      "edit": "編輯",
+      "next": "下一步",
+      "back": "上一步",
+      "clear": "清空",
+      "expand": "展開",
+      "collapse": "收合",
+      "start": "開始",
+      "search": "搜尋",
+      "reset": "重整",
+      "delete": "刪除",
+      "deleting": "刪除中...",
+      "analyze": "分析",
+      "complete": "完成",
+      "return": "返回",
+      "continueEditing": "繼續編輯",
+      "discardChanges": "取消編輯",
+      "resetPassword": "重設密碼"
+    },
+    "states": {
+      "loading": "讀取中...",
+      "empty": "目前沒有資料",
+      "notFound": "找不到資料",
+      "noDescription": "暫無描述",
+      "noExample": "暫無例句",
+      "notAvailable": "—"
+    },
+    "labels": {
+      "yes": "是",
+      "no": "否",
+      "unknown": "不清楚",
+      "email": "Email",
+      "password": "密碼",
+      "date": "日期"
+    },
+    "illustrationCredit": {
+      "by": "Illustration by",
+      "from": "from",
+      "author": "Tanya Krasutska",
+      "source": "Ouch!"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "main": "主導覽"
+      },
+      "links": {
+        "home": "首頁",
+        "aboutEmotions": "認識情緒",
+        "explore": "探索情緒",
+        "records": "我的紀錄",
+        "account": "帳戶設定",
+        "signIn": "登入",
+        "signUp": "註冊",
+        "signOut": "登出",
+        "emoCards": "情緒卡"
+      },
+      "sr": {
+        "accountSettings": "帳戶設定",
+        "signOut": "登出",
+        "brand": "Wavemocards"
+      }
+    },
+    "mobileNav": {
+      "toggleMenu": "切換選單",
+      "dialogLabel": "行動裝置導覽選單",
+      "navLabel": "行動裝置導覽",
+      "links": {
+        "home": "首頁",
+        "aboutEmotions": "認識情緒",
+        "emoCards": "情緒卡",
+        "explore": "探索情緒",
+        "records": "我的紀錄",
+        "account": "帳戶設定",
+        "signIn": "登入",
+        "signUp": "註冊",
+        "signOut": "登出"
+      }
+    },
+    "footer": {
+      "tagline": "透過情緒卡認識、探索和記錄你的情緒",
+      "sections": {
+        "team": "開發團隊",
+        "usefulLinks": "實用連結"
+      },
+      "links": {
+        "aboutEmotions": "認識情緒",
+        "contactUs": "聯絡我們",
+        "reportIssue": "回報問題"
+      },
+      "contributors": {
+        "projectManager": "Project Manager",
+        "productDesigner": "Product Designer",
+        "frontEndEngineer": "Front-End Engineer",
+        "frontEndConsultant": "Front-End Consultant",
+        "databaseDeveloper": "Database Developer",
+        "backEndDeveloper": "Back-End Developer",
+        "systemDesigner": "System Designer",
+        "illustrator": "Illustrator"
+      },
+      "copyright": "© 2023 - {year} 浪潮情緒卡 | Wave Emotion Cards 版權所有",
+      "sr": {
+        "brand": "Wavemocards"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "line1": "找尋自我",
+      "line2": "情緒的浪潮"
+    },
+    "cta": {
+      "aboutEmotions": "認識情緒",
+      "signUp": "前往註冊"
+    }
+  },
+  "aboutEmotions": {
+    "pageTitle": "認識情緒",
+    "tabs": {
+      "aboutEmotions": "認識情緒",
+      "emoCards": "情緒卡"
+    },
+    "sourceLabel": "引用文章來源：",
+    "sourceName": "香港青年協會｜全健空間（九龍）",
+    "sections": {
+      "whatIsEmotion": {
+        "title": "什麼是情緒？",
+        "content": "情緒英文是emotion，代表流動在我們身體的能量。當我們受到刺激，引發出內心感受、身體反應、想法與行動，就是情緒。例如某人踏進後巷時，遇到一隻看來很兇惡的狗（刺激），覺得十分害怕，擔心自己被咬傷（內心感受和想法），不禁心跳加速和顫抖（身體反應），最終決定急步繞路離開（行動）。"
+      },
+      "sixBasicEmotions": {
+        "title": "6大基本情緒",
+        "content": "博物學家達爾文提及過人類有六種基本情緒，包括快樂（happiness）、悲傷（sadness）、恐懼（fear）、厭惡（disgust）、憤怒（anger）和驚訝（surprise），屬於有助人類提高生存機會的本能情緒。其他複雜情緒如興奮、委屈、自卑、妒忌、內疚、寂寞等，則是由基本情緒混合衍生而成，並且經過學習與社會化之後產生。"
+      },
+      "goodOrBad": {
+        "title": "情緒無分好與壞",
+        "content": "一般人習慣將情緒分為正負面，覺得快樂屬於正面情緒，悲傷、憤怒、恐懼則對人有害。其實情緒無分好與壞，每一種情緒都有其獨特意義。例如對於陌生環境感到恐懼不安，反映著對安全感的渴求，提醒我們遠離危險。悲傷時脆弱流淚，則可吸引關顧與扶持，促進人際聯繫。"
+      },
+      "healthyEmotion": {
+        "title": "情緒的健康之道",
+        "content": "假如對情緒存在偏見，否定和壓抑自己的真正感覺，明明傷心卻扮開心，明明生氣卻默默忍受，很容易令身心健康出現問題。所謂情緒健康，不代表要時刻保持愉快心情，而是要有能力覺察自己的不同情緒，了解內心需要，並以健康恰當的方式去表達和調適，讓心靈回復平靜。"
+      }
+    },
+    "basicEmotions": {
+      "happiness": "快樂",
+      "sadness": "悲傷",
+      "fear": "恐懼",
+      "disgust": "厭惡",
+      "anger": "憤怒",
+      "surprise": "驚訝"
+    }
+  },
+  "emoCards": {
+    "overview": {
+      "pageTitle": "認識情緒",
+      "tabs": {
+        "aboutEmotions": "認識情緒",
+        "emoCards": "情緒卡"
+      },
+      "view": {
+        "expand": "展開",
+        "collapse": "收合",
+        "table": "情緒表"
+      },
+      "guide": {
+        "title": "瀏覽情緒卡的方法",
+        "interfaceTypes": "介面的種類",
+        "usageByView": "各個介面的使用說明",
+        "switchViewDescription": "點擊右上方的「收合」或「展開」按鈕，可以轉換情緒卡的展示方式。",
+        "tableDescription": "點擊右上方的「情緒表」，可以快速瀏覽所有情緒詞彙。",
+        "expand": {
+          "title": "展開",
+          "description": "點擊單張「情緒卡」，可以查看關於該情緒的詳細內容。"
+        },
+        "collapse": {
+          "title": "收合",
+          "description": "共有 9 張分類卡，點擊單張「分類卡」後，即可進入該分類的情緒卡頁面。"
+        },
+        "table": {
+          "title": "情緒表",
+          "description": "點擊單一「情緒詞彙」，可以查看關於該情緒的詳細內容。"
+        },
+        "hint": "💬 透過點擊 標題「瀏覽情緒卡的方法」的區塊，可將此說明收合。"
+      },
+      "categoryCardsHint": "🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。",
+      "empty": {
+        "noDescription": "暫無描述",
+        "noExample": "暫無例句"
+      }
+    },
+    "category": {
+      "backToAllCards": "返回",
+      "openCardDetail": "查看情緒卡詳情",
+      "emptyState": "目前沒有情緒卡"
+    },
+    "table": {
+      "openCategory": "查看 {category} 分類",
+      "openCard": "查看 {card} 情緒卡"
+    },
+    "modal": {
+      "dialogLabel": "情緒卡詳情",
+      "close": "關閉",
+      "addToHolder": "加入卡夾",
+      "meaning": "意思：",
+      "example": "例句：",
+      "empty": {
+        "noDescription": "暫無描述",
+        "noExample": "暫無例句"
+      },
+      "aria": {
+        "cardDetail": "{cardName} 情緒卡詳情"
+      }
+    }
+  },
+  "explore": {
+    "entry": {
+      "aria": {
+        "section": "探索情緒入口"
+      },
+      "title": "探索情緒",
+      "intro": {
+        "line1": "你在情緒的世界裡迷航了嗎？",
+        "line2": "沒關係，讓我們一起在浪潮情緒卡中，探索自己的情緒。"
+      },
+      "breathing": {
+        "line1": "邀請你先閉上眼睛，",
+        "highlight": "深呼吸",
+        "line2": "，再慢慢地吐氣。"
+      },
+      "awareness": {
+        "line1": "在吸氣與吐氣的過程，",
+        "highlight": "慢慢地感受自己的身體與心靈的狀態",
+        "line2": "。"
+      },
+      "ctaPrompt": {
+        "line1": "如果準備好了的話，",
+        "highlight": "請點擊「開始探索」",
+        "line2": "。"
+      },
+      "startButton": "開始探索"
+    },
+    "cards": {
+      "aria": {
+        "section": "探索情緒卡",
+        "categorySection": "{category} 情緒卡"
+      },
+      "titles": {
+        "mobile": "探索情緒",
+        "desktop": "探索情緒｜情緒卡",
+        "category": "探索情緒｜{category}",
+        "holder": "我的情緒卡夾"
+      },
+      "view": {
+        "expand": "展開",
+        "collapse": "收合",
+        "table": "情緒表"
+      },
+      "guide": {
+        "title": "探索步驟與方法",
+        "stepsTitle": "探索步驟",
+        "browseTitle": "瀏覽情緒卡的方法",
+        "steps": [
+          "下滑頁面，開始瀏覽情緒卡。",
+          "點擊情緒卡右上方的「＋」按鈕，即可將情緒卡放進「我的情緒卡夾」中。",
+          "完成情緒卡挑選後，請點擊「我的情緒卡夾」按鈕，進行下一步的內容。"
+        ],
+        "browseMethods": [
+          "點擊右上方的「收合」或「展開」按鈕，可以轉換情緒卡的展示方式。",
+          "點擊右上方的「情緒表」，可以快速瀏覽所有情緒詞彙。"
+        ]
+      },
+      "actions": {
+        "openHolder": "我的情緒卡夾",
+        "addToHolder": "加入卡夾",
+        "removeFromHolder": "移出卡夾",
+        "addedToHolder": "已加入卡夾",
+        "backToCards": "回到情緒卡"
+      },
+      "countBadge": "{count}",
+      "emptyState": "目前沒有情緒卡"
+    },
+    "selected": {
+      "title": "我的情緒卡夾",
+      "actions": {
+        "clear": "清空",
+        "backToCards": "回到情緒卡",
+        "previousStep": "上一步",
+        "nextStep": "下一步"
+      },
+      "instructions": {
+        "keepThreeCards": "🔎 請留下最符合您現在狀態的情緒卡「3 張」。",
+        "removeHint": "🔎 您可以透過點擊右上角的「X」，將情緒卡移除。"
+      },
+      "empty": {
+        "title": "尚未選擇任何情緒卡",
+        "cta": "前往選擇情緒卡"
+      },
+      "card": {
+        "remove": "移除"
+      },
+      "confirmClear": {
+        "title": "確定要清空嗎？",
+        "description": "點擊確定後，將會移除所有卡片，並且無法復原。"
+      },
+      "errors": {
+        "tooFewTitle": "卡片數量不足",
+        "tooFewDescription": "請至少挑選 1 張卡片。",
+        "tooManyTitle": "卡片數量過多",
+        "tooManyDescriptionLine1": "卡片數量最多 3 張。",
+        "tooManyDescriptionLine2": "請篩選出最貼近您的情緒的卡片。"
+      },
+      "acknowledge": "我知道了"
+    },
+    "strength1": {
+      "title": "我的情緒強度｜第一次",
+      "titleMobile": {
+        "line1": "我的情緒強度",
+        "line2": "第一次"
+      },
+      "actions": {
+        "previous": "上一步",
+        "next": "下一步"
+      },
+      "instructions": {
+        "line1": "謝謝你努力地找尋到屬於自己的情緒卡。",
+        "line2": "接下來，想邀請你，再次閉上眼睛，深呼吸～吐氣～",
+        "line3": "在深呼吸的過程中，感受心中的自己，挑選的情緒，其強度分別如何呢？",
+        "scoreHint": "（ 1分代表最為微弱，5分代表最為強烈 ）"
+      },
+      "errors": {
+        "title": "尚未完成",
+        "description": "每張情緒卡的情緒強度皆須選填。"
+      },
+      "acknowledge": "我知道了"
+    },
+    "strength2": {
+      "title": "我的情緒強度｜第二次",
+      "titleMobile": {
+        "line1": "我的情緒強度",
+        "line2": "第二次"
+      },
+      "actions": {
+        "previous": "上一步",
+        "saveRecord": "儲存紀錄",
+        "saving": "儲存中..."
+      },
+      "instructions": {
+        "line1": "在覺察與記錄情緒故事後，不知道你現在的情緒還好嗎？",
+        "line2": "邀請你再次深呼吸，並問問心中的自己，現在的情緒強度分別如何呢？",
+        "scoreHint": "（ 1分代表最為微弱，5分代表最為強烈 ）",
+        "skipHint": "若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」"
+      }
+    },
+    "storyBackground": {
+      "title": "我的情緒故事｜背景篇",
+      "titleMobile": {
+        "line1": "我的情緒故事",
+        "line2": "背景篇"
+      },
+      "actions": {
+        "previous": "上一步",
+        "next": "下一步"
+      },
+      "greeting": "謝謝親愛的 {userName}",
+      "instructions": {
+        "line2": "接下來，想邀請你慢慢地潛入自己的情緒故事中，找尋自己情緒的源頭。",
+        "skipHint": "若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」"
+      },
+      "prompt": {
+        "title": "邀請你輕輕地闔上雙眼，在吸氣與吐氣之間，慢慢地回想，在感受到「{cardNames}」的情緒之前，發生了什麼事情呢？",
+        "description": "請在下欄中，試著寫下你覺得可能是讓你有這些情緒的原因或是事情、背景故事等。"
+      },
+      "placeholder": "在這裡寫下你的故事..."
+    },
+    "storyAction": {
+      "title": "我的情緒故事｜行動篇",
+      "titleMobile": {
+        "line1": "我的情緒故事",
+        "line2": "行動篇"
+      },
+      "actions": {
+        "previous": "上一步",
+        "next": "下一步"
+      },
+      "intro": {
+        "line1": "謝謝你，努力地回想了情緒發生的背景、原因。",
+        "line2": "接下來，想邀請你一起回想在情緒浪潮來臨之後⋯⋯",
+        "skipHint": "若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」"
+      },
+      "question1": {
+        "label": "第 1 題",
+        "prompt": "在感受到「{cardNames}」的情緒後，你有什麼反應呢？或是做了什麼事情呢？",
+        "example": "例如：在感受到心中的焦慮後，我在日記本寫下各種心中所擔憂的事情。"
+      },
+      "question2": {
+        "label": "第 2 題",
+        "prompt": "在上述你所做的反應後，帶來了什麼樣的結果呢？"
+      },
+      "question3": {
+        "label": "第 3 題",
+        "prompt": "對於上述發生的結果，你有什麼樣的感受呢？"
+      },
+      "question4": {
+        "label": "第 4 題",
+        "prompt": "你覺得這個的結果是否是你所期待的結果呢？",
+        "options": {
+          "yes": "是",
+          "no": "否",
+          "unclear": "不清楚"
+        }
+      },
+      "question5": {
+        "label": "第 5 題",
+        "promptUnexpected": "如果這次的結果不如你所期待的話，你覺得下次有類似的情緒時，可以怎麼做，可能可以得到你所期待的結果呢？",
+        "promptAffirming": "這次的情緒歷程，有哪些是你覺得做得不錯的地方呢？邀請你寫下肯定自己做得不錯的地方。"
+      }
+    },
+    "complete": {
+      "title": "謝謝自己與情緒浪潮同在",
+      "titleMobile": {
+        "line1": "謝謝自己",
+        "line2": "與情緒浪潮同在"
+      },
+      "actions": {
+        "complete": "完成"
+      },
+      "greeting": "親愛的 {userName}，",
+      "saveSuccess": "紀錄已成功儲存。",
+      "thanks": "謝謝你為了自己花了時間、心思，做覺察、紀錄與省思。",
+      "selfTalkIntro": "想邀請你對自己說：",
+      "selfTalkLead": "我想謝謝自己，",
+      "selfTalkFull": "我願意覺察、擁抱情緒與我自己，這樣的我已經很棒了！",
+      "selfTalkLine1": "我願意覺察、擁抱情緒與我自己",
+      "selfTalkLine2": "這樣的我已經很棒了！",
+      "hint": "您可以點擊右上方的「完成」，前往「我的紀錄」觀看紀錄內容。"
+    }
+  },
+  "records": {
+    "list": {
+      "title": "我的紀錄",
+      "tabs": {
+        "records": "紀錄",
+        "analysis": "分析"
+      },
+      "search": {
+        "keywordPlaceholder": "請輸入關鍵字，以「空格」做區隔",
+        "dateRangeSeparator": "～",
+        "search": "搜尋",
+        "reset": "重整｜顯示全部"
+      },
+      "actions": {
+        "delete": "刪除"
+      },
+      "empty": {
+        "noRecords": "目前沒有紀錄"
+      },
+      "table": {
+        "select": "選取",
+        "date": "日期",
+        "emotionAndStrength": "情緒與強度"
+      },
+      "pagination": {
+        "previous": "上一頁",
+        "next": "下一頁"
+      },
+      "confirmDelete": {
+        "title": "確定要刪除嗎？",
+        "description": "您選擇刪除 {count} 筆資料，刪除後便不可再復原，確定要刪除嗎？",
+        "cancel": "取消",
+        "confirm": "確定刪除",
+        "deleting": "刪除中..."
+      }
+    },
+    "detail": {
+      "title": "我的紀錄｜情緒故事",
+      "titleMobile": {
+        "line1": "我的紀錄",
+        "line2": "情緒故事"
+      },
+      "actions": {
+        "delete": "刪除",
+        "back": "返回",
+        "edit": "編輯",
+        "cancel": "取消",
+        "save": "儲存",
+        "saving": "儲存中..."
+      },
+      "sections": {
+        "storyBackground": "情緒故事｜背景篇",
+        "storyAction": "情緒故事｜行動篇"
+      },
+      "fields": {
+        "date": "日期",
+        "strengthBefore": "情緒強度｜第一次",
+        "strengthAfter": "情緒強度｜第二次",
+        "storyBackground": "情緒的背景",
+        "actionTaken": "情緒後做的反應",
+        "resultAfterAction": "反應後的結果",
+        "feelingAfterResult": "結果帶給我的感受",
+        "expectedResult": "結果是否是我所期待的？",
+        "nextActionAndAffirmationLine1": "下次可以怎麼做？",
+        "nextActionAndAffirmationLine2": "以及我想肯定自己的地方"
+      },
+      "expect": {
+        "yes": "是",
+        "no": "否",
+        "unknown": "不清楚"
+      },
+      "empty": {
+        "notFound": "找不到此紀錄",
+        "notAvailable": "—"
+      },
+      "confirmDelete": {
+        "title": "確定要刪除嗎？",
+        "description": "刪除後便不可再復原，確定要刪除嗎？",
+        "cancel": "取消",
+        "confirm": "確定刪除",
+        "deleting": "刪除中..."
+      }
+    },
+    "analysis": {
+      "title": "我的紀錄｜分析",
+      "tabs": {
+        "records": "紀錄",
+        "analysis": "分析"
+      },
+      "dateRangeSeparator": "～",
+      "loading": "讀取中...",
+      "analyze": "分析",
+      "empty": {
+        "noData": "這段期間沒有資料"
+      },
+      "charts": {
+        "frequency": {
+          "title": "情緒類組次數",
+          "description1": "下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數的長條圖。",
+          "description2": "若您想看該類別出現的次數，您可將游標停留在該類別的長條上。",
+          "unit": "(次)",
+          "tooltipValue": "{value} 次"
+        },
+        "ratio": {
+          "title": "情緒類組比例",
+          "description1": "下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數比例的圓餅圖。",
+          "description2": "若您想看該類別所佔的比例，您可將游標停留在圓餅圖中該類別的色塊上。",
+          "tooltipValue": "{value}%"
+        }
+      },
+      "illustrationAlt": "分析"
+    }
+  },
+  "account": {
+    "profile": {
+      "title": "我的帳戶",
+      "actions": {
+        "edit": "編輯",
+        "cancel": "取消",
+        "save": "儲存",
+        "saving": "儲存中..."
+      },
+      "fields": {
+        "email": "Email",
+        "password": "密碼",
+        "lastName": "姓",
+        "firstName": "名",
+        "birthDate": "生日",
+        "role": "身份"
+      },
+      "placeholders": {
+        "lastName": "請輸入姓氏",
+        "firstName": "請輸入名字"
+      },
+      "options": {
+        "student": "學生",
+        "teacher": "教師",
+        "other": "其他"
+      },
+      "errors": {
+        "required": "此欄為必填",
+        "loadFailed": "載入帳戶資料失敗",
+        "loadUnexpected": "載入帳戶資料時發生錯誤"
+      },
+      "empty": {
+        "loadFailed": "無法載入帳戶資料",
+        "notAvailable": "—"
+      },
+      "passwordMask": "********",
+      "resetPassword": "重設密碼",
+      "confirmCancel": {
+        "title": "確定要取消編輯嗎？",
+        "description": "取消編輯後，將不會儲存您所做的變更，確定要取消編輯嗎？",
+        "continueEditing": "繼續編輯",
+        "discard": "取消編輯"
+      },
+      "saveResult": {
+        "successTitle": "儲存成功",
+        "failureTitle": "儲存失敗",
+        "failureDescription": "很抱歉儲存失敗，請確認您所輸入的內容是否有無錯誤。",
+        "contactUsPrompt": "若無法排除問題，請",
+        "contactUs": "與我們聯繫",
+        "acknowledge": "我知道了",
+        "successAlt": "儲存成功",
+        "failureAlt": "儲存失敗"
+      }
+    }
+  },
+  "auth": {
+    "signIn": "登入",
+    "signUp": "註冊",
+    "signOut": "登出",
+    "accountSettings": "帳戶設定",
+    "hostedAuth": {
+      "signIn": "前往登入",
+      "signUp": "前往註冊",
+      "signOut": "安全登出"
+    }
+  },
+  "aria": {
+    "mainNavigation": "主導覽",
+    "mobileNavigation": "行動裝置導覽",
+    "mobileNavigationMenu": "行動裝置導覽選單",
+    "skipToMainContent": "跳到主要內容",
+    "closeDialog": "關閉",
+    "emotionCardDetail": "{cardName} 情緒卡詳情",
+    "addToHolder": "加入卡夾",
+    "removeFromHolder": "移出卡夾",
+    "toggleMenu": "切換選單",
+    "brand": "Wavemocards",
+    "selectRecord": "選取",
+    "delete": "刪除"
+  },
+  "toast": {
+    "account": {
+      "loadFailed": "載入帳戶資料失敗",
+      "loadUnexpected": "載入帳戶資料時發生錯誤"
+    },
+    "records": {
+      "loadFailed": "載入紀錄失敗",
+      "loadUnexpected": "載入紀錄時發生錯誤",
+      "saveSuccess": "儲存成功",
+      "saveFailed": "儲存失敗",
+      "saveUnexpected": "儲存時發生錯誤",
+      "deleteSuccess": "刪除成功",
+      "deleteFailed": "刪除失敗",
+      "deleteUnexpected": "刪除時發生錯誤",
+      "deleteSelectionRequired": "請先勾選欲刪除的項目",
+      "batchDeleteSuccess": "成功刪除 {count} 筆紀錄",
+      "batchDeleteFailed": "{count} 筆紀錄刪除失敗"
+    },
+    "analysis": {
+      "startDateRequired": "請輸入起始日期",
+      "endDateRequired": "請輸入結束日期",
+      "invalidDateRange": "開始時間不可晚於結束時間",
+      "failed": "分析失敗",
+      "unexpected": "分析時發生錯誤"
+    },
+    "explore": {
+      "saveSuccess": "儲存成功",
+      "saveFailed": "很抱歉，儲存紀錄失敗，請稍後再試。",
+      "saveUnexpected": "儲存時發生錯誤，請確認網路狀態後再試一次。"
+    }
+  },
+  "validation": {
+    "required": "此欄為必填",
+    "invalidDateRange": "開始時間不可晚於結束時間"
+  },
+  "emotionContent": {
+    "aboutSections": {
+      "whatIsEmotion": {
+        "title": "什麼是情緒？",
+        "content": "情緒英文是emotion，代表流動在我們身體的能量。當我們受到刺激，引發出內心感受、身體反應、想法與行動，就是情緒。例如某人踏進後巷時，遇到一隻看來很兇惡的狗（刺激），覺得十分害怕，擔心自己被咬傷（內心感受和想法），不禁心跳加速和顫抖（身體反應），最終決定急步繞路離開（行動）。"
+      },
+      "sixBasicEmotions": {
+        "title": "6大基本情緒",
+        "content": "博物學家達爾文提及過人類有六種基本情緒，包括快樂（happiness）、悲傷（sadness）、恐懼（fear）、厭惡（disgust）、憤怒（anger）和驚訝（surprise），屬於有助人類提高生存機會的本能情緒。其他複雜情緒如興奮、委屈、自卑、妒忌、內疚、寂寞等，則是由基本情緒混合衍生而成，並且經過學習與社會化之後產生。"
+      },
+      "goodOrBad": {
+        "title": "情緒無分好與壞",
+        "content": "一般人習慣將情緒分為正負面，覺得快樂屬於正面情緒，悲傷、憤怒、恐懼則對人有害。其實情緒無分好與壞，每一種情緒都有其獨特意義。例如對於陌生環境感到恐懼不安，反映著對安全感的渴求，提醒我們遠離危險。悲傷時脆弱流淚，則可吸引關顧與扶持，促進人際聯繫。"
+      },
+      "healthyEmotion": {
+        "title": "情緒的健康之道",
+        "content": "假如對情緒存在偏見，否定和壓抑自己的真正感覺，明明傷心卻扮開心，明明生氣卻默默忍受，很容易令身心健康出現問題。所謂情緒健康，不代表要時刻保持愉快心情，而是要有能力覺察自己的不同情緒，了解內心需要，並以健康恰當的方式去表達和調適，讓心靈回復平靜。"
+      }
+    },
+    "basicEmotions": {
+      "happiness": "快樂",
+      "sadness": "悲傷",
+      "fear": "恐懼",
+      "disgust": "厭惡",
+      "anger": "憤怒",
+      "surprise": "驚訝"
+    }
+  }
+}
