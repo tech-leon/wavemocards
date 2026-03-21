@@ -26,6 +26,31 @@ export function isPublicLocale(value: string | null | undefined): value is Publi
   return PUBLIC_LOCALES.includes(value as PublicLocale);
 }
 
+export function extractLocaleFromPathname(pathname: string): {
+  pathname: string;
+  locale: Locale | null;
+} {
+  const normalizedPathname = normalizePathname(pathname);
+
+  if (normalizedPathname === '/') {
+    return { pathname: '/', locale: null };
+  }
+
+  const segments = normalizedPathname.split('/');
+  const firstSegment = segments[1];
+
+  if (!isLocale(firstSegment)) {
+    return { pathname: normalizedPathname, locale: null };
+  }
+
+  const strippedPathname = `/${segments.slice(2).join('/')}`;
+
+  return {
+    pathname: normalizePathname(strippedPathname),
+    locale: firstSegment,
+  };
+}
+
 function isPublicPathWithoutLocale(pathname: string): boolean {
   return (
     pathname === '/' ||
@@ -37,29 +62,15 @@ function isPublicPathWithoutLocale(pathname: string): boolean {
 }
 
 export function stripLocaleFromPathname(pathname: string): { pathname: string; locale: PublicLocale | null } {
-  const normalizedPathname = normalizePathname(pathname);
+  const { pathname: normalizedStrippedPathname, locale } = extractLocaleFromPathname(pathname);
 
-  if (normalizedPathname === '/') {
-    return { pathname: '/', locale: null };
-  }
-
-  const segments = normalizedPathname.split('/');
-  const firstSegment = segments[1];
-
-  if (!isPublicLocale(firstSegment)) {
-    return { pathname: normalizedPathname, locale: null };
-  }
-
-  const strippedPathname = `/${segments.slice(2).join('/')}`;
-  const normalizedStrippedPathname = normalizePathname(strippedPathname);
-
-  if (!isPublicPathWithoutLocale(normalizedStrippedPathname)) {
-    return { pathname: normalizedPathname, locale: null };
+  if (!locale || !isPublicPathWithoutLocale(normalizedStrippedPathname)) {
+    return { pathname: normalizePathname(pathname), locale: null };
   }
 
   return {
     pathname: normalizedStrippedPathname,
-    locale: firstSegment,
+    locale,
   };
 }
 
