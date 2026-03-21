@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Menu, X, Settings, LogOut, Home, Heart, BookOpen, FolderOpen } from 'lucide-react';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
@@ -20,6 +21,8 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ locale, user }: MobileNavProps) {
+  const t = useTranslations('layout.mobileNav');
+  const tAria = useTranslations('aria');
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -58,7 +61,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
         type="button"
         onClick={toggleMenu}
         className="inline-flex rounded-md p-2 text-gray-800 transition-colors hover:bg-gray-200/70 hover:text-main dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-main-tint01"
-        aria-label="Toggle menu"
+        aria-label={tAria('toggleMenu')}
         aria-expanded={isOpen}
       >
         {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
@@ -80,43 +83,43 @@ export function MobileNav({ locale, user }: MobileNavProps) {
               className="fixed right-0 top-[73px] z-50 h-[calc(100dvh-73px)] w-[min(85vw,360px)] overflow-y-auto border-l border-gray-200 bg-gray-100 p-6 shadow-xl dark:border-gray-700 dark:bg-gray-900 lg:hidden"
               role="dialog"
               aria-modal="true"
-              aria-label="行動裝置導覽選單"
+              aria-label={tAria('mobileNavigationMenu')}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.26, ease: 'easeOut' }}
             >
-              <nav aria-label="行動裝置導覽">
+              <nav aria-label={tAria('mobileNavigation')}>
                 {user ? (
                   <ul className="space-y-2">
                     <li>
                       <Link href={aboutHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
-                        <span>認識情緒</span>
+                        <span>{t('links.aboutEmotions')}</span>
                       </Link>
                     </li>
                     <li>
                       <Link href="/explore" onClick={closeMenu} className={mobileItemClass}>
                         <Heart className="size-5" />
-                        <span>探索情緒</span>
+                        <span>{t('links.explore')}</span>
                       </Link>
                     </li>
                     <li>
                       <Link href="/records" onClick={closeMenu} className={mobileItemClass}>
                         <FolderOpen className="size-5" />
-                        <span>我的紀錄</span>
+                        <span>{t('links.records')}</span>
                       </Link>
                     </li>
                     <li>
                       <Link href={emoCardsHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
-                        <span>情緒卡</span>
+                        <span>{t('links.emoCards')}</span>
                       </Link>
                     </li>
                     <li className="mt-4 border-t border-gray-300 pt-4 dark:border-gray-700">
                       <Link href="/account" onClick={closeMenu} className={mobileItemClass}>
                         <Settings className="size-5" />
-                        <span>帳戶設定</span>
+                        <span>{t('links.account')}</span>
                       </Link>
                     </li>
                     <li>
@@ -126,7 +129,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                         className={`${mobileItemClass} w-full`}
                       >
                           <LogOut className="size-5" />
-                          <span>登出</span>
+                          <span>{t('links.signOut')}</span>
                       </AuthNavigationButton>
                     </li>
                   </ul>
@@ -135,19 +138,19 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                     <li>
                       <Link href={homeHref} onClick={closeMenu} className={mobileItemClass}>
                         <Home className="size-5" />
-                        <span>首頁</span>
+                        <span>{t('links.home')}</span>
                       </Link>
                     </li>
                     <li>
                       <Link href={aboutHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
-                        <span>認識情緒</span>
+                        <span>{t('links.aboutEmotions')}</span>
                       </Link>
                     </li>
                     <li>
                       <Link href={emoCardsHref} onClick={closeMenu} className={mobileItemClass}>
                         <BookOpen className="size-5" />
-                        <span>情緒卡</span>
+                        <span>{t('links.emoCards')}</span>
                       </Link>
                     </li>
                     <li className="mt-4 border-t border-gray-300 pt-4 dark:border-gray-700">
@@ -156,7 +159,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                         onNavigate={closeMenu}
                         className="type-button inline-flex h-9 w-full items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main"
                       >
-                        登入
+                        {t('links.signIn')}
                       </AuthNavigationButton>
                     </li>
                     <li>
@@ -165,7 +168,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                         onNavigate={closeMenu}
                         className="type-button inline-flex h-9 w-full items-center justify-center rounded-full bg-pink px-4 py-2 text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
                       >
-                        註冊
+                        {t('links.signUp')}
                       </AuthNavigationButton>
                     </li>
                   </ul>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 
@@ -9,6 +10,7 @@ interface BackToTopButtonProps {
 }
 
 export function BackToTopButton({ className }: BackToTopButtonProps) {
+  const t = useTranslations('aria');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
             'type-caption text-white font-bold',
             className
           )}
-          aria-label="回到頂部"
+          aria-label={t('backToTop')}
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}

@@ -725,6 +725,7 @@
     "mobileNavigation": "行動裝置導覽",
     "mobileNavigationMenu": "行動裝置導覽選單",
     "skipToMainContent": "跳到主要內容",
+    "backToTop": "回到頂部",
     "closeDialog": "關閉",
     "emotionCardDetail": "{cardName} 情緒卡詳情",
     "addToHolder": "加入卡夾",
@@ -733,6 +734,9 @@
     "brand": "Wavemocards",
     "selectRecord": "選取",
     "delete": "刪除"
+  },
+  "theme": {
+    "toggle": "切換亮色/深色模式"
   },
   "toast": {
     "account": {

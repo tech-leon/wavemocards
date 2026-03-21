@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Settings, LogOut } from 'lucide-react';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
@@ -20,6 +21,8 @@ interface HeaderProps {
 }
 
 export function Header({ locale, user }: HeaderProps) {
+  const t = useTranslations('layout.header');
+  const tAria = useTranslations('aria');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isAuthenticated = Boolean(user);
@@ -46,29 +49,29 @@ export function Header({ locale, user }: HeaderProps) {
     >
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="hidden items-center gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
-          <nav className="flex items-center gap-1" aria-label="主導覽">
+          <nav className="flex items-center gap-1" aria-label={tAria('mainNavigation')}>
             {user ? (
               <>
                 <Link href={aboutHref} className={navLinkClass(aboutHref)}>
-                  認識情緒
+                  {t('links.aboutEmotions')}
                 </Link>
                 <Link href="/explore" className={navLinkClass('/explore')}>
-                  探索情緒
+                  {t('links.explore')}
                 </Link>
                 <Link href="/records" className={navLinkClass('/records')}>
-                  我的紀錄
+                  {t('links.records')}
                 </Link>
               </>
             ) : (
               <Link href={aboutHref} className={navLinkClass(aboutHref)}>
-                認識情緒
+                {t('links.aboutEmotions')}
               </Link>
             )}
           </nav>
 
           <h1>
             <Link href={homeHref} className="group block h-[45px] w-[200px]">
-              <span className="sr-only">Wavemocards</span>
+              <span className="sr-only">{tAria('brand')}</span>
               <span
                 aria-hidden="true"
                 className="block h-full w-full bg-[url('/images/logo_name.svg')] bg-contain bg-center bg-no-repeat"
@@ -88,14 +91,14 @@ export function Header({ locale, user }: HeaderProps) {
                   }`}
                 >
                   <Settings className="size-5" strokeWidth={pathname === '/account' ? 2.5 : 2} />
-                  <span className="sr-only">帳戶設定</span>
+                  <span className="sr-only">{t('sr.accountSettings')}</span>
                 </Link>
                 <AuthNavigationButton
                   href={signOutHref}
                   className="inline-flex rounded-md p-2 text-slate-800 transition-colors hover:text-main dark:text-slate-100 dark:hover:text-main-tint01"
                 >
                   <LogOut className="size-5" />
-                  <span className="sr-only">登出</span>
+                  <span className="sr-only">{t('sr.signOut')}</span>
                 </AuthNavigationButton>
               </>
             ) : (
@@ -104,13 +107,13 @@ export function Header({ locale, user }: HeaderProps) {
                   href={signInHref}
                   className="type-button inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-slate-900"
                 >
-                  登入
+                  {t('links.signIn')}
                 </AuthNavigationButton>
                 <AuthNavigationButton
                   href={signUpHref}
                   className="type-button inline-flex h-9 items-center justify-center rounded-full bg-pink px-4 py-2 text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
                 >
-                  註冊
+                  {t('links.signUp')}
                 </AuthNavigationButton>
               </>
             )}
@@ -120,7 +123,7 @@ export function Header({ locale, user }: HeaderProps) {
 
         <div className="flex items-center justify-between lg:hidden">
           <Link href={homeHref} className="block h-[36px] w-[150px]">
-            <span className="sr-only">Wavemocards</span>
+            <span className="sr-only">{tAria('brand')}</span>
             <span
               aria-hidden="true"
               className="block h-full w-full bg-[url('/images/logo_name.svg')] bg-contain bg-left bg-no-repeat"
