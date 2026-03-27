@@ -18,11 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function EmoCardsPage() {
-  const [categories, cards] = await Promise.all([
-    getEmotionCategories(),
-    getEmotionCards(),
-  ]);
   const locale = await getRequestLocale();
+  const [categories, cards] = await Promise.all([
+    getEmotionCategories(locale),
+    getEmotionCards(locale),
+  ]);
 
   const cardsByCategory = new Map<number, typeof cards>();
   cards.forEach((card) => {

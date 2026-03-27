@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { getEmotionCategories } from '@/lib/emotions';
+import { DEFAULT_LOCALE } from '@/lib/i18n/locale';
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://wavemocards.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch dynamic routes
-  const categories = await getEmotionCategories();
+  const categories = await getEmotionCategories(DEFAULT_LOCALE);
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [

@@ -2,7 +2,7 @@
   {
     "id": 1,
     "slug": "happy",
-    "name": "快樂",
+    "name": "喜び",
     "displayOrder": 1
   },
   {
@@ -26,31 +26,31 @@
   {
     "id": 5,
     "slug": "amazed",
-    "name": "驚訝",
+    "name": "驚き",
     "displayOrder": 5
   },
   {
     "id": 6,
     "slug": "sadness",
-    "name": "低落",
+    "name": "落ち込み",
     "displayOrder": 6
   },
   {
     "id": 7,
     "slug": "hate",
-    "name": "討厭",
+    "name": "嫌悪",
     "displayOrder": 7
   },
   {
     "id": 8,
     "slug": "anger",
-    "name": "生氣",
+    "name": "怒り",
     "displayOrder": 8
   },
   {
     "id": 9,
     "slug": "others",
-    "name": "其他",
+    "name": "その他",
     "displayOrder": 9
   }
 ]

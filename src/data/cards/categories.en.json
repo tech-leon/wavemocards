@@ -2,55 +2,55 @@
   {
     "id": 1,
     "slug": "happy",
-    "name": "快樂",
+    "name": "Happiness",
     "displayOrder": 1
   },
   {
     "id": 2,
     "slug": "expectation",
-    "name": "期待",
+    "name": "Expectation",
     "displayOrder": 2
   },
   {
     "id": 3,
     "slug": "relieved",
-    "name": "安心",
+    "name": "Relief",
     "displayOrder": 3
   },
   {
     "id": 4,
     "slug": "unstable",
-    "name": "不安",
+    "name": "Unease",
     "displayOrder": 4
   },
   {
     "id": 5,
     "slug": "amazed",
-    "name": "驚訝",
+    "name": "Surprise",
     "displayOrder": 5
   },
   {
     "id": 6,
     "slug": "sadness",
-    "name": "低落",
+    "name": "Sadness",
     "displayOrder": 6
   },
   {
     "id": 7,
     "slug": "hate",
-    "name": "討厭",
+    "name": "Dislike",
     "displayOrder": 7
   },
   {
     "id": 8,
     "slug": "anger",
-    "name": "生氣",
+    "name": "Anger",
     "displayOrder": 8
   },
   {
     "id": 9,
     "slug": "others",
-    "name": "其他",
+    "name": "Others",
     "displayOrder": 9
   }
 ]

@@ -1,8 +1,16 @@
-import type { EmotionCard } from '@/lib/emotions';
 import type { EmotionCardData } from '@/types/emotion-card';
 
+interface EmotionCardLike {
+  id: number;
+  name: string;
+  category_id: number;
+  description?: string | null;
+  example?: string | null;
+  image_path?: string | null;
+}
+
 export function toEmotionCardData(
-  card: EmotionCard,
+  card: EmotionCardLike,
   categoryName: string
 ): EmotionCardData {
   return {

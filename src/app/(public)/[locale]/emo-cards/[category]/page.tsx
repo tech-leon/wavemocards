@@ -36,13 +36,13 @@ export async function generateStaticParams() {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: slug } = await params;
   const locale = await getRequestLocale();
-  const category = await getEmotionCategoryBySlug(slug);
+  const category = await getEmotionCategoryBySlug(slug, locale);
 
   if (!category) {
     notFound();
   }
 
-  const cards = await getEmotionCardsByCategoryId(category.id);
+  const cards = await getEmotionCardsByCategoryId(category.id, locale);
 
   return (
     <CategoryCardsContent

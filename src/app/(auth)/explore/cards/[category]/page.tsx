@@ -1,5 +1,6 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { notFound } from 'next/navigation';
+import { getRequestLocale } from '@/lib/i18n/request';
 import {
   getEmotionCardsByCategoryId,
   getEmotionCategoryBySlug,
@@ -23,13 +24,14 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function ExploreCategoryPage({ params }: PageProps) {
   const { category } = await params;
   await withAuth({ ensureSignedIn: true });
+  const locale = await getRequestLocale();
 
-  const categoryData = await getEmotionCategoryBySlug(category);
+  const categoryData = await getEmotionCategoryBySlug(category, locale);
   if (!categoryData) {
     notFound();
   }
 
-  const cards = await getEmotionCardsByCategoryId(categoryData.id);
+  const cards = await getEmotionCardsByCategoryId(categoryData.id, locale);
 
   return (
     <ExploreCategoryCardsContent

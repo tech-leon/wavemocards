@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
 import {
   getEmotionCards,
   getEmotionCategories,
@@ -18,10 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ExploreCardsPage() {
   await withAuth({ ensureSignedIn: true });
+  const locale = await getRequestLocale();
 
   const [categories, cards] = await Promise.all([
-    getEmotionCategories(),
-    getEmotionCards(),
+    getEmotionCategories(locale),
+    getEmotionCards(locale),
   ]);
 
   return <ExploreCardsContent categories={categories} cards={cards} />;
