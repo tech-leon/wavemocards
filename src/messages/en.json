@@ -782,6 +782,41 @@
     "required": "This field is required",
     "invalidDateRange": "Start time cannot be later than end time"
   },
+  "apiErrors": {
+    "common": {
+      "unauthorized": "Unauthorized",
+      "databaseNotConfigured": "Database not configured",
+      "internalServerError": "Internal server error",
+      "invalidRequestBody": "Invalid request body"
+    },
+    "profile": {
+      "notFound": "Profile not found",
+      "createFailed": "Failed to create profile",
+      "fetchFailed": "Failed to fetch profile",
+      "updateFailed": "Failed to update profile",
+      "invalidFirstName": "First name is required",
+      "invalidLastName": "Last name is required",
+      "invalidTitle": "Invalid role option",
+      "invalidDate": "Invalid date format",
+      "invalidThemePreference": "Invalid theme preference",
+      "invalidLocalePreference": "Invalid locale preference",
+      "noUpdatableFields": "No updatable fields provided"
+    },
+    "records": {
+      "notFound": "Record not found",
+      "fetchFailed": "Failed to fetch records",
+      "createFailed": "Failed to create record",
+      "updateFailed": "Failed to update record",
+      "deleteFailed": "Failed to delete record",
+      "invalidCards": "Cards must be an array containing 1 to 3 cards",
+      "profileCreateFailed": "Failed to create profile"
+    },
+    "analysis": {
+      "missingDateRange": "Both start date and end date are required",
+      "fetchFailed": "Failed to fetch analysis data",
+      "noData": "There is no data for this period"
+    }
+  },
   "emotionContent": {
     "aboutSections": {
       "whatIsEmotion": {

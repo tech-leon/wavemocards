@@ -71,7 +71,7 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
-          <span>TOP</span>
+          <span>{t('backToTop')}</span>
         </motion.button>
       )}
     </AnimatePresence>

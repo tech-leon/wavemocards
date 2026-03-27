@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
@@ -58,6 +59,7 @@ interface ExploreCardsContentProps {
 }
 
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
+  const t = useTranslations('explore.cards');
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
@@ -87,14 +89,14 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   const getCategorySlug = (cat: EmotionCategory) => cat.slug;
 
   return (
-    <section aria-label="探索情緒卡">
+    <section aria-label={t('aria.section')}>
       {/* Sticky header */}
       <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
-              <h2 className="md:hidden">探索情緒</h2>
-              <h2 className="hidden md:block">探索情緒｜情緒卡</h2>
+              <h2 className="md:hidden">{t('titles.mobile')}</h2>
+              <h2 className="hidden md:block">{t('titles.desktop')}</h2>
             </div>
             <div className="flex flex-col md:flex-row justify-end items-end md:items-center gap-2">
               <div className="flex items-center gap-2">
@@ -109,7 +111,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  展開
+                  {t('view.expand')}
                 </button>
                 <button
                   type="button"
@@ -122,7 +124,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  收合
+                  {t('view.collapse')}
                 </button>
                 <button
                   type="button"
@@ -135,7 +137,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  情緒表
+                  {t('view.table')}
                 </button>
               </div>
               <Link
@@ -144,7 +146,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
               >
                 <Folder className="w-4 h-4 group-hover:hidden" />
                 <FolderOpen className="w-4 h-4 hidden group-hover:block" />
-                <span>我的情緒卡夾</span>
+                <span>{t('actions.openHolder')}</span>
                 {selectedCards.length > 0 && (
                   <span className="type-caption ml-1 bg-gray-100 dark:bg-gray-900 text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     {selectedCards.length}
@@ -165,37 +167,21 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
               onClick={() => setShowGuide(!showGuide)}
               className="w-full px-4 py-3 text-main font-bold text-left flex justify-between items-center"
             >
-              <span>探索步驟與方法</span>
+              <span>{t('guide.title')}</span>
               <span className={cn('transition-transform', showGuide && 'rotate-180')}>▼</span>
             </button>
             {showGuide && (
               <div className="type-body-sm px-4 pb-4">
-                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">探索步驟</h3>
+                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">{t('guide.stepsTitle')}</h3>
                 <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
-                  <li>下滑頁面，開始瀏覽情緒卡。</li>
-                  <li>
-                    點擊情緒卡右上方的「
-                    <span className="text-pink-tint01 font-bold">
-                      <PlusCircle className="inline w-4 h-4" />
-                    </span>
-                    」按鈕，即可將情緒卡放進「我的情緒卡夾」中。
-                  </li>
-                  <li>
-                    完成情緒卡挑選後，請點擊「
-                    <span className="text-main font-bold">我的情緒卡夾</span>
-                    」按鈕，進行<span className="text-main font-bold">下一步</span>的內容。
-                  </li>
+                  <li>{t('guide.steps.0')}</li>
+                  <li>{t('guide.steps.1')}</li>
+                  <li>{t('guide.steps.2')}</li>
                 </ol>
-                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">瀏覽情緒卡的方法</h3>
+                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">{t('guide.browseTitle')}</h3>
                 <ol className="pl-6 mb-4 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
-                  <li>
-                    點擊右上方的「<span className="text-main font-bold">收合</span>」或「
-                    <span className="text-main font-bold">展開</span>」按鈕，可以轉換情緒卡的展示方式。
-                  </li>
-                  <li>
-                    點擊右上方的「<span className="text-main font-bold">情緒表</span>
-                    」，可以快速瀏覽所有情緒詞彙。
-                  </li>
+                  <li>{t('guide.browseMethods.0')}</li>
+                  <li>{t('guide.browseMethods.1')}</li>
                 </ol>
               </div>
             )}
@@ -245,12 +231,12 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                             isAdded
                               ? {
                                   kind: 'remove',
-                                  label: '移出卡夾',
+                                  label: t('actions.removeFromHolder'),
                                   onClick: () => removeCard(card.id),
                                 }
                               : {
                                   kind: 'add',
-                                  label: '加入卡夾',
+                                  label: t('actions.addToHolder'),
                                   onClick: () => handleAddCard(card),
                                 }
                           }
@@ -269,7 +255,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {viewMode === 'folded' && (
           <div className="mt-6 mb-16">
             <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
-              <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
+              <li>{t('guide.categoryCardsHint')}</li>
             </ul>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               {categories.map((cat) => {
@@ -343,7 +329,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                               type="button"
                               onClick={() => handleAddCard(card)}
                               className="absolute -top-1.5 -right-1.5 z-10 w-5 h-5 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
-                              title="加入卡夾"
+                              title={t('actions.addToHolder')}
                             >
                               <PlusCircle className="w-3.5 h-3.5" />
                             </button>

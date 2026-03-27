@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { categoryRepresentativeCards } from '@/lib/emotions';
@@ -49,6 +50,7 @@ export function EmoCardsContent({
   cardsByCategoryObj,
   locale,
 }: EmoCardsContentProps) {
+  const t = useTranslations('emoCards.overview');
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [selectedCard, setSelectedCard] = useState<EmotionCardData | null>(null);
   const [selectedCategorySlug, setSelectedCategorySlug] = useState<string>('');
@@ -75,15 +77,15 @@ export function EmoCardsContent({
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-            <h2>認識情緒</h2>
+            <h2>{t('pageTitle')}</h2>
             <div className="flex justify-end gap-4">
               <Link
                 href={localizeHref('/about-emotions', locale)}
                 className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
               >
-                認識情緒
+                {t('tabs.aboutEmotions')}
               </Link>
-              <span className="px-4 py-2 text-gray-500 dark:text-gray-300 font-medium">情緒卡</span>
+              <span className="px-4 py-2 text-gray-500 dark:text-gray-300 font-medium">{t('tabs.emoCards')}</span>
             </div>
           </div>
 
@@ -100,7 +102,7 @@ export function EmoCardsContent({
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
-                展開
+                {t('view.expand')}
               </button>
               <button
                 onClick={() => setViewMode('folded')}
@@ -112,7 +114,7 @@ export function EmoCardsContent({
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
-                收合
+                {t('view.collapse')}
               </button>
               <button
                 onClick={() => setViewMode('table')}
@@ -124,7 +126,7 @@ export function EmoCardsContent({
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
-                情緒表
+                {t('view.table')}
               </button>
             </div>
           </div>
@@ -136,47 +138,37 @@ export function EmoCardsContent({
               className="border-2 border-main-tint02 rounded-lg bg-gray-100 dark:bg-gray-900 last:border-b-2"
             >
               <AccordionTrigger className="px-4 py-3 text-main font-bold hover:no-underline">
-                瀏覽情緒卡的方法
+                {t('guide.title')}
               </AccordionTrigger>
               <AccordionContent className="type-body-sm px-4 pb-4">
-                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">介面的種類</h3>
+                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">{t('guide.interfaceTypes')}</h3>
                 <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
-                  <li>
-                    點擊右上方的「<span className="px-1 font-bold text-main">收合</span>
-                    」或「<span className="px-1 font-bold text-main">展開</span>
-                    」按鈕，可以轉換情緒卡的展示方式。
-                  </li>
-                  <li>
-                    點擊右上方的「<span className="px-1 font-bold text-main">情緒表</span>
-                    」，可以快速瀏覽所有情緒詞彙。
-                  </li>
+                  <li>{t('guide.switchViewDescription')}</li>
+                  <li>{t('guide.tableDescription')}</li>
                 </ol>
-                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">各個介面的使用說明</h3>
+                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">{t('guide.usageByView')}</h3>
                 <ol className="pl-6 mb-6 text-gray-800 dark:text-gray-100 list-decimal space-y-2">
                   <li>
-                    <span className="font-bold">展開</span>：
+                    <span className="font-bold">{t('guide.expand.title')}</span>：
                     <p className="text-gray-700 dark:text-gray-100">
-                      點擊單張「<span className="px-1">情緒卡</span>
-                      」，可以查看關於該情緒的詳細內容。
+                      {t('guide.expand.description')}
                     </p>
                   </li>
                   <li>
-                    <span className="font-bold">收合</span>：
+                    <span className="font-bold">{t('guide.collapse.title')}</span>：
                     <p className="text-gray-700 dark:text-gray-100">
-                      共有 9 張分類卡，點擊單張「<span className="px-1">分類卡</span>
-                      」後，即可進入該分類的情緒卡頁面。
+                      {t('guide.collapse.description')}
                     </p>
                   </li>
                   <li>
-                    <span className="font-bold">情緒表</span>：
+                    <span className="font-bold">{t('guide.table.title')}</span>：
                     <p className="text-gray-700 dark:text-gray-100">
-                      點擊單一「<span className="px-1">情緒詞彙</span>
-                      」，可以查看關於該情緒的詳細內容。
+                      {t('guide.table.description')}
                     </p>
                   </li>
                 </ol>
                 <p className="type-caption text-gray-700 dark:text-gray-100">
-                  💬 透過點擊 標題「瀏覽情緒卡的方法」的區塊，可將此說明收合。
+                  {t('guide.hint')}
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -228,7 +220,7 @@ export function EmoCardsContent({
           {viewMode === 'folded' && (
             <div className="mt-6 mb-18">
               <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
-                <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
+                <li>{t('categoryCardsHint')}</li>
               </ul>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 {categories.map((category) => {

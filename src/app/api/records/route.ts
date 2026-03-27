@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
 
 /**
@@ -9,22 +11,26 @@ import { createServerClient } from '@/lib/supabase';
  */
 export async function GET(request: NextRequest) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     // Verify authentication
     let user = null;
     try {
       const auth = await withAuth();
       user = auth.user;
     } catch {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     // Get user profile
@@ -35,7 +41,7 @@ export async function GET(request: NextRequest) {
       .single();
 
     if (profileError || !profile) {
-      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
+      return NextResponse.json({ error: tProfile('notFound') }, { status: 404 });
     }
 
     // Parse query params
@@ -78,7 +84,7 @@ export async function GET(request: NextRequest) {
 
     if (queryError) {
       console.error('Error fetching records:', queryError);
-      return NextResponse.json({ error: 'Failed to fetch records' }, { status: 500 });
+      return NextResponse.json({ error: tRecords('fetchFailed') }, { status: 500 });
     }
 
     // Keyword filtering (client-side)
@@ -126,7 +132,9 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Unexpected error in GET /api/records:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }
 
@@ -136,17 +144,20 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     // Verify authentication
     let user = null;
     try {
       const auth = await withAuth();
       user = auth.user;
     } catch {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     const body = await request.json();
@@ -164,10 +175,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-      return NextResponse.json(
-        { error: 'Cards must be an array of 1-3 card IDs' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
     }
 
     // Map cards to card_1_id, card_2_id, card_3_id
@@ -188,10 +196,7 @@ export async function POST(request: NextRequest) {
     // Get user profile from Supabase
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json(
-        { error: 'Database not configured' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     // Get the profile by workos_user_id
@@ -216,10 +221,7 @@ export async function POST(request: NextRequest) {
 
       if (createError || !newProfile) {
         console.error('Error creating profile:', createError);
-        return NextResponse.json(
-          { error: 'Failed to create user profile' },
-          { status: 500 }
-        );
+        return NextResponse.json({ error: tRecords('profileCreateFailed') }, { status: 500 });
       }
 
       // Use the new profile
@@ -248,10 +250,7 @@ export async function POST(request: NextRequest) {
 
       if (insertError) {
         console.error('Error inserting emotion record:', insertError);
-        return NextResponse.json(
-          { error: 'Failed to save emotion record' },
-          { status: 500 }
-        );
+        return NextResponse.json({ error: tRecords('createFailed') }, { status: 500 });
       }
 
       return NextResponse.json({ message: 'Record saved successfully' });
@@ -281,18 +280,14 @@ export async function POST(request: NextRequest) {
 
     if (insertError) {
       console.error('Error inserting emotion record:', insertError);
-      return NextResponse.json(
-        { error: 'Failed to save emotion record' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: tRecords('createFailed') }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'Record saved successfully' });
   } catch (error) {
     console.error('Unexpected error in POST /api/records:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }

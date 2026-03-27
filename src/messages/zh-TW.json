@@ -782,6 +782,41 @@
     "required": "此欄為必填",
     "invalidDateRange": "開始時間不可晚於結束時間"
   },
+  "apiErrors": {
+    "common": {
+      "unauthorized": "未授權",
+      "databaseNotConfigured": "資料庫尚未設定",
+      "internalServerError": "伺服器內部錯誤",
+      "invalidRequestBody": "無效的請求格式"
+    },
+    "profile": {
+      "notFound": "找不到使用者資料",
+      "createFailed": "建立使用者資料失敗",
+      "fetchFailed": "取得使用者資料失敗",
+      "updateFailed": "更新使用者資料失敗",
+      "invalidFirstName": "名字為必填欄位",
+      "invalidLastName": "姓氏為必填欄位",
+      "invalidTitle": "無效的身份選項",
+      "invalidDate": "無效的日期格式",
+      "invalidThemePreference": "無效的主題偏好",
+      "invalidLocalePreference": "無效的語言偏好",
+      "noUpdatableFields": "未提供可更新欄位"
+    },
+    "records": {
+      "notFound": "找不到紀錄",
+      "fetchFailed": "載入紀錄失敗",
+      "createFailed": "建立紀錄失敗",
+      "updateFailed": "更新紀錄失敗",
+      "deleteFailed": "刪除紀錄失敗",
+      "invalidCards": "卡片必須是 1 到 3 張的陣列",
+      "profileCreateFailed": "建立使用者資料失敗"
+    },
+    "analysis": {
+      "missingDateRange": "必須提供開始與結束日期",
+      "fetchFailed": "分析資料載入失敗",
+      "noData": "這段期間沒有資料"
+    }
+  },
   "emotionContent": {
     "aboutSections": {
       "whatIsEmotion": {

@@ -782,6 +782,41 @@
     "required": "この項目は必須です",
     "invalidDateRange": "開始時刻を終了時刻より遅くすることはできません"
   },
+  "apiErrors": {
+    "common": {
+      "unauthorized": "認証されていません",
+      "databaseNotConfigured": "データベースが設定されていません",
+      "internalServerError": "サーバー内部エラー",
+      "invalidRequestBody": "無効なリクエスト形式です"
+    },
+    "profile": {
+      "notFound": "プロフィールが見つかりません",
+      "createFailed": "プロフィールの作成に失敗しました",
+      "fetchFailed": "プロフィールの取得に失敗しました",
+      "updateFailed": "プロフィールの更新に失敗しました",
+      "invalidFirstName": "名は必須です",
+      "invalidLastName": "姓は必須です",
+      "invalidTitle": "無効な役割です",
+      "invalidDate": "無効な日付形式です",
+      "invalidThemePreference": "無効なテーマ設定です",
+      "invalidLocalePreference": "無効な言語設定です",
+      "noUpdatableFields": "更新可能な項目がありません"
+    },
+    "records": {
+      "notFound": "レコードが見つかりません",
+      "fetchFailed": "レコードの取得に失敗しました",
+      "createFailed": "レコードの作成に失敗しました",
+      "updateFailed": "レコードの更新に失敗しました",
+      "deleteFailed": "レコードの削除に失敗しました",
+      "invalidCards": "カードは 1 枚から 3 枚までの配列である必要があります",
+      "profileCreateFailed": "プロフィールの作成に失敗しました"
+    },
+    "analysis": {
+      "missingDateRange": "開始日と終了日を指定してください",
+      "fetchFailed": "分析データの取得に失敗しました",
+      "noData": "この期間のデータはありません"
+    }
+  },
   "emotionContent": {
     "aboutSections": {
       "whatIsEmotion": {

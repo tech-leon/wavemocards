@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
 import { AccountProfile } from '@/components/account';
 
-export const metadata: Metadata = {
-  title: '浪潮情緒卡｜我的帳戶',
-  description: '管理你的帳戶設定和個人資料',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta.account');
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function AccountPage() {
   await withAuth({ ensureSignedIn: true });

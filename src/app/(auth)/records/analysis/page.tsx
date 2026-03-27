@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
 
 const RecordAnalysis = dynamic(() =>
   import('@/components/records').then((mod) => ({ default: mod.RecordAnalysis })),
@@ -13,10 +14,14 @@ const RecordAnalysis = dynamic(() =>
   }
 );
 
-export const metadata: Metadata = {
-  title: '浪潮情緒卡｜我的紀錄｜分析',
-  description: '分析你的情緒紀錄，查看情緒類組次數和比例',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta.records');
+
+  return {
+    title: t('analysisTitle'),
+    description: t('analysisDescription'),
+  };
+}
 
 export default async function RecordAnalysisPage() {
   await withAuth({ ensureSignedIn: true });

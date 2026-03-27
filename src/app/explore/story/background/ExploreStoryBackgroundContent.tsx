@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
@@ -12,6 +13,7 @@ interface ExploreStoryBackgroundContentProps {
 export function ExploreStoryBackgroundContent({
   userName,
 }: ExploreStoryBackgroundContentProps) {
+  const t = useTranslations('explore.storyBackground');
   const router = useRouter();
   const { selectedCards, storyBackground, setStoryBackground } = useExploreStore();
 
@@ -29,8 +31,8 @@ export function ExploreStoryBackgroundContent({
   return (
     <ExploreStepLayout
       currentStep={3}
-      title="我的情緒故事｜背景篇"
-      titleMobile={{ line1: '我的情緒故事', line2: '背景篇' }}
+      title={t('title')}
+      titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
           <button
@@ -38,26 +40,25 @@ export function ExploreStoryBackgroundContent({
             onClick={handleBack}
             className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
-            上一步
+            {t('actions.previous')}
           </button>
           <button
             type="button"
             onClick={handleNext}
             className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
-            下一步
+            {t('actions.next')}
           </button>
         </>
       }
     >
       <ul className="type-body-sm ml-1 mt-3 mb-6 space-y-1 text-gray-800 dark:text-gray-100">
         <li>
-          謝謝親愛的
-          <span className="px-0.5 text-main font-bold">{userName}</span>
+          {t('greeting', { userName })}
         </li>
-        <li>接下來，想邀請你慢慢地潛入自己的情緒故事中，找尋自己情緒的源頭。</li>
+        <li>{t('instructions.line2')}</li>
         <li className="type-caption text-gray-500 dark:text-gray-300">
-          若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」
+          {t('instructions.skipHint')}
         </li>
       </ul>
 
@@ -65,12 +66,10 @@ export function ExploreStoryBackgroundContent({
         <div className="rounded-lg bg-main-tint03 md:w-2/3 lg:w-3/4">
           <label htmlFor="whatHappened" className="block px-4 py-3">
             <p className="type-body mb-2 font-medium text-main">
-              邀請你輕輕地闔上雙眼，在吸氣與吐氣之間，慢慢地回想，在感受到「
-              <span className="px-0.5">{cardNamesStr}</span>
-              」的情緒之前，發生了什麼事情呢？
+              {t('prompt.title', { cardNames: cardNamesStr })}
             </p>
             <p className="type-body-sm text-gray-800">
-              請在下欄中，試著寫下你覺得可能是讓你有這些情緒的原因或是事情、背景故事等。
+              {t('prompt.description')}
             </p>
           </label>
           <StoryTextarea
@@ -78,7 +77,7 @@ export function ExploreStoryBackgroundContent({
             value={storyBackground}
             onChange={(e) => setStoryBackground(e.target.value)}
             className="min-h-[120px] resize-y"
-            placeholder="在這裡寫下你的故事..."
+            placeholder={t('placeholder')}
           />
         </div>
         <div className="flex items-center justify-center md:w-1/3 md:justify-end lg:w-1/4">

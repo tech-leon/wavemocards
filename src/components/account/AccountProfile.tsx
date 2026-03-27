@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { Button } from '@/components/ui/button';
@@ -25,18 +26,19 @@ interface ProfileData {
 /**
  * Map title value to display text
  */
-function getTitleDisplay(title: string | null): string {
+function getTitleDisplay(title: string | null, t: ReturnType<typeof useTranslations>): string {
   switch (title) {
     case 'Student':
-      return '學生';
+      return t('options.student');
     case 'Teacher':
-      return '教師';
+      return t('options.teacher');
     default:
-      return '其他';
+      return t('options.other');
   }
 }
 
 export function AccountProfile() {
+  const t = useTranslations('account.profile');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -63,11 +65,7 @@ export function AccountProfile() {
     force: true,
   });
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/user');
@@ -82,19 +80,23 @@ export function AccountProfile() {
         setFormBirthday(data.profile.day_of_birth || '');
         setFormTitle(data.profile.title || 'Null');
       } else {
-        toast.error('載入帳戶資料失敗');
+        toast.error(data.error || t('errors.loadFailed'));
       }
     } catch {
-      toast.error('載入帳戶資料時發生錯誤');
+      toast.error(t('errors.loadUnexpected'));
     } finally {
       setLoading(false);
     }
-  };
+  }, [t]);
+
+  useEffect(() => {
+    void fetchProfile();
+  }, [fetchProfile]);
 
   // Validate last name
   const validateLastName = (value: string) => {
     if (!value.trim()) {
-      setLastNameError('此欄為必填');
+      setLastNameError(t('errors.required'));
       return false;
     }
     setLastNameError('');
@@ -104,7 +106,7 @@ export function AccountProfile() {
   // Validate first name
   const validateFirstName = (value: string) => {
     if (!value.trim()) {
-      setFirstNameError('此欄為必填');
+      setFirstNameError(t('errors.required'));
       return false;
     }
     setFirstNameError('');
@@ -213,7 +215,7 @@ export function AccountProfile() {
 
   if (!profile) {
     return (
-      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">無法載入帳戶資料</div>
+      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">{t('empty.loadFailed')}</div>
     );
   }
 
@@ -223,7 +225,7 @@ export function AccountProfile() {
       <div className="sticky top-[64px] z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0">
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
-            <h2>我的帳戶</h2>
+            <h2>{t('title')}</h2>
 
             {/* Action buttons */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -233,7 +235,7 @@ export function AccountProfile() {
                   onClick={handleEdit}
                   className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 font-bold"
                 >
-                  編輯
+                  {t('actions.edit')}
                 </Button>
               ) : (
                 <>
@@ -243,14 +245,14 @@ export function AccountProfile() {
                     className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 font-bold"
                     disabled={saving}
                   >
-                    取消
+                    {t('actions.cancel')}
                   </Button>
                   <Button
                     onClick={handleSave}
                     className="type-button rounded-full bg-main hover:bg-main-dark text-white px-6 font-bold"
                     disabled={saving}
                   >
-                    {saving ? '儲存中...' : '儲存'}
+                    {saving ? t('actions.saving') : t('actions.save')}
                   </Button>
                 </>
               )}
@@ -299,21 +301,21 @@ export function AccountProfile() {
           <div className="w-full flex-1">
             {/* Email - always read only */}
             <div className="mb-6">
-              <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">Email</span>
+              <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.email')}</span>
               <p className="type-body ml-1 font-bold">{email}</p>
             </div>
 
             {/* Password */}
             <div className="mb-6">
-              <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">密碼</span>
+              <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.password')}</span>
               <div className="flex justify-between items-center">
-                <p className="type-body ml-1 font-bold">********</p>
+                <p className="type-body ml-1 font-bold">{t('passwordMask')}</p>
                 {!isEditing && (
                   <AuthNavigationButton
                     href={passwordResetHref}
                     className="type-button px-4 py-1 rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors"
                   >
-                    重設密碼
+                    {t('resetPassword')}
                   </AuthNavigationButton>
                 )}
               </div>
@@ -323,7 +325,7 @@ export function AccountProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
               {/* Last Name (姓) */}
               <div className="mb-6">
-                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">姓</span>
+                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.lastName')}</span>
                 {isEditing ? (
                   <div>
                     <input
@@ -334,20 +336,20 @@ export function AccountProfile() {
                         setFormLastName(e.target.value);
                         validateLastName(e.target.value);
                       }}
-                      placeholder="請輸入姓氏"
+                      placeholder={t('placeholders.lastName')}
                     />
                     {lastNameError && (
                       <p className="type-caption mt-1 ml-3 text-pink">{lastNameError}</p>
                     )}
                   </div>
                 ) : (
-                  <p className="type-body ml-1 font-bold">{profile.last_name || '—'}</p>
+                  <p className="type-body ml-1 font-bold">{profile.last_name || t('empty.notAvailable')}</p>
                 )}
               </div>
 
               {/* First Name (名) */}
               <div className="mb-6">
-                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">名</span>
+                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.firstName')}</span>
                 {isEditing ? (
                   <div>
                     <input
@@ -358,14 +360,14 @@ export function AccountProfile() {
                         setFormFirstName(e.target.value);
                         validateFirstName(e.target.value);
                       }}
-                      placeholder="請輸入名字"
+                      placeholder={t('placeholders.firstName')}
                     />
                     {firstNameError && (
                       <p className="type-caption mt-1 ml-3 text-pink">{firstNameError}</p>
                     )}
                   </div>
                 ) : (
-                  <p className="type-body ml-1 font-bold">{profile.first_name || '—'}</p>
+                  <p className="type-body ml-1 font-bold">{profile.first_name || t('empty.notAvailable')}</p>
                 )}
               </div>
             </div>
@@ -374,7 +376,7 @@ export function AccountProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
               {/* Birthday */}
               <div className="mb-6">
-                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">生日</span>
+                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.birthDate')}</span>
                 {isEditing ? (
                   <input
                     type="date"
@@ -383,25 +385,25 @@ export function AccountProfile() {
                     onChange={(e) => setFormBirthday(e.target.value)}
                   />
                 ) : (
-                  <p className="type-body ml-1 font-bold">{profile.day_of_birth || '—'}</p>
+                  <p className="type-body ml-1 font-bold">{profile.day_of_birth || t('empty.notAvailable')}</p>
                 )}
               </div>
 
               {/* Title (身份) */}
               <div className="mb-6">
-                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">身份</span>
+                <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.role')}</span>
                 {isEditing ? (
                   <select
                     className="type-body w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
                   >
-                    <option value="Student">學生</option>
-                    <option value="Teacher">教師</option>
-                    <option value="Null">其他</option>
+                    <option value="Student">{t('options.student')}</option>
+                    <option value="Teacher">{t('options.teacher')}</option>
+                    <option value="Null">{t('options.other')}</option>
                   </select>
                 ) : (
-                  <p className="type-body ml-1 font-bold">{getTitleDisplay(profile.title)}</p>
+                  <p className="type-body ml-1 font-bold">{getTitleDisplay(profile.title, t)}</p>
                 )}
               </div>
             </div>
@@ -414,16 +416,14 @@ export function AccountProfile() {
       {showCancelModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
-            <p className="type-page-title mb-3 text-pink">確定要取消編輯嗎？</p>
+            <p className="type-page-title mb-3 text-pink">{t('confirmCancel.title')}</p>
             <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
-              取消編輯後，
-              <span className="text-pink pl-1">將不會儲存</span>
-              您所做的變更，確定要取消編輯嗎？
+              {t('confirmCancel.description')}
             </p>
             <div className="w-[45%] mb-4">
               <Image
                 src="/images/sureToDelete.svg"
-                alt="確認取消"
+                alt={t('confirmCancel.title')}
                 width={200}
                 height={200}
                 className="w-full"
@@ -445,13 +445,13 @@ export function AccountProfile() {
                 onClick={() => setShowCancelModal(false)}
                 className="rounded-full border-2 border-pink text-pink hover:bg-pink/10 px-6"
               >
-                繼續編輯
+                {t('confirmCancel.continueEditing')}
               </Button>
               <Button
                 onClick={handleCancelConfirm}
                 className="rounded-full bg-pink hover:bg-pink-dark text-white px-6"
               >
-                取消編輯
+                {t('confirmCancel.discard')}
               </Button>
             </div>
           </div>
@@ -463,17 +463,17 @@ export function AccountProfile() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className={`type-page-title mb-3 ${saveSuccess ? 'text-main' : 'text-pink'}`}>
-              {saveSuccess ? '儲存成功' : '儲存失敗'}
+              {saveSuccess ? t('saveResult.successTitle') : t('saveResult.failureTitle')}
             </p>
             {!saveSuccess && (
               <>
                 <p className="type-body-sm mt-3 text-gray-800 dark:text-gray-100">
-                  很抱歉儲存失敗，請確認您所輸入的內容是否有無錯誤。
+                  {t('saveResult.failureDescription')}
                 </p>
                 <p className="type-body-sm mt-2 text-gray-800 dark:text-gray-100">
-                  若無法排除問題，請{' '}
+                  {t('saveResult.contactUsPrompt')}{' '}
                   <a className="text-pink hover:underline" href="mailto:info@wavemocards.com">
-                    與我們聯繫
+                    {t('saveResult.contactUs')}
                   </a>
                 </p>
               </>
@@ -481,7 +481,7 @@ export function AccountProfile() {
             <div className="w-[45%] my-4">
               <Image
                 src={saveSuccess ? '/images/emoCards/5.svg' : '/images/addCardFail.svg'}
-                alt={saveSuccess ? '儲存成功' : '儲存失敗'}
+                alt={saveSuccess ? t('saveResult.successAlt') : t('saveResult.failureAlt')}
                 width={200}
                 height={200}
                 className="w-full"
@@ -493,7 +493,7 @@ export function AccountProfile() {
                 saveSuccess ? 'bg-main hover:bg-main-dark' : 'bg-pink hover:bg-pink-dark'
               }`}
             >
-              我知道了
+              {t('saveResult.acknowledge')}
             </Button>
           </div>
         </div>

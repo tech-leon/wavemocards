@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
@@ -9,6 +10,8 @@ import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StrengthSelector } from '@/components/explore';
 
 export default function ExploreStrength2Page() {
+  const t = useTranslations('explore.strength2');
+  const tToast = useTranslations('toast.explore');
   const router = useRouter();
   const store = useExploreStore();
   const { selectedCards, afterLevels, setAfterLevel } = store;
@@ -42,14 +45,15 @@ export default function ExploreStrength2Page() {
       });
 
       if (res.ok) {
-        toast.success('儲存成功');
+        toast.success(tToast('saveSuccess'));
         store.reset();
         router.push('/explore/complete');
       } else {
-        toast.error('很抱歉，儲存紀錄失敗，請稍後再試。');
+        const data = await res.json();
+        toast.error(data.error || tToast('saveFailed'));
       }
     } catch {
-      toast.error('儲存時發生錯誤，請確認網路狀態後再試一次。');
+      toast.error(tToast('saveUnexpected'));
     } finally {
       setSaving(false);
     }
@@ -58,8 +62,8 @@ export default function ExploreStrength2Page() {
   return (
     <ExploreStepLayout
       currentStep={5}
-      title="我的情緒強度｜第二次"
-      titleMobile={{ line1: '我的情緒強度', line2: '第二次' }}
+      title={t('title')}
+      titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
           <button
@@ -67,7 +71,7 @@ export default function ExploreStrength2Page() {
             onClick={handleBack}
             className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
-            上一步
+            {t('actions.previous')}
           </button>
           <button
             type="button"
@@ -78,21 +82,19 @@ export default function ExploreStrength2Page() {
               saving ? 'cursor-not-allowed opacity-60' : 'hover:bg-main-dark'
             )}
           >
-            {saving ? '儲存中...' : '儲存紀錄'}
+            {saving ? t('actions.saving') : t('actions.saveRecord')}
           </button>
         </>
       }
     >
       {/* Instructions */}
       <ul className="type-body-sm ml-1 mt-3 mb-9 text-gray-800 dark:text-gray-100 space-y-1">
-        <li>在覺察與記錄情緒故事後，不知道你現在的情緒還好嗎？</li>
+        <li>{t('instructions.line1')}</li>
         <li>
-          <span className="text-main font-medium">
-            邀請你再次深呼吸，並問問心中的自己，現在的情緒強度分別如何呢？
-          </span>
-          <span className="type-caption text-gray-500 dark:text-gray-300">（ 1分代表最為微弱，5分代表最為強烈 ）</span>
+          <span className="text-main font-medium">{t('instructions.line2')}</span>
+          <span className="type-caption text-gray-500 dark:text-gray-300">{t('instructions.scoreHint')}</span>
         </li>
-        <li className="type-caption text-gray-500 dark:text-gray-300">若您不想紀錄，可以跳過此步驟，直接點擊「儲存紀錄」</li>
+        <li className="type-caption text-gray-500 dark:text-gray-300">{t('instructions.skipHint')}</li>
       </ul>
 
       {/* Strength selectors for each card */}

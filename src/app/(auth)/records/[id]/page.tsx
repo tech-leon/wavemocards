@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
 import { RecordDetail } from '@/components/records';
 
-export const metadata: Metadata = {
-  title: '浪潮情緒卡｜我的紀錄｜情緒故事',
-  description: '查看和編輯情緒故事詳情',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta.records');
+
+  return {
+    title: t('detailTitle'),
+    description: t('detailDescription'),
+  };
+}
 
 export default async function RecordDetailPage({
   params,

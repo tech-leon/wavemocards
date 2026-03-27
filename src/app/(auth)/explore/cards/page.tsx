@@ -1,14 +1,20 @@
+import type { Metadata } from 'next';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
 import {
   getEmotionCards,
   getEmotionCategories,
 } from '@/lib/emotions';
 import { ExploreCardsContent } from '@/app/explore/cards/ExploreCardsContent';
 
-export const metadata = {
-  title: '浪潮情緒卡｜探索情緒｜情緒卡',
-  description: '瀏覽並選擇情緒卡，放入你的情緒卡夾。',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta.explore.cards');
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function ExploreCardsPage() {
   await withAuth({ ensureSignedIn: true });

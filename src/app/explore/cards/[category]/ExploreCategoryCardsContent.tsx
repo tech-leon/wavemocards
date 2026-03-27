@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Folder, FolderOpen } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
@@ -16,6 +17,7 @@ interface ExploreCategoryCardsContentProps {
 }
 
 export function ExploreCategoryCardsContent({ category, cards }: ExploreCategoryCardsContentProps) {
+  const t = useTranslations('explore.cards');
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
   const slug = category.slug;
@@ -26,7 +28,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   };
 
   return (
-    <section aria-label={`${category.name} 情緒卡`}>
+    <section aria-label={t('aria.categorySection', { category: category.name })}>
       {/* Sticky header */}
       <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
         <div className="container mx-auto pt-4 px-3 sm:px-0">
@@ -38,7 +40,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h2>探索情緒｜{category.name}</h2>
+              <h2>{t('titles.category', { category: category.name })}</h2>
             </div>
             <Link
               href="/explore/selected"
@@ -46,7 +48,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
             >
               <Folder className="w-4 h-4 group-hover:hidden" />
               <FolderOpen className="w-4 h-4 hidden group-hover:block" />
-              <span>我的情緒卡夾</span>
+              <span>{t('actions.openHolder')}</span>
               {selectedCards.length > 0 && (
                 <span className="type-caption ml-1 bg-gray-100 dark:bg-gray-900 text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {selectedCards.length}
@@ -70,12 +72,12 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
                   isAdded
                     ? {
                         kind: 'remove',
-                        label: '移出卡夾',
+                        label: t('actions.removeFromHolder'),
                         onClick: () => removeCard(card.id),
                       }
                     : {
                         kind: 'add',
-                        label: '加入卡夾',
+                        label: t('actions.addToHolder'),
                         onClick: () => handleAddCard(card),
                       }
                 }

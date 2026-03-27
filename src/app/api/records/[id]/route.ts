@@ -1,26 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
 
 /**
  * Helper: get authenticated user's profile ID
  */
 async function getAuthenticatedProfileId() {
+  const locale = await getRequestLocale();
+  const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+  const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
   let user = null;
   try {
     const auth = await withAuth();
     user = auth.user;
   } catch {
-    return { error: 'Unauthorized', status: 401, profileId: null };
+    return { error: tCommon('unauthorized'), status: 401, profileId: null };
   }
 
   if (!user) {
-    return { error: 'Unauthorized', status: 401, profileId: null };
+    return { error: tCommon('unauthorized'), status: 401, profileId: null };
   }
 
   const supabase = createServerClient();
   if (!supabase) {
-    return { error: 'Database not configured', status: 500, profileId: null };
+    return { error: tCommon('databaseNotConfigured'), status: 500, profileId: null };
   }
 
   const { data: profile, error: profileError } = await supabase
@@ -30,7 +35,7 @@ async function getAuthenticatedProfileId() {
     .single();
 
   if (profileError || !profile) {
-    return { error: 'Profile not found', status: 404, profileId: null };
+    return { error: tProfile('notFound'), status: 404, profileId: null };
   }
 
   return { error: null, status: 200, profileId: profile.id };
@@ -45,6 +50,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
     const { error, status, profileId } = await getAuthenticatedProfileId();
 
@@ -54,7 +62,7 @@ export async function GET(
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     const { data: record, error: queryError } = await supabase
@@ -76,13 +84,15 @@ export async function GET(
       .single();
 
     if (queryError || !record) {
-      return NextResponse.json({ error: 'Record not found' }, { status: 404 });
+      return NextResponse.json({ error: tRecords('notFound') }, { status: 404 });
     }
 
     return NextResponse.json({ record });
   } catch (error) {
     console.error('Unexpected error in GET /api/records/[id]:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }
 
@@ -95,6 +105,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
     const { error, status, profileId } = await getAuthenticatedProfileId();
 
@@ -104,7 +117,7 @@ export async function PUT(
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     const body = await request.json();
@@ -128,17 +141,19 @@ export async function PUT(
 
     if (updateError) {
       console.error('Error updating record:', updateError);
-      return NextResponse.json({ error: 'Failed to update record' }, { status: 500 });
+      return NextResponse.json({ error: tRecords('updateFailed') }, { status: 500 });
     }
 
     if (!updatedRecord) {
-      return NextResponse.json({ error: 'Record not found' }, { status: 404 });
+      return NextResponse.json({ error: tRecords('notFound') }, { status: 404 });
     }
 
     return NextResponse.json({ message: 'Record updated successfully', record: updatedRecord });
   } catch (error) {
     console.error('Unexpected error in PUT /api/records/[id]:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }
 
@@ -151,6 +166,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
     const { error, status, profileId } = await getAuthenticatedProfileId();
 
@@ -160,7 +178,7 @@ export async function DELETE(
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     const { error: deleteError } = await supabase
@@ -171,12 +189,14 @@ export async function DELETE(
 
     if (deleteError) {
       console.error('Error deleting record:', deleteError);
-      return NextResponse.json({ error: 'Failed to delete record' }, { status: 500 });
+      return NextResponse.json({ error: tRecords('deleteFailed') }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'Record deleted successfully' });
   } catch (error) {
     console.error('Unexpected error in DELETE /api/records/[id]:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }

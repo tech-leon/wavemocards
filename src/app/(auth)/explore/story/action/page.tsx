@@ -1,12 +1,14 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
 
 export default function ExploreStoryActionPage() {
+  const t = useTranslations('explore.storyAction');
   const router = useRouter();
   const {
     selectedCards,
@@ -36,8 +38,8 @@ export default function ExploreStoryActionPage() {
   return (
     <ExploreStepLayout
       currentStep={4}
-      title="我的情緒故事｜行動篇"
-      titleMobile={{ line1: '我的情緒故事', line2: '行動篇' }}
+      title={t('title')}
+      titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
           <button
@@ -45,23 +47,23 @@ export default function ExploreStoryActionPage() {
             onClick={handleBack}
             className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
-            上一步
+            {t('actions.previous')}
           </button>
           <button
             type="button"
             onClick={handleNext}
             className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
-            下一步
+            {t('actions.next')}
           </button>
         </>
       }
     >
       {/* Instructions */}
       <ul className="type-body-sm ml-1 mt-3 mb-6 text-gray-800 dark:text-gray-100 space-y-1">
-        <li>謝謝你，努力地回想了情緒發生的背景、原因。</li>
-        <li>接下來，想邀請你一起回想在情緒浪潮來臨之後⋯⋯</li>
-        <li className="type-caption text-gray-500 dark:text-gray-300">若您暫時不想紀錄，可以跳過此步驟，直接點擊「下一步」</li>
+        <li>{t('intro.line1')}</li>
+        <li>{t('intro.line2')}</li>
+        <li className="type-caption text-gray-500 dark:text-gray-300">{t('intro.skipHint')}</li>
       </ul>
 
       {/* Q1: What did you do? */}
@@ -69,12 +71,12 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="storyAction" className="block py-3 px-4">
-              <p className="type-caption mb-1 text-gray-800">第 1 題</p>
+              <p className="type-caption mb-1 text-gray-800">{t('question1.label')}</p>
               <p className="mb-1 text-main font-medium">
-                在感受到「<span className="px-0.5">{cardNamesStr}</span>」的情緒後，你有什麼反應呢？或是做了什麼事情呢？
+                {t('question1.prompt', { cardNames: cardNamesStr })}
               </p>
               <p className="type-body-sm text-gray-800">
-                例如：在感受到心中的焦慮後，我在日記本寫下各種心中所擔憂的事情。
+                {t('question1.example')}
               </p>
             </label>
             <StoryTextarea
@@ -98,9 +100,9 @@ export default function ExploreStoryActionPage() {
           </div>
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg order-2">
             <label htmlFor="storyResult" className="block py-3 px-4">
-              <p className="type-caption mb-1 text-gray-800">第 2 題</p>
+              <p className="type-caption mb-1 text-gray-800">{t('question2.label')}</p>
               <p className="text-main font-medium">
-                在上述你所做的反應後，帶來了什麼樣的結果呢？
+                {t('question2.prompt')}
               </p>
             </label>
             <StoryTextarea
@@ -118,9 +120,9 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="storyFeeling" className="block py-3 px-4">
-              <p className="type-caption mb-1 text-gray-800">第 3 題</p>
+              <p className="type-caption mb-1 text-gray-800">{t('question3.label')}</p>
               <p className="text-main font-medium">
-                對於上述發生的結果，你有什麼樣的感受呢？
+                {t('question3.prompt')}
               </p>
             </label>
             <StoryTextarea
@@ -144,16 +146,16 @@ export default function ExploreStoryActionPage() {
           </div>
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg order-2">
             <label className="block py-3 px-4">
-              <p className="type-caption mb-1 text-gray-800">第 4 題</p>
+              <p className="type-caption mb-1 text-gray-800">{t('question4.label')}</p>
               <p className="text-main font-medium">
-                你覺得這個的結果是否是你所期待的結果呢？
+                {t('question4.prompt')}
               </p>
             </label>
             <div className="mb-4 px-4 flex items-center gap-4">
               {[
-                { label: '是', value: 0 },
-                { label: '否', value: 1 },
-                { label: '不清楚', value: null },
+                { label: t('question4.options.yes'), value: 0 },
+                { label: t('question4.options.no'), value: 1 },
+                { label: t('question4.options.unclear'), value: null },
               ].map((option) => (
                 <button
                   key={option.label}
@@ -179,20 +181,13 @@ export default function ExploreStoryActionPage() {
         <div className="flex flex-col md:flex-row items-stretch gap-6">
           <div className="md:w-2/3 lg:w-3/4 bg-main-tint03 rounded-lg">
             <label htmlFor="betterAction" className="block py-3 px-4">
-              <p className="type-caption mb-1 text-gray-800">第 5 題</p>
+              <p className="type-caption mb-1 text-gray-800">{t('question5.label')}</p>
               <ul className="list-disc space-y-2">
                 <li>
-                  <p className="text-gray-800">
-                    如果這次的<span className="text-main font-medium">結果不如你所期待</span>的話，你覺得
-                    <span className="text-main font-medium">下次有類似的情緒時，可以怎麼做</span>
-                    ，可能可以得到你所期待的結果呢？
-                  </p>
+                  <p className="text-gray-800">{t('question5.promptUnexpected')}</p>
                 </li>
                 <li>
-                  <p className="text-gray-700">
-                    這次的情緒歷程，有哪些是你覺得做得不錯的地方呢？邀請你寫下
-                    <span className="text-main font-medium">肯定自己做得不錯的地方</span>。
-                  </p>
+                  <p className="text-gray-700">{t('question5.promptAffirming')}</p>
                 </li>
               </ul>
             </label>

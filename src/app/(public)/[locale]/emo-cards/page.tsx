@@ -1,15 +1,19 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { getEmotionCategories, getEmotionCards } from '@/lib/emotions';
 import { EmoCardsContent } from '@/app/emo-cards/EmoCardsContent';
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const t = await getTranslations({ locale, namespace: 'meta.emoCards' });
+
   return createPublicMetadata({
     pathname: '/emo-cards',
-    title: '浪潮情緒卡｜認識情緒｜情緒卡',
-    description: '瀏覽 65 張情緒卡，了解各種情緒的意思和例句',
-    keywords: ['情緒卡', '情緒詞彙', '情緒分類', '情緒教育'],
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords') as string[],
   });
 }
 
