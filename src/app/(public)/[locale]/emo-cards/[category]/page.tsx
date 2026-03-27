@@ -5,8 +5,9 @@ import { getRequestLocale } from '@/lib/i18n/request';
 import {
   getEmotionCategoryBySlug,
   getEmotionCardsByCategoryId,
-  categoryNames,
+  getEmotionCategories,
 } from '@/lib/emotions';
+import { DEFAULT_LOCALE } from '@/lib/i18n/locale';
 import { CategoryCardsContent } from '@/app/emo-cards/[category]/CategoryCardsContent';
 
 interface CategoryPageProps {
@@ -17,7 +18,9 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { category: slug } = await params;
-  const categoryName = categoryNames[slug] || slug;
+  const locale = await getRequestLocale();
+  const category = await getEmotionCategoryBySlug(slug, locale);
+  const categoryName = category?.name || slug;
 
   return createPublicMetadata({
     pathname: `/emo-cards/${slug}`,
@@ -28,8 +31,10 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return Object.keys(categoryNames).map((slug) => ({
-    category: slug,
+  const categories = await getEmotionCategories(DEFAULT_LOCALE);
+
+  return categories.map((category) => ({
+    category: category.slug,
   }));
 }
 

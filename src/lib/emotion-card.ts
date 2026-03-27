@@ -11,13 +11,13 @@ interface EmotionCardLike {
 
 export function toEmotionCardData(
   card: EmotionCardLike,
-  categoryName: string
+  categorySlug: string
 ): EmotionCardData {
   return {
     id: card.id,
     name: card.name,
     categoryId: card.category_id,
-    categoryName,
+    categorySlug,
     description: card.description || undefined,
     example: card.example || undefined,
     imagePath: card.image_path || undefined,

@@ -3,6 +3,7 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
+import { categoryRepresentativeCards } from '@/lib/emotions';
 
 /**
  * GET /api/records/analysis
@@ -60,13 +61,13 @@ export async function GET(request: NextRequest) {
         card_2_id,
         card_3_id,
         card_1:emotion_cards!emotion_records_card_1_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         ),
         card_2:emotion_cards!emotion_records_card_2_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         ),
         card_3:emotion_cards!emotion_records_card_3_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         )
       `)
       .eq('user_id', profile.id)
@@ -86,16 +87,15 @@ export async function GET(request: NextRequest) {
     const categoryCounts: Record<string, number> = {};
 
     records.forEach((record) => {
-      // Helper to extract category name from nested relation
-      const getCategoryName = (card: unknown): string | null => {
+      const getCategorySlug = (card: unknown): string | null => {
         if (!card) return null;
-        const c = card as { category?: { name?: string } };
-        return c?.category?.name || null;
+        const c = card as { category?: { slug?: string } };
+        return c?.category?.slug || null;
       };
 
-      const cat1 = getCategoryName(record.card_1);
-      const cat2 = getCategoryName(record.card_2);
-      const cat3 = getCategoryName(record.card_3);
+      const cat1 = getCategorySlug(record.card_1);
+      const cat2 = getCategorySlug(record.card_2);
+      const cat3 = getCategorySlug(record.card_3);
 
       if (cat1) categoryCounts[cat1] = (categoryCounts[cat1] || 0) + 1;
       if (cat2) categoryCounts[cat2] = (categoryCounts[cat2] || 0) + 1;
@@ -104,6 +104,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       categoryCounts,
+      representativeCards: categoryRepresentativeCards,
       totalRecords: records.length,
     });
   } catch (error) {

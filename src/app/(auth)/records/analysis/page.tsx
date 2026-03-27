@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
+import { getEmotionCategories } from '@/lib/emotions';
 
 const RecordAnalysis = dynamic(() =>
   import('@/components/records').then((mod) => ({ default: mod.RecordAnalysis })),
@@ -25,6 +27,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RecordAnalysisPage() {
   await withAuth({ ensureSignedIn: true });
+  const locale = await getRequestLocale();
+  const categories = await getEmotionCategories(locale);
 
-  return <RecordAnalysis />;
+  return <RecordAnalysis categories={categories} />;
 }

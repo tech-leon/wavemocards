@@ -20,30 +20,49 @@ import {
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
-// Emotion category color mapping (matches old version)
+interface EmotionCategorySummary {
+  id: number;
+  slug: string;
+  name: string;
+}
+
 const CATEGORY_COLORS: Record<string, string> = {
-  快樂: '#FFE589',
-  期待: '#F8C18F',
-  安心: '#CEE5AF',
-  不安: '#E0CACA',
-  驚訝: '#B4B9E7',
-  低落: '#C5DDE8',
-  討厭: '#D6CAC0',
-  生氣: '#E0AEAE',
-  其他: '#EBEBEB',
+  happy: '#FFE589',
+  expectation: '#F8C18F',
+  relieved: '#CEE5AF',
+  unstable: '#E0CACA',
+  amazed: '#B4B9E7',
+  sadness: '#C5DDE8',
+  hate: '#D6CAC0',
+  anger: '#E0AEAE',
+  others: '#EBEBEB',
 };
 
-// Category order
-const CATEGORY_ORDER = ['快樂', '期待', '安心', '不安', '驚訝', '低落', '討厭', '生氣', '其他'];
+const CATEGORY_ORDER = [
+  'happy',
+  'expectation',
+  'relieved',
+  'unstable',
+  'amazed',
+  'sadness',
+  'hate',
+  'anger',
+  'others',
+] as const;
 
 interface ChartData {
+  slug: string;
   name: string;
   count: number;
   color: string;
   percentage?: number;
 }
 
-export function RecordAnalysis() {
+interface RecordAnalysisProps {
+  categories: EmotionCategorySummary[];
+}
+
+export function RecordAnalysis({ categories }: RecordAnalysisProps) {
   const t = useTranslations('records.analysis');
   const tToast = useTranslations('toast.analysis');
   const [startDate, setStartDate] = useState('');
@@ -96,13 +115,18 @@ export function RecordAnalysis() {
         0
       );
 
+      const categoryNameMap = new Map(
+        categories.map((category) => [category.slug, category.name])
+      );
+
       const result: ChartData[] = CATEGORY_ORDER
-        .filter((cat) => (categoryCounts as Record<string, number>)[cat] > 0)
-        .map((cat) => ({
-          name: cat,
-          count: (categoryCounts as Record<string, number>)[cat],
-          color: CATEGORY_COLORS[cat] || '#EBEBEB',
-          percentage: Number((((categoryCounts as Record<string, number>)[cat] / total) * 100).toFixed(1)),
+        .filter((slug) => (categoryCounts as Record<string, number>)[slug] > 0)
+        .map((slug) => ({
+          slug,
+          name: categoryNameMap.get(slug) || slug,
+          count: (categoryCounts as Record<string, number>)[slug],
+          color: CATEGORY_COLORS[slug] || '#EBEBEB',
+          percentage: Number((((categoryCounts as Record<string, number>)[slug] / total) * 100).toFixed(1)),
         }));
 
       setChartData(result);

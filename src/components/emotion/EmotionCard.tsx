@@ -62,7 +62,7 @@ export function EmotionCard({
   dimmed = false,
   className,
 }: EmotionCardProps) {
-  const categorySlug = card.categoryName.toLowerCase();
+  const categorySlug = card.categorySlug || card.categoryName?.toLowerCase() || 'others';
   const styles = getEmotionCardCategoryStyle(categorySlug);
   const interactive = Boolean(onCardClick) && !disabled;
   const bodyClassName = cn(

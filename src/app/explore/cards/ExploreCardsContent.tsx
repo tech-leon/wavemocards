@@ -360,7 +360,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
       {modalCard && (
         <EmotionCardModal
           card={modalCard}
-          categorySlug={modalCard.categoryName}
+          categorySlug={modalCard.categorySlug}
           isOpen={!!modalCard}
           onClose={() => setModalCard(null)}
           onAdd={
