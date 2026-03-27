@@ -122,7 +122,7 @@ export function Header({ locale, user }: HeaderProps) {
               locale={locale}
               isAuthenticated={isAuthenticated}
               className="inline-flex"
-              selectClassName="type-button h-9 rounded-full border border-slate-300 bg-transparent px-3 text-slate-800 transition-colors hover:border-main hover:text-main disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:text-slate-100 dark:hover:border-main dark:hover:text-main"
+              triggerClassName="h-9 w-9 border-slate-300 text-slate-800 dark:border-slate-600 dark:text-slate-100"
             />
             <ThemeToggle isAuthenticated={isAuthenticated} />
           </div>

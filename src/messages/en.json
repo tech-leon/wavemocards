@@ -740,6 +740,7 @@
   },
   "languageSwitcher": {
     "ariaLabel": "Switch language",
+    "label": "Language",
     "options": {
       "zh-TW": "Traditional Chinese",
       "en": "English",

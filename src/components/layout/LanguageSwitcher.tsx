@@ -1,8 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Check, Languages } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import {
   isPublicPath,
   localizeHref,
@@ -16,8 +25,10 @@ interface LanguageSwitcherProps {
   locale: Locale;
   isAuthenticated: boolean;
   className?: string;
-  selectClassName?: string;
+  triggerClassName?: string;
   onChanged?: () => void;
+  align?: 'start' | 'end';
+  side?: 'bottom' | 'top';
 }
 
 function setLocaleCookie(locale: Locale) {
@@ -28,14 +39,17 @@ export function LanguageSwitcher({
   locale,
   isAuthenticated,
   className,
-  selectClassName,
+  triggerClassName,
   onChanged,
+  align = 'start',
+  side = 'bottom',
 }: LanguageSwitcherProps) {
   const t = useTranslations('languageSwitcher');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [selectedLocale, setSelectedLocale] = useState<Locale>(locale);
   const [isPending, setIsPending] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setSelectedLocale(locale);
@@ -60,7 +74,6 @@ export function LanguageSwitcher({
 
   const handleChange = async (nextLocale: Locale) => {
     if (nextLocale === locale || isPending) {
-      onChanged?.();
       return;
     }
 
@@ -88,26 +101,61 @@ export function LanguageSwitcher({
     }
 
     setLocaleCookie(nextLocale);
-    navigateToLocale(nextLocale);
+    setOpen(false);
     onChanged?.();
+    navigateToLocale(nextLocale);
   };
 
+  const localeOptions: Locale[] = ['zh-TW', 'en', 'ja'];
+
   return (
-    <label className={className}>
-      <span className="sr-only">{t('ariaLabel')}</span>
-      <select
-        aria-label={t('ariaLabel')}
-        value={selectedLocale}
-        disabled={isPending}
-        onChange={(event) => {
-          void handleChange(event.target.value as Locale);
-        }}
-        className={selectClassName}
-      >
-        <option value="zh-TW">{t('options.zh-TW')}</option>
-        <option value="en">{t('options.en')}</option>
-        <option value="ja">{t('options.ja')}</option>
-      </select>
-    </label>
+    <div className={className}>
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenuTrigger asChild disabled={isPending}>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className={cn(
+              'rounded-full border-slate-300 bg-transparent text-slate-800 shadow-none transition-colors hover:border-main hover:bg-slate-200/70 hover:text-main data-[state=open]:border-main data-[state=open]:bg-slate-200/80 data-[state=open]:text-main dark:border-slate-600 dark:bg-transparent dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-main dark:data-[state=open]:bg-slate-800',
+              triggerClassName
+            )}
+            aria-label={t('ariaLabel')}
+          >
+            <Languages className="size-4" />
+            <span className="sr-only">{t('ariaLabel')}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align={align}
+          side={side}
+          sideOffset={8}
+          className="w-44"
+        >
+          {localeOptions.map((localeOption) => {
+            const isSelected = selectedLocale === localeOption;
+
+            return (
+              <DropdownMenuItem
+                key={localeOption}
+                disabled={isPending}
+                onSelect={() => {
+                  void handleChange(localeOption);
+                }}
+                className={cn(
+                  'type-button justify-start gap-3 px-3 py-2 text-slate-700 hover:text-main dark:text-slate-100 dark:hover:text-main',
+                  isSelected && 'bg-main/10 text-main dark:bg-main/15'
+                )}
+              >
+                <span className="flex size-4 items-center justify-center">
+                  {isSelected ? <Check className="size-4 text-main" /> : null}
+                </span>
+                <span>{t(`options.${localeOption}`)}</span>
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }

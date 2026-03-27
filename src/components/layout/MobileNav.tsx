@@ -24,6 +24,7 @@ interface MobileNavProps {
 export function MobileNav({ locale, user }: MobileNavProps) {
   const t = useTranslations('layout.mobileNav');
   const tAria = useTranslations('aria');
+  const tLanguage = useTranslations('languageSwitcher');
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -91,13 +92,16 @@ export function MobileNav({ locale, user }: MobileNavProps) {
               transition={{ duration: 0.26, ease: 'easeOut' }}
             >
               <div className="mb-4 border-b border-gray-300 pb-4 dark:border-gray-700">
-                <LanguageSwitcher
-                  locale={locale}
-                  isAuthenticated={Boolean(user)}
-                  onChanged={closeMenu}
-                  className="flex w-full"
-                  selectClassName="type-button h-10 w-full rounded-full border border-gray-300 bg-transparent px-4 text-gray-800 transition-colors hover:border-main hover:text-main disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-600 dark:text-gray-100 dark:hover:border-main dark:hover:text-main"
-                />
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="type-button text-gray-700 dark:text-gray-100">{tLanguage('label')}</p>
+                  <LanguageSwitcher
+                    locale={locale}
+                    isAuthenticated={Boolean(user)}
+                    onChanged={closeMenu}
+                    className="inline-flex"
+                    triggerClassName="h-10 w-10 border-gray-300 text-gray-800 dark:border-gray-600 dark:text-gray-100"
+                  />
+                </div>
               </div>
               <nav aria-label={tAria('mobileNavigation')}>
                 {user ? (
