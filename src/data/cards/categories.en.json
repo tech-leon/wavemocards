@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "slug": "happy",
+    "name": "快樂",
+    "displayOrder": 1
+  },
+  {
+    "id": 2,
+    "slug": "expectation",
+    "name": "期待",
+    "displayOrder": 2
+  },
+  {
+    "id": 3,
+    "slug": "relieved",
+    "name": "安心",
+    "displayOrder": 3
+  },
+  {
+    "id": 4,
+    "slug": "unstable",
+    "name": "不安",
+    "displayOrder": 4
+  },
+  {
+    "id": 5,
+    "slug": "amazed",
+    "name": "驚訝",
+    "displayOrder": 5
+  },
+  {
+    "id": 6,
+    "slug": "sadness",
+    "name": "低落",
+    "displayOrder": 6
+  },
+  {
+    "id": 7,
+    "slug": "hate",
+    "name": "討厭",
+    "displayOrder": 7
+  },
+  {
+    "id": 8,
+    "slug": "anger",
+    "name": "生氣",
+    "displayOrder": 8
+  },
+  {
+    "id": 9,
+    "slug": "others",
+    "name": "其他",
+    "displayOrder": 9
+  }
+]

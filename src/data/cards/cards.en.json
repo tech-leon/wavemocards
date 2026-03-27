@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "slug": "satisfaction",
+    "categoryId": 1,
+    "name": "滿足",
+    "description": "一種心理或情感上的滿意狀態。",
+    "example": "我完成了自己今天的讀書目標，讓我感到很滿足。",
+    "imagePath": "/images/emoCards/1.svg"
+  },
+  {
+    "id": 2,
+    "slug": "joy",
+    "categoryId": 1,
+    "name": "快樂",
+    "description": "對事情感到滿意的反應，令人心情良好、滿足和舒暢。",
+    "example": "放學後，我和好朋友一起去吃東西、聊天，而感到好快樂。",
+    "imagePath": "/images/emoCards/2.svg"
+  },
+  {
+    "id": 3,
+    "slug": "happiness",
+    "categoryId": 1,
+    "name": "幸福",
+    "description": "喜悅滿足，快樂愉悅，煩惱離開，心情舒適愉快的美好感覺。",
+    "example": "放學後，我和好朋友一起去吃東西、聊天，而感到好快樂。",
+    "imagePath": "/images/emoCards/3.svg"
+  },
+  {
+    "id": 4,
+    "slug": "pride",
+    "categoryId": 1,
+    "name": "自豪",
+    "description": "為自己的努力或成就而感到自信和滿足。",
+    "example": "老師讚揚了我在課堂上的發表，讓我感到很自豪與開心。",
+    "imagePath": "/images/emoCards/4.svg"
+  },
+  {
+    "id": 5,
+    "slug": "excitement",
+    "categoryId": 1,
+    "name": "興奮",
+    "description": "一種充滿期待和熱情的感覺，讓人難以掩藏內心的喜悅和興趣。",
+    "example": "收到期待已久的新遊戲，我感到非常興奮，迫不及待地想玩它。",
+    "imagePath": "/images/emoCards/5.svg"
+  },
+  {
+    "id": 6,
+    "slug": "exhilaration",
+    "categoryId": 1,
+    "name": "痛快",
+    "description": "做事或表達感受時，無拘束、爽快，感覺很舒暢和暢快。",
+    "example": "趁著假日，我大聲唱歌跳舞，真的玩得很痛快。",
+    "imagePath": "/images/emoCards/6.svg"
+  },
+  {
+    "id": 7,
+    "slug": "euphoria",
+    "categoryId": 1,
+    "name": "狂喜",
+    "description": "極度興奮和高興，讓人情緒飆升到極點的快樂感受。",
+    "example": "考試得了滿分，我簡直狂喜地跳了起來，好開心！",
+    "imagePath": "/images/emoCards/7.svg"
+  },
+  {
+    "id": 8,
+    "slug": "anticipation",
+    "categoryId": 2,
+    "name": "期待",
+    "description": "充滿期盼，期待未來美好事情的到來，心情充滿期待與興奮。",
+    "example": "暑假即將到來，我充滿期待地計畫著可以做的有趣事情。",
+    "imagePath": "/images/emoCards/8.svg"
+  },
+  {
+    "id": 9,
+    "slug": "confidence",
+    "categoryId": 2,
+    "name": "有信心",
+    "description": "自信而確信，相信能夠成功或克服困難的堅定信念。",
+    "example": "因為有充分的準備，我有信心能夠在演講比賽中有良好的表現。",
+    "imagePath": "/images/emoCards/9.svg"
+  },
+  {
+    "id": 10,
+    "slug": "interest",
+    "categoryId": 2,
+    "name": "充滿興趣",
+    "description": "對某事感到好奇和熱情，願意投入時間和精力，感受快樂。",
+    "example": "我對畫畫充滿興趣，每天放學後都投入好幾個小時畫畫。",
+    "imagePath": "/images/emoCards/10.svg"
+  },
+  {
+    "id": 11,
+    "slug": "longing",
+    "categoryId": 2,
+    "name": "渴望",
+    "description": "強烈期望實現的感受，迫切希望得到或達成某事的內心渴求。",
+    "example": "我渴望能找到自己的興趣與熱情，讓生活快樂而精彩。",
+    "imagePath": "/images/emoCards/11.svg"
+  },
+  {
+    "id": 12,
+    "slug": "comfort",
+    "categoryId": 3,
+    "name": "舒服",
+    "description": "感到身心愉悅和輕鬆，讓人感受到安逸和放鬆。",
+    "example": "躺在舒適的床休息，感到非常舒服。",
+    "imagePath": "/images/emoCards/12.svg"
+  },
+  {
+    "id": 15,
+    "slug": "reassurance",
+    "categoryId": 3,
+    "name": "安心",
+    "description": "內心安寧，沒有擔憂，感到安全和放心。",
+    "example": "在家中，我感到身邊的親人，讓我感到安心和溫暖。",
+    "imagePath": "/images/emoCards/15.svg"
+  },
+  {
+    "id": 21,
+    "slug": "unease",
+    "categoryId": 4,
+    "name": "不安",
+    "description": "對未知或有風險的事情感到焦慮和不放心，內心無法放鬆。",
+    "example": "面對考試，我感到很不安，不確定自己是否能夠考好。",
+    "imagePath": "/images/emoCards/21.svg"
+  },
+  {
+    "id": 26,
+    "slug": "astonishment",
+    "categoryId": 5,
+    "name": "錯愕",
+    "description": "突然受到意外信息或事件衝擊，導致感到極度驚訝和無法反應。",
+    "example": "被選為班長，我感到錯愕，從未料想到有這樣的結果。",
+    "imagePath": "/images/emoCards/26.svg"
+  },
+  {
+    "id": 34,
+    "slug": "discouragement",
+    "categoryId": 6,
+    "name": "沮喪",
+    "description": "因為受到挫敗、阻礙或無法達成目標，而感到情緒低落、困擾或不滿意。",
+    "example": "嘗試與班上同學建立友誼，卻遭遇誤解，讓我感到很沮喪。",
+    "imagePath": "/images/emoCards/34.svg"
+  },
+  {
+    "id": 44,
+    "slug": "inferiority",
+    "categoryId": 7,
+    "name": "自卑",
+    "description": "對自己的能力、價值感到不足或不夠，造成情緒上的不安和不自信。",
+    "example": "我對自己的缺點和身材，會感到自卑和羞愧。",
+    "imagePath": "/images/emoCards/44.svg"
+  },
+  {
+    "id": 51,
+    "slug": "irritation",
+    "categoryId": 8,
+    "name": "煩躁",
+    "description": "情緒不安定，感到不耐煩或易怒。",
+    "example": "弟弟一直吵鬧，讓我感到很煩躁。",
+    "imagePath": "/images/emoCards/51.svg"
+  },
+  {
+    "id": 55,
+    "slug": "letting-go",
+    "categoryId": 9,
+    "name": "釋懷",
+    "description": "放下過去的情感、困擾或煩惱，讓自己心情得到解脫和寬慰。",
+    "example": "面對失敗，我練習接受並慢慢釋懷，重新開始。",
+    "imagePath": "/images/emoCards/55.svg"
+  }
+]
