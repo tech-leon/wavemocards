@@ -29,6 +29,7 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     keywords: t.raw('keywords') as string[],
+    locale,
   });
 }
 

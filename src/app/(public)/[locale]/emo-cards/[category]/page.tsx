@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
 import { getRequestLocale } from '@/lib/i18n/request';
 import {
@@ -19,14 +20,21 @@ export async function generateMetadata({
 }: CategoryPageProps): Promise<Metadata> {
   const { category: slug } = await params;
   const locale = await getRequestLocale();
+  const t = await getTranslations({ locale, namespace: 'meta.emoCards.category' });
   const category = await getEmotionCategoryBySlug(slug, locale);
   const categoryName = category?.name || slug;
 
   return createPublicMetadata({
     pathname: `/emo-cards/${slug}`,
-    title: `浪潮情緒卡｜認識情緒｜${categoryName}`,
-    description: `瀏覽${categoryName}類的情緒卡，了解各種${categoryName}情緒的意思和例句`,
-    keywords: ['情緒卡', categoryName, '情緒詞彙', '情緒分類'],
+    title: t('title', { category: categoryName }),
+    description: t('description', { category: categoryName }),
+    keywords: [
+      t('keywords.card'),
+      categoryName,
+      t('keywords.vocabulary'),
+      t('keywords.category'),
+    ],
+    locale,
   });
 }
 

@@ -1,14 +1,19 @@
 import { getUser } from "@/lib/auth";
 import { createPublicMetadata } from "@/lib/i18n/metadata";
 import { getRequestLocale } from "@/lib/i18n/request";
+import { getTranslations } from "next-intl/server";
 import { HomeHero } from "@/components/layout/HomeHero";
 
 export async function generateMetadata() {
+  const locale = await getRequestLocale();
+  const t = await getTranslations({ locale, namespace: "meta.home" });
+
   return createPublicMetadata({
     pathname: '/',
-    title: "浪潮情緒卡 Wavemocards - 探索你的情緒",
-    description: "透過情緒卡認識、探索和記錄你的情緒，讓情緒成為你的力量",
-    keywords: ["情緒卡", "情緒探索", "心理健康", "情緒管理", "自我覺察"],
+    title: t("title"),
+    description: t("description"),
+    keywords: t.raw("keywords") as string[],
+    locale,
   });
 }
 

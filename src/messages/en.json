@@ -44,7 +44,16 @@
         "emotion vocabulary",
         "Emotion classification",
         "emotional education"
-      ]
+      ],
+      "category": {
+        "title": "Wavemocards | Understanding Emotions | {category}",
+        "description": "Browse emotion cards in the {category} category to learn their meanings and examples.",
+        "keywords": {
+          "card": "emotion card",
+          "vocabulary": "emotion vocabulary",
+          "category": "emotion category"
+        }
+      }
     },
     "explore": {
       "entry": {

@@ -1,42 +1,33 @@
 import type { MetadataRoute } from 'next';
 import { getEmotionCategories } from '@/lib/emotions';
 import { DEFAULT_LOCALE } from '@/lib/i18n/locale';
-
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://wavemocards.com';
+import { buildLanguageAlternates, buildPublicUrl } from '@/lib/i18n/metadata';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch dynamic routes
   const categories = await getEmotionCategories(DEFAULT_LOCALE);
+  const now = new Date();
+  const createEntry = (
+    pathname: string,
+    priority: number,
+  ): MetadataRoute.Sitemap[number] => ({
+    url: buildPublicUrl(pathname, DEFAULT_LOCALE),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority,
+    alternates: {
+      languages: buildLanguageAlternates(pathname),
+    },
+  });
 
-  // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/about-emotions`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/emo-cards`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    createEntry('/', 1),
+    createEntry('/about-emotions', 0.8),
+    createEntry('/emo-cards', 0.8),
   ];
 
-  // Dynamic routes: emotion card categories
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) => ({
-    url: `${siteUrl}/emo-cards/${category.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) =>
+    createEntry(`/emo-cards/${category.slug}`, 0.7)
+  );
 
   return [...staticRoutes, ...categoryRoutes];
 }

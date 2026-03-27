@@ -44,7 +44,16 @@
         "感情の語彙",
         "感情の分類",
         "心の教育"
-      ]
+      ],
+      "category": {
+        "title": "Wavemocards｜感情を知る｜{category}",
+        "description": "{category} カテゴリの感情カードを閲覧し、それぞれの意味と例文を知ることができます。",
+        "keywords": {
+          "card": "感情カード",
+          "vocabulary": "感情の語彙",
+          "category": "感情カテゴリ"
+        }
+      }
     },
     "explore": {
       "entry": {

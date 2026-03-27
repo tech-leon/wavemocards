@@ -44,7 +44,16 @@
         "情緒詞彙",
         "情緒分類",
         "情緒教育"
-      ]
+      ],
+      "category": {
+        "title": "浪潮情緒卡｜認識情緒｜{category}",
+        "description": "瀏覽 {category} 類的情緒卡，了解各種 {category} 情緒的意思和例句",
+        "keywords": {
+          "card": "情緒卡",
+          "vocabulary": "情緒詞彙",
+          "category": "情緒分類"
+        }
+      }
     },
     "explore": {
       "entry": {
