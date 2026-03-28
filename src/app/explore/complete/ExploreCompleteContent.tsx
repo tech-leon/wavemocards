@@ -13,7 +13,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
   const t = useTranslations('explore.complete');
   return (
     <ExploreStepLayout
-      currentStep={6}
+      currentStep={5}
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={

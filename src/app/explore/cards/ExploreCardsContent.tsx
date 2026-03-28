@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
@@ -60,9 +61,12 @@ interface ExploreCardsContentProps {
 
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
   const t = useTranslations('explore.cards');
+  const tCommon = useTranslations('common.actions');
+  const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
+  const [showError, setShowError] = useState<'tooFew' | 'tooMany' | null>(null);
 
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
 
@@ -87,6 +91,20 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   };
 
   const getCategorySlug = (cat: EmotionCategory) => cat.slug;
+
+  const handleOpenHolder = () => {
+    if (selectedCards.length === 0) {
+      setShowError('tooFew');
+      return;
+    }
+
+    if (selectedCards.length > 3) {
+      setShowError('tooMany');
+      return;
+    }
+
+    router.push('/explore/strength/1');
+  };
 
   return (
     <section aria-label={t('aria.section')}>
@@ -140,8 +158,9 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   {t('view.table')}
                 </button>
               </div>
-              <Link
-                href="/explore/selected"
+              <button
+                type="button"
+                onClick={handleOpenHolder}
                 className="type-button group px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex items-center gap-1 transition-colors"
               >
                 <Folder className="w-4 h-4 group-hover:hidden" />
@@ -152,7 +171,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     {selectedCards.length}
                   </span>
                 )}
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -365,6 +384,35 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
           onClose={() => setModalCard(null)}
           showCloseButton={false}
         />
+      )}
+
+      {showError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowError(null)}>
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <p className="type-page-title mb-3 text-pink">
+              {showError === 'tooFew' ? t('errors.tooFewTitle') : t('errors.tooManyTitle')}
+            </p>
+            {showError === 'tooFew' ? (
+              <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+                {t('errors.tooFewDescription')}
+              </p>
+            ) : (
+              <div className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+                <p>{t('errors.tooManyDescriptionLine1')}</p>
+                <p>{t('errors.tooManyDescriptionLine2')}</p>
+              </div>
+            )}
+            <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
+            <button
+              type="button"
+              onClick={() => setShowError(null)}
+              className="type-button px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
+            >
+              {tCommon('confirm')}
+            </button>
+          </div>
+        </div>
       )}
     </section>
   );

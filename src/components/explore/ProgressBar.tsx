@@ -4,11 +4,10 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 
 interface ProgressBarProps {
-  currentStep: number; // 1-6
+  currentStep: number; // 1-5
 }
 
 const steps = [
-  { label: '我的情緒卡夾', path: '/explore/selected' },
   { label: '1st情緒強度', path: '/explore/strength/1' },
   { label: '背景篇', path: '/explore/story/background' },
   { label: '行動篇', path: '/explore/story/action' },

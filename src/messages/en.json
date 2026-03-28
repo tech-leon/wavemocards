@@ -64,10 +64,6 @@
         "title": "Wavemocards | Explore Emotions | Emotion Cards",
         "description": "Browse and select emotion cards to add to your holder."
       },
-      "selected": {
-        "title": "Wavemocards | Explore Emotions | My Emotion Card Holder",
-        "description": "Arrange the emotion cards you selected and enter the subsequent exploration process."
-      },
       "strength1": {
         "title": "Wavemocards | Exploring Emotions | My Emotional Intensity | First Time",
         "description": "Record the emotional intensity of the first time you pick an emotion card."
@@ -377,7 +373,7 @@
         "steps": [
           "Scroll down the page to start browsing mood cards.",
           "Click the \"+\" button on the upper right side of the emotion card to put the emotion card into \"My Emotion Card Holder\".",
-          "After completing the selection of emotion cards, please click the \"My Emotion Card Holder\" button to proceed to the next step."
+          "After completing the selection of emotion cards, click the \"My Emotion Card Holder\" button to go directly to the next step."
         ],
         "browseMethods": [
           "Click the \"Collapse\" or \"Expand\" button on the upper right to change the display mode of the emotion card.",
@@ -391,32 +387,6 @@
         "addedToHolder": "Added to card folder",
         "backToCards": "Back to mood card"
       },
-      "countBadge": "{count}",
-      "emptyState": "There are currently no mood cards"
-    },
-    "selected": {
-      "title": "My mood card holder",
-      "actions": {
-        "clear": "Clear",
-        "backToCards": "Back to mood card",
-        "previousStep": "Previous step",
-        "nextStep": "Next step"
-      },
-      "instructions": {
-        "keepThreeCards": "🔎 Please leave \"3\" emotional cards that best match your current situation.",
-        "removeHint": "🔎 You can remove the emotion card by clicking the \"X\" in the upper right corner."
-      },
-      "empty": {
-        "title": "No mood cards have been selected yet",
-        "cta": "Go to select mood card"
-      },
-      "card": {
-        "remove": "Remove"
-      },
-      "confirmClear": {
-        "title": "Are you sure you want to clear it?",
-        "description": "Once you click OK, all cards will be removed and cannot be restored."
-      },
       "errors": {
         "tooFewTitle": "Not enough cards",
         "tooFewDescription": "Please pick at least 1 card.",
@@ -424,7 +394,8 @@
         "tooManyDescriptionLine1": "The maximum number of cards is 3.",
         "tooManyDescriptionLine2": "Please filter for the cards that best match your emotions."
       },
-      "acknowledge": "I see"
+      "countBadge": "{count}",
+      "emptyState": "There are currently no mood cards"
     },
     "strength1": {
       "title": "The intensity of my emotions | First time",
@@ -440,11 +411,19 @@
         "line1": "Thank you for your efforts in finding your own emotional card.",
         "line2": "Next, I want to invite you to close your eyes again, take a deep breath and exhale~",
         "line3": "During the process of taking a deep breath, feel yourself in your heart and what is the intensity of the selected emotions?",
+        "line4": "You can remove a card with the \"X\" in the top-right corner. If you want to add another card, go back to the previous step.",
         "scoreHint": "(1 point represents the weakest, 5 points represents the strongest)"
       },
+      "card": {
+        "remove": "Remove"
+      },
       "errors": {
-        "title": "Not yet completed",
-        "description": "The emotional intensity of each emotion card is optional."
+        "countTitle": "Invalid number of cards",
+        "tooFewDescription": "Please pick at least 1 card.",
+        "tooManyDescriptionLine1": "The maximum number of cards is 3.",
+        "tooManyDescriptionLine2": "Please filter for the cards that best match your emotions.",
+        "levelsTitle": "Not yet completed",
+        "levelsDescription": "The emotional intensity of each emotion card must be filled in."
       },
       "acknowledge": "I see"
     },

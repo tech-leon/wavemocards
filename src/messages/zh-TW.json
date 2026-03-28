@@ -64,10 +64,6 @@
         "title": "浪潮情緒卡｜探索情緒｜情緒卡",
         "description": "瀏覽並選擇情緒卡，放入你的情緒卡夾。"
       },
-      "selected": {
-        "title": "浪潮情緒卡｜探索情緒｜我的情緒卡夾",
-        "description": "整理你挑選的情緒卡，進入後續探索流程。"
-      },
       "strength1": {
         "title": "浪潮情緒卡｜探索情緒｜我的情緒強度｜第一次",
         "description": "記錄挑選情緒卡的第一次情緒強度。"
@@ -377,7 +373,7 @@
         "steps": [
           "下滑頁面，開始瀏覽情緒卡。",
           "點擊情緒卡右上方的「＋」按鈕，即可將情緒卡放進「我的情緒卡夾」中。",
-          "完成情緒卡挑選後，請點擊「我的情緒卡夾」按鈕，進行下一步的內容。"
+          "完成情緒卡挑選後，請點擊「我的情緒卡夾」按鈕，直接進入下一步。"
         ],
         "browseMethods": [
           "點擊右上方的「收合」或「展開」按鈕，可以轉換情緒卡的展示方式。",
@@ -391,32 +387,6 @@
         "addedToHolder": "已加入卡夾",
         "backToCards": "回到情緒卡"
       },
-      "countBadge": "{count}",
-      "emptyState": "目前沒有情緒卡"
-    },
-    "selected": {
-      "title": "我的情緒卡夾",
-      "actions": {
-        "clear": "清空",
-        "backToCards": "回到情緒卡",
-        "previousStep": "上一步",
-        "nextStep": "下一步"
-      },
-      "instructions": {
-        "keepThreeCards": "🔎 請留下最符合您現在狀態的情緒卡「3 張」。",
-        "removeHint": "🔎 您可以透過點擊右上角的「X」，將情緒卡移除。"
-      },
-      "empty": {
-        "title": "尚未選擇任何情緒卡",
-        "cta": "前往選擇情緒卡"
-      },
-      "card": {
-        "remove": "移除"
-      },
-      "confirmClear": {
-        "title": "確定要清空嗎？",
-        "description": "點擊確定後，將會移除所有卡片，並且無法復原。"
-      },
       "errors": {
         "tooFewTitle": "卡片數量不足",
         "tooFewDescription": "請至少挑選 1 張卡片。",
@@ -424,7 +394,8 @@
         "tooManyDescriptionLine1": "卡片數量最多 3 張。",
         "tooManyDescriptionLine2": "請篩選出最貼近您的情緒的卡片。"
       },
-      "acknowledge": "我知道了"
+      "countBadge": "{count}",
+      "emptyState": "目前沒有情緒卡"
     },
     "strength1": {
       "title": "我的情緒強度｜第一次",
@@ -440,11 +411,19 @@
         "line1": "謝謝你努力地找尋到屬於自己的情緒卡。",
         "line2": "接下來，想邀請你，再次閉上眼睛，深呼吸～吐氣～",
         "line3": "在深呼吸的過程中，感受心中的自己，挑選的情緒，其強度分別如何呢？",
+        "line4": "你可以點擊卡片右上角的「X」移除卡片；若想補選其他卡片，可以按「上一步」返回挑選。",
         "scoreHint": "（ 1分代表最為微弱，5分代表最為強烈 ）"
       },
+      "card": {
+        "remove": "移除"
+      },
       "errors": {
-        "title": "尚未完成",
-        "description": "每張情緒卡的情緒強度皆須選填。"
+        "countTitle": "卡片數量不符",
+        "tooFewDescription": "請至少挑選 1 張卡片。",
+        "tooManyDescriptionLine1": "卡片數量最多 3 張。",
+        "tooManyDescriptionLine2": "請篩選出最貼近您的情緒的卡片。",
+        "levelsTitle": "尚未完成",
+        "levelsDescription": "每張情緒卡的情緒強度皆須選填。"
       },
       "acknowledge": "我知道了"
     },

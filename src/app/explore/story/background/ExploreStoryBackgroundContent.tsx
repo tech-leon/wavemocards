@@ -30,7 +30,7 @@ export function ExploreStoryBackgroundContent({
 
   return (
     <ExploreStepLayout
-      currentStep={3}
+      currentStep={2}
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={

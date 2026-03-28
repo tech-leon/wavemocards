@@ -61,7 +61,7 @@ export default function ExploreStrength2Page() {
 
   return (
     <ExploreStepLayout
-      currentStep={5}
+      currentStep={4}
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={

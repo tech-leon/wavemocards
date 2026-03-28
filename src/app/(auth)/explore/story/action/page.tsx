@@ -37,7 +37,7 @@ export default function ExploreStoryActionPage() {
 
   return (
     <ExploreStepLayout
-      currentStep={4}
+      currentStep={3}
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={

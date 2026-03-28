@@ -64,10 +64,6 @@
         "title": "Wavemocards｜感情を探る｜感情カード",
         "description": "感情カードを見ながら選び、カードホルダーに追加します。"
       },
-      "selected": {
-        "title": "Wavemocards｜感情を探る｜私の感情カードホルダー",
-        "description": "選んだ感情カードを整理し、次の探索ステップに進みます。"
-      },
       "strength1": {
         "title": "Wavemocards｜感情を探る｜私の感情の強さ｜1回目",
         "description": "初めて感情カードを選んだときの感情の激しさを記録します。"
@@ -377,7 +373,7 @@
         "steps": [
           "ページを下にスクロールして、ムード カードの閲覧を開始します。",
           "感情カードの右上にある「＋」ボタンをクリックして、感情カードを「My Emotion Card Holder」に入れます。",
-          "感情カードの選択が完了したら、「My Emotion Card Holder」ボタンをクリックして次のステップに進んでください。"
+          "感情カードの選択が完了したら、「My Emotion Card Holder」ボタンをクリックして直接次のステップに進んでください。"
         ],
         "browseMethods": [
           "右上の「折りたたむ」または「展開」ボタンをクリックして、感情カードの表示モードを変更します。",
@@ -391,32 +387,6 @@
         "addedToHolder": "カードフォルダーに追加されました",
         "backToCards": "ムードカードに戻る"
       },
-      "countBadge": "{count}",
-      "emptyState": "現在ムードカードはありません"
-    },
-    "selected": {
-      "title": "私の気分カードホルダー",
-      "actions": {
-        "clear": "クリア",
-        "backToCards": "ムードカードに戻る",
-        "previousStep": "前のステップ",
-        "nextStep": "次のステップ"
-      },
-      "instructions": {
-        "keepThreeCards": "🔎あなたの今の状況に最も当てはまる感情カードを「3枚」残してください。",
-        "removeHint": "🔎 右上隅の「X」をクリックすると、感情カードを削除できます。"
-      },
-      "empty": {
-        "title": "ムード カードがまだ選択されていません",
-        "cta": "ムードカードの選択に移動します"
-      },
-      "card": {
-        "remove": "取り除く"
-      },
-      "confirmClear": {
-        "title": "本当にクリアしてもよろしいですか?",
-        "description": "[OK] をクリックすると、すべてのカードが削除され、復元できなくなります。"
-      },
       "errors": {
         "tooFewTitle": "カードが足りません",
         "tooFewDescription": "少なくとも 1 枚のカードを選んでください。",
@@ -424,7 +394,8 @@
         "tooManyDescriptionLine1": "カードの最大枚数は3枚です。",
         "tooManyDescriptionLine2": "あなたの感情に最もマッチするカードをフィルターしてください。"
       },
-      "acknowledge": "なるほど"
+      "countBadge": "{count}",
+      "emptyState": "現在ムードカードはありません"
     },
     "strength1": {
       "title": "感情の激しさ｜初めて",
@@ -440,11 +411,19 @@
         "line1": "自分自身の感情カードを見つけるためにご尽力いただきありがとうございます。",
         "line2": "次に、もう一度目を閉じて、深呼吸して、吐き出してください。",
         "line3": "深呼吸する過程で、自分の心の中で自分自身を感じ、選択した感情の強さはどれくらいですか?",
+        "line4": "カード右上の「X」を押すとカードを削除できます。別のカードを追加したい場合は「前のステップ」で戻って選び直してください。",
         "scoreHint": "(1 ポイントが最も弱いことを表し、5 ポイントが最も強いことを表します)"
       },
+      "card": {
+        "remove": "取り除く"
+      },
       "errors": {
-        "title": "まだ完成していません",
-        "description": "各感情カードの感情の強さはオプションです。"
+        "countTitle": "カード数が正しくありません",
+        "tooFewDescription": "少なくとも 1 枚のカードを選んでください。",
+        "tooManyDescriptionLine1": "カードの最大枚数は3枚です。",
+        "tooManyDescriptionLine2": "あなたの感情に最もマッチするカードをフィルターしてください。",
+        "levelsTitle": "まだ完成していません",
+        "levelsDescription": "各感情カードの感情の強さはすべて入力する必要があります。"
       },
       "acknowledge": "なるほど"
     },
