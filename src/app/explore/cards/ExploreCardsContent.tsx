@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
+import { PlusCircle, XCircle, Folder, FolderOpen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -69,6 +69,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   const [showError, setShowError] = useState<'tooFew' | 'tooMany' | null>(null);
 
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
+  const selectedCount = selectedCards.length;
+  const isSelectionFull = selectedCount >= 3;
 
   // Group cards by category
   const cardsByCategory = new Map<number, EmotionCardRecord[]>();
@@ -241,25 +243,28 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   <div className="flex gap-4 overflow-x-auto pt-3 pr-2 pb-2">
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
+                      const action = isAdded
+                        ? {
+                            kind: 'remove' as const,
+                            label: t('actions.removeFromHolder'),
+                            onClick: () => removeCard(card.id),
+                          }
+                        : isSelectionFull
+                          ? undefined
+                          : {
+                              kind: 'add' as const,
+                              label: t('actions.addToHolder'),
+                              onClick: () => handleAddCard(card),
+                            };
+
                       return (
                         <EmotionCard
                           key={card.id}
                           card={toEmotionCardData(card, slug)}
                           onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
-                          action={
-                            isAdded
-                              ? {
-                                  kind: 'remove',
-                                  label: t('actions.removeFromHolder'),
-                                  onClick: () => removeCard(card.id),
-                                }
-                              : {
-                                  kind: 'add',
-                                  label: t('actions.addToHolder'),
-                                  onClick: () => handleAddCard(card),
-                                }
-                          }
+                          action={action}
                           dimmed={isAdded}
+                          locked={!isAdded && isSelectionFull}
                         />
                       );
                     })}
@@ -341,9 +346,20 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   <div className="flex items-center overflow-x-auto pt-3 mb-1 gap-4">
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
+                      const isLocked = !isAdded && isSelectionFull;
+
                       return (
                         <div key={card.id} className="relative shrink-0">
-                          {!isAdded && (
+                          {isAdded ? (
+                            <button
+                              type="button"
+                              onClick={() => removeCard(card.id)}
+                              className="absolute -top-1.5 -right-1.5 z-10 w-5 h-5 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
+                              title={t('actions.removeFromHolder')}
+                            >
+                              <XCircle className="w-3.5 h-3.5" />
+                            </button>
+                          ) : !isLocked ? (
                             <button
                               type="button"
                               onClick={() => handleAddCard(card)}
@@ -352,14 +368,15 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                             >
                               <PlusCircle className="w-3.5 h-3.5" />
                             </button>
-                          )}
+                          ) : null}
                           <button
                             type="button"
                             onClick={() => setModalCard(toEmotionCardData(card, slug))}
                             className={cn(
                               'type-button px-3 py-1 rounded-full whitespace-nowrap transition-colors',
                               categoryBtnColors[slug],
-                              isAdded && 'opacity-25'
+                              isAdded && 'opacity-25',
+                              isLocked && 'grayscale opacity-40'
                             )}
                           >
                             {card.name}

@@ -26,6 +26,8 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   const [showError, setShowError] = useState<'tooFew' | 'tooMany' | null>(null);
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
   const slug = category.slug;
+  const selectedCount = selectedCards.length;
+  const isSelectionFull = selectedCount >= 3;
 
   const handleAddCard = (card: EmotionCardRecord) => {
     if (hasCard(card.id)) return;
@@ -83,25 +85,28 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
         <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 pt-2 pr-2 mb-16">
           {cards.map((card) => {
             const isAdded = hasCard(card.id);
+            const action = isAdded
+              ? {
+                  kind: 'remove' as const,
+                  label: t('actions.removeFromHolder'),
+                  onClick: () => removeCard(card.id),
+                }
+              : isSelectionFull
+                ? undefined
+                : {
+                    kind: 'add' as const,
+                    label: t('actions.addToHolder'),
+                    onClick: () => handleAddCard(card),
+                  };
+
             return (
               <EmotionCard
                 key={card.id}
                 card={toEmotionCardData(card, slug)}
                 onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
-                action={
-                  isAdded
-                    ? {
-                        kind: 'remove',
-                        label: t('actions.removeFromHolder'),
-                        onClick: () => removeCard(card.id),
-                      }
-                    : {
-                        kind: 'add',
-                        label: t('actions.addToHolder'),
-                        onClick: () => handleAddCard(card),
-                      }
-                }
+                action={action}
                 dimmed={isAdded}
+                locked={!isAdded && isSelectionFull}
               />
             );
           })}
