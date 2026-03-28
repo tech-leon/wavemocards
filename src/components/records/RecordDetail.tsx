@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
 
 // Types for the record detail
 interface CardInfo {
@@ -238,7 +239,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0">
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0`}>
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}

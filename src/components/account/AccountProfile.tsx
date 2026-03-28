@@ -8,6 +8,7 @@ import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { buildAuthHref, buildCurrentReturnTo } from '@/lib/auth-routing';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
 
 interface ProfileData {
   id: string;
@@ -222,7 +223,7 @@ export function AccountProfile() {
   return (
     <>
       {/* Sticky title bar */}
-      <div className="sticky top-[64px] z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0">
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0`}>
           <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             <h2>{t('title')}</h2>

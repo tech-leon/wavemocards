@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { PlusCircle, XCircle, Folder, FolderOpen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
@@ -111,7 +112,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   return (
     <section aria-label={t('aria.section')}>
       {/* Sticky header */}
-      <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
+      <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
