@@ -49,6 +49,9 @@ interface RecordDetailProps {
   recordId: string;
 }
 
+const detailLabelClassName =
+  'type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium flex items-center whitespace-normal break-words';
+
 export function RecordDetail({ recordId }: RecordDetailProps) {
   const t = useTranslations('records.detail');
   const tToast = useTranslations('toast.records');
@@ -302,7 +305,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
         <div className="mt-4 space-y-2">
           {/* Date */}
           <div className="flex flex-col lg:flex-row gap-0 lg:gap-0">
-            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
+            <div className={detailLabelClassName}>
               {t('fields.date')}
             </div>
             <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
@@ -312,7 +315,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
           {/* Emotion strength 1st */}
           <div className="flex flex-col lg:flex-row gap-0">
-            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
+            <div className={detailLabelClassName}>
               {t('fields.strengthBefore')}
             </div>
             <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
@@ -329,7 +332,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
 
           {/* Emotion strength 2nd */}
           <div className="flex flex-col lg:flex-row gap-0">
-            <div className="type-button lg:w-1/4 px-3 py-2 bg-main text-white rounded-sm font-medium whitespace-nowrap">
+            <div className={detailLabelClassName}>
               {t('fields.strengthAfter')}
             </div>
             <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
@@ -392,7 +395,7 @@ export function RecordDetail({ recordId }: RecordDetailProps) {
             />
             {/* Expect - read only */}
             <div className="flex flex-col lg:flex-row gap-0">
-              <div className="type-body-sm lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm flex items-center">
+              <div className={detailLabelClassName}>
                 {t('fields.expectedResult')}
               </div>
               <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm flex items-center">
@@ -470,7 +473,7 @@ function StoryField({
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-0">
-      <div className="type-body-sm lg:w-1/4 px-3 py-2 bg-main-tint02 rounded-sm flex items-center">
+      <div className={detailLabelClassName}>
         {label}
       </div>
       {isEditing ? (

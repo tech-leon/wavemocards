@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
+import { localizeRecordCollection } from '@/lib/records';
 import { createServerClient } from '@/lib/supabase';
+
+function getLocalizedCardCategoryName(card: {
+  category?: { name: string } | null;
+} | null | undefined): string | null {
+  return card?.category?.name ?? null;
+}
 
 /**
  * GET /api/records
@@ -88,9 +95,14 @@ export async function GET(request: NextRequest) {
     }
 
     // Keyword filtering (client-side)
-    let filteredRecords = records || [];
+    const localizedRecords = await localizeRecordCollection(records || [], locale);
+
+    let filteredRecords = localizedRecords;
     if (keyword && keyword.trim()) {
-      const keywords = keyword.trim().split(/\s+/);
+      const keywords = keyword
+        .trim()
+        .toLocaleLowerCase(locale)
+        .split(/\s+/);
       filteredRecords = filteredRecords.filter((record) => {
         const searchableText = [
           record.story,
@@ -98,19 +110,19 @@ export async function GET(request: NextRequest) {
           record.results,
           record.feelings,
           record.reaction,
-          // Card names
-          (record.card_1 as Record<string, unknown>)?.name,
-          (record.card_2 as Record<string, unknown>)?.name,
-          (record.card_3 as Record<string, unknown>)?.name,
-          // Category names
-          ((record.card_1 as Record<string, unknown>)?.category as Record<string, unknown>)?.name,
-          ((record.card_2 as Record<string, unknown>)?.category as Record<string, unknown>)?.name,
-          ((record.card_3 as Record<string, unknown>)?.category as Record<string, unknown>)?.name,
+          record.card_1?.name,
+          record.card_2?.name,
+          record.card_3?.name,
+          getLocalizedCardCategoryName(record.card_1),
+          getLocalizedCardCategoryName(record.card_2),
+          getLocalizedCardCategoryName(record.card_3),
         ]
           .filter(Boolean)
           .join(' ');
 
-        return keywords.some((kw) => searchableText.includes(kw));
+        return keywords.some((kw) =>
+          searchableText.toLocaleLowerCase(locale).includes(kw)
+        );
       });
     }
 

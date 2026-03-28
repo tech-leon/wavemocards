@@ -158,6 +158,20 @@ export async function getEmotionCategories(
   return getLocalizedCategoryRecords(locale).map(toEmotionCategory);
 }
 
+export async function getEmotionCategoryMap(
+  locale: Locale = 'zh-TW',
+): Promise<{
+  byId: Map<number, EmotionCategory>;
+  bySlug: Map<string, EmotionCategory>;
+}> {
+  const categories = await getEmotionCategories(locale);
+
+  return {
+    byId: new Map(categories.map((category) => [category.id, category])),
+    bySlug: new Map(categories.map((category) => [category.slug, category])),
+  };
+}
+
 /**
  * Get emotion category by slug
  */
@@ -179,6 +193,13 @@ export async function getEmotionCards(
   locale: Locale = 'zh-TW',
 ): Promise<EmotionCard[]> {
   return getLocalizedCardRecords(locale).map(toEmotionCard);
+}
+
+export async function getEmotionCardMap(
+  locale: Locale = 'zh-TW',
+): Promise<Map<number, EmotionCard>> {
+  const cards = await getEmotionCards(locale);
+  return new Map(cards.map((card) => [card.id, card]));
 }
 
 /**

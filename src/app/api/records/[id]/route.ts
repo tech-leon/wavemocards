@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
+import { localizeRecord } from '@/lib/records';
 import { createServerClient } from '@/lib/supabase';
 
 /**
@@ -87,7 +88,9 @@ export async function GET(
       return NextResponse.json({ error: tRecords('notFound') }, { status: 404 });
     }
 
-    return NextResponse.json({ record });
+    const localizedRecord = await localizeRecord(record, locale);
+
+    return NextResponse.json({ record: localizedRecord });
   } catch (error) {
     console.error('Unexpected error in GET /api/records/[id]:', error);
     const locale = await getRequestLocale();
