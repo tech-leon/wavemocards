@@ -363,14 +363,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
           categorySlug={modalCard.categorySlug}
           isOpen={!!modalCard}
           onClose={() => setModalCard(null)}
-          onAdd={
-            !hasCard(modalCard.id)
-              ? () => {
-                  addCard(modalCard);
-                  setModalCard(null);
-                }
-              : undefined
-          }
+          showCloseButton={false}
         />
       )}
     </section>

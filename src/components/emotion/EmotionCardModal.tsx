@@ -15,6 +15,7 @@ interface EmotionCardModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAdd?: () => void;
+  showCloseButton?: boolean;
 }
 
 export function EmotionCardModal({
@@ -23,6 +24,7 @@ export function EmotionCardModal({
   isOpen,
   onClose,
   onAdd,
+  showCloseButton = true,
 }: EmotionCardModalProps) {
   const t = useTranslations('emoCards.modal');
   // Close on escape key
@@ -78,13 +80,15 @@ export function EmotionCardModal({
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
-              aria-label={t('close')}
-            >
-              <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
-            </button>
+            {showCloseButton && (
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                aria-label={t('close')}
+              >
+                <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
+              </button>
+            )}
 
             {/* Add to holder button */}
             {onAdd && (
