@@ -1,0 +1,587 @@
+[
+  {
+    "id": 1,
+    "slug": "satisfaction",
+    "categoryId": 1,
+    "name": "Satisfied",
+    "description": "A state of emotional or psychological contentment.",
+    "example": "I finished my study goal for today, and I felt satisfied.",
+    "imagePath": "/images/emoCards/1.svg"
+  },
+  {
+    "id": 2,
+    "slug": "joy",
+    "categoryId": 1,
+    "name": "Happy",
+    "description": "A pleasant response when things feel fulfilling, comfortable, and good.",
+    "example": "After school, I ate snacks and chatted with my close friends, and I felt happy.",
+    "imagePath": "/images/emoCards/2.svg"
+  },
+  {
+    "id": 3,
+    "slug": "happiness",
+    "categoryId": 1,
+    "name": "Blessed",
+    "description": "A warm feeling of joy, contentment, and comfort, as if worries have drifted away.",
+    "example": "After school, I spent time with my good friends, and I felt blessed and happy.",
+    "imagePath": "/images/emoCards/3.svg"
+  },
+  {
+    "id": 4,
+    "slug": "pride",
+    "categoryId": 1,
+    "name": "Proud",
+    "description": "Feeling confident and satisfied because of your own effort or achievement.",
+    "example": "My teacher praised my presentation in class, and I felt proud and happy.",
+    "imagePath": "/images/emoCards/4.svg"
+  },
+  {
+    "id": 5,
+    "slug": "excitement",
+    "categoryId": 1,
+    "name": "Excited",
+    "description": "A feeling full of anticipation and energy that makes joy hard to hide.",
+    "example": "I got the new game I had been waiting for, and I felt so excited to play it.",
+    "imagePath": "/images/emoCards/5.svg"
+  },
+  {
+    "id": 6,
+    "slug": "exhilaration",
+    "categoryId": 1,
+    "name": "Exhilarated",
+    "description": "Feeling free, open, and refreshed when you do something with full enjoyment.",
+    "example": "During the holiday, I sang and danced loudly, and it felt exhilarating.",
+    "imagePath": "/images/emoCards/6.svg"
+  },
+  {
+    "id": 7,
+    "slug": "euphoria",
+    "categoryId": 1,
+    "name": "Ecstatic",
+    "description": "An intense feeling of excitement and joy that sends your emotions soaring.",
+    "example": "I got a perfect score on the test, and I jumped up in pure ecstasy.",
+    "imagePath": "/images/emoCards/7.svg"
+  },
+  {
+    "id": 8,
+    "slug": "anticipation",
+    "categoryId": 2,
+    "name": "Expectant",
+    "description": "Feeling full of hope and excitement about something good that may happen in the future.",
+    "example": "Summer vacation was coming soon, and I eagerly planned all the fun things I could do.",
+    "imagePath": "/images/emoCards/8.svg"
+  },
+  {
+    "id": 9,
+    "slug": "confidence",
+    "categoryId": 2,
+    "name": "Confident",
+    "description": "A steady belief that you can succeed or overcome difficulties.",
+    "example": "Because I had prepared well, I felt confident about doing well in the speech contest.",
+    "imagePath": "/images/emoCards/9.svg"
+  },
+  {
+    "id": 10,
+    "slug": "interest",
+    "categoryId": 2,
+    "name": "Interested",
+    "description": "Feeling curious and enthusiastic about something, and wanting to spend time and effort on it.",
+    "example": "I am very interested in drawing, so I spend hours on it after school every day.",
+    "imagePath": "/images/emoCards/10.svg"
+  },
+  {
+    "id": 11,
+    "slug": "longing",
+    "categoryId": 2,
+    "name": "Longing",
+    "description": "A strong inner desire to gain, do, or achieve something.",
+    "example": "I long to find my own interests and passions so life can feel joyful and meaningful.",
+    "imagePath": "/images/emoCards/11.svg"
+  },
+  {
+    "id": 12,
+    "slug": "comfort",
+    "categoryId": 3,
+    "name": "Comfortable",
+    "description": "Feeling physically and emotionally at ease, relaxed, and pleasant.",
+    "example": "Lying down on a cozy bed to rest made me feel very comfortable.",
+    "imagePath": "/images/emoCards/12.svg"
+  },
+  {
+    "id": 13,
+    "slug": "card-13",
+    "categoryId": 3,
+    "name": "Relaxed",
+    "description": "Feeling calm in your mind and released from tension in your body.",
+    "example": "Lying on the grass and listening to the wind in the trees helped me feel relaxed.",
+    "imagePath": "/images/emoCards/13.svg"
+  },
+  {
+    "id": 14,
+    "slug": "card-14",
+    "categoryId": 3,
+    "name": "Calm",
+    "description": "A peaceful state of mind without worries, bringing steadiness and comfort.",
+    "example": "I sat down, took deep breaths, and let the calm atmosphere ease my stress.",
+    "imagePath": "/images/emoCards/14.svg"
+  },
+  {
+    "id": 15,
+    "slug": "reassurance",
+    "categoryId": 3,
+    "name": "Reassured",
+    "description": "Feeling safe, settled, and free from worry.",
+    "example": "Being at home with my family around me made me feel reassured and warm.",
+    "imagePath": "/images/emoCards/15.svg"
+  },
+  {
+    "id": 16,
+    "slug": "card-16",
+    "categoryId": 3,
+    "name": "At Ease",
+    "description": "Feeling light, natural, and free from pressure or tension.",
+    "example": "Playing games and laughing with my best friends made me feel completely at ease.",
+    "imagePath": "/images/emoCards/16.svg"
+  },
+  {
+    "id": 17,
+    "slug": "card-17",
+    "categoryId": 3,
+    "name": "Trusting",
+    "description": "A steady belief that someone is honest and reliable, allowing you to feel safe with them.",
+    "example": "I shared my feelings with a friend and felt trusting because I knew I would be understood.",
+    "imagePath": "/images/emoCards/17.svg"
+  },
+  {
+    "id": 18,
+    "slug": "card-18",
+    "categoryId": 4,
+    "name": "Shy",
+    "description": "Feeling uneasy when facing other people or unfamiliar situations.",
+    "example": "In a new class, I felt shy and did not dare to talk to my classmates first.",
+    "imagePath": "/images/emoCards/18.svg"
+  },
+  {
+    "id": 19,
+    "slug": "card-19",
+    "categoryId": 4,
+    "name": "Worried",
+    "description": "Feeling troubled or uneasy about a particular situation or outcome.",
+    "example": "I was worried that the weather tomorrow would be bad and affect our outdoor activity.",
+    "imagePath": "/images/emoCards/19.svg"
+  },
+  {
+    "id": 20,
+    "slug": "card-20",
+    "categoryId": 4,
+    "name": "Lost",
+    "description": "Feeling confused and helpless about a situation or choice, not knowing what to do next.",
+    "example": "When I thought about my future school path, I felt lost and did not know what choice was right.",
+    "imagePath": "/images/emoCards/20.svg"
+  },
+  {
+    "id": 21,
+    "slug": "unease",
+    "categoryId": 4,
+    "name": "Uneasy",
+    "description": "Feeling anxious and unsettled about something unknown or risky.",
+    "example": "I felt uneasy before the exam because I was not sure whether I could do well.",
+    "imagePath": "/images/emoCards/21.svg"
+  },
+  {
+    "id": 22,
+    "slug": "card-22",
+    "categoryId": 4,
+    "name": "Afraid",
+    "description": "Feeling anxious and timid when facing a threat or an unsafe situation.",
+    "example": "I was home alone at night and felt afraid, so I turned on every light.",
+    "imagePath": "/images/emoCards/22.svg"
+  },
+  {
+    "id": 23,
+    "slug": "card-23",
+    "categoryId": 4,
+    "name": "Nervous",
+    "description": "Feeling anxious before an important moment, often with physical reactions like a racing heart or sweaty hands.",
+    "example": "Before the competition, I felt nervous and my palms started sweating.",
+    "imagePath": "/images/emoCards/23.svg"
+  },
+  {
+    "id": 24,
+    "slug": "card-24",
+    "categoryId": 4,
+    "name": "Anxious",
+    "description": "Feeling worried, tense, and uneasy about a possible bad outcome.",
+    "example": "As the final report deadline got closer, everyone felt anxious about not finishing in time.",
+    "imagePath": "/images/emoCards/24.svg"
+  },
+  {
+    "id": 25,
+    "slug": "card-25",
+    "categoryId": 4,
+    "name": "Terrified",
+    "description": "A strong fear caused by real or imagined danger or threat.",
+    "example": "Walking down a dark and unfamiliar alley made me feel terrified that something bad might happen.",
+    "imagePath": "/images/emoCards/25.svg"
+  },
+  {
+    "id": 26,
+    "slug": "astonishment",
+    "categoryId": 5,
+    "name": "Stunned",
+    "description": "Feeling shocked and unable to react after something unexpected happens.",
+    "example": "When I was chosen to be class leader, I felt stunned because I had never expected it.",
+    "imagePath": "/images/emoCards/26.svg"
+  },
+  {
+    "id": 27,
+    "slug": "card-27",
+    "categoryId": 5,
+    "name": "Surprised",
+    "description": "Feeling startled or amazed because something happens unexpectedly.",
+    "example": "Xiao-juan loves desserts, so I was surprised when she gave me her cake.",
+    "imagePath": "/images/emoCards/27.svg"
+  },
+  {
+    "id": 28,
+    "slug": "card-28",
+    "categoryId": 5,
+    "name": "Pleasantly Surprised",
+    "description": "Feeling excited and happy because of an unexpected event or situation.",
+    "example": "The surprise birthday party made me feel pleasantly surprised and delighted.",
+    "imagePath": "/images/emoCards/28.svg"
+  },
+  {
+    "id": 29,
+    "slug": "card-29",
+    "categoryId": 5,
+    "name": "Shocked",
+    "description": "Feeling intensely surprised by something extreme or hard to believe.",
+    "example": "Hearing about the severe earthquake damage in the country left everyone shocked.",
+    "imagePath": "/images/emoCards/29.svg"
+  },
+  {
+    "id": 30,
+    "slug": "card-30",
+    "categoryId": 6,
+    "name": "Helplessly Resigned",
+    "description": "Feeling there is nothing you can do to change or solve the situation.",
+    "example": "When it suddenly started raining, I felt helplessly resigned because I had not brought any rain gear.",
+    "imagePath": "/images/emoCards/30.svg"
+  },
+  {
+    "id": 31,
+    "slug": "card-31",
+    "categoryId": 6,
+    "name": "Frustrated",
+    "description": "Feeling upset and discouraged after facing obstacles, setbacks, or difficulty.",
+    "example": "I tried several times and still could not solve the hard problem, so I felt frustrated.",
+    "imagePath": "/images/emoCards/31.svg"
+  },
+  {
+    "id": 32,
+    "slug": "card-32",
+    "categoryId": 6,
+    "name": "Disappointed",
+    "description": "Feeling sad or dissatisfied because things did not turn out as hoped.",
+    "example": "The event I had been looking forward to was canceled at the last minute, and I felt disappointed.",
+    "imagePath": "/images/emoCards/32.svg"
+  },
+  {
+    "id": 33,
+    "slug": "card-33",
+    "categoryId": 6,
+    "name": "Powerless",
+    "description": "Feeling unable to influence, solve, or change a situation because you lack ability, resources, or control.",
+    "example": "I tried to resolve the conflict, but the other person would not cooperate, so I felt powerless.",
+    "imagePath": "/images/emoCards/33.svg"
+  },
+  {
+    "id": 34,
+    "slug": "discouragement",
+    "categoryId": 6,
+    "name": "Discouraged",
+    "description": "Feeling emotionally low after setbacks, obstacles, or unmet goals.",
+    "example": "I tried to build friendships with classmates, but misunderstandings left me feeling discouraged.",
+    "imagePath": "/images/emoCards/34.svg"
+  },
+  {
+    "id": 35,
+    "slug": "card-35",
+    "categoryId": 6,
+    "name": "Sad",
+    "description": "Feeling down and heavy because of loss, hurt, or disappointment.",
+    "example": "My favorite keychain went missing, and that made me feel sad.",
+    "imagePath": "/images/emoCards/35.svg"
+  },
+  {
+    "id": 36,
+    "slug": "card-36",
+    "categoryId": 6,
+    "name": "Helpless",
+    "description": "Feeling alone and unsupported, not knowing what to do.",
+    "example": "When I ran into difficulties and could not find a solution, I felt helpless.",
+    "imagePath": "/images/emoCards/36.svg"
+  },
+  {
+    "id": 37,
+    "slug": "card-37",
+    "categoryId": 6,
+    "name": "Sorrowful",
+    "description": "Feeling deep sadness because of loss, pain, or something heartbreaking.",
+    "example": "When my beloved pet passed away, I felt sorrowful and kept crying.",
+    "imagePath": "/images/emoCards/37.svg"
+  },
+  {
+    "id": 38,
+    "slug": "card-38",
+    "categoryId": 6,
+    "name": "Heartbroken",
+    "description": "Feeling emotional pain and hurt because of loss, sorrow, or betrayal.",
+    "example": "I felt heartbroken after being betrayed by a close friend.",
+    "imagePath": "/images/emoCards/38.svg"
+  },
+  {
+    "id": 39,
+    "slug": "card-39",
+    "categoryId": 6,
+    "name": "Depressed",
+    "description": "A lasting emotional state of hopelessness, low mood, and lack of energy that can affect daily life.",
+    "example": "The pressure of school that I could not release made me feel depressed and unmotivated.",
+    "imagePath": "/images/emoCards/39.svg"
+  },
+  {
+    "id": 40,
+    "slug": "card-40",
+    "categoryId": 6,
+    "name": "Overwhelmed",
+    "description": "Losing emotional control because of heavy pressure, pain, or difficulty.",
+    "example": "Facing adults’ high expectations for a long time made me feel overwhelmed and drained.",
+    "imagePath": "/images/emoCards/40.svg"
+  },
+  {
+    "id": 41,
+    "slug": "card-41",
+    "categoryId": 6,
+    "name": "Desperate",
+    "description": "Feeling extremely low and completely without hope because of difficulty or repeated hurt.",
+    "example": "After being lied to by my friend again and again, I felt desperate about the friendship.",
+    "imagePath": "/images/emoCards/41.svg"
+  },
+  {
+    "id": 42,
+    "slug": "card-42",
+    "categoryId": 7,
+    "name": "Bored",
+    "description": "Feeling unstimulated and uninterested in what is around you.",
+    "example": "Because I could not go out on a rainy day, I felt bored inside.",
+    "imagePath": "/images/emoCards/42.svg"
+  },
+  {
+    "id": 43,
+    "slug": "card-43",
+    "categoryId": 7,
+    "name": "Fed Up",
+    "description": "Feeling mentally and physically tired of something repeated for too long.",
+    "example": "Practicing the same thing again and again for a long time made me feel fed up.",
+    "imagePath": "/images/emoCards/43.svg"
+  },
+  {
+    "id": 44,
+    "slug": "inferiority",
+    "categoryId": 7,
+    "name": "Inferior",
+    "description": "Feeling that your ability or worth is not enough, which can lead to insecurity and low confidence.",
+    "example": "I feel inferior and ashamed when I think about my flaws and body shape.",
+    "imagePath": "/images/emoCards/44.svg"
+  },
+  {
+    "id": 45,
+    "slug": "card-45",
+    "categoryId": 7,
+    "name": "Displeased",
+    "description": "Feeling dislike, dissatisfaction, or discomfort toward something.",
+    "example": "When I am forced to do something I do not like, I feel displeased and unwilling.",
+    "imagePath": "/images/emoCards/45.svg"
+  },
+  {
+    "id": 46,
+    "slug": "card-46",
+    "categoryId": 7,
+    "name": "Jealous",
+    "description": "Feeling envious and unhappy about what someone else has, achieves, or can do.",
+    "example": "I felt jealous of other people’s talent and ability, and it made me feel smaller.",
+    "imagePath": "/images/emoCards/46.svg"
+  },
+  {
+    "id": 47,
+    "slug": "card-47",
+    "categoryId": 7,
+    "name": "Disgusted",
+    "description": "Feeling strong dislike and revulsion toward something.",
+    "example": "I felt deeply disgusted by those awful behaviors.",
+    "imagePath": "/images/emoCards/47.svg"
+  },
+  {
+    "id": 48,
+    "slug": "card-48",
+    "categoryId": 7,
+    "name": "Repulsed",
+    "description": "Feeling disgust so strongly that it becomes hard to tolerate.",
+    "example": "His two-faced behavior was so repulsive that I could hardly stand it.",
+    "imagePath": "/images/emoCards/48.svg"
+  },
+  {
+    "id": 49,
+    "slug": "card-49",
+    "categoryId": 7,
+    "name": "Resentful",
+    "description": "Feeling anger, bitterness, and blame toward a person or situation.",
+    "example": "Being betrayed by someone I trusted made me feel deeply resentful.",
+    "imagePath": "/images/emoCards/49.svg"
+  },
+  {
+    "id": 50,
+    "slug": "card-50",
+    "categoryId": 8,
+    "name": "Dissatisfied",
+    "description": "Feeling unhappy with the current situation and wishing it were better.",
+    "example": "I feel dissatisfied with how much adults restrict me.",
+    "imagePath": "/images/emoCards/50.svg"
+  },
+  {
+    "id": 51,
+    "slug": "irritation",
+    "categoryId": 8,
+    "name": "Irritable",
+    "description": "Feeling emotionally unsettled, impatient, or easily angered.",
+    "example": "My younger brother kept making noise, and I felt irritable.",
+    "imagePath": "/images/emoCards/51.svg"
+  },
+  {
+    "id": 52,
+    "slug": "card-52",
+    "categoryId": 8,
+    "name": "Angry",
+    "description": "Feeling upset and angry after being provoked or bothered.",
+    "example": "He kept interrupting my homework, and it made me angry.",
+    "imagePath": "/images/emoCards/52.svg"
+  },
+  {
+    "id": 53,
+    "slug": "card-53",
+    "categoryId": 8,
+    "name": "Furious",
+    "description": "A strong form of anger caused by frustration, unfairness, or deep dissatisfaction.",
+    "example": "I felt furious when I was treated unfairly.",
+    "imagePath": "/images/emoCards/53.svg"
+  },
+  {
+    "id": 54,
+    "slug": "card-54",
+    "categoryId": 8,
+    "name": "Enraged",
+    "description": "An extreme form of anger that can lead to intense outbursts or loss of control.",
+    "example": "Xiao-ming broke his promise again, and I became enraged and shouted at him on the phone.",
+    "imagePath": "/images/emoCards/54.svg"
+  },
+  {
+    "id": 55,
+    "slug": "letting-go",
+    "categoryId": 9,
+    "name": "Relieved",
+    "description": "Letting go of past feelings or worries and finding emotional release and comfort.",
+    "example": "After failing, I practiced accepting it and slowly felt relieved enough to start again.",
+    "imagePath": "/images/emoCards/55.svg"
+  },
+  {
+    "id": 56,
+    "slug": "card-56",
+    "categoryId": 9,
+    "name": "Embarrassed",
+    "description": "Feeling awkward and unsure of yourself in a sudden social or situational moment.",
+    "example": "Introducing myself in front of strangers made me feel embarrassed.",
+    "imagePath": "/images/emoCards/56.svg"
+  },
+  {
+    "id": 57,
+    "slug": "card-57",
+    "categoryId": 9,
+    "name": "Envious",
+    "description": "Wanting something that someone else has and wishing you could have it too.",
+    "example": "I envy his musical talent and wish I had that kind of ability too.",
+    "imagePath": "/images/emoCards/57.svg"
+  },
+  {
+    "id": 58,
+    "slug": "card-58",
+    "categoryId": 9,
+    "name": "Guilty",
+    "description": "Feeling uneasy or remorseful about something you did or chose.",
+    "example": "I told a lie, and now I feel very guilty.",
+    "imagePath": "/images/emoCards/58.svg"
+  },
+  {
+    "id": 59,
+    "slug": "card-59",
+    "categoryId": 9,
+    "name": "Conflicted",
+    "description": "Feeling inner conflict between two or more thoughts, feelings, or choices.",
+    "example": "I like sweets, but I also worry about my health, so I feel conflicted.",
+    "imagePath": "/images/emoCards/59.svg"
+  },
+  {
+    "id": 60,
+    "slug": "card-60",
+    "categoryId": 9,
+    "name": "Regretful",
+    "description": "Feeling sorry about a past decision, action, or missed opportunity.",
+    "example": "I regret saying those words in front of my friend.",
+    "imagePath": "/images/emoCards/60.svg"
+  },
+  {
+    "id": 61,
+    "slug": "card-61",
+    "categoryId": 9,
+    "name": "Wronged",
+    "description": "Feeling hurt because you were treated unfairly or misunderstood.",
+    "example": "I felt wronged because people misunderstood me and still blamed me.",
+    "imagePath": "/images/emoCards/61.svg"
+  },
+  {
+    "id": 62,
+    "slug": "card-62",
+    "categoryId": 9,
+    "name": "Lonely",
+    "description": "Feeling alone and separated from others.",
+    "example": "I did not make any friends at my new school, so I felt lonely.",
+    "imagePath": "/images/emoCards/62.svg"
+  },
+  {
+    "id": 63,
+    "slug": "card-63",
+    "categoryId": 9,
+    "name": "Ashamed",
+    "description": "Feeling embarrassed or bad about your behavior, appearance, or words.",
+    "example": "After making a small mistake and hearing classmates laugh, I felt embarrassed and ashamed.",
+    "imagePath": "/images/emoCards/63.svg"
+  },
+  {
+    "id": 64,
+    "slug": "card-64",
+    "categoryId": 9,
+    "name": "Moved",
+    "description": "Feeling deeply touched by a person, scene, or event.",
+    "example": "My friend carefully prepared a birthday gift for me, and I was deeply moved.",
+    "imagePath": "/images/emoCards/64.svg"
+  },
+  {
+    "id": 65,
+    "slug": "card-65",
+    "categoryId": 9,
+    "name": "Agitated",
+    "description": "An excited and stirred-up emotional state, often caused by anticipation, excitement, or nervousness.",
+    "example": "When I ran into my idol while shopping, I felt agitated with excitement and rushed over for a photo.",
+    "imagePath": "/images/emoCards/65.svg"
+  }
+]

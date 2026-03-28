@@ -1,0 +1,837 @@
+{
+  "meta": {
+    "siteName": "Wavemocards",
+    "siteTitleDefault": "Wavemocards - Explore Your Emotions",
+    "siteTitleTemplate": "%s | Wavemocards",
+    "siteDescription": "Recognize, explore and record your emotions through emotion cards, and let your emotions become your power. 65 emotion cards help you become aware of your inner feelings, write emotional stories, and promote mental health.",
+    "siteKeywords": [
+      "mood card",
+      "Emotional exploration",
+      "mental health",
+      "Emotional management",
+      "self-awareness",
+      "Wavemocards",
+      "wave mood card",
+      "emotional education"
+    ],
+    "home": {
+      "title": "Wavemocards - Explore your emotions",
+      "description": "Understand, explore and record your emotions through emotion cards, and let your emotions become your power",
+      "keywords": [
+        "mood card",
+        "Emotional exploration",
+        "mental health",
+        "Emotional management",
+        "self-awareness"
+      ]
+    },
+    "aboutEmotions": {
+      "title": "Wavemocards | Understanding Emotions",
+      "description": "Learn what emotions are, the six basic emotions, why emotions are neither good nor bad, and healthy ways to live with emotions",
+      "keywords": [
+        "mood",
+        "basic emotions",
+        "emotional health",
+        "mental health",
+        "Emotional management"
+      ]
+    },
+    "emoCards": {
+      "title": "Wavemocards | Understanding Emotions | Emotion Cards",
+      "description": "Browse 65 emotion cards to learn the meanings and examples of each emotion",
+      "keywords": [
+        "mood card",
+        "emotion vocabulary",
+        "Emotion classification",
+        "emotional education"
+      ],
+      "category": {
+        "title": "Wavemocards | Understanding Emotions | {category}",
+        "description": "Browse emotion cards in the {category} category to learn their meanings and examples.",
+        "keywords": {
+          "card": "emotion card",
+          "vocabulary": "emotion vocabulary",
+          "category": "emotion category"
+        }
+      }
+    },
+    "explore": {
+      "entry": {
+        "title": "Explore Emotions",
+        "description": "Explore and become aware of your emotions through Wavemocards."
+      },
+      "cards": {
+        "title": "Wavemocards | Explore Emotions | Emotion Cards",
+        "description": "Browse and select emotion cards to add to your holder."
+      },
+      "strength1": {
+        "title": "Wavemocards | Exploring Emotions | My Emotional Intensity | First Time",
+        "description": "Record the emotional intensity of the first time you pick an emotion card."
+      },
+      "storyBackground": {
+        "title": "Wavemocards | Exploring Emotions | My Emotional Story | Background Chapter",
+        "description": "Recall the background and reasons for the emotion, and record the starting point of the emotional story."
+      },
+      "storyAction": {
+        "title": "Wavemocards | Exploring Emotions | My Emotional Story | Action Chapter",
+        "description": "Review the reactions, results and feelings after the emotion, and sort out your emotional history."
+      },
+      "strength2": {
+        "title": "Wavemocards | Exploring Emotions | My Emotional Intensity | Second Time",
+        "description": "Record the second emotional intensity after awareness and writing."
+      },
+      "complete": {
+        "title": "Wavemocards | Exploring Emotions | Thank You for Staying with Your Emotional Wave",
+        "description": "Your emotion record has been successfully saved. You can go to My Records to view the content."
+      },
+      "category": {
+        "title": "Wavemocards | Explore Emotions | {category}",
+        "description": "Browse emotion cards in the {category} category and add them to your holder."
+      }
+    },
+    "records": {
+      "title": "Wavemocards | My Records",
+      "description": "View and manage your emotion records",
+      "detailTitle": "Wavemocards | My Records | Emotion Story",
+      "detailDescription": "View and edit your emotion story details",
+      "analysisTitle": "Wavemocards | My Records | Analysis",
+      "analysisDescription": "View the distribution and proportion of your emotional records from the chart."
+    },
+    "account": {
+      "title": "Wavemocards | My Account",
+      "description": "Manage your account settings and profile"
+    },
+    "ogImageAlt": "Wavemocards"
+  },
+  "common": {
+    "actions": {
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "close": "Close",
+      "edit": "Edit",
+      "next": "Next",
+      "back": "Back",
+      "clear": "Clear",
+      "expand": "Expand",
+      "collapse": "Collapse",
+      "start": "Start",
+      "search": "Search",
+      "reset": "Reset",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "analyze": "Analyze",
+      "complete": "Complete",
+      "return": "Return",
+      "continueEditing": "Continue editing",
+      "discardChanges": "Discard changes",
+      "resetPassword": "Reset password"
+    },
+    "states": {
+      "loading": "Loading...",
+      "empty": "No data available",
+      "notFound": "Not found",
+      "noDescription": "No description available",
+      "noExample": "No example available",
+      "notAvailable": "—"
+    },
+    "labels": {
+      "yes": "Yes",
+      "no": "No",
+      "unknown": "Unknown",
+      "email": "Email",
+      "password": "Password",
+      "date": "Date"
+    },
+    "illustrationCredit": {
+      "by": "Illustration by",
+      "from": "from",
+      "author": "Tanya Krasutska",
+      "source": "Ouch!"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "main": "Main navigation"
+      },
+      "links": {
+        "home": "Home",
+        "aboutEmotions": "Understanding Emotions",
+        "explore": "Explore Emotions",
+        "records": "My Records",
+        "account": "Account settings",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "signOut": "Sign out",
+        "emoCards": "Emotion Cards"
+      },
+      "sr": {
+        "accountSettings": "Account settings",
+        "signOut": "Sign out",
+        "brand": "Wavemocards"
+      }
+    },
+    "mobileNav": {
+      "toggleMenu": "Switch menu",
+      "dialogLabel": "Mobile device navigation menu",
+      "navLabel": "Mobile device navigation",
+      "links": {
+        "home": "Home",
+        "aboutEmotions": "Understanding Emotions",
+        "emoCards": "Emotion Cards",
+        "explore": "Explore Emotions",
+        "records": "My Records",
+        "account": "Account settings",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "signOut": "Sign out"
+      }
+    },
+    "footer": {
+      "tagline": "Understand, explore, and record your emotions through emotion cards",
+      "sections": {
+        "team": "Development Team",
+        "usefulLinks": "Useful links"
+      },
+      "links": {
+        "aboutEmotions": "Understanding Emotions",
+        "contactUs": "Contact us",
+        "reportIssue": "Report an issue"
+      },
+      "contributors": {
+        "projectManager": "Project Manager",
+        "productDesigner": "Product Designer",
+        "frontEndEngineer": "Front-End Engineer",
+        "frontEndConsultant": "Front-End Consultant",
+        "databaseDeveloper": "Database Developer",
+        "backEndDeveloper": "Back-End Developer",
+        "systemDesigner": "System Designer",
+        "illustrator": "Illustrator"
+      },
+      "copyright": "© 2023 - {year} Wavemocards | All Rights Reserved",
+      "sr": {
+        "brand": "Wavemocards"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "line1": "Find yourself",
+      "line2": "wave of emotions"
+    },
+    "cta": {
+      "aboutEmotions": "Understanding Emotions",
+      "signUp": "Go to register"
+    }
+  },
+  "aboutEmotions": {
+    "pageTitle": "Recognize emotions",
+    "tabs": {
+      "aboutEmotions": "Recognize emotions",
+      "emoCards": "mood card"
+    },
+    "sourceLabel": "Quoting article source:",
+    "sourceName": "Hong Kong Federation of Youth Groups | Healthy Space (Kowloon)",
+    "sections": {
+      "whatIsEmotion": {
+        "title": "What are emotions?",
+        "content": "Emotion in English is emotion, which represents the energy flowing in our body. When we are stimulated and trigger inner feelings, physical reactions, thoughts and actions, we are called emotions. For example, when someone walks into a back alley and encounters a vicious-looking dog (stimulus), he feels very frightened and worries that he will be bitten (inner feelings and thoughts), his heart beats faster and he trembles (physical reaction), and he finally decides to take a quick detour and leave (action)."
+      },
+      "sixBasicEmotions": {
+        "title": "6 basic emotions",
+        "content": "Naturalist Darwin mentioned that humans have six basic emotions, including happiness, sadness, fear, disgust, anger and surprise, which are instinctive emotions that help humans improve their chances of survival. Other complex emotions, such as excitement, grievance, inferiority, jealousy, guilt, loneliness, etc., are derived from a mixture of basic emotions and arise after learning and socialization."
+      },
+      "goodOrBad": {
+        "title": "Emotions are neither good nor bad",
+        "content": "Most people are used to classifying emotions into positive and negative. They feel that happiness is a positive emotion, while sadness, anger, and fear are harmful to people. In fact, emotions are neither good nor bad. Each emotion has its own unique meaning. For example, feeling fearful and uneasy about unfamiliar environments reflects the desire for security and reminds us to stay away from danger. Being vulnerable and crying when you are sad can attract care and support and promote interpersonal connections."
+      },
+      "healthyEmotion": {
+        "title": "Emotional health",
+        "content": "If you are biased against emotions, deny and suppress your true feelings, pretend to be happy when you are sad, or endure silently when you are angry, it will easily lead to physical and mental health problems. The so-called emotional health does not mean to be in a happy mood all the time, but to be able to be aware of your different emotions, understand your inner needs, and express and adjust them in a healthy and appropriate way to restore peace of mind."
+      }
+    },
+    "basicEmotions": {
+      "happiness": "hapiness",
+      "sadness": "sad",
+      "fear": "fear",
+      "disgust": "disgust",
+      "anger": "anger",
+      "surprise": "surprise"
+    }
+  },
+  "emoCards": {
+    "overview": {
+      "pageTitle": "Recognize emotions",
+      "tabs": {
+        "aboutEmotions": "Recognize emotions",
+        "emoCards": "mood card"
+      },
+      "view": {
+        "expand": "Expand",
+        "collapse": "close",
+        "table": "emotion meter"
+      },
+      "guide": {
+        "title": "How to browse mood cards",
+        "interfaceTypes": "Type of interface",
+        "usageByView": "Instructions for use of each interface",
+        "switchViewDescription": "Click the \"Collapse\" or \"Expand\" button on the upper right to change the display mode of the emotion card.",
+        "tableDescription": "Click the \"Emotion Chart\" on the upper right to quickly browse all emotion words.",
+        "expand": {
+          "title": "Expand",
+          "description": "Click on a single \"Emotion Card\" to view details about that emotion."
+        },
+        "collapse": {
+          "title": "close",
+          "description": "There are 9 category cards in total. After clicking on a single \"category card\", you can enter the emotion card page of that category."
+        },
+        "table": {
+          "title": "emotion meter",
+          "description": "Click on a single \"emotion word\" to view detailed content about that emotion."
+        },
+        "hint": "💬 You can collapse this description by clicking on the block titled \"How to browse mood cards\"."
+      },
+      "categoryCardsHint": "🔍 There are 9 category cards below. Click on a category card to enter the emotion card page of that category.",
+      "empty": {
+        "noDescription": "No description yet",
+        "noExample": "No examples yet"
+      }
+    },
+    "category": {
+      "backToAllCards": "return",
+      "openCardDetail": "View mood card details",
+      "emptyState": "There are currently no mood cards"
+    },
+    "table": {
+      "openCategory": "View {category} category",
+      "openCard": "View {card} mood card"
+    },
+    "modal": {
+      "dialogLabel": "Mood card details",
+      "close": "closure",
+      "addToHolder": "Add to card holder",
+      "meaning": "mean:",
+      "example": "Example:",
+      "empty": {
+        "noDescription": "No description yet",
+        "noExample": "No examples yet"
+      },
+      "aria": {
+        "cardDetail": "{cardName} Emotion card details"
+      }
+    }
+  },
+  "explore": {
+    "entry": {
+      "aria": {
+        "section": "Explore the emotional portal"
+      },
+      "title": "explore emotions",
+      "intro": {
+        "line1": "Are you lost in the world of emotions?",
+        "line2": "It doesn't matter, let's explore our emotions together in the wave emotion card."
+      },
+      "breathing": {
+        "line1": "I invite you to close your eyes first,",
+        "highlight": "Take a deep breath",
+        "line2": ", and then exhale slowly."
+      },
+      "awareness": {
+        "line1": "During the process of inhaling and exhaling,",
+        "highlight": "Slowly feel the state of your body and mind",
+        "line2": "."
+      },
+      "ctaPrompt": {
+        "line1": "If you are ready,",
+        "highlight": "Please click \"Start exploring\"",
+        "line2": "."
+      },
+      "startButton": "Start exploring"
+    },
+    "cards": {
+      "aria": {
+        "section": "Explore mood cards",
+        "categorySection": "{category} Mood card"
+      },
+      "titles": {
+        "mobile": "explore emotions",
+        "desktop": "Explore emotions | Emotion cards",
+        "category": "Exploring emotions | {category}",
+        "holder": "My mood card holder"
+      },
+      "view": {
+        "expand": "Expand",
+        "collapse": "close",
+        "table": "emotion meter"
+      },
+      "guide": {
+        "title": "Explore steps and methods",
+        "stepsTitle": "Discovery steps",
+        "browseTitle": "How to browse mood cards",
+        "categoryCardsHint": "🔍 There are 9 category cards below. Click on a category card to enter the emotion card page of that category.",
+        "steps": [
+          "Scroll down the page to start browsing mood cards.",
+          "Click the \"+\" button on the upper right side of the emotion card to put the emotion card into \"My Emotion Card Holder\".",
+          "After completing the selection of emotion cards, click the \"My Emotion Card Holder\" button to go directly to the next step."
+        ],
+        "browseMethods": [
+          "Click the \"Collapse\" or \"Expand\" button on the upper right to change the display mode of the emotion card.",
+          "Click the \"Emotion Chart\" on the upper right to quickly browse all emotion words."
+        ]
+      },
+      "actions": {
+        "openHolder": "My mood card holder",
+        "addToHolder": "Add to card holder",
+        "removeFromHolder": "Remove card holder",
+        "addedToHolder": "Added to card folder",
+        "backToCards": "Back to mood card"
+      },
+      "errors": {
+        "tooFewTitle": "Not enough cards",
+        "tooFewDescription": "Please pick at least 1 card.",
+        "tooManyTitle": "Too many cards",
+        "tooManyDescriptionLine1": "The maximum number of cards is 3.",
+        "tooManyDescriptionLine2": "Please filter for the cards that best match your emotions."
+      },
+      "countBadge": "{count}",
+      "emptyState": "There are currently no mood cards"
+    },
+    "strength1": {
+      "title": "The intensity of my emotions | First time",
+      "titleMobile": {
+        "line1": "my emotional intensity",
+        "line2": "first"
+      },
+      "actions": {
+        "previous": "Previous step",
+        "next": "Next step"
+      },
+      "instructions": {
+        "line1": "Thank you for your efforts in finding your own emotional card.",
+        "line2": "Next, I want to invite you to close your eyes again, take a deep breath and exhale~",
+        "line3": "During the process of taking a deep breath, feel yourself in your heart and what is the intensity of the selected emotions?",
+        "line4": "You can remove a card with the \"X\" in the top-right corner. If you want to add another card, go back to the previous step.",
+        "scoreHint": "(1 point represents the weakest, 5 points represents the strongest)"
+      },
+      "card": {
+        "remove": "Remove"
+      },
+      "errors": {
+        "countTitle": "Invalid number of cards",
+        "tooFewDescription": "Please pick at least 1 card.",
+        "tooManyDescriptionLine1": "The maximum number of cards is 3.",
+        "tooManyDescriptionLine2": "Please filter for the cards that best match your emotions.",
+        "levelsTitle": "Not yet completed",
+        "levelsDescription": "The emotional intensity of each emotion card must be filled in."
+      },
+      "acknowledge": "I see"
+    },
+    "strength2": {
+      "title": "The intensity of my emotions | The second time",
+      "titleMobile": {
+        "line1": "my emotional intensity",
+        "line2": "second time"
+      },
+      "actions": {
+        "previous": "Previous step",
+        "saveRecord": "save record",
+        "saving": "Saving..."
+      },
+      "instructions": {
+        "line1": "After noticing and recording emotional stories, I wonder if your current emotions are okay?",
+        "line2": "I invite you to take a deep breath again and ask yourself, what is the intensity of your emotions now?",
+        "scoreHint": "(1 point represents the weakest, 5 points represents the strongest)",
+        "skipHint": "If you don't want to record it, you can skip this step and click \"Save Record\" directly."
+      }
+    },
+    "storyBackground": {
+      "title": "My emotional story | Background",
+      "titleMobile": {
+        "line1": "my emotional story",
+        "line2": "Background"
+      },
+      "actions": {
+        "previous": "Previous step",
+        "next": "Next step"
+      },
+      "greeting": "Thank you dear {userName}",
+      "instructions": {
+        "line2": "Next, I would like to invite you to slowly dive into your own emotional story and find the source of your emotions.",
+        "skipHint": "If you don't want to record it yet, you can skip this step and click \"Next\" directly."
+      },
+      "prompt": {
+        "title": "I invite you to gently close your eyes, and between inhaling and exhaling, slowly recall what happened before you felt the emotion \"{cardNames}\"?",
+        "description": "In the column below, please try to write down the reasons, things, background stories, etc. that you think may have caused you to have these emotions."
+      },
+      "placeholder": "Write your story here..."
+    },
+    "storyAction": {
+      "title": "My Emotional Story | Action Chapter",
+      "titleMobile": {
+        "line1": "my emotional story",
+        "line2": "Action"
+      },
+      "actions": {
+        "previous": "Previous step",
+        "next": "Next step"
+      },
+      "intro": {
+        "line1": "Thank you for trying hard to recall the background and reasons for the emotion.",
+        "line2": "Next, I want to invite you to think back together after the emotional wave comes...",
+        "skipHint": "If you don't want to record it yet, you can skip this step and click \"Next\" directly."
+      },
+      "question1": {
+        "label": "Question 1",
+        "prompt": "How did you react after feeling the emotion of \"{cardNames}\"? Or what did you do?",
+        "example": "For example: After feeling the anxiety in my heart, I wrote down various things I was worried about in my diary."
+      },
+      "question2": {
+        "label": "Question 2",
+        "prompt": "What was the result of your reaction above?"
+      },
+      "question3": {
+        "label": "Question 3",
+        "prompt": "How do you feel about the above results?"
+      },
+      "question4": {
+        "label": "Question 4",
+        "prompt": "Do you think the result of this is what you expected?",
+        "options": {
+          "yes": "yes",
+          "no": "no",
+          "unclear": "Not sure"
+        }
+      },
+      "question5": {
+        "label": "Question 5",
+        "promptUnexpected": "If the results this time are not what you expected, what do you think you can do next time you have similar emotions to get the results you expected?",
+        "promptAffirming": "In this emotional journey, what do you think you did well? You are invited to write down what you are sure you did well."
+      }
+    },
+    "complete": {
+      "title": "Thank you for being with the emotional wave",
+      "titleMobile": {
+        "line1": "thank yourself",
+        "line2": "Be with the emotional wave"
+      },
+      "actions": {
+        "complete": "Finish"
+      },
+      "greeting": "Dear {userName},",
+      "saveSuccess": "The record has been saved successfully.",
+      "thanks": "Thank you for spending time, thought, awareness, recording and reflection on yourself.",
+      "selfTalkIntro": "I want to invite you to say to yourself:",
+      "selfTalkLead": "I want to thank myself,",
+      "selfTalkFull": "I am willing to be aware of and embrace my emotions and myself. This way I am already great!",
+      "selfTalkLine1": "I am willing to be aware of and embrace my emotions and myself",
+      "selfTalkLine2": "I'm already great like this!",
+      "hint": "You can click \"Done\" in the upper right corner and go to \"My Records\" to view the record content."
+    }
+  },
+  "records": {
+    "list": {
+      "title": "my record",
+      "tabs": {
+        "records": "log",
+        "analysis": "analyze"
+      },
+      "search": {
+        "keywordPlaceholder": "Please enter keywords separated by \"space\"",
+        "dateRangeSeparator": "~",
+        "search": "search",
+        "reset": "Reorganization | Show all"
+      },
+      "actions": {
+        "delete": "delete"
+      },
+      "empty": {
+        "noRecords": "There is currently no record"
+      },
+      "table": {
+        "select": "Select",
+        "date": "date",
+        "emotionAndStrength": "mood and intensity"
+      },
+      "pagination": {
+        "previous": "Previous page",
+        "next": "Next page"
+      },
+      "confirmDelete": {
+        "title": "Are you sure you want to delete it?",
+        "description": "You have chosen to delete {count} data. Once deleted, it cannot be restored. Are you sure you want to delete it?",
+        "cancel": "Cancel",
+        "confirm": "Confirm deletion",
+        "deleting": "Deleting..."
+      }
+    },
+    "detail": {
+      "title": "My record | Emotional story",
+      "titleMobile": {
+        "line1": "my record",
+        "line2": "emotional story"
+      },
+      "actions": {
+        "delete": "delete",
+        "back": "return",
+        "edit": "edit",
+        "cancel": "Cancel",
+        "save": "store",
+        "saving": "Saving..."
+      },
+      "sections": {
+        "storyBackground": "Emotional Story | Background",
+        "storyAction": "Emotional Story | Action Chapter"
+      },
+      "fields": {
+        "date": "date",
+        "strengthBefore": "Emotional intensity | first time",
+        "strengthAfter": "Emotional intensity | Second time",
+        "storyBackground": "emotional background",
+        "actionTaken": "reaction after emotion",
+        "resultAfterAction": "The result after the reaction",
+        "feelingAfterResult": "How the results make me feel",
+        "expectedResult": "Are the results what I expected?",
+        "nextActionAndAffirmationLine1": "What can be done next time?",
+        "nextActionAndAffirmationLine2": "And what I want to affirm about myself"
+      },
+      "expect": {
+        "yes": "yes",
+        "no": "no",
+        "unknown": "Not sure"
+      },
+      "empty": {
+        "notFound": "This record cannot be found",
+        "notAvailable": "—"
+      },
+      "confirmDelete": {
+        "title": "Are you sure you want to delete it?",
+        "description": "Once deleted, it cannot be restored. Are you sure you want to delete it?",
+        "cancel": "Cancel",
+        "confirm": "Confirm deletion",
+        "deleting": "Deleting..."
+      }
+    },
+    "analysis": {
+      "title": "My record | Analysis",
+      "tabs": {
+        "records": "log",
+        "analysis": "analyze"
+      },
+      "dateRangeSeparator": "~",
+      "loading": "Reading...",
+      "analyze": "analyze",
+      "empty": {
+        "noData": "There is no data during this period"
+      },
+      "charts": {
+        "frequency": {
+          "title": "number of emotion categories",
+          "description1": "The picture below is a bar chart of the number of times the emotion cards you recorded during this period appeared in the following categories.",
+          "description2": "If you want to see the number of times a category appears, you can hover the cursor over the category bar.",
+          "unit": "(Second-rate)",
+          "tooltipValue": "{value} times"
+        },
+        "ratio": {
+          "title": "Emotional group ratio",
+          "description1": "The picture below is a pie chart of the proportion of times the emotion cards you recorded during this period appeared in the following categories.",
+          "description2": "If you want to see the proportion of that category, you can hover the cursor over the color block of that category in the pie chart.",
+          "tooltipValue": "{value}%"
+        }
+      },
+      "illustrationAlt": "analyze"
+    }
+  },
+  "account": {
+    "profile": {
+      "title": "my account",
+      "actions": {
+        "edit": "edit",
+        "cancel": "Cancel",
+        "save": "store",
+        "saving": "Saving..."
+      },
+      "fields": {
+        "email": "Email",
+        "password": "password",
+        "lastName": "surname",
+        "firstName": "name",
+        "birthDate": "Birthday",
+        "role": "identity"
+      },
+      "placeholders": {
+        "lastName": "Please enter last name",
+        "firstName": "Please enter name"
+      },
+      "options": {
+        "student": "student",
+        "teacher": "teacher",
+        "other": "other"
+      },
+      "errors": {
+        "required": "This field is required",
+        "loadFailed": "Failed to load account information",
+        "loadUnexpected": "An error occurred while loading account information"
+      },
+      "empty": {
+        "loadFailed": "Unable to load account information",
+        "notAvailable": "—"
+      },
+      "passwordMask": "**********",
+      "resetPassword": "reset password",
+      "confirmCancel": {
+        "title": "Are you sure you want to cancel editing?",
+        "description": "After canceling the edit, your changes will not be saved. Are you sure you want to cancel the edit?",
+        "continueEditing": "Continue editing",
+        "discard": "Cancel edit"
+      },
+      "saveResult": {
+        "successTitle": "Saved successfully",
+        "failureTitle": "Save failed",
+        "failureDescription": "Sorry, the storage failed. Please confirm whether the content you entered is correct.",
+        "contactUsPrompt": "If the problem cannot be eliminated, please",
+        "contactUs": "Contact us",
+        "acknowledge": "I see",
+        "successAlt": "Saved successfully",
+        "failureAlt": "Save failed"
+      }
+    }
+  },
+  "auth": {
+    "signIn": "log in",
+    "signUp": "register",
+    "signOut": "Sign out",
+    "accountSettings": "Account settings",
+    "hostedAuth": {
+      "signIn": "Go to login",
+      "signUp": "Go to register",
+      "signOut": "Safe sign out"
+    }
+  },
+  "aria": {
+    "mainNavigation": "main navigation",
+    "mobileNavigation": "Mobile device navigation",
+    "mobileNavigationMenu": "Mobile device navigation menu",
+    "skipToMainContent": "Skip to main content",
+    "backToTop": "back to top",
+    "closeDialog": "closure",
+    "emotionCardDetail": "{cardName} Emotion card details",
+    "addToHolder": "Add to card holder",
+    "removeFromHolder": "Remove card holder",
+    "toggleMenu": "Switch menu",
+    "brand": "Wavemocards",
+    "selectRecord": "Select",
+    "delete": "delete"
+  },
+  "theme": {
+    "toggle": "Toggle light/dark mode"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Switch language",
+    "label": "Language",
+    "options": {
+      "zh-TW": "繁體中文",
+      "en": "English",
+      "ja": "日本語"
+    }
+  },
+  "toast": {
+    "account": {
+      "loadFailed": "Failed to load account information",
+      "loadUnexpected": "An error occurred while loading account information"
+    },
+    "records": {
+      "loadFailed": "Failed to load records",
+      "loadUnexpected": "An error occurred while loading records",
+      "saveSuccess": "Saved successfully",
+      "saveFailed": "Save failed",
+      "saveUnexpected": "An error occurred while saving",
+      "deleteSuccess": "Delete successfully",
+      "deleteFailed": "Delete failed",
+      "deleteUnexpected": "An error occurred while deleting",
+      "deleteSelectionRequired": "Please check the items you want to delete first",
+      "batchDeleteSuccess": "Successfully deleted {count} records",
+      "batchDeleteFailed": "{count} Deletion of pen record failed"
+    },
+    "analysis": {
+      "startDateRequired": "Please enter a start date",
+      "endDateRequired": "Please enter end date",
+      "invalidDateRange": "Start time cannot be later than end time",
+      "failed": "Analysis failed",
+      "unexpected": "An error occurred while parsing"
+    },
+    "explore": {
+      "saveSuccess": "Saved successfully",
+      "saveFailed": "Sorry, saving the record failed, please try again later.",
+      "saveUnexpected": "An error occurred while saving. Please confirm the network status and try again."
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidDateRange": "Start time cannot be later than end time"
+  },
+  "apiErrors": {
+    "common": {
+      "unauthorized": "Unauthorized",
+      "databaseNotConfigured": "Database not configured",
+      "internalServerError": "Internal server error",
+      "invalidRequestBody": "Invalid request body"
+    },
+    "profile": {
+      "notFound": "Profile not found",
+      "createFailed": "Failed to create profile",
+      "fetchFailed": "Failed to fetch profile",
+      "updateFailed": "Failed to update profile",
+      "invalidFirstName": "First name is required",
+      "invalidLastName": "Last name is required",
+      "invalidTitle": "Invalid role option",
+      "invalidDate": "Invalid date format",
+      "invalidThemePreference": "Invalid theme preference",
+      "invalidLocalePreference": "Invalid locale preference",
+      "noUpdatableFields": "No updatable fields provided"
+    },
+    "records": {
+      "notFound": "Record not found",
+      "fetchFailed": "Failed to fetch records",
+      "createFailed": "Failed to create record",
+      "updateFailed": "Failed to update record",
+      "deleteFailed": "Failed to delete record",
+      "invalidCards": "Cards must be an array containing 1 to 3 cards",
+      "profileCreateFailed": "Failed to create profile"
+    },
+    "analysis": {
+      "missingDateRange": "Both start date and end date are required",
+      "fetchFailed": "Failed to fetch analysis data",
+      "noData": "There is no data for this period"
+    }
+  },
+  "emotionContent": {
+    "aboutSections": {
+      "whatIsEmotion": {
+        "title": "What are emotions?",
+        "content": "Emotion in English is emotion, which represents the energy flowing in our body. When we are stimulated and trigger inner feelings, physical reactions, thoughts and actions, we are called emotions. For example, when someone walks into a back alley and encounters a vicious-looking dog (stimulus), he feels very frightened and worries that he will be bitten (inner feelings and thoughts), his heart beats faster and he trembles (physical reaction), and he finally decides to take a quick detour and leave (action)."
+      },
+      "sixBasicEmotions": {
+        "title": "6 basic emotions",
+        "content": "Naturalist Darwin mentioned that humans have six basic emotions, including happiness, sadness, fear, disgust, anger and surprise, which are instinctive emotions that help humans improve their chances of survival. Other complex emotions, such as excitement, grievance, inferiority, jealousy, guilt, loneliness, etc., are derived from a mixture of basic emotions and arise after learning and socialization."
+      },
+      "goodOrBad": {
+        "title": "Emotions are neither good nor bad",
+        "content": "Most people are used to classifying emotions into positive and negative. They feel that happiness is a positive emotion, while sadness, anger, and fear are harmful to people. In fact, emotions are neither good nor bad. Each emotion has its own unique meaning. For example, feeling fearful and uneasy about unfamiliar environments reflects the desire for security and reminds us to stay away from danger. Being vulnerable and crying when you are sad can attract care and support and promote interpersonal connections."
+      },
+      "healthyEmotion": {
+        "title": "Emotional health",
+        "content": "If you are biased against emotions, deny and suppress your true feelings, pretend to be happy when you are sad, or endure silently when you are angry, it will easily lead to physical and mental health problems. The so-called emotional health does not mean to be in a happy mood all the time, but to be able to be aware of your different emotions, understand your inner needs, and express and adjust them in a healthy and appropriate way to restore peace of mind."
+      }
+    },
+    "basicEmotions": {
+      "happiness": "hapiness",
+      "sadness": "sad",
+      "fear": "fear",
+      "disgust": "disgust",
+      "anger": "anger",
+      "surprise": "surprise"
+    }
+  }
+}

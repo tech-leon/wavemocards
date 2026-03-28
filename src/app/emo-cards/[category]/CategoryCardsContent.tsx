@@ -52,7 +52,7 @@ export function CategoryCardsContent({
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-[#3C9DAE]">{category.name}</h2>
+            <h2>{category.name}</h2>
             <div className="flex justify-end">
               <Link
                 href={localizeHref('/emo-cards', locale)}

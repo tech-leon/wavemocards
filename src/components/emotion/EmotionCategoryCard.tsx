@@ -48,7 +48,7 @@ export function EmotionCategoryCard({ category, href, className }: EmotionCatego
           className
         )}
       >
-        <p className="w-1/2 px-2 text-[28px] font-bold text-main transition-all duration-200 group-hover:w-[40%] group-hover:text-[32px] group-hover:px-0">
+        <p className="type-card-display type-card-display-hover w-1/2 px-2 text-main transition-all duration-200 group-hover:w-[40%] group-hover:px-0">
           {category.name}
         </p>
         <div className="w-1/2 rounded-full overflow-hidden transition-all duration-200 group-hover:w-[55%]">

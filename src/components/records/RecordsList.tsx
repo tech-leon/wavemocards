@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Search, RotateCcw, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
@@ -43,6 +44,9 @@ interface PaginationInfo {
 }
 
 export function RecordsList() {
+  const t = useTranslations('records.list');
+  const tToast = useTranslations('toast.records');
+  const tAria = useTranslations('aria');
   const router = useRouter();
   const [records, setRecords] = useState<RecordItem[]>([]);
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
@@ -85,14 +89,14 @@ export function RecordsList() {
         setCurrentPage(page);
         setSelectedIds(new Set());
       } else {
-        toast.error(data.error || '載入紀錄失敗');
+        toast.error(data.error || tToast('loadFailed'));
       }
     } catch {
-      toast.error('載入紀錄時發生錯誤');
+      toast.error(tToast('loadUnexpected'));
     } finally {
       setLoading(false);
     }
-  }, [startDate, endDate, keyword]);
+  }, [startDate, endDate, keyword, tToast]);
 
   useEffect(() => {
     fetchRecords(1);
@@ -128,7 +132,7 @@ export function RecordsList() {
   // Handle batch delete
   const handleBatchDelete = () => {
     if (selectedIds.size === 0) {
-      toast.warning('請先勾選欲刪除的項目');
+      toast.warning(tToast('deleteSelectionRequired'));
       return;
     }
     setShowDeleteDialog(true);
@@ -156,10 +160,10 @@ export function RecordsList() {
     setShowDeleteDialog(false);
 
     if (successCount > 0) {
-      toast.success(`成功刪除 ${successCount} 筆紀錄`);
+      toast.success(tToast('batchDeleteSuccess', { count: successCount }));
     }
     if (failCount > 0) {
-      toast.error(`${failCount} 筆紀錄刪除失敗`);
+      toast.error(tToast('batchDeleteFailed', { count: failCount }));
     }
 
     fetchRecords(currentPage);
@@ -188,17 +192,17 @@ export function RecordsList() {
     <div className="container mx-auto pt-4 pb-10 md:pb-12">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄</h2>
+        <h2>{t('title')}</h2>
         <div className="flex gap-2">
-          <div className="px-4 py-2 text-sm font-bold text-white bg-main rounded-full cursor-default">
-            紀錄
+          <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
+            {t('tabs.records')}
           </div>
           <Link href="/records/analysis">
             <Button
               variant="outline"
-              className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+              className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
             >
-              分析
+              {t('tabs.analysis')}
             </Button>
           </Link>
         </div>
@@ -210,15 +214,15 @@ export function RecordsList() {
         <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
             value={startDate}
             max={today}
             onChange={(e) => setStartDate(e.target.value)}
           />
-          <span className="text-main-tint01">～</span>
+          <span className="text-main-tint01">{t('search.dateRangeSeparator')}</span>
           <input
             type="date"
-            className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
             value={endDate}
             max={today}
             min={startDate || undefined}
@@ -233,8 +237,8 @@ export function RecordsList() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
             <input
               type="search"
-              className="w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full text-sm bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
-              placeholder="請輸入關鍵字，以「空格」做區隔"
+              className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              placeholder={t('search.keywordPlaceholder')}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -243,14 +247,15 @@ export function RecordsList() {
           <div className="flex shrink-0 items-center gap-2">
             <Button
               onClick={handleSearch}
-              className="bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 text-sm font-bold"
+              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
             >
-              搜尋
+              {t('search.search')}
             </Button>
             <button
               onClick={handleReset}
               className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title="重整｜顯示全部"
+              title={t('search.reset')}
+              aria-label={t('search.reset')}
             >
               <RotateCcw className="w-5 h-5" />
             </button>
@@ -258,7 +263,8 @@ export function RecordsList() {
             <button
               onClick={handleBatchDelete}
               className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title="刪除"
+              title={t('actions.delete')}
+              aria-label={tAria('delete')}
             >
               <Trash2 className="w-5 h-5" />
             </button>
@@ -272,8 +278,8 @@ export function RecordsList() {
           <div className="w-8 h-8 border-4 border-main-tint02 border-t-main rounded-full animate-spin" />
         </div>
       ) : records.length === 0 ? (
-        <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">
-          目前沒有紀錄
+        <div className="type-subsection-title py-20 text-center text-gray-500 dark:text-gray-300">
+          {t('empty.noRecords')}
         </div>
       ) : (
         <>
@@ -282,10 +288,10 @@ export function RecordsList() {
               <thead>
                 <tr className="bg-main-tint01 text-white text-center">
                   <th className="py-2 px-3 w-10">
-                    <span className="sr-only">選取</span>
+                    <span className="sr-only">{t('table.select')}</span>
                   </th>
-                  <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">日期</th>
-                  <th className="py-2 px-3 whitespace-nowrap text-sm font-medium">情緒與強度</th>
+                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium">{t('table.date')}</th>
+                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium">{t('table.emotionAndStrength')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -307,10 +313,10 @@ export function RecordsList() {
                           className="w-4 h-4 accent-main cursor-pointer"
                         />
                       </td>
-                      <td className="py-3 px-3 text-sm whitespace-nowrap">
+                      <td className="type-body-sm py-3 px-3 whitespace-nowrap">
                         {formatDate(record.created_at)}
                       </td>
-                      <td className="py-3 px-3 text-sm">
+                      <td className="type-body-sm py-3 px-3">
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1">
                           {emotions.map((emo, i) => (
                             <span key={i}>
@@ -332,7 +338,8 @@ export function RecordsList() {
             <button
               onClick={handleBatchDelete}
               className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title="刪除"
+              title={t('actions.delete')}
+              aria-label={tAria('delete')}
             >
               <Trash2 className="w-5 h-5" />
             </button>
@@ -341,11 +348,12 @@ export function RecordsList() {
           {/* Pagination */}
           {pagination && pagination.totalPages > 1 && (
             <div className="flex justify-center md:justify-end pt-6">
-              <nav className="flex items-center gap-2">
+              <nav className="flex items-center gap-2" aria-label={t('title')}>
                 <button
                   onClick={() => fetchRecords(currentPage - 1)}
                   disabled={currentPage <= 1}
                   className="p-2 rounded-full disabled:opacity-30 hover:bg-main-tint03 transition-colors"
+                  aria-label={t('pagination.previous')}
                 >
                   <ChevronLeft className="w-5 h-5 text-main" />
                 </button>
@@ -354,7 +362,7 @@ export function RecordsList() {
                   <button
                     key={pageNum}
                     onClick={() => fetchRecords(pageNum)}
-                    className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
+                    className={`type-button w-9 h-9 rounded-full font-medium transition-colors ${
                       pageNum === currentPage
                         ? 'bg-main text-white'
                         : 'text-main hover:bg-main-tint03'
@@ -368,6 +376,7 @@ export function RecordsList() {
                   onClick={() => fetchRecords(currentPage + 1)}
                   disabled={currentPage >= pagination.totalPages}
                   className="p-2 rounded-full disabled:opacity-30 hover:bg-main-tint03 transition-colors"
+                  aria-label={t('pagination.next')}
                 >
                   <ChevronRight className="w-5 h-5 text-main" />
                 </button>
@@ -381,16 +390,12 @@ export function RecordsList() {
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
-            <p className="mb-3 text-2xl font-bold text-pink">確定要刪除嗎？</p>
-            <p className="mb-4 text-sm text-gray-800 dark:text-gray-100">
-              您選擇刪除
-              <span className="px-1 text-pink font-bold">{selectedIds.size} 筆</span>
-              資料，刪除後便
-              <span className="pl-1 text-pink font-bold">不可再復原</span>
-              ，確定要刪除嗎？
+            <p className="type-page-title mb-3 text-pink">{t('confirmDelete.title')}</p>
+            <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+              {t('confirmDelete.description', { count: selectedIds.size })}
             </p>
             <div className="w-[45%] mb-4">
-              <Image className="w-full" src="/images/sureToDelete.svg" alt="確認刪除" width={200} height={200} />
+              <Image className="w-full" src="/images/sureToDelete.svg" alt={t('confirmDelete.title')} width={200} height={200} />
             </div>
             <div className="flex gap-4">
               <Button
@@ -399,14 +404,14 @@ export function RecordsList() {
                 className="rounded-full border-2 border-pink text-pink hover:bg-pink/10 px-6"
                 disabled={deleting}
               >
-                取消
+                {t('confirmDelete.cancel')}
               </Button>
               <Button
                 onClick={confirmDelete}
                 className="rounded-full bg-pink hover:bg-pink-dark text-white px-6"
                 disabled={deleting}
               >
-                {deleting ? '刪除中...' : '確定刪除'}
+                {deleting ? t('confirmDelete.deleting') : t('confirmDelete.confirm')}
               </Button>
             </div>
           </div>

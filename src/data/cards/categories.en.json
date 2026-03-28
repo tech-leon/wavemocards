@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "slug": "happy",
+    "name": "Happiness",
+    "displayOrder": 1
+  },
+  {
+    "id": 2,
+    "slug": "expectation",
+    "name": "Expectation",
+    "displayOrder": 2
+  },
+  {
+    "id": 3,
+    "slug": "relieved",
+    "name": "Relief",
+    "displayOrder": 3
+  },
+  {
+    "id": 4,
+    "slug": "unstable",
+    "name": "Unease",
+    "displayOrder": 4
+  },
+  {
+    "id": 5,
+    "slug": "amazed",
+    "name": "Surprise",
+    "displayOrder": 5
+  },
+  {
+    "id": 6,
+    "slug": "sadness",
+    "name": "Sadness",
+    "displayOrder": 6
+  },
+  {
+    "id": 7,
+    "slug": "hate",
+    "name": "Dislike",
+    "displayOrder": 7
+  },
+  {
+    "id": 8,
+    "slug": "anger",
+    "name": "Anger",
+    "displayOrder": 8
+  },
+  {
+    "id": 9,
+    "slug": "others",
+    "name": "Others",
+    "displayOrder": 9
+  }
+]

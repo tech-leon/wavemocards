@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import {
   BarChart,
   Bar,
@@ -19,30 +20,51 @@ import {
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
-// Emotion category color mapping (matches old version)
+interface EmotionCategorySummary {
+  id: number;
+  slug: string;
+  name: string;
+}
+
 const CATEGORY_COLORS: Record<string, string> = {
-  快樂: '#FFE589',
-  期待: '#F8C18F',
-  安心: '#CEE5AF',
-  不安: '#E0CACA',
-  驚訝: '#B4B9E7',
-  低落: '#C5DDE8',
-  討厭: '#D6CAC0',
-  生氣: '#E0AEAE',
-  其他: '#EBEBEB',
+  happy: '#FFE589',
+  expectation: '#F8C18F',
+  relieved: '#CEE5AF',
+  unstable: '#E0CACA',
+  amazed: '#B4B9E7',
+  sadness: '#C5DDE8',
+  hate: '#D6CAC0',
+  anger: '#E0AEAE',
+  others: '#EBEBEB',
 };
 
-// Category order
-const CATEGORY_ORDER = ['快樂', '期待', '安心', '不安', '驚訝', '低落', '討厭', '生氣', '其他'];
+const CATEGORY_ORDER = [
+  'happy',
+  'expectation',
+  'relieved',
+  'unstable',
+  'amazed',
+  'sadness',
+  'hate',
+  'anger',
+  'others',
+] as const;
 
 interface ChartData {
+  slug: string;
   name: string;
   count: number;
   color: string;
   percentage?: number;
 }
 
-export function RecordAnalysis() {
+interface RecordAnalysisProps {
+  categories: EmotionCategorySummary[];
+}
+
+export function RecordAnalysis({ categories }: RecordAnalysisProps) {
+  const t = useTranslations('records.analysis');
+  const tToast = useTranslations('toast.analysis');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [chartData, setChartData] = useState<ChartData[] | null>(null);
@@ -53,15 +75,15 @@ export function RecordAnalysis() {
     e.preventDefault();
 
     if (!startDate) {
-      toast.warning('請輸入起始日期');
+      toast.warning(tToast('startDateRequired'));
       return;
     }
     if (!endDate) {
-      toast.warning('請輸入結束日期');
+      toast.warning(tToast('endDateRequired'));
       return;
     }
     if (new Date(startDate) > new Date(endDate)) {
-      toast.warning('開始時間不可晚於結束時間');
+      toast.warning(tToast('invalidDateRange'));
       return;
     }
 
@@ -74,7 +96,7 @@ export function RecordAnalysis() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.error || '分析失敗');
+        toast.error(data.error || tToast('failed'));
         setChartData(null);
         return;
       }
@@ -93,18 +115,23 @@ export function RecordAnalysis() {
         0
       );
 
+      const categoryNameMap = new Map(
+        categories.map((category) => [category.slug, category.name])
+      );
+
       const result: ChartData[] = CATEGORY_ORDER
-        .filter((cat) => (categoryCounts as Record<string, number>)[cat] > 0)
-        .map((cat) => ({
-          name: cat,
-          count: (categoryCounts as Record<string, number>)[cat],
-          color: CATEGORY_COLORS[cat] || '#EBEBEB',
-          percentage: Number((((categoryCounts as Record<string, number>)[cat] / total) * 100).toFixed(1)),
+        .filter((slug) => (categoryCounts as Record<string, number>)[slug] > 0)
+        .map((slug) => ({
+          slug,
+          name: categoryNameMap.get(slug) || slug,
+          count: (categoryCounts as Record<string, number>)[slug],
+          color: CATEGORY_COLORS[slug] || '#EBEBEB',
+          percentage: Number((((categoryCounts as Record<string, number>)[slug] / total) * 100).toFixed(1)),
         }));
 
       setChartData(result);
     } catch {
-      toast.error('分析時發生錯誤');
+      toast.error(tToast('unexpected'));
       setChartData(null);
     } finally {
       setLoading(false);
@@ -116,18 +143,18 @@ export function RecordAnalysis() {
     <div className="container mx-auto pt-4 pb-10 md:pb-12">
       {/* Title */}
       <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-[#3C9DAE]">我的紀錄｜分析</h2>
+        <h2>{t('title')}</h2>
         <div className="flex gap-2">
           <Link href="/records">
             <Button
               variant="outline"
-              className="rounded-full border-2 border-main text-main hover:bg-main hover:text-white text-sm font-bold"
+              className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
             >
-              紀錄
+              {t('tabs.records')}
             </Button>
           </Link>
-          <div className="px-4 py-2 text-sm font-bold text-white bg-main rounded-full cursor-default">
-            分析
+          <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
+            {t('tabs.analysis')}
           </div>
         </div>
       </div>
@@ -138,15 +165,15 @@ export function RecordAnalysis() {
           <div className="flex flex-col sm:flex-row items-center gap-2">
             <input
               type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
             />
-            <span className="text-main-tint01">～</span>
+            <span className="text-main-tint01">{t('dateRangeSeparator')}</span>
             <input
               type="date"
-              className="px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center text-sm bg-gray-100 dark:bg-gray-900"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               required
@@ -154,18 +181,18 @@ export function RecordAnalysis() {
           </div>
           <Button
             type="submit"
-            className="bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 text-sm font-bold"
+            className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
             disabled={loading}
           >
-            {loading ? '讀取中...' : '分析'}
+            {loading ? t('loading') : t('analyze')}
           </Button>
         </div>
       </form>
 
       {/* No data message */}
       {noData && (
-        <div className="text-center text-2xl text-gray-500 dark:text-gray-300 py-12">
-          這段期間沒有資料
+        <div className="type-page-title py-12 text-center text-gray-500 dark:text-gray-300">
+          {t('empty.noData')}
         </div>
       )}
 
@@ -174,14 +201,14 @@ export function RecordAnalysis() {
         <div className="flex flex-col lg:flex-row justify-between gap-8 mb-12">
           {/* Bar Chart - Category Counts */}
           <div className="flex-1">
-            <h3 className="mb-2 py-1 text-lg font-bold text-main border-b border-main-tint02">
-              情緒類組次數
+            <h3 className="type-subsection-title mb-2 py-1 border-b border-main-tint02">
+              {t('charts.frequency.title')}
             </h3>
-            <p className="mb-1 text-sm text-gray-800 dark:text-gray-100">
-              下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數的長條圖。
+            <p className="type-body-sm mb-1 text-gray-800 dark:text-gray-100">
+              {t('charts.frequency.description1')}
             </p>
-            <p className="mb-8 text-sm text-gray-800 dark:text-gray-100">
-              若您想看該類別出現的次數，您可將游標停留在該類別的長條上。
+            <p className="type-body-sm mb-8 text-gray-800 dark:text-gray-100">
+              {t('charts.frequency.description2')}
             </p>
             <div className="w-full h-[350px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -189,19 +216,19 @@ export function RecordAnalysis() {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 14, fontWeight: 700 }}
+                    tick={{ fontSize: 'var(--type-body-sm)', fontWeight: 700 }}
                     axisLine={{ stroke: '#313131', strokeWidth: 2 }}
                     tickLine={false}
                   />
                   <YAxis
                     allowDecimals={false}
-                    tick={{ fontSize: 14 }}
+                    tick={{ fontSize: 'var(--type-body-sm)' }}
                     axisLine={false}
                     tickLine={false}
-                    label={{ value: '(次)', position: 'top', offset: 10, style: { fontSize: 12, fill: '#818181' } }}
+                    label={{ value: t('charts.frequency.unit'), position: 'top', offset: 10, style: { fontSize: 'var(--type-caption)', fill: '#818181' } }}
                   />
                   <RechartsTooltip
-                    formatter={(value) => [`${value} 次`, '']}
+                    formatter={(value) => [t('charts.frequency.tooltipValue', { value: String(value) }), '']}
                     labelFormatter={(label) => String(label)}
                     contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
                   />
@@ -217,14 +244,14 @@ export function RecordAnalysis() {
 
           {/* Pie Chart - Category Proportions */}
           <div className="flex-1">
-            <h3 className="mb-2 py-1 text-lg font-bold text-main border-b border-main-tint02">
-              情緒類組比例
+            <h3 className="type-subsection-title mb-2 py-1 border-b border-main-tint02">
+              {t('charts.ratio.title')}
             </h3>
-            <p className="mb-1 text-sm text-gray-800 dark:text-gray-100">
-              下圖為您在此期間記錄的情緒卡，在以下分類中所出現的次數比例的圓餅圖。
+            <p className="type-body-sm mb-1 text-gray-800 dark:text-gray-100">
+              {t('charts.ratio.description1')}
             </p>
-            <p className="mb-8 text-sm text-gray-800 dark:text-gray-100">
-              若您想看該類別所佔的比例，您可將游標停留在圓餅圖中該類別的色塊上。
+            <p className="type-body-sm mb-8 text-gray-800 dark:text-gray-100">
+              {t('charts.ratio.description2')}
             </p>
             <div className="w-full h-[350px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -246,14 +273,14 @@ export function RecordAnalysis() {
                     ))}
                   </Pie>
                   <RechartsTooltip
-                    formatter={(value) => [`${value}%`, '']}
+                    formatter={(value) => [t('charts.ratio.tooltipValue', { value: String(value) }), '']}
                     contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
                   />
                   <Legend
                     verticalAlign="bottom"
                     iconType="circle"
                     formatter={(value: string) => (
-                      <span className="text-sm text-gray-800 dark:text-gray-100">{value}</span>
+                      <span className="type-body-sm text-gray-800 dark:text-gray-100">{value}</span>
                     )}
                   />
                 </PieChart>
@@ -267,13 +294,13 @@ export function RecordAnalysis() {
       {!chartData && !noData && (
         <div className="px-3 sm:px-0">
           <div className="flex justify-end">
-            <Image src="/images/lime-analyze.svg" alt="分析" width={300} height={300} className="max-w-[300px]" />
+            <Image src="/images/lime-analyze.svg" alt={t('illustrationAlt')} width={300} height={300} className="max-w-[300px]" />
           </div>
           <div className="text-right mb-8">
-            <span className="text-gray-500 dark:text-gray-300 text-xs">
+            <span className="type-caption text-gray-500 dark:text-gray-300">
               Illustration by{' '}
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] hover:underline"
+                className="text-gray-500 dark:text-gray-300 hover:text-main hover:underline"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noreferrer"
@@ -282,7 +309,7 @@ export function RecordAnalysis() {
               </a>{' '}
               from{' '}
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-[#3C9DAE] hover:underline"
+                className="text-gray-500 dark:text-gray-300 hover:text-main hover:underline"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noreferrer"

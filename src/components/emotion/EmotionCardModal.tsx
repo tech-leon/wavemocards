@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { X, PlusCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 import type { EmotionCardData } from '@/types/emotion-card';
@@ -14,6 +15,7 @@ interface EmotionCardModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAdd?: () => void;
+  showCloseButton?: boolean;
 }
 
 export function EmotionCardModal({
@@ -22,7 +24,9 @@ export function EmotionCardModal({
   isOpen,
   onClose,
   onAdd,
+  showCloseButton = true,
 }: EmotionCardModalProps) {
+  const t = useTranslations('emoCards.modal');
   // Close on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -68,7 +72,7 @@ export function EmotionCardModal({
             )}
             role="dialog"
             aria-modal="true"
-            aria-label={card ? `${card.name} 情緒卡詳情` : '情緒卡詳情'}
+            aria-label={card ? t('aria.cardDetail', { cardName: card.name }) : t('dialogLabel')}
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -76,21 +80,23 @@ export function EmotionCardModal({
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
-              aria-label="關閉"
-            >
-              <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
-            </button>
+            {showCloseButton && (
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                aria-label={t('close')}
+              >
+                <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
+              </button>
+            )}
 
             {/* Add to holder button */}
             {onAdd && (
               <button
                 onClick={onAdd}
                 className="absolute top-4 left-4 z-10 p-2 rounded-full bg-pink-tint01 hover:bg-pink text-white transition-colors shadow"
-                aria-label="加入卡夾"
-                title="加入卡夾"
+                aria-label={t('addToHolder')}
+                title={t('addToHolder')}
               >
                 <PlusCircle className="w-5 h-5" />
               </button>
@@ -119,17 +125,17 @@ export function EmotionCardModal({
 
                 {/* Description */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-main mb-1">意思：</h3>
+                  <h3 className="text-xl font-bold text-main mb-1">{t('meaning')}</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    {card.description || '暫無描述'}
+                    {card.description || t('empty.noDescription')}
                   </p>
                 </div>
 
                 {/* Example */}
                 <div>
-                  <h3 className="text-xl font-bold text-main mb-1">例句：</h3>
+                  <h3 className="text-xl font-bold text-main mb-1">{t('example')}</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    {card.example || '暫無例句'}
+                    {card.example || t('empty.noExample')}
                   </p>
                 </div>
               </div>

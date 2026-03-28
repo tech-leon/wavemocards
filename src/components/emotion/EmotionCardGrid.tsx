@@ -9,6 +9,7 @@ interface EmotionCardGridProps {
   onCardClick?: (card: EmotionCardData) => void;
   getAction?: (card: EmotionCardData) => EmotionCardAction | undefined;
   isDimmed?: (card: EmotionCardData) => boolean;
+  isLocked?: (card: EmotionCardData) => boolean;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ export function EmotionCardGrid({
   onCardClick,
   getAction,
   isDimmed,
+  isLocked,
   className,
 }: EmotionCardGridProps) {
   return (
@@ -28,6 +30,7 @@ export function EmotionCardGrid({
           onCardClick={onCardClick ? () => onCardClick(card) : undefined}
           action={getAction?.(card)}
           dimmed={isDimmed?.(card)}
+          locked={isLocked?.(card)}
         />
       ))}
     </div>

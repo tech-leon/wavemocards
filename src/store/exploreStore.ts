@@ -76,7 +76,7 @@ export const useExploreStore = create<ExploreState>()(
       addCard: (card) =>
         set((state) => {
           if (state.selectedCards.find((c) => c.id === card.id)) return state;
-          if (state.selectedCards.length >= 10) return state; // Safety limit
+          if (state.selectedCards.length >= 3) return state;
           return { selectedCards: [...state.selectedCards, card] };
         }),
 

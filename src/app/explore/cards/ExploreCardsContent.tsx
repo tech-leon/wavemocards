@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PlusCircle, Folder, FolderOpen } from 'lucide-react';
+import { PlusCircle, XCircle, Folder, FolderOpen } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
@@ -58,11 +61,17 @@ interface ExploreCardsContentProps {
 }
 
 export function ExploreCardsContent({ categories, cards }: ExploreCardsContentProps) {
+  const t = useTranslations('explore.cards');
+  const tCommon = useTranslations('common.actions');
+  const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
+  const [showError, setShowError] = useState<'tooFew' | 'tooMany' | null>(null);
 
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
+  const selectedCount = selectedCards.length;
+  const isSelectionFull = selectedCount >= 3;
 
   // Group cards by category
   const cardsByCategory = new Map<number, EmotionCardRecord[]>();
@@ -86,15 +95,29 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
 
   const getCategorySlug = (cat: EmotionCategory) => cat.slug;
 
+  const handleOpenHolder = () => {
+    if (selectedCards.length === 0) {
+      setShowError('tooFew');
+      return;
+    }
+
+    if (selectedCards.length > 3) {
+      setShowError('tooMany');
+      return;
+    }
+
+    router.push('/explore/strength/1');
+  };
+
   return (
-    <section aria-label="探索情緒卡">
+    <section aria-label={t('aria.section')}>
       {/* Sticky header */}
-      <div className="sticky top-[64px] z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
+      <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
-              <h2 className="text-2xl font-bold text-main md:hidden">探索情緒</h2>
-              <h2 className="text-2xl font-bold text-main hidden md:block">探索情緒｜情緒卡</h2>
+              <h2 className="md:hidden">{t('titles.mobile')}</h2>
+              <h2 className="hidden md:block">{t('titles.desktop')}</h2>
             </div>
             <div className="flex flex-col md:flex-row justify-end items-end md:items-center gap-2">
               <div className="flex items-center gap-2">
@@ -103,54 +126,55 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   onClick={() => setViewMode('expanded')}
                   disabled={viewMode === 'expanded'}
                   className={cn(
-                    'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
+                    'type-button px-4 py-1.5 font-bold rounded-full border-2 transition-colors',
                     viewMode === 'expanded'
                       ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  展開
+                  {t('view.expand')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewMode('folded')}
                   disabled={viewMode === 'folded'}
                   className={cn(
-                    'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
+                    'type-button px-4 py-1.5 font-bold rounded-full border-2 transition-colors',
                     viewMode === 'folded'
                       ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  收合
+                  {t('view.collapse')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewMode('table')}
                   disabled={viewMode === 'table'}
                   className={cn(
-                    'px-4 py-1.5 text-sm font-bold rounded-full border-2 transition-colors',
+                    'type-button px-4 py-1.5 font-bold rounded-full border-2 transition-colors',
                     viewMode === 'table'
                       ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-300 border-gray-300 dark:border-gray-700 cursor-not-allowed'
                       : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
                   )}
                 >
-                  情緒表
+                  {t('view.table')}
                 </button>
               </div>
-              <Link
-                href="/explore/selected"
-                className="group px-4 py-1.5 bg-main hover:bg-main-dark text-white text-sm font-bold rounded-full flex items-center gap-1 transition-colors"
+              <button
+                type="button"
+                onClick={handleOpenHolder}
+                className="type-button group px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex items-center gap-1 transition-colors"
               >
                 <Folder className="w-4 h-4 group-hover:hidden" />
                 <FolderOpen className="w-4 h-4 hidden group-hover:block" />
-                <span>我的情緒卡夾</span>
+                <span>{t('actions.openHolder')}</span>
                 {selectedCards.length > 0 && (
-                  <span className="ml-1 bg-gray-100 dark:bg-gray-900 text-main text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="type-caption ml-1 bg-gray-100 dark:bg-gray-900 text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     {selectedCards.length}
                   </span>
                 )}
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -165,37 +189,21 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
               onClick={() => setShowGuide(!showGuide)}
               className="w-full px-4 py-3 text-main font-bold text-left flex justify-between items-center"
             >
-              <span>探索步驟與方法</span>
+              <span>{t('guide.title')}</span>
               <span className={cn('transition-transform', showGuide && 'rotate-180')}>▼</span>
             </button>
             {showGuide && (
-              <div className="px-4 pb-4 text-sm">
-                <h3 className="mb-1 font-bold text-gray-800 dark:text-gray-100">探索步驟</h3>
+              <div className="type-body-sm px-4 pb-4">
+                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">{t('guide.stepsTitle')}</h3>
                 <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
-                  <li>下滑頁面，開始瀏覽情緒卡。</li>
-                  <li>
-                    點擊情緒卡右上方的「
-                    <span className="text-pink-tint01 font-bold">
-                      <PlusCircle className="inline w-4 h-4" />
-                    </span>
-                    」按鈕，即可將情緒卡放進「我的情緒卡夾」中。
-                  </li>
-                  <li>
-                    完成情緒卡挑選後，請點擊「
-                    <span className="text-main font-bold">我的情緒卡夾</span>
-                    」按鈕，進行<span className="text-main font-bold">下一步</span>的內容。
-                  </li>
+                  <li>{t('guide.steps.0')}</li>
+                  <li>{t('guide.steps.1')}</li>
+                  <li>{t('guide.steps.2')}</li>
                 </ol>
-                <h3 className="mb-1 font-bold text-gray-800 dark:text-gray-100">瀏覽情緒卡的方法</h3>
+                <h3 className="type-body-sm mb-1 font-bold text-gray-800 dark:text-gray-100">{t('guide.browseTitle')}</h3>
                 <ol className="pl-6 mb-4 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
-                  <li>
-                    點擊右上方的「<span className="text-main font-bold">收合</span>」或「
-                    <span className="text-main font-bold">展開</span>」按鈕，可以轉換情緒卡的展示方式。
-                  </li>
-                  <li>
-                    點擊右上方的「<span className="text-main font-bold">情緒表</span>
-                    」，可以快速瀏覽所有情緒詞彙。
-                  </li>
+                  <li>{t('guide.browseMethods.0')}</li>
+                  <li>{t('guide.browseMethods.1')}</li>
                 </ol>
               </div>
             )}
@@ -221,7 +229,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     className={cn(
                       'shrink-0 w-[72px] h-[140px] mt-3 rounded-xl',
                       'flex flex-col items-center justify-center',
-                      'font-bold text-main text-lg',
+                      'type-subsection-title',
                       'transition-colors duration-200',
                       styles.bg,
                       styles.hoverBorder,
@@ -236,25 +244,28 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   <div className="flex gap-4 overflow-x-auto pt-3 pr-2 pb-2">
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
+                      const action = isAdded
+                        ? {
+                            kind: 'remove' as const,
+                            label: t('actions.removeFromHolder'),
+                            onClick: () => removeCard(card.id),
+                          }
+                        : isSelectionFull
+                          ? undefined
+                          : {
+                              kind: 'add' as const,
+                              label: t('actions.addToHolder'),
+                              onClick: () => handleAddCard(card),
+                            };
+
                       return (
                         <EmotionCardComponent
                           key={card.id}
                           card={toEmotionCardData(card, slug)}
                           onCardClick={() => setModalCard(toEmotionCardData(card, slug))}
-                          action={
-                            isAdded
-                              ? {
-                                  kind: 'remove',
-                                  label: '移出卡夾',
-                                  onClick: () => removeCard(card.id),
-                                }
-                              : {
-                                  kind: 'add',
-                                  label: '加入卡夾',
-                                  onClick: () => handleAddCard(card),
-                                }
-                          }
+                          action={action}
                           dimmed={isAdded}
+                          locked={!isAdded && isSelectionFull}
                         />
                       );
                     })}
@@ -268,8 +279,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {/* Folded View - Category cards */}
         {viewMode === 'folded' && (
           <div className="mt-6 mb-16">
-            <ul className="mb-9 text-gray-800 dark:text-gray-100 text-sm">
-              <li>🔍 以下共有 9 張分類卡，點擊分類卡後，即可進入該分類的情緒卡頁。</li>
+            <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
+              <li>{t('guide.categoryCardsHint')}</li>
             </ul>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               {categories.map((cat) => {
@@ -302,7 +313,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                         className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                       />
                     </div>
-                    <p className="text-lg font-bold text-main mt-2">
+                    <p className="type-subsection-title mt-2">
                       {cat.name[0]}&nbsp;{cat.name[1]}
                     </p>
                   </Link>
@@ -315,7 +326,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         {/* Table View - Emotion word buttons */}
         {viewMode === 'table' && (
           <div className="mt-6 mb-16">
-            <p className="mb-8 px-1 md:px-3 text-gray-800 dark:text-gray-100 text-sm">
+            <p className="type-body-sm mb-8 px-1 md:px-3 text-gray-800 dark:text-gray-100">
               🔎 請點擊下方各個情緒名詞，可以展開觀看詳細的情緒資訊。
             </p>
             {categories.map((cat) => {
@@ -326,7 +337,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   <Link
                     href={`/explore/cards/${slug}`}
                     className={cn(
-                      'shrink-0 mr-3 mt-2 px-3 py-1 rounded-full font-bold text-sm',
+                      'type-button shrink-0 mr-3 mt-2 px-3 py-1 rounded-full font-bold',
                       'flex items-center justify-center whitespace-nowrap transition-colors',
                       categoryBtnColors[slug]
                     )}
@@ -336,25 +347,37 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   <div className="flex items-center overflow-x-auto pt-3 mb-1 gap-4">
                     {catCards.map((card) => {
                       const isAdded = hasCard(card.id);
+                      const isLocked = !isAdded && isSelectionFull;
+
                       return (
                         <div key={card.id} className="relative shrink-0">
-                          {!isAdded && (
+                          {isAdded ? (
+                            <button
+                              type="button"
+                              onClick={() => removeCard(card.id)}
+                              className="absolute -top-1.5 -right-1.5 z-10 w-5 h-5 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
+                              title={t('actions.removeFromHolder')}
+                            >
+                              <XCircle className="w-3.5 h-3.5" />
+                            </button>
+                          ) : !isLocked ? (
                             <button
                               type="button"
                               onClick={() => handleAddCard(card)}
                               className="absolute -top-1.5 -right-1.5 z-10 w-5 h-5 rounded-full bg-pink-tint01 hover:bg-pink text-white flex items-center justify-center shadow transition-colors"
-                              title="加入卡夾"
+                              title={t('actions.addToHolder')}
                             >
                               <PlusCircle className="w-3.5 h-3.5" />
                             </button>
-                          )}
+                          ) : null}
                           <button
                             type="button"
                             onClick={() => setModalCard(toEmotionCardData(card, slug))}
                             className={cn(
-                              'px-3 py-1 rounded-full text-sm whitespace-nowrap transition-colors',
+                              'type-button px-3 py-1 rounded-full whitespace-nowrap transition-colors',
                               categoryBtnColors[slug],
-                              isAdded && 'opacity-25'
+                              isAdded && 'opacity-25',
+                              isLocked && 'grayscale opacity-40'
                             )}
                           >
                             {card.name}
@@ -374,18 +397,40 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
       {modalCard && (
         <EmotionCardModal
           card={modalCard}
-          categorySlug={modalCard.categoryName}
+          categorySlug={modalCard.categorySlug}
           isOpen={!!modalCard}
           onClose={() => setModalCard(null)}
-          onAdd={
-            !hasCard(modalCard.id)
-              ? () => {
-                  addCard(modalCard);
-                  setModalCard(null);
-                }
-              : undefined
-          }
+          showCloseButton={false}
         />
+      )}
+
+      {showError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowError(null)}>
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <p className="type-page-title mb-3 text-pink">
+              {showError === 'tooFew' ? t('errors.tooFewTitle') : t('errors.tooManyTitle')}
+            </p>
+            {showError === 'tooFew' ? (
+              <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+                {t('errors.tooFewDescription')}
+              </p>
+            ) : (
+              <div className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+                <p>{t('errors.tooManyDescriptionLine1')}</p>
+                <p>{t('errors.tooManyDescriptionLine2')}</p>
+              </div>
+            )}
+            <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
+            <button
+              type="button"
+              onClick={() => setShowError(null)}
+              className="type-button px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
+            >
+              {tCommon('confirm')}
+            </button>
+          </div>
+        </div>
       )}
     </section>
   );

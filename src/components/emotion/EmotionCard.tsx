@@ -16,6 +16,7 @@ interface EmotionCardProps {
   action?: EmotionCardAction;
   disabled?: boolean;
   dimmed?: boolean;
+  locked?: boolean;
   className?: string;
 }
 
@@ -60,9 +61,10 @@ export function EmotionCard({
   action,
   disabled = false,
   dimmed = false,
+  locked = false,
   className,
 }: EmotionCardProps) {
-  const categorySlug = card.categoryName.toLowerCase();
+  const categorySlug = card.categorySlug || card.categoryName?.toLowerCase() || 'others';
   const styles = getEmotionCardCategoryStyle(categorySlug);
   const interactive = Boolean(onCardClick) && !disabled;
   const bodyClassName = cn(
@@ -70,6 +72,7 @@ export function EmotionCard({
     styles.bg,
     interactive && ['cursor-pointer', styles.hoverBorder, 'hover:p-2'],
     dimmed && 'opacity-50',
+    locked && 'grayscale opacity-40',
     disabled && 'cursor-not-allowed'
   );
   const bodyContent = (
@@ -86,7 +89,7 @@ export function EmotionCard({
           )}
         />
       </div>
-      <p className="mt-2 text-center text-lg font-bold text-main">
+      <p className="type-subsection-title mt-2 text-center">
         {formatEmotionCardName(card.name)}
       </p>
     </>

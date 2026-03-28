@@ -1,0 +1,837 @@
+{
+  "meta": {
+    "siteName": "Wavemocards",
+    "siteTitleDefault": "Wavemocards - 感情を探る",
+    "siteTitleTemplate": "%s｜Wavemocards",
+    "siteDescription": "感情カードを通じて自分の感情を認識、探索、記録し、感情を自分の力にしましょう。 65 枚の感情カードは、自分の内なる感情に気づき、感情的なストーリーを書き、精神的健康を促進するのに役立ちます。",
+    "siteKeywords": [
+      "ムードカード",
+      "感情の探求",
+      "メンタルヘルス",
+      "感情の管理",
+      "自己認識",
+      "ウェーブモカード",
+      "波のムードカード",
+      "心の教育"
+    ],
+    "home": {
+      "title": "Wavemocards - 感情を探る",
+      "description": "感情カードを通じて自分の感情を理解し、探求し、記録し、感情を自分の力にしましょう",
+      "keywords": [
+        "ムードカード",
+        "感情の探求",
+        "メンタルヘルス",
+        "感情の管理",
+        "自己認識"
+      ]
+    },
+    "aboutEmotions": {
+      "title": "Wavemocards｜感情を知る",
+      "description": "感情とは何か、6つの基本感情、感情に良し悪しはないこと、そして感情と健やかに向き合う方法を学びます",
+      "keywords": [
+        "気分",
+        "基本的な感情",
+        "心の健康",
+        "メンタルヘルス",
+        "感情の管理"
+      ]
+    },
+    "emoCards": {
+      "title": "Wavemocards｜感情を知る｜感情カード",
+      "description": "65枚の感情カードを閲覧し、それぞれの感情の意味と例文を知ることができます",
+      "keywords": [
+        "ムードカード",
+        "感情の語彙",
+        "感情の分類",
+        "心の教育"
+      ],
+      "category": {
+        "title": "Wavemocards｜感情を知る｜{category}",
+        "description": "{category} カテゴリの感情カードを閲覧し、それぞれの意味と例文を知ることができます。",
+        "keywords": {
+          "card": "感情カード",
+          "vocabulary": "感情の語彙",
+          "category": "感情カテゴリ"
+        }
+      }
+    },
+    "explore": {
+      "entry": {
+        "title": "感情を探る",
+        "description": "Wavemocards を通して自分の感情を探り、気づきを深めましょう。"
+      },
+      "cards": {
+        "title": "Wavemocards｜感情を探る｜感情カード",
+        "description": "感情カードを見ながら選び、カードホルダーに追加します。"
+      },
+      "strength1": {
+        "title": "Wavemocards｜感情を探る｜私の感情の強さ｜1回目",
+        "description": "初めて感情カードを選んだときの感情の激しさを記録します。"
+      },
+      "storyBackground": {
+        "title": "Wavemocards｜感情を探る｜私の感情ストーリー｜背景編",
+        "description": "感情の背景や理由を思い出し、感情の物語の出発点を記録します。"
+      },
+      "storyAction": {
+        "title": "Wavemocards｜感情を探る｜私の感情ストーリー｜行動編",
+        "description": "感情を抱いた後の反応、結果、感情を振り返り、自分の感情の歴史を整理します。"
+      },
+      "strength2": {
+        "title": "Wavemocards｜感情を探る｜私の感情の強さ｜2回目",
+        "description": "意識して書いた後の 2 番目の感情の強さを記録します。"
+      },
+      "complete": {
+        "title": "Wavemocards｜感情を探る｜感情の波とともにいてくれた自分へ",
+        "description": "あなたの感情記録は正常に保存されました。 [マイ レコード] に移動してコンテンツを表示できます。"
+      },
+      "category": {
+        "title": "Wavemocards｜感情を探る｜{category}",
+        "description": "{category} カテゴリの感情カードを見て、カードホルダーに追加できます。"
+      }
+    },
+    "records": {
+      "title": "Wavemocards｜記録",
+      "description": "自分の感情履歴を表示および管理する",
+      "detailTitle": "Wavemocards｜記録｜感情ストーリー",
+      "detailDescription": "センチメント ストーリーの詳細を表示および編集する",
+      "analysisTitle": "Wavemocards｜記録｜分析",
+      "analysisDescription": "グラフから感情の記録の分布と割合を表示します。"
+    },
+    "account": {
+      "title": "Wavemocards｜アカウント",
+      "description": "アカウント設定とプロフィールを管理する"
+    },
+    "ogImageAlt": "Wavemocards"
+  },
+  "common": {
+    "actions": {
+      "save": "保存",
+      "saving": "保存中...",
+      "cancel": "キャンセル",
+      "confirm": "確認",
+      "close": "閉じる",
+      "edit": "編集",
+      "next": "次へ",
+      "back": "戻る",
+      "clear": "クリア",
+      "expand": "展開",
+      "collapse": "折りたたむ",
+      "start": "開始",
+      "search": "検索",
+      "reset": "リセット",
+      "delete": "削除",
+      "deleting": "削除中...",
+      "analyze": "分析",
+      "complete": "完了",
+      "return": "戻る",
+      "continueEditing": "編集を続ける",
+      "discardChanges": "編集を破棄",
+      "resetPassword": "パスワードを再設定"
+    },
+    "states": {
+      "loading": "読み込み中...",
+      "empty": "現在データはありません",
+      "notFound": "見つかりません",
+      "noDescription": "説明はありません",
+      "noExample": "例文はありません",
+      "notAvailable": "—"
+    },
+    "labels": {
+      "yes": "はい",
+      "no": "いいえ",
+      "unknown": "わからない",
+      "email": "Email",
+      "password": "パスワード",
+      "date": "日付"
+    },
+    "illustrationCredit": {
+      "by": "イラスト：",
+      "from": "から",
+      "author": "ターニャ・クラスツカ",
+      "source": "ああ！"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "main": "メインナビゲーション"
+      },
+      "links": {
+        "home": "ホーム",
+        "aboutEmotions": "感情を知る",
+        "explore": "感情を探る",
+        "records": "私の記録",
+        "account": "アカウント設定",
+        "signIn": "ログイン",
+        "signUp": "新規登録",
+        "signOut": "サインアウト",
+        "emoCards": "感情カード"
+      },
+      "sr": {
+        "accountSettings": "アカウント設定",
+        "signOut": "サインアウト",
+        "brand": "Wavemocards"
+      }
+    },
+    "mobileNav": {
+      "toggleMenu": "メニューの切り替え",
+      "dialogLabel": "モバイルデバイスのナビゲーションメニュー",
+      "navLabel": "モバイルデバイスのナビゲーション",
+      "links": {
+        "home": "ホーム",
+        "aboutEmotions": "感情を知る",
+        "emoCards": "感情カード",
+        "explore": "感情を探る",
+        "records": "私の記録",
+        "account": "アカウント設定",
+        "signIn": "ログイン",
+        "signUp": "新規登録",
+        "signOut": "サインアウト"
+      }
+    },
+    "footer": {
+      "tagline": "感情カードを通じて自分の感情を理解し、探求し、記録する",
+      "sections": {
+        "team": "開発チーム",
+        "usefulLinks": "役立つリンク"
+      },
+      "links": {
+        "aboutEmotions": "感情を知る",
+        "contactUs": "お問い合わせ",
+        "reportIssue": "問題を報告する"
+      },
+      "contributors": {
+        "projectManager": "プロジェクトマネージャー",
+        "productDesigner": "プロダクトデザイナー",
+        "frontEndEngineer": "フロントエンドエンジニア",
+        "frontEndConsultant": "フロントエンドコンサルタント",
+        "databaseDeveloper": "データベース開発者",
+        "backEndDeveloper": "バックエンド開発者",
+        "systemDesigner": "システムデザイナー",
+        "illustrator": "イラストレーター"
+      },
+      "copyright": "© 2023 - {year} Wavemocards | All Rights Reserved",
+      "sr": {
+        "brand": "Wavemocards"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "line1": "自分自身を見つける",
+      "line2": "感情の波"
+    },
+    "cta": {
+      "aboutEmotions": "感情を知る",
+      "signUp": "登録に行く"
+    }
+  },
+  "aboutEmotions": {
+    "pageTitle": "感情を認識する",
+    "tabs": {
+      "aboutEmotions": "感情を認識する",
+      "emoCards": "ムードカード"
+    },
+    "sourceLabel": "記事ソースを引用：",
+    "sourceName": "香港青少年団体連盟｜健康空間（九龍）",
+    "sections": {
+      "whatIsEmotion": {
+        "title": "感情とは何ですか?",
+        "content": "エモーションは英語でemotion、つまり私たちの体に流れるエネルギーを表します。私たちが刺激を受けて内なる感情、身体的な反応、思考、行動を引き起こすとき、私たちは感情と呼ばれます。例えば、人は路地裏に入って凶悪そうな犬に遭遇すると（刺激）、とても怖がって噛まれるのではないかと心配し（内なる感情や思考）、心臓の鼓動が速くなり震え（身体的反応）、最終的には急いで迂回して立ち去ることを決意する（行動）。"
+      },
+      "sixBasicEmotions": {
+        "title": "6つの基本的な感情",
+        "content": "博物学者のダーウィンは、人間には幸福、悲しみ、恐怖、嫌悪、怒り、驚きを含む6つの基本的な感情があり、これらは人間が生き残る可能性を高めるのに役立つ本能的な感情であると述べました。興奮、不満、劣等感、嫉妬、罪悪感、孤独などの他の複雑な感情は、基本的な感情の混合から派生し、学習と社会化の後に生じます。"
+      },
+      "goodOrBad": {
+        "title": "感情には良いも悪いもない",
+        "content": "ほとんどの人は、感情をポジティブとネガティブに分類することに慣れています。彼らは、幸福はポジティブな感情である一方、悲しみ、怒り、恐怖は人にとって有害で​​あると感じています。実際、感情には良いも悪いもありません。それぞれの感情には独自の意味があります。たとえば、慣れない環境に対して恐怖や不安を感じることは、安全への欲求を反映し、危険から遠ざかることを思い出させます。傷つきやすく、悲しいときに泣くことは、思いやりやサポートを呼び込み、対人関係を促進する可能性があります。"
+      },
+      "healthyEmotion": {
+        "title": "心の健康",
+        "content": "感情に偏り、自分の本当の感情を否定して抑圧したり、悲しいのに嬉しいふりをしたり、怒っているのに黙って耐えたりすると、心身の健康を害しやすくなります。いわゆる感情の健康とは、常に幸せな気分であることを意味するのではなく、自分のさまざまな感情に気づき、内なるニーズを理解し、それらを健康的かつ適切な方法で表現して調整し、心の平安を取り戻すことができることを意味します。"
+      }
+    },
+    "basicEmotions": {
+      "happiness": "幸福",
+      "sadness": "悲しい",
+      "fear": "恐れ",
+      "disgust": "嫌悪",
+      "anger": "怒り",
+      "surprise": "驚き"
+    }
+  },
+  "emoCards": {
+    "overview": {
+      "pageTitle": "感情を認識する",
+      "tabs": {
+        "aboutEmotions": "感情を認識する",
+        "emoCards": "ムードカード"
+      },
+      "view": {
+        "expand": "拡大する",
+        "collapse": "近い",
+        "table": "感情メーター"
+      },
+      "guide": {
+        "title": "ムードカードの閲覧方法",
+        "interfaceTypes": "インターフェースの種類",
+        "usageByView": "各インターフェースの使用説明",
+        "switchViewDescription": "右上の「折りたたむ」または「展開」ボタンをクリックして、感情カードの表示モードを変更します。",
+        "tableDescription": "右上の「感情チャート」をクリックすると、すべての感情単語を素早く閲覧できます。",
+        "expand": {
+          "title": "拡大する",
+          "description": "1 つの「感情カード」をクリックすると、その感情の詳細が表示されます。"
+        },
+        "collapse": {
+          "title": "近い",
+          "description": "カテゴリカードは全部で9枚あります。単一の「カテゴリ カード」をクリックすると、そのカテゴリの感情カード ページに入ることができます。"
+        },
+        "table": {
+          "title": "感情メーター",
+          "description": "単一の「感情ワード」をクリックすると、その感情に関する詳細なコンテンツが表示されます。"
+        },
+        "hint": "💬 「ムードカードの閲覧方法」というタイトルのブロックをクリックすると、この説明を折りたたむことができます。"
+      },
+      "categoryCardsHint": "🔍 以下に9つのカテゴリカードがあります。カテゴリ カードをクリックして、そのカテゴリの感情カード ページに移動します。",
+      "empty": {
+        "noDescription": "まだ説明がありません",
+        "noExample": "まだ例はありません"
+      }
+    },
+    "category": {
+      "backToAllCards": "戻る",
+      "openCardDetail": "ムードカードの詳細を表示する",
+      "emptyState": "現在ムードカードはありません"
+    },
+    "table": {
+      "openCategory": "{category} カテゴリを表示",
+      "openCard": "{card} ムード カードを表示する"
+    },
+    "modal": {
+      "dialogLabel": "ムードカードの詳細",
+      "close": "閉鎖",
+      "addToHolder": "カードホルダーに追加",
+      "meaning": "平均：",
+      "example": "例：",
+      "empty": {
+        "noDescription": "まだ説明がありません",
+        "noExample": "まだ例はありません"
+      },
+      "aria": {
+        "cardDetail": "{cardName} エモーション カードの詳細"
+      }
+    }
+  },
+  "explore": {
+    "entry": {
+      "aria": {
+        "section": "感情のポータルを探索する"
+      },
+      "title": "感情を探る",
+      "intro": {
+        "line1": "感情の世界に迷い込んでいませんか？",
+        "line2": "そんなことはどうでもいいので、波動感情カードで一緒に自分の感情を探ってみましょう。"
+      },
+      "breathing": {
+        "line1": "まずは目を閉じてください。",
+        "highlight": "深呼吸してください",
+        "line2": "、そしてゆっくりと息を吐きます。"
+      },
+      "awareness": {
+        "line1": "息を吸ったり吐いたりする過程で、",
+        "highlight": "自分の体と心の状態をゆっくりと感じてみましょう",
+        "line2": "。"
+      },
+      "ctaPrompt": {
+        "line1": "準備ができたら、",
+        "highlight": "「探索を開始」をクリックしてください",
+        "line2": "。"
+      },
+      "startButton": "探索を開始する"
+    },
+    "cards": {
+      "aria": {
+        "section": "ムードカードを探索する",
+        "categorySection": "{category} ムードカード"
+      },
+      "titles": {
+        "mobile": "感情を探る",
+        "desktop": "感情を探る｜感情カード",
+        "category": "感情の探求｜{category}",
+        "holder": "私の気分カードホルダー"
+      },
+      "view": {
+        "expand": "拡大する",
+        "collapse": "近い",
+        "table": "感情メーター"
+      },
+      "guide": {
+        "title": "手順と方法を調べる",
+        "stepsTitle": "発見手順",
+        "browseTitle": "ムードカードの閲覧方法",
+        "categoryCardsHint": "🔍 以下に9つのカテゴリカードがあります。カテゴリカードをクリックすると、そのカテゴリの感情カードページに移動します。",
+        "steps": [
+          "ページを下にスクロールして、ムード カードの閲覧を開始します。",
+          "感情カードの右上にある「＋」ボタンをクリックして、感情カードを「My Emotion Card Holder」に入れます。",
+          "感情カードの選択が完了したら、「My Emotion Card Holder」ボタンをクリックして直接次のステップに進んでください。"
+        ],
+        "browseMethods": [
+          "右上の「折りたたむ」または「展開」ボタンをクリックして、感情カードの表示モードを変更します。",
+          "右上の「感情チャート」をクリックすると、すべての感情単語を素早く閲覧できます。"
+        ]
+      },
+      "actions": {
+        "openHolder": "私の気分カードホルダー",
+        "addToHolder": "カードホルダーに追加",
+        "removeFromHolder": "カードホルダーを外す",
+        "addedToHolder": "カードフォルダーに追加されました",
+        "backToCards": "ムードカードに戻る"
+      },
+      "errors": {
+        "tooFewTitle": "カードが足りません",
+        "tooFewDescription": "少なくとも 1 枚のカードを選んでください。",
+        "tooManyTitle": "カードが多すぎる",
+        "tooManyDescriptionLine1": "カードの最大枚数は3枚です。",
+        "tooManyDescriptionLine2": "あなたの感情に最もマッチするカードをフィルターしてください。"
+      },
+      "countBadge": "{count}",
+      "emptyState": "現在ムードカードはありません"
+    },
+    "strength1": {
+      "title": "感情の激しさ｜初めて",
+      "titleMobile": {
+        "line1": "私の感情の激しさ",
+        "line2": "初め"
+      },
+      "actions": {
+        "previous": "前のステップ",
+        "next": "次のステップ"
+      },
+      "instructions": {
+        "line1": "自分自身の感情カードを見つけるためにご尽力いただきありがとうございます。",
+        "line2": "次に、もう一度目を閉じて、深呼吸して、吐き出してください。",
+        "line3": "深呼吸する過程で、自分の心の中で自分自身を感じ、選択した感情の強さはどれくらいですか?",
+        "line4": "カード右上の「X」を押すとカードを削除できます。別のカードを追加したい場合は「前のステップ」で戻って選び直してください。",
+        "scoreHint": "(1 ポイントが最も弱いことを表し、5 ポイントが最も強いことを表します)"
+      },
+      "card": {
+        "remove": "取り除く"
+      },
+      "errors": {
+        "countTitle": "カード数が正しくありません",
+        "tooFewDescription": "少なくとも 1 枚のカードを選んでください。",
+        "tooManyDescriptionLine1": "カードの最大枚数は3枚です。",
+        "tooManyDescriptionLine2": "あなたの感情に最もマッチするカードをフィルターしてください。",
+        "levelsTitle": "まだ完成していません",
+        "levelsDescription": "各感情カードの感情の強さはすべて入力する必要があります。"
+      },
+      "acknowledge": "なるほど"
+    },
+    "strength2": {
+      "title": "感情の激しさ｜2回目",
+      "titleMobile": {
+        "line1": "私の感情の激しさ",
+        "line2": "2回目"
+      },
+      "actions": {
+        "previous": "前のステップ",
+        "saveRecord": "記録を保存する",
+        "saving": "保存中..."
+      },
+      "instructions": {
+        "line1": "感情的なストーリーに気づいて記録した後、今の感情は大丈夫ですか？",
+        "line2": "もう一度深呼吸して、今の自分の感情の強さはどのくらいなのか、自分自身に問いかけてみてください。",
+        "scoreHint": "(1 ポイントが最も弱いことを表し、5 ポイントが最も強いことを表します)",
+        "skipHint": "記録したくない場合は、この手順をスキップして、「記録を保存」を直接クリックしてください。"
+      }
+    },
+    "storyBackground": {
+      "title": "私の感動の物語｜背景",
+      "titleMobile": {
+        "line1": "私の感動的な物語",
+        "line2": "背景"
+      },
+      "actions": {
+        "previous": "前のステップ",
+        "next": "次のステップ"
+      },
+      "greeting": "ありがとう、親愛なる{userName}",
+      "instructions": {
+        "line2": "次に、あなた自身の感情の物語にゆっくりと飛び込んで、自分の感情の源を見つけていただきたいと思います。",
+        "skipHint": "まだ記録したくない場合は、この手順をスキップして、直接「次へ」をクリックしてください。"
+      },
+      "prompt": {
+        "title": "そっと目を閉じて、息を吸って吐くまでの間に、「{cardNames}」という感情を感じる前に何が起こったのかをゆっくり思い出してください。",
+        "description": "下の欄に、あなたがその感情を抱いた原因や事柄、背景ストーリーなどを書いてみてください。"
+      },
+      "placeholder": "ここにあなたのストーリーを書いてください..."
+    },
+    "storyAction": {
+      "title": "私の感動の物語｜アクション編",
+      "titleMobile": {
+        "line1": "私の感動的な物語",
+        "line2": "アクション"
+      },
+      "actions": {
+        "previous": "前のステップ",
+        "next": "次のステップ"
+      },
+      "intro": {
+        "line1": "感情の背景や理由を一生懸命思い出そうとしてくれてありがとう。",
+        "line2": "次に、感情の波が来た後に一緒に考えてみてください...",
+        "skipHint": "まだ記録したくない場合は、この手順をスキップして、直接「次へ」をクリックしてください。"
+      },
+      "question1": {
+        "label": "質問1",
+        "prompt": "「{cardNames}」の感情を感じた後、どのように反応しましたか?それとも何をしましたか？",
+        "example": "例： 心の不安を感じた後、いろいろ気になることを日記に書きました。"
+      },
+      "question2": {
+        "label": "質問2",
+        "prompt": "上記の反応の結果はどうなりましたか?"
+      },
+      "question3": {
+        "label": "質問3",
+        "prompt": "上記の結果についてどう思いますか?"
+      },
+      "question4": {
+        "label": "質問4",
+        "prompt": "この結果は期待どおりだと思いますか?",
+        "options": {
+          "yes": "はい",
+          "no": "いいえ",
+          "unclear": "わからない"
+        }
+      },
+      "question5": {
+        "label": "質問5",
+        "promptUnexpected": "今回の結果が期待したものではなかった場合、次回同じような感情を抱いたときに期待した結果を得るために何ができると思いますか?",
+        "promptAffirming": "この感情的な旅の中で、うまくいったことは何だと思いますか?あなたがうまくやったと確信していることを書き留めてください。"
+      }
+    },
+    "complete": {
+      "title": "感情の波に付き合ってくれてありがとう",
+      "titleMobile": {
+        "line1": "自分に感謝します",
+        "line2": "感情の波とともにある"
+      },
+      "actions": {
+        "complete": "仕上げる"
+      },
+      "greeting": "{userName} 様",
+      "saveSuccess": "レコードは正常に保存されました。",
+      "thanks": "自分自身について、時間を費やし、考え、気づき、記録し、熟考していただきありがとうございます。",
+      "selfTalkIntro": "ぜひ自分自身にこう言ってみてください。",
+      "selfTalkLead": "自分自身に感謝したいのですが、",
+      "selfTalkFull": "私は自分の感情と自分自身を認識し、受け入れたいと思っています。この方法で私はすでに素晴らしいです！",
+      "selfTalkLine1": "私は自分の感情と自分自身を認識し、受け入れるつもりです",
+      "selfTalkLine2": "私はもうこのままで最高です！",
+      "hint": "右上隅の「完了」をクリックし、「マイレコード」に移動してレコードの内容を表示できます。"
+    }
+  },
+  "records": {
+    "list": {
+      "title": "私の記録",
+      "tabs": {
+        "records": "ログ",
+        "analysis": "分析する"
+      },
+      "search": {
+        "keywordPlaceholder": "キーワードを「スペース」で区切って入力してください",
+        "dateRangeSeparator": "～",
+        "search": "検索",
+        "reset": "組織再編 |すべて表示"
+      },
+      "actions": {
+        "delete": "消去"
+      },
+      "empty": {
+        "noRecords": "現在、記録はありません"
+      },
+      "table": {
+        "select": "選択",
+        "date": "日付",
+        "emotionAndStrength": "気分と激しさ"
+      },
+      "pagination": {
+        "previous": "前のページへ",
+        "next": "次のページ"
+      },
+      "confirmDelete": {
+        "title": "削除してもよろしいですか?",
+        "description": "{count} データを削除することを選択しました。一度削除すると復元することはできません。削除してもよろしいですか?",
+        "cancel": "キャンセル",
+        "confirm": "削除の確認",
+        "deleting": "削除中..."
+      }
+    },
+    "detail": {
+      "title": "私の記録｜感動の物語",
+      "titleMobile": {
+        "line1": "私の記録",
+        "line2": "感動的な物語"
+      },
+      "actions": {
+        "delete": "消去",
+        "back": "戻る",
+        "edit": "編集",
+        "cancel": "キャンセル",
+        "save": "店",
+        "saving": "保存中..."
+      },
+      "sections": {
+        "storyBackground": "感動のストーリー｜背景",
+        "storyAction": "感動のストーリー｜アクション編"
+      },
+      "fields": {
+        "date": "日付",
+        "strengthBefore": "感情の激しさ |初めて",
+        "strengthAfter": "感情の激しさ｜2回目",
+        "storyBackground": "感情的な背景",
+        "actionTaken": "感情の後の反応",
+        "resultAfterAction": "反応後の結果",
+        "feelingAfterResult": "結果を見てどう感じるか",
+        "expectedResult": "結果は私が期待していたものですか?",
+        "nextActionAndAffirmationLine1": "次回は何ができるでしょうか？",
+        "nextActionAndAffirmationLine2": "そして自分自身について肯定したいこと"
+      },
+      "expect": {
+        "yes": "はい",
+        "no": "いいえ",
+        "unknown": "わからない"
+      },
+      "empty": {
+        "notFound": "このレコードは見つかりません",
+        "notAvailable": "—"
+      },
+      "confirmDelete": {
+        "title": "削除してもよろしいですか?",
+        "description": "一度削除すると復元することはできません。削除してもよろしいですか?",
+        "cancel": "キャンセル",
+        "confirm": "削除の確認",
+        "deleting": "削除中..."
+      }
+    },
+    "analysis": {
+      "title": "私の記録｜分析",
+      "tabs": {
+        "records": "ログ",
+        "analysis": "分析する"
+      },
+      "dateRangeSeparator": "～",
+      "loading": "読む...",
+      "analyze": "分析する",
+      "empty": {
+        "noData": "この期間のデータはありません"
+      },
+      "charts": {
+        "frequency": {
+          "title": "感情カテゴリの数",
+          "description1": "下の図は、この期間中に記録した感情カードが以下のカテゴリに出現した回数を棒グラフにしたものです。",
+          "description2": "カテゴリが表示された回数を確認したい場合は、カテゴリ バーの上にカーソルを置きます。",
+          "unit": "(二流)",
+          "tooltipValue": "{value}回"
+        },
+        "ratio": {
+          "title": "感情的グループの比率",
+          "description1": "下の図は、この期間に記録した感情カードが次のカテゴリに出現した回数の割合を円グラフで示したものです。",
+          "description2": "そのカテゴリの割合を確認したい場合は、円グラフ内のそのカテゴリのカラー ブロックの上にカーソルを置きます。",
+          "tooltipValue": "{value}%"
+        }
+      },
+      "illustrationAlt": "分析する"
+    }
+  },
+  "account": {
+    "profile": {
+      "title": "私のアカウント",
+      "actions": {
+        "edit": "編集",
+        "cancel": "キャンセル",
+        "save": "店",
+        "saving": "保存中..."
+      },
+      "fields": {
+        "email": "電子メール",
+        "password": "パスワード",
+        "lastName": "姓",
+        "firstName": "名前",
+        "birthDate": "誕生日",
+        "role": "身元"
+      },
+      "placeholders": {
+        "lastName": "姓を入力してください",
+        "firstName": "名前を入力してください"
+      },
+      "options": {
+        "student": "学生",
+        "teacher": "教師",
+        "other": "他の"
+      },
+      "errors": {
+        "required": "この項目は必須です",
+        "loadFailed": "アカウント情報の読み込みに失敗しました",
+        "loadUnexpected": "アカウント情報の読み込み中にエラーが発生しました"
+      },
+      "empty": {
+        "loadFailed": "アカウント情報を読み込めません",
+        "notAvailable": "—"
+      },
+      "passwordMask": "**********",
+      "resetPassword": "パスワードをリセットする",
+      "confirmCancel": {
+        "title": "編集をキャンセルしてもよろしいですか?",
+        "description": "編集をキャンセルすると、変更は保存されません。編集をキャンセルしてもよろしいですか?",
+        "continueEditing": "編集を続ける",
+        "discard": "編集をキャンセルする"
+      },
+      "saveResult": {
+        "successTitle": "正常に保存されました",
+        "failureTitle": "保存に失敗しました",
+        "failureDescription": "申し訳ありませんが、保存に失敗しました。入力した内容が正しいか確認してください。",
+        "contactUsPrompt": "問題が解決できない場合は、",
+        "contactUs": "お問い合わせ",
+        "acknowledge": "なるほど",
+        "successAlt": "正常に保存されました",
+        "failureAlt": "保存に失敗しました"
+      }
+    }
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "登録する",
+    "signOut": "サインアウト",
+    "accountSettings": "アカウント設定",
+    "hostedAuth": {
+      "signIn": "ログインに移動",
+      "signUp": "登録に行く",
+      "signOut": "安全なサインアウト"
+    }
+  },
+  "aria": {
+    "mainNavigation": "メインナビゲーション",
+    "mobileNavigation": "モバイルデバイスのナビゲーション",
+    "mobileNavigationMenu": "モバイルデバイスのナビゲーションメニュー",
+    "skipToMainContent": "メインコンテンツにスキップ",
+    "backToTop": "トップに戻る",
+    "closeDialog": "閉鎖",
+    "emotionCardDetail": "{cardName} エモーション カードの詳細",
+    "addToHolder": "カードホルダーに追加",
+    "removeFromHolder": "カードホルダーを外す",
+    "toggleMenu": "メニューの切り替え",
+    "brand": "Wavemocards",
+    "selectRecord": "選択",
+    "delete": "消去"
+  },
+  "theme": {
+    "toggle": "ライト/ダークモードを切り替える"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "言語を切り替える",
+    "label": "言語",
+    "options": {
+      "zh-TW": "繁體中文",
+      "en": "English",
+      "ja": "日本語"
+    }
+  },
+  "toast": {
+    "account": {
+      "loadFailed": "アカウント情報の読み込みに失敗しました",
+      "loadUnexpected": "アカウント情報の読み込み中にエラーが発生しました"
+    },
+    "records": {
+      "loadFailed": "レコードのロードに失敗しました",
+      "loadUnexpected": "レコードのロード中にエラーが発生しました",
+      "saveSuccess": "正常に保存されました",
+      "saveFailed": "保存に失敗しました",
+      "saveUnexpected": "保存中にエラーが発生しました",
+      "deleteSuccess": "正常に削除されました",
+      "deleteFailed": "削除に失敗しました",
+      "deleteUnexpected": "削除中にエラーが発生しました",
+      "deleteSelectionRequired": "まず削除したい項目にチェックを入れてください",
+      "batchDeleteSuccess": "{count} レコードが正常に削除されました",
+      "batchDeleteFailed": "{count} ペンレコードの削除に失敗しました"
+    },
+    "analysis": {
+      "startDateRequired": "開始日を入力してください",
+      "endDateRequired": "終了日を入力してください",
+      "invalidDateRange": "開始時刻を終了時刻より遅くすることはできません",
+      "failed": "分析に失敗しました",
+      "unexpected": "解析中にエラーが発生しました"
+    },
+    "explore": {
+      "saveSuccess": "正常に保存されました",
+      "saveFailed": "申し訳ありませんが、レコードの保存に失敗しました。後でもう一度お試しください。",
+      "saveUnexpected": "保存中にエラーが発生しました。ネットワークの状態を確認して再試行してください。"
+    }
+  },
+  "validation": {
+    "required": "この項目は必須です",
+    "invalidDateRange": "開始時刻を終了時刻より遅くすることはできません"
+  },
+  "apiErrors": {
+    "common": {
+      "unauthorized": "認証されていません",
+      "databaseNotConfigured": "データベースが設定されていません",
+      "internalServerError": "サーバー内部エラー",
+      "invalidRequestBody": "無効なリクエスト形式です"
+    },
+    "profile": {
+      "notFound": "プロフィールが見つかりません",
+      "createFailed": "プロフィールの作成に失敗しました",
+      "fetchFailed": "プロフィールの取得に失敗しました",
+      "updateFailed": "プロフィールの更新に失敗しました",
+      "invalidFirstName": "名は必須です",
+      "invalidLastName": "姓は必須です",
+      "invalidTitle": "無効な役割です",
+      "invalidDate": "無効な日付形式です",
+      "invalidThemePreference": "無効なテーマ設定です",
+      "invalidLocalePreference": "無効な言語設定です",
+      "noUpdatableFields": "更新可能な項目がありません"
+    },
+    "records": {
+      "notFound": "レコードが見つかりません",
+      "fetchFailed": "レコードの取得に失敗しました",
+      "createFailed": "レコードの作成に失敗しました",
+      "updateFailed": "レコードの更新に失敗しました",
+      "deleteFailed": "レコードの削除に失敗しました",
+      "invalidCards": "カードは 1 枚から 3 枚までの配列である必要があります",
+      "profileCreateFailed": "プロフィールの作成に失敗しました"
+    },
+    "analysis": {
+      "missingDateRange": "開始日と終了日を指定してください",
+      "fetchFailed": "分析データの取得に失敗しました",
+      "noData": "この期間のデータはありません"
+    }
+  },
+  "emotionContent": {
+    "aboutSections": {
+      "whatIsEmotion": {
+        "title": "感情とは何ですか?",
+        "content": "エモーションは英語でemotion、つまり私たちの体に流れるエネルギーを表します。私たちが刺激を受けて内なる感情、身体的な反応、思考、行動を引き起こすとき、私たちは感情と呼ばれます。例えば、人は路地裏に入って凶悪そうな犬に遭遇すると（刺激）、とても怖がって噛まれるのではないかと心配し（内なる感情や思考）、心臓の鼓動が速くなり震え（身体的反応）、最終的には急いで迂回して立ち去ることを決意する（行動）。"
+      },
+      "sixBasicEmotions": {
+        "title": "6つの基本的な感情",
+        "content": "博物学者のダーウィンは、人間には幸福、悲しみ、恐怖、嫌悪、怒り、驚きを含む6つの基本的な感情があり、これらは人間が生き残る可能性を高めるのに役立つ本能的な感情であると述べました。興奮、不満、劣等感、嫉妬、罪悪感、孤独などの他の複雑な感情は、基本的な感情の混合から派生し、学習と社会化の後に生じます。"
+      },
+      "goodOrBad": {
+        "title": "感情には良いも悪いもない",
+        "content": "ほとんどの人は、感情をポジティブとネガティブに分類することに慣れています。彼らは、幸福はポジティブな感情である一方、悲しみ、怒り、恐怖は人にとって有害で​​あると感じています。実際、感情には良いも悪いもありません。それぞれの感情には独自の意味があります。たとえば、慣れない環境に対して恐怖や不安を感じることは、安全への欲求を反映し、危険から遠ざかることを思い出させます。傷つきやすく、悲しいときに泣くことは、思いやりやサポートを呼び込み、対人関係を促進する可能性があります。"
+      },
+      "healthyEmotion": {
+        "title": "心の健康",
+        "content": "感情に偏り、自分の本当の感情を否定して抑圧したり、悲しいのに嬉しいふりをしたり、怒っているのに黙って耐えたりすると、心身の健康を害しやすくなります。いわゆる感情の健康とは、常に幸せな気分であることを意味するのではなく、自分のさまざまな感情に気づき、内なるニーズを理解し、それらを健康的かつ適切な方法で表現して調整し、心の平安を取り戻すことができることを意味します。"
+      }
+    },
+    "basicEmotions": {
+      "happiness": "幸福",
+      "sadness": "悲しい",
+      "fear": "恐れ",
+      "disgust": "嫌悪",
+      "anger": "怒り",
+      "surprise": "驚き"
+    }
+  }
+}

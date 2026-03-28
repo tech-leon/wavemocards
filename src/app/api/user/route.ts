@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
 import type { Database } from '@/types/database';
 
+type LocalePreference = 'zh-TW' | 'en' | 'ja';
 type ThemePreference = 'light' | 'dark' | 'system';
+
+function isLocalePreference(value: unknown): value is LocalePreference {
+  return value === 'zh-TW' || value === 'en' || value === 'ja';
+}
 
 function isThemePreference(value: unknown): value is ThemePreference {
   return value === 'light' || value === 'dark' || value === 'system';
@@ -15,22 +22,25 @@ function isThemePreference(value: unknown): value is ThemePreference {
  */
 export async function GET() {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
     // Verify authentication
     let user = null;
     try {
       const auth = await withAuth();
       user = auth.user;
     } catch {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     // Fetch user profile
@@ -48,6 +58,7 @@ export async function GET() {
           .insert({
             workos_user_id: user.id,
             email: user.email,
+            locale_preference: 'zh-TW',
             first_name: user.firstName || null,
             last_name: user.lastName || null,
           })
@@ -56,7 +67,7 @@ export async function GET() {
 
         if (insertError) {
           console.error('Error creating profile:', insertError);
-          return NextResponse.json({ error: 'Failed to create profile' }, { status: 500 });
+          return NextResponse.json({ error: tProfile('createFailed') }, { status: 500 });
         }
 
         return NextResponse.json({
@@ -66,7 +77,7 @@ export async function GET() {
       }
 
       console.error('Error fetching profile:', error);
-      return NextResponse.json({ error: 'Failed to fetch profile' }, { status: 500 });
+      return NextResponse.json({ error: tProfile('fetchFailed') }, { status: 500 });
     }
 
     return NextResponse.json({
@@ -75,7 +86,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Unexpected error in GET /api/user:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }
 
@@ -85,33 +98,36 @@ export async function GET() {
  */
 export async function PUT(request: NextRequest) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
     // Verify authentication
     let user = null;
     try {
       const auth = await withAuth();
       user = auth.user;
     } catch {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     let body: unknown;
     try {
       body = await request.json();
     } catch {
-      return NextResponse.json({ error: '無效的請求格式' }, { status: 400 });
+      return NextResponse.json({ error: tCommon('invalidRequestBody') }, { status: 400 });
     }
 
     if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return NextResponse.json({ error: '無效的請求格式' }, { status: 400 });
+      return NextResponse.json({ error: tCommon('invalidRequestBody') }, { status: 400 });
     }
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     const payload = body as Record<string, unknown>;
@@ -122,14 +138,14 @@ export async function PUT(request: NextRequest) {
 
     if (hasOwn('first_name')) {
       if (typeof payload.first_name !== 'string' || !payload.first_name.trim()) {
-        return NextResponse.json({ error: '名為必填欄位' }, { status: 400 });
+        return NextResponse.json({ error: tProfile('invalidFirstName') }, { status: 400 });
       }
       updates.first_name = payload.first_name.trim();
     }
 
     if (hasOwn('last_name')) {
       if (typeof payload.last_name !== 'string' || !payload.last_name.trim()) {
-        return NextResponse.json({ error: '姓為必填欄位' }, { status: 400 });
+        return NextResponse.json({ error: tProfile('invalidLastName') }, { status: 400 });
       }
       updates.last_name = payload.last_name.trim();
     }
@@ -140,7 +156,7 @@ export async function PUT(request: NextRequest) {
       if (title === null || title === '') {
         updates.title = null;
       } else if (typeof title !== 'string' || !validTitles.includes(title)) {
-        return NextResponse.json({ error: '無效的身份選項' }, { status: 400 });
+        return NextResponse.json({ error: tProfile('invalidTitle') }, { status: 400 });
       } else {
         updates.title = title;
       }
@@ -151,7 +167,7 @@ export async function PUT(request: NextRequest) {
       if (dayOfBirth === null || dayOfBirth === '') {
         updates.day_of_birth = null;
       } else if (typeof dayOfBirth !== 'string' || isNaN(Date.parse(dayOfBirth))) {
-        return NextResponse.json({ error: '無效的日期格式' }, { status: 400 });
+        return NextResponse.json({ error: tProfile('invalidDate') }, { status: 400 });
       } else {
         updates.day_of_birth = dayOfBirth;
       }
@@ -159,13 +175,20 @@ export async function PUT(request: NextRequest) {
 
     if (hasOwn('theme_preference')) {
       if (!isThemePreference(payload.theme_preference)) {
-        return NextResponse.json({ error: '無效的主題偏好' }, { status: 400 });
+        return NextResponse.json({ error: tProfile('invalidThemePreference') }, { status: 400 });
       }
       updates.theme_preference = payload.theme_preference;
     }
 
+    if (hasOwn('locale_preference')) {
+      if (!isLocalePreference(payload.locale_preference)) {
+        return NextResponse.json({ error: tProfile('invalidLocalePreference') }, { status: 400 });
+      }
+      updates.locale_preference = payload.locale_preference;
+    }
+
     if (Object.keys(updates).length === 0) {
-      return NextResponse.json({ error: '未提供可更新欄位' }, { status: 400 });
+      return NextResponse.json({ error: tProfile('noUpdatableFields') }, { status: 400 });
     }
 
     updates.updated_at = new Date().toISOString();
@@ -180,7 +203,7 @@ export async function PUT(request: NextRequest) {
 
     if (error) {
       console.error('Error updating profile:', error);
-      return NextResponse.json({ error: 'Failed to update profile' }, { status: 500 });
+      return NextResponse.json({ error: tProfile('updateFailed') }, { status: 500 });
     }
 
     return NextResponse.json({
@@ -189,6 +212,8 @@ export async function PUT(request: NextRequest) {
     });
   } catch (error) {
     console.error('Unexpected error in PUT /api/user:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }

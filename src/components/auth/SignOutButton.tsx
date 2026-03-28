@@ -15,7 +15,7 @@ export function SignOutButton({
   return (
     <AuthNavigationButton
       href={buildSignOutHref(returnTo)}
-      className={`px-4 py-2 text-sm font-medium text-gray-800 transition-colors hover:text-[#3C9DAE] dark:text-gray-100 ${className}`}
+      className={`type-button px-4 py-2 text-gray-800 transition-colors hover:text-main dark:text-gray-100 ${className}`}
     >
       {children}
     </AuthNavigationButton>

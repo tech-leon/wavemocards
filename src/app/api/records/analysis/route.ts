@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
+import { categoryRepresentativeCards } from '@/lib/emotions';
 
 /**
  * GET /api/records/analysis
@@ -8,22 +11,26 @@ import { createServerClient } from '@/lib/supabase';
  */
 export async function GET(request: NextRequest) {
   try {
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
+    const tAnalysis = await getTranslations({ locale, namespace: 'apiErrors.analysis' });
     // Verify authentication
     let user = null;
     try {
       const auth = await withAuth();
       user = auth.user;
     } catch {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
     }
 
     const supabase = createServerClient();
     if (!supabase) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     // Get user profile
@@ -34,7 +41,7 @@ export async function GET(request: NextRequest) {
       .single();
 
     if (profileError || !profile) {
-      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
+      return NextResponse.json({ error: tProfile('notFound') }, { status: 404 });
     }
 
     // Parse date range params
@@ -43,10 +50,7 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get('endDate');
 
     if (!startDate || !endDate) {
-      return NextResponse.json(
-        { error: 'Both startDate and endDate are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: tAnalysis('missingDateRange') }, { status: 400 });
     }
 
     // Fetch records within date range
@@ -57,13 +61,13 @@ export async function GET(request: NextRequest) {
         card_2_id,
         card_3_id,
         card_1:emotion_cards!emotion_records_card_1_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         ),
         card_2:emotion_cards!emotion_records_card_2_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         ),
         card_3:emotion_cards!emotion_records_card_3_id_fkey(
-          category:emotion_categories!emotion_cards_category_id_fkey(name)
+          category:emotion_categories!emotion_cards_category_id_fkey(slug)
         )
       `)
       .eq('user_id', profile.id)
@@ -72,27 +76,26 @@ export async function GET(request: NextRequest) {
 
     if (queryError) {
       console.error('Error fetching analysis data:', queryError);
-      return NextResponse.json({ error: 'Failed to fetch analysis data' }, { status: 500 });
+      return NextResponse.json({ error: tAnalysis('fetchFailed') }, { status: 500 });
     }
 
     if (!records || records.length === 0) {
-      return NextResponse.json({ message: '這段期間沒有資料', categoryCounts: {} });
+      return NextResponse.json({ message: tAnalysis('noData'), categoryCounts: {} });
     }
 
     // Count categories
     const categoryCounts: Record<string, number> = {};
 
     records.forEach((record) => {
-      // Helper to extract category name from nested relation
-      const getCategoryName = (card: unknown): string | null => {
+      const getCategorySlug = (card: unknown): string | null => {
         if (!card) return null;
-        const c = card as { category?: { name?: string } };
-        return c?.category?.name || null;
+        const c = card as { category?: { slug?: string } };
+        return c?.category?.slug || null;
       };
 
-      const cat1 = getCategoryName(record.card_1);
-      const cat2 = getCategoryName(record.card_2);
-      const cat3 = getCategoryName(record.card_3);
+      const cat1 = getCategorySlug(record.card_1);
+      const cat2 = getCategorySlug(record.card_2);
+      const cat3 = getCategorySlug(record.card_3);
 
       if (cat1) categoryCounts[cat1] = (categoryCounts[cat1] || 0) + 1;
       if (cat2) categoryCounts[cat2] = (categoryCounts[cat2] || 0) + 1;
@@ -101,10 +104,13 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       categoryCounts,
+      representativeCards: categoryRepresentativeCards,
       totalRecords: records.length,
     });
   } catch (error) {
     console.error('Unexpected error in GET /api/records/analysis:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const locale = await getRequestLocale();
+    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    return NextResponse.json({ error: tCommon('internalServerError') }, { status: 500 });
   }
 }

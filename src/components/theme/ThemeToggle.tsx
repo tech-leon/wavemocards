@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,9 +19,10 @@ function isThemePreference(value: unknown): value is ThemePreference {
 }
 
 export function ThemeToggle({ className, isAuthenticated = false }: ThemeToggleProps) {
+  const t = useTranslations("theme");
   const { resolvedTheme, setTheme } = useTheme();
   const [isSavingTheme, setIsSavingTheme] = useState(false);
-  const label = "切換亮色/深色模式";
+  const label = t("toggle");
 
   const syncThemeFromDatabase = async () => {
     try {

@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface LoadingSpinnerProps {
@@ -6,6 +9,7 @@ interface LoadingSpinnerProps {
 }
 
 export function LoadingSpinner({ size = 'md', className }: LoadingSpinnerProps) {
+  const t = useTranslations('common.states');
   const sizeClasses = {
     sm: 'w-4 h-4 border-2',
     md: 'w-8 h-8 border-3',
@@ -20,9 +24,9 @@ export function LoadingSpinner({ size = 'md', className }: LoadingSpinnerProps) 
         className
       )}
       role="status"
-      aria-label="Loading"
+      aria-label={t('loading')}
     >
-      <span className="sr-only">載入中...</span>
+      <span className="sr-only">{t('loading')}</span>
     </div>
   );
 }

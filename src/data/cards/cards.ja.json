@@ -1,0 +1,587 @@
+[
+  {
+    "id": 1,
+    "slug": "satisfaction",
+    "categoryId": 1,
+    "name": "満足",
+    "description": "心や気持ちが満たされている状態。",
+    "example": "今日の勉強目標を達成できて、私は満足した。",
+    "imagePath": "/images/emoCards/1.svg"
+  },
+  {
+    "id": 2,
+    "slug": "joy",
+    "categoryId": 1,
+    "name": "楽しい",
+    "description": "物事がうまくいったり心地よかったりして、気分がよくなる反応。",
+    "example": "放課後に仲のよい友だちとおしゃべりしながらおやつを食べて、とても楽しかった。",
+    "imagePath": "/images/emoCards/2.svg"
+  },
+  {
+    "id": 3,
+    "slug": "happiness",
+    "categoryId": 1,
+    "name": "幸せ",
+    "description": "喜びや満足に包まれ、心地よくあたたかい気持ちになること。",
+    "example": "放課後に親しい友だちと過ごして、幸せな気持ちになった。",
+    "imagePath": "/images/emoCards/3.svg"
+  },
+  {
+    "id": 4,
+    "slug": "pride",
+    "categoryId": 1,
+    "name": "誇らしい",
+    "description": "自分の努力や成果に自信と満足を感じること。",
+    "example": "授業での発表を先生に褒められて、私は誇らしくてうれしかった。",
+    "imagePath": "/images/emoCards/4.svg"
+  },
+  {
+    "id": 5,
+    "slug": "excitement",
+    "categoryId": 1,
+    "name": "わくわくする",
+    "description": "期待や熱意でいっぱいになり、喜びを隠せない気持ち。",
+    "example": "ずっと楽しみにしていた新しいゲームをもらって、わくわくした。",
+    "imagePath": "/images/emoCards/5.svg"
+  },
+  {
+    "id": 6,
+    "slug": "exhilaration",
+    "categoryId": 1,
+    "name": "爽快",
+    "description": "のびのびと行動したり気持ちを表したりして、すっきりする感覚。",
+    "example": "休みの日に大声で歌って踊って、とても爽快だった。",
+    "imagePath": "/images/emoCards/6.svg"
+  },
+  {
+    "id": 7,
+    "slug": "euphoria",
+    "categoryId": 1,
+    "name": "狂喜",
+    "description": "気持ちが一気に高まり、頂点まで達するほどの強い喜び。",
+    "example": "テストで満点を取って、私は狂喜して飛び上がった。",
+    "imagePath": "/images/emoCards/7.svg"
+  },
+  {
+    "id": 8,
+    "slug": "anticipation",
+    "categoryId": 2,
+    "name": "期待",
+    "description": "これから起こるよいことを思い描き、楽しみに待つ気持ち。",
+    "example": "夏休みが近づいてきて、できることを考えながら期待でいっぱいだった。",
+    "imagePath": "/images/emoCards/8.svg"
+  },
+  {
+    "id": 9,
+    "slug": "confidence",
+    "categoryId": 2,
+    "name": "自信がある",
+    "description": "自分はきっとうまくできると信じられる気持ち。",
+    "example": "しっかり準備していたので、私はスピーチ大会でうまくやれると自信があった。",
+    "imagePath": "/images/emoCards/9.svg"
+  },
+  {
+    "id": 10,
+    "slug": "interest",
+    "categoryId": 2,
+    "name": "興味津々",
+    "description": "あることに好奇心や熱意を持ち、時間や力を注ぎたくなること。",
+    "example": "私は絵を描くことにとても興味があり、毎日放課後に何時間も描いている。",
+    "imagePath": "/images/emoCards/10.svg"
+  },
+  {
+    "id": 11,
+    "slug": "longing",
+    "categoryId": 2,
+    "name": "切望",
+    "description": "何かを手に入れたり実現したりしたいという強い願い。",
+    "example": "私は自分の興味や情熱を見つけて、もっと楽しく生きたいと切望している。",
+    "imagePath": "/images/emoCards/11.svg"
+  },
+  {
+    "id": 12,
+    "slug": "comfort",
+    "categoryId": 3,
+    "name": "心地よい",
+    "description": "心も体も楽になり、気分よく過ごせる状態。",
+    "example": "気持ちのよいベッドで休んで、とても心地よかった。",
+    "imagePath": "/images/emoCards/12.svg"
+  },
+  {
+    "id": 13,
+    "slug": "card-13",
+    "categoryId": 3,
+    "name": "リラックス",
+    "description": "心が落ち着き、体の緊張がほどけて軽くなること。",
+    "example": "芝生に寝転んで風に揺れる葉の音を聞いていると、気持ちがリラックスした。",
+    "imagePath": "/images/emoCards/13.svg"
+  },
+  {
+    "id": 14,
+    "slug": "card-14",
+    "categoryId": 3,
+    "name": "穏やか",
+    "description": "悩みが少なく、静かで落ち着いた気持ち。",
+    "example": "座って深呼吸をし、穏やかな空気を感じると、ストレスが和らいだ。",
+    "imagePath": "/images/emoCards/14.svg"
+  },
+  {
+    "id": 15,
+    "slug": "reassurance",
+    "categoryId": 3,
+    "name": "安心",
+    "description": "心が落ち着き、不安がなく、安全だと感じること。",
+    "example": "家で家族のそばにいると、私は安心してあたたかい気持ちになる。",
+    "imagePath": "/images/emoCards/15.svg"
+  },
+  {
+    "id": 16,
+    "slug": "card-16",
+    "categoryId": 3,
+    "name": "気楽",
+    "description": "縛られず、緊張せずに自然でいられる状態。",
+    "example": "親友とゲームをして笑い合っていると、とても気楽でいられた。",
+    "imagePath": "/images/emoCards/16.svg"
+  },
+  {
+    "id": 17,
+    "slug": "card-17",
+    "categoryId": 3,
+    "name": "信頼",
+    "description": "相手は誠実で頼れると信じられることで生まれる安心感。",
+    "example": "友だちに悩みを話し、きっとわかってもらえると思えて信頼を感じた。",
+    "imagePath": "/images/emoCards/17.svg"
+  },
+  {
+    "id": 18,
+    "slug": "card-18",
+    "categoryId": 4,
+    "name": "恥ずかしい",
+    "description": "人前や新しい場面で、落ち着かず不安になること。",
+    "example": "新しいクラスでは恥ずかしくて、自分からあまり話しかけられなかった。",
+    "imagePath": "/images/emoCards/18.svg"
+  },
+  {
+    "id": 19,
+    "slug": "card-19",
+    "categoryId": 4,
+    "name": "心配",
+    "description": "特定のことや状況について気がかりになること。",
+    "example": "明日の天気が悪くて外の活動に影響しないか心配だった。",
+    "imagePath": "/images/emoCards/19.svg"
+  },
+  {
+    "id": 20,
+    "slug": "card-20",
+    "categoryId": 4,
+    "name": "迷う",
+    "description": "状況や選択に戸惑い、どう決めればよいかわからないこと。",
+    "example": "進学先のことを考えると、何が正しいのかわからず迷ってしまった。",
+    "imagePath": "/images/emoCards/20.svg"
+  },
+  {
+    "id": 21,
+    "slug": "unease",
+    "categoryId": 4,
+    "name": "不安",
+    "description": "未知のことや危険があるかもしれないことに落ち着かなくなる気持ち。",
+    "example": "試験を前にして、うまくできるかわからず不安だった。",
+    "imagePath": "/images/emoCards/21.svg"
+  },
+  {
+    "id": 22,
+    "slug": "card-22",
+    "categoryId": 4,
+    "name": "怖い",
+    "description": "脅威や危険を感じて、おびえたり落ち着かなくなったりすること。",
+    "example": "夜に一人で家にいると怖くなって、部屋の電気を全部つけた。",
+    "imagePath": "/images/emoCards/22.svg"
+  },
+  {
+    "id": 23,
+    "slug": "card-23",
+    "categoryId": 4,
+    "name": "緊張",
+    "description": "大切な場面の前で不安になり、体にもその反応が出ること。",
+    "example": "試合の前、私は緊張して手のひらに汗をかいた。",
+    "imagePath": "/images/emoCards/23.svg"
+  },
+  {
+    "id": 24,
+    "slug": "card-24",
+    "categoryId": 4,
+    "name": "焦る",
+    "description": "悪い結果になるかもしれないと心配し、そわそわすること。",
+    "example": "期末レポートの締め切りが近づき、みんな間に合うか焦っていた。",
+    "imagePath": "/images/emoCards/24.svg"
+  },
+  {
+    "id": 25,
+    "slug": "card-25",
+    "categoryId": 4,
+    "name": "恐怖",
+    "description": "現実または想像上の危険に対して強く怖がること。",
+    "example": "見知らぬ暗い路地を歩いていると、とても恐怖を感じた。",
+    "imagePath": "/images/emoCards/25.svg"
+  },
+  {
+    "id": 26,
+    "slug": "astonishment",
+    "categoryId": 5,
+    "name": "呆然",
+    "description": "予想外の出来事に強い衝撃を受け、すぐに反応できないこと。",
+    "example": "学級委員に選ばれて、私は予想していなかったので呆然とした。",
+    "imagePath": "/images/emoCards/26.svg"
+  },
+  {
+    "id": 27,
+    "slug": "card-27",
+    "categoryId": 5,
+    "name": "驚き",
+    "description": "思いがけないことが起こって、びっくりすること。",
+    "example": "甘いものが好きな小娟が自分のケーキを私にくれて、とても驚いた。",
+    "imagePath": "/images/emoCards/27.svg"
+  },
+  {
+    "id": 28,
+    "slug": "card-28",
+    "categoryId": 5,
+    "name": "驚喜",
+    "description": "思いがけない出来事で、うれしくて驚くこと。",
+    "example": "突然の誕生日パーティーに、私はとても驚いてうれしかった。",
+    "imagePath": "/images/emoCards/28.svg"
+  },
+  {
+    "id": 29,
+    "slug": "card-29",
+    "categoryId": 5,
+    "name": "衝撃",
+    "description": "信じられないような出来事に強く驚き、言葉を失うこと。",
+    "example": "国内で大地震による大きな被害が出たと聞いて、みんな衝撃を受けた。",
+    "imagePath": "/images/emoCards/29.svg"
+  },
+  {
+    "id": 30,
+    "slug": "card-30",
+    "categoryId": 6,
+    "name": "やるせない",
+    "description": "変えられない状況に対して、どうしようもなさを感じること。",
+    "example": "急に雨が降ってきて、雨具もなかったのでやるせなかった。",
+    "imagePath": "/images/emoCards/30.svg"
+  },
+  {
+    "id": 31,
+    "slug": "card-31",
+    "categoryId": 6,
+    "name": "挫折",
+    "description": "失敗や困難にぶつかって、気持ちがくじけること。",
+    "example": "何度やっても難しい問題が解けず、挫折を感じた。",
+    "imagePath": "/images/emoCards/31.svg"
+  },
+  {
+    "id": 32,
+    "slug": "card-32",
+    "categoryId": 6,
+    "name": "失望",
+    "description": "期待した通りにならず、がっかりしたり悲しくなったりすること。",
+    "example": "楽しみにしていたイベントが急に中止になって、私は失望した。",
+    "imagePath": "/images/emoCards/32.svg"
+  },
+  {
+    "id": 33,
+    "slug": "card-33",
+    "categoryId": 6,
+    "name": "無力",
+    "description": "自分には状況を変える力がないと感じること。",
+    "example": "トラブルを解決しようとしたが相手が協力してくれず、無力感を覚えた。",
+    "imagePath": "/images/emoCards/33.svg"
+  },
+  {
+    "id": 34,
+    "slug": "discouragement",
+    "categoryId": 6,
+    "name": "落ち込む",
+    "description": "つまずきや妨げによって気持ちが沈むこと。",
+    "example": "クラスメートと仲良くなろうとして誤解され、私は落ち込んだ。",
+    "imagePath": "/images/emoCards/34.svg"
+  },
+  {
+    "id": 35,
+    "slug": "card-35",
+    "categoryId": 6,
+    "name": "悲しい",
+    "description": "失ったり傷ついたりして、気分が重く沈むこと。",
+    "example": "大切なキーホルダーをなくして、とても悲しかった。",
+    "imagePath": "/images/emoCards/35.svg"
+  },
+  {
+    "id": 36,
+    "slug": "card-36",
+    "categoryId": 6,
+    "name": "無助",
+    "description": "助けがなく、どうしたらよいかわからないと感じること。",
+    "example": "困ったときに解決方法が見つからず、私は無助だと感じた。",
+    "imagePath": "/images/emoCards/36.svg"
+  },
+  {
+    "id": 37,
+    "slug": "card-37",
+    "categoryId": 6,
+    "name": "悲嘆",
+    "description": "喪失やつらい出来事によって深く悲しむこと。",
+    "example": "大好きなペットが亡くなり、私はとても悲しくて泣き続けた。",
+    "imagePath": "/images/emoCards/37.svg"
+  },
+  {
+    "id": 38,
+    "slug": "card-38",
+    "categoryId": 6,
+    "name": "胸が痛む",
+    "description": "失ったことや裏切りなどで心が強く傷つくこと。",
+    "example": "親友に裏切られて、私は胸が痛む思いをした。",
+    "imagePath": "/images/emoCards/38.svg"
+  },
+  {
+    "id": 39,
+    "slug": "card-39",
+    "categoryId": 6,
+    "name": "憂うつ",
+    "description": "気持ちが長く沈み、希望ややる気を失いやすい状態。",
+    "example": "進学のプレッシャーを解消できず、私は憂うつで何にもやる気が出なかった。",
+    "imagePath": "/images/emoCards/39.svg"
+  },
+  {
+    "id": 40,
+    "slug": "card-40",
+    "categoryId": 6,
+    "name": "崩れそう",
+    "description": "強いストレスやつらさで、心が保てなくなりそうな状態。",
+    "example": "大人からの大きすぎる期待に長くさらされて、私は崩れそうだった。",
+    "imagePath": "/images/emoCards/40.svg"
+  },
+  {
+    "id": 41,
+    "slug": "card-41",
+    "categoryId": 6,
+    "name": "絶望",
+    "description": "困難や失敗が続き、希望を完全に失ったように感じること。",
+    "example": "友だちに何度もだまされて、その友情に私は絶望した。",
+    "imagePath": "/images/emoCards/41.svg"
+  },
+  {
+    "id": 42,
+    "slug": "card-42",
+    "categoryId": 7,
+    "name": "退屈",
+    "description": "刺激や興味が足りず、周りのことがつまらなく感じること。",
+    "example": "雨で外に出られず、家の中で退屈していた。",
+    "imagePath": "/images/emoCards/42.svg"
+  },
+  {
+    "id": 43,
+    "slug": "card-43",
+    "categoryId": 7,
+    "name": "うんざり",
+    "description": "同じことが長く続いて、心身ともに疲れてしまうこと。",
+    "example": "同じ練習をずっと繰り返して、私はうんざりしてしまった。",
+    "imagePath": "/images/emoCards/43.svg"
+  },
+  {
+    "id": 44,
+    "slug": "inferiority",
+    "categoryId": 7,
+    "name": "劣等感",
+    "description": "自分の能力や価値が足りないと感じて、自信をなくすこと。",
+    "example": "自分の欠点や体型を思うと、私は劣等感と恥ずかしさを感じる。",
+    "imagePath": "/images/emoCards/44.svg"
+  },
+  {
+    "id": 45,
+    "slug": "card-45",
+    "categoryId": 7,
+    "name": "嫌だ",
+    "description": "あることに対して好きになれず、不快に感じること。",
+    "example": "やりたくないことを無理にさせられると、私は嫌だと感じる。",
+    "imagePath": "/images/emoCards/45.svg"
+  },
+  {
+    "id": 46,
+    "slug": "card-46",
+    "categoryId": 7,
+    "name": "嫉妬",
+    "description": "他人の持っているものや才能をうらやみ、不快になること。",
+    "example": "他人の才能や能力を見て、私は嫉妬してしまう。",
+    "imagePath": "/images/emoCards/46.svg"
+  },
+  {
+    "id": 47,
+    "slug": "card-47",
+    "categoryId": 7,
+    "name": "嫌悪",
+    "description": "あることに対して強い嫌さや反発を感じること。",
+    "example": "ひどい行いを見て、私は強い嫌悪感を覚えた。",
+    "imagePath": "/images/emoCards/47.svg"
+  },
+  {
+    "id": 48,
+    "slug": "card-48",
+    "categoryId": 7,
+    "name": "吐き気がする",
+    "description": "耐えられないほどの嫌悪を感じること。",
+    "example": "あの人の裏表のある態度を見て、本当に吐き気がした。",
+    "imagePath": "/images/emoCards/48.svg"
+  },
+  {
+    "id": 49,
+    "slug": "card-49",
+    "categoryId": 7,
+    "name": "恨み",
+    "description": "誰かや何かに対して怒りや苦さを長く抱くこと。",
+    "example": "信じていた人に裏切られて、私は強い恨みを感じた。",
+    "imagePath": "/images/emoCards/49.svg"
+  },
+  {
+    "id": 50,
+    "slug": "card-50",
+    "categoryId": 8,
+    "name": "不満",
+    "description": "今の状態に満足できず、もっとよくあってほしいと感じること。",
+    "example": "大人に必要以上に制限されることに、私は不満を感じる。",
+    "imagePath": "/images/emoCards/50.svg"
+  },
+  {
+    "id": 51,
+    "slug": "irritation",
+    "categoryId": 8,
+    "name": "いらいら",
+    "description": "気持ちが落ち着かず、すぐに腹が立ちやすい状態。",
+    "example": "弟がずっと騒いでいて、私はいらいらした。",
+    "imagePath": "/images/emoCards/51.svg"
+  },
+  {
+    "id": 52,
+    "slug": "card-52",
+    "categoryId": 8,
+    "name": "腹が立つ",
+    "description": "刺激されたり邪魔されたりして怒りを感じること。",
+    "example": "宿題をしているときに何度も邪魔されて、私は腹が立った。",
+    "imagePath": "/images/emoCards/52.svg"
+  },
+  {
+    "id": 53,
+    "slug": "card-53",
+    "categoryId": 8,
+    "name": "憤り",
+    "description": "不公平さや不満から生じる強い怒り。",
+    "example": "不公平な扱いを受けて、私は強い憤りを覚えた。",
+    "imagePath": "/images/emoCards/53.svg"
+  },
+  {
+    "id": 54,
+    "slug": "card-54",
+    "categoryId": 8,
+    "name": "激怒",
+    "description": "感情が大きく爆発しそうになるほどの激しい怒り。",
+    "example": "小明が何度も約束を破り、今回もまた破ったので、私は激怒して電話で怒鳴ってしまった。",
+    "imagePath": "/images/emoCards/54.svg"
+  },
+  {
+    "id": 55,
+    "slug": "letting-go",
+    "categoryId": 9,
+    "name": "吹っ切れる",
+    "description": "過去の感情や悩みを手放し、心が少し軽くなること。",
+    "example": "失敗を受け入れる練習をして、私は少しずつ吹っ切れてまた始められた。",
+    "imagePath": "/images/emoCards/55.svg"
+  },
+  {
+    "id": 56,
+    "slug": "card-56",
+    "categoryId": 9,
+    "name": "気まずい",
+    "description": "場の空気や状況の変化で、落ち着かなくなること。",
+    "example": "知らない人の前で自己紹介をすると、少し気まずかった。",
+    "imagePath": "/images/emoCards/56.svg"
+  },
+  {
+    "id": 57,
+    "slug": "card-57",
+    "categoryId": 9,
+    "name": "うらやましい",
+    "description": "自分にないものを相手が持っていて、ほしいと思う気持ち。",
+    "example": "彼の音楽の才能がうらやましくて、自分にもあればいいのにと思った。",
+    "imagePath": "/images/emoCards/57.svg"
+  },
+  {
+    "id": 58,
+    "slug": "card-58",
+    "categoryId": 9,
+    "name": "罪悪感",
+    "description": "自分の行動や選択に対して申し訳なさや落ち着かなさを感じること。",
+    "example": "私はうそをついてしまい、今とても罪悪感がある。",
+    "imagePath": "/images/emoCards/58.svg"
+  },
+  {
+    "id": 59,
+    "slug": "card-59",
+    "categoryId": 9,
+    "name": "葛藤",
+    "description": "二つ以上の思いや考えの間で心が揺れること。",
+    "example": "甘いものは好きだけど健康も気になるので、私は葛藤している。",
+    "imagePath": "/images/emoCards/59.svg"
+  },
+  {
+    "id": 60,
+    "slug": "card-60",
+    "categoryId": 9,
+    "name": "後悔",
+    "description": "過去の決定や行動、逃した機会を残念に思うこと。",
+    "example": "友だちの前であの言葉を言ってしまったことを、私は後悔している。",
+    "imagePath": "/images/emoCards/60.svg"
+  },
+  {
+    "id": 61,
+    "slug": "card-61",
+    "categoryId": 9,
+    "name": "悔しい",
+    "description": "不当な扱いや誤解によって傷つくこと。",
+    "example": "私の気持ちを誤解されたうえに責められて、私はとても悔しかった。",
+    "imagePath": "/images/emoCards/61.svg"
+  },
+  {
+    "id": 62,
+    "slug": "card-62",
+    "categoryId": 9,
+    "name": "寂しい",
+    "description": "ひとりぼっちで、人とのつながりが遠いと感じること。",
+    "example": "新しい学校で友だちができず、私は寂しかった。",
+    "imagePath": "/images/emoCards/62.svg"
+  },
+  {
+    "id": 63,
+    "slug": "card-63",
+    "categoryId": 9,
+    "name": "恥",
+    "description": "自分の行動や見た目、言葉のせいで気まずくなったり、いたたまれなくなったりすること。",
+    "example": "小さな失敗をしてクラスメートに笑われ、私は恥ずかしくてたまらなかった。",
+    "imagePath": "/images/emoCards/63.svg"
+  },
+  {
+    "id": 64,
+    "slug": "card-64",
+    "categoryId": 9,
+    "name": "感動",
+    "description": "人や出来事に心を深く動かされること。",
+    "example": "友だちが心を込めて誕生日プレゼントを用意してくれて、私はとても感動した。",
+    "imagePath": "/images/emoCards/64.svg"
+  },
+  {
+    "id": 65,
+    "slug": "card-65",
+    "categoryId": 9,
+    "name": "高ぶる",
+    "description": "期待や興奮、緊張で気持ちが大きく高まること。",
+    "example": "買い物中に憧れの人に会って、私は高ぶってすぐに写真をお願いしに行った。",
+    "imagePath": "/images/emoCards/65.svg"
+  }
+]

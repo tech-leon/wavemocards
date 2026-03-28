@@ -1,12 +1,12 @@
 export const DEFAULT_LOCALE = 'zh-TW' as const;
-export const PUBLIC_LOCALES = ['en', 'ja'] as const;
-export const SUPPORTED_LOCALES = [DEFAULT_LOCALE, ...PUBLIC_LOCALES] as const;
+export const PUBLIC_LOCALES = [DEFAULT_LOCALE, 'en', 'ja'] as const;
+export const SUPPORTED_LOCALES = PUBLIC_LOCALES;
 
 export const LOCALE_COOKIE_NAME = 'locale';
 export const LOCALE_HEADER_NAME = 'x-wavemocards-locale';
 
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
-export type PublicLocale = (typeof PUBLIC_LOCALES)[number];
+export type PublicLocale = Locale;
 
 const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards'] as const;
 
@@ -26,7 +26,10 @@ export function isPublicLocale(value: string | null | undefined): value is Publi
   return PUBLIC_LOCALES.includes(value as PublicLocale);
 }
 
-export function stripLocaleFromPathname(pathname: string): { pathname: string; locale: PublicLocale | null } {
+export function extractLocaleFromPathname(pathname: string): {
+  pathname: string;
+  locale: Locale | null;
+} {
   const normalizedPathname = normalizePathname(pathname);
 
   if (normalizedPathname === '/') {
@@ -36,7 +39,7 @@ export function stripLocaleFromPathname(pathname: string): { pathname: string; l
   const segments = normalizedPathname.split('/');
   const firstSegment = segments[1];
 
-  if (!isPublicLocale(firstSegment)) {
+  if (!isLocale(firstSegment)) {
     return { pathname: normalizedPathname, locale: null };
   }
 
@@ -48,16 +51,33 @@ export function stripLocaleFromPathname(pathname: string): { pathname: string; l
   };
 }
 
-export function isPublicPath(pathname: string): boolean {
-  const normalizedPathname = normalizePathname(pathname);
-
+function isPublicPathWithoutLocale(pathname: string): boolean {
   return (
-    normalizedPathname === '/' ||
+    pathname === '/' ||
     PUBLIC_ROUTE_PREFIXES.some(
       (prefix) =>
-        normalizedPathname === prefix || normalizedPathname.startsWith(`${prefix}/`)
+        pathname === prefix || pathname.startsWith(`${prefix}/`)
     )
   );
+}
+
+export function stripLocaleFromPathname(pathname: string): { pathname: string; locale: PublicLocale | null } {
+  const { pathname: normalizedStrippedPathname, locale } = extractLocaleFromPathname(pathname);
+
+  if (!locale || !isPublicPathWithoutLocale(normalizedStrippedPathname)) {
+    return { pathname: normalizePathname(pathname), locale: null };
+  }
+
+  return {
+    pathname: normalizedStrippedPathname,
+    locale,
+  };
+}
+
+export function isPublicPath(pathname: string): boolean {
+  const { pathname: normalizedPathname } = stripLocaleFromPathname(pathname);
+
+  return isPublicPathWithoutLocale(normalizedPathname);
 }
 
 export function resolveLocale(pathname: string, cookieLocale?: string | null): Locale {
@@ -85,7 +105,7 @@ export function localizeHref(href: string, locale: Locale): string {
   const { pathname } = stripLocaleFromPathname(rawPathname);
   const normalizedPathname = normalizePathname(pathname);
 
-  if (!isPublicPath(normalizedPathname) || locale === DEFAULT_LOCALE) {
+  if (!isPublicPath(normalizedPathname)) {
     return `${normalizedPathname}${suffix}`;
   }
 

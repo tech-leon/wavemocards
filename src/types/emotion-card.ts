@@ -2,7 +2,8 @@ export interface EmotionCardData {
   id: number;
   name: string;
   categoryId: number;
-  categoryName: string;
+  categorySlug: string;
+  categoryName?: string;
   description?: string;
   example?: string;
   imagePath?: string;

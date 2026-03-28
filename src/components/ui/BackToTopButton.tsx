@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 
@@ -9,6 +10,7 @@ interface BackToTopButtonProps {
 }
 
 export function BackToTopButton({ className }: BackToTopButtonProps) {
+  const t = useTranslations('aria');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -44,10 +46,10 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
             'w-14 h-14 rounded-full shadow-lg',
             'bg-main-tint01 hover:bg-main transition-colors',
             'flex flex-col items-center justify-center',
-            'text-white font-bold text-xs',
+            'type-caption text-white font-bold',
             className
           )}
-          aria-label="回到頂部"
+          aria-label={t('backToTop')}
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -69,7 +71,7 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
               d="M5 10l7-7m0 0l7 7m-7-7v18"
             />
           </svg>
-          <span>TOP</span>
+          <span>{t('backToTop')}</span>
         </motion.button>
       )}
     </AnimatePresence>

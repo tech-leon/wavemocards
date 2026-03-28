@@ -4,11 +4,10 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 
 interface ProgressBarProps {
-  currentStep: number; // 1-6
+  currentStep: number; // 1-5
 }
 
 const steps = [
-  { label: '我的情緒卡夾', path: '/explore/selected' },
   { label: '1st情緒強度', path: '/explore/strength/1' },
   { label: '背景篇', path: '/explore/story/background' },
   { label: '行動篇', path: '/explore/story/action' },
@@ -53,7 +52,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                 }}
                 className={cn(
                   'absolute top-0 translate-x-[-50%] translate-y-[-50%]',
-                  'w-7 h-7 rounded-full text-xs font-bold',
+                  'type-caption w-7 h-7 rounded-full font-bold',
                   'flex items-center justify-center',
                   'transition-all duration-200',
                   isCompleted && 'bg-main-tint01 text-white cursor-pointer hover:bg-main',
