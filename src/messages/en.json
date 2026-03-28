@@ -731,9 +731,9 @@
     "ariaLabel": "Switch language",
     "label": "Language",
     "options": {
-      "zh-TW": "Traditional Chinese",
+      "zh-TW": "繁體中文",
       "en": "English",
-      "ja": "Japanese"
+      "ja": "日本語"
     }
   },
   "toast": {
