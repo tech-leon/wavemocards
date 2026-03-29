@@ -11,6 +11,7 @@ import {
   extractLocaleFromPathname,
   isPublicPath,
   isLocale,
+  getLocaleCookieOptions,
   LOCALE_COOKIE_NAME,
   LOCALE_HEADER_NAME,
   localizeHref,
@@ -20,7 +21,6 @@ import {
 } from "@/lib/i18n/locale";
 
 const PRIVATE_ROUTE_PREFIXES = ["/account", "/records", "/explore"] as const;
-const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 function isPrivatePath(pathname: string): boolean {
   return PRIVATE_ROUTE_PREFIXES.some(
@@ -63,15 +63,20 @@ async function getProfileLocalePreference(
 export default async function proxy(request: NextRequest) {
   const { headers: authkitHeaders, session } = await authkit(request);
   const pathname = normalizePathname(request.nextUrl.pathname);
+  const apiPath = pathname === "/api" || pathname.startsWith("/api/");
   const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
+  const validCookieLocale = isLocale(cookieLocale) ? cookieLocale : null;
   const { pathname: pathnameWithoutLocale, locale: localePrefix } =
     extractLocaleFromPathname(pathname);
   const publicPath = isPublicPath(pathname);
   const privatePath = isPrivatePath(pathnameWithoutLocale);
-  const profileLocalePreference = await getProfileLocalePreference(session.user?.id);
+  const profileLocalePreference =
+    !apiPath && validCookieLocale === null
+      ? await getProfileLocalePreference(session.user?.id)
+      : null;
   const locale =
+    validCookieLocale ??
     profileLocalePreference ??
-    (isLocale(cookieLocale) ? cookieLocale : null) ??
     (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale));
   const { requestHeaders, responseHeaders } = partitionAuthkitHeaders(
     request,
@@ -82,14 +87,20 @@ export default async function proxy(request: NextRequest) {
 
   const finalizeResponse = (response: NextResponse) => {
     const nextResponse = applyResponseHeaders(response, responseHeaders);
-    nextResponse.cookies.set(LOCALE_COOKIE_NAME, locale, {
-      path: "/",
-      sameSite: "lax",
-      maxAge: LOCALE_COOKIE_MAX_AGE,
-    });
+    nextResponse.cookies.set(LOCALE_COOKIE_NAME, locale, getLocaleCookieOptions());
     nextResponse.headers.set(LOCALE_HEADER_NAME, locale);
     return nextResponse;
   };
+
+  if (apiPath) {
+    return finalizeResponse(
+      NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      })
+    );
+  }
 
   if (pathname === "/") {
     return finalizeResponse(

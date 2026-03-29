@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
+import {
+  getLocaleCookieOptions,
+  LOCALE_COOKIE_NAME,
+} from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { createServerClient } from '@/lib/supabase';
 import type { Database } from '@/types/database';
@@ -206,10 +210,20 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: tProfile('updateFailed') }, { status: 500 });
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       message: 'Profile updated successfully',
       profile: updatedProfile,
     });
+
+    if (isLocalePreference(updatedProfile.locale_preference)) {
+      response.cookies.set(
+        LOCALE_COOKIE_NAME,
+        updatedProfile.locale_preference,
+        getLocaleCookieOptions()
+      );
+    }
+
+    return response;
   } catch (error) {
     console.error('Unexpected error in PUT /api/user:', error);
     const locale = await getRequestLocale();

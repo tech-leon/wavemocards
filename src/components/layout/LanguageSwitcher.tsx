@@ -13,13 +13,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import {
+  buildLocaleCookieValue,
+  isLocale,
   isPublicPath,
   localizeHref,
   stripLocaleFromPathname,
   type Locale,
 } from '@/lib/i18n/locale';
-
-const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 interface LanguageSwitcherProps {
   locale: Locale;
@@ -32,7 +32,7 @@ interface LanguageSwitcherProps {
 }
 
 function setLocaleCookie(locale: Locale) {
-  document.cookie = `locale=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
+  document.cookie = buildLocaleCookieValue(locale);
 }
 
 export function LanguageSwitcher({
@@ -93,6 +93,23 @@ export function LanguageSwitcher({
           setIsPending(false);
           return;
         }
+
+        const data = (await response.json()) as {
+          profile?: { locale_preference?: Locale };
+        };
+        const confirmedLocale = data.profile?.locale_preference;
+
+        if (!isLocale(confirmedLocale)) {
+          setSelectedLocale(locale);
+          setIsPending(false);
+          return;
+        }
+
+        setSelectedLocale(confirmedLocale);
+        setOpen(false);
+        onChanged?.();
+        navigateToLocale(confirmedLocale);
+        return;
       } catch {
         setSelectedLocale(locale);
         setIsPending(false);

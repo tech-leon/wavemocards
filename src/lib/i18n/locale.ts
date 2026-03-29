@@ -3,12 +3,26 @@ export const PUBLIC_LOCALES = [DEFAULT_LOCALE, 'en', 'ja'] as const;
 export const SUPPORTED_LOCALES = PUBLIC_LOCALES;
 
 export const LOCALE_COOKIE_NAME = 'locale';
+export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 export const LOCALE_HEADER_NAME = 'x-wavemocards-locale';
 
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export type PublicLocale = Locale;
 
 const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards'] as const;
+
+export function getLocaleCookieOptions() {
+  return {
+    path: '/',
+    sameSite: 'lax' as const,
+    maxAge: LOCALE_COOKIE_MAX_AGE,
+  };
+}
+
+export function buildLocaleCookieValue(locale: Locale): string {
+  const { path, sameSite, maxAge } = getLocaleCookieOptions();
+  return `${LOCALE_COOKIE_NAME}=${locale}; Path=${path}; Max-Age=${maxAge}; SameSite=${sameSite}`;
+}
 
 export function normalizePathname(pathname: string): string {
   if (!pathname || pathname === '/') {
