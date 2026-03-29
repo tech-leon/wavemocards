@@ -1,5 +1,12 @@
 import type { Locale } from '@/lib/i18n/locale';
+import type { EmotionCard, EmotionCategory } from '@/lib/emotions';
 import { getEmotionCardMap, getEmotionCategoryMap } from '@/lib/emotions';
+
+type CardMap = Map<number, EmotionCard>;
+type CategoryMaps = {
+  byId: Map<number, EmotionCategory>;
+  bySlug: Map<string, EmotionCategory>;
+};
 
 interface RawCategoryInfo {
   id: number;
@@ -43,25 +50,29 @@ export interface LocalizedRecordItem extends RawRecordWithCards {
   card_3?: LocalizedCardInfo | null;
 }
 
-async function localizeCardInfo(
+async function buildLocalizationMaps(locale: Locale) {
+  const [cardMap, categoryMaps] = await Promise.all([
+    getEmotionCardMap(locale),
+    getEmotionCategoryMap(locale),
+  ]);
+  return { cardMap, categoryMaps };
+}
+
+function localizeCard(
   card: RawCardInfo | null | undefined,
-  locale: Locale,
-): Promise<LocalizedCardInfo | null> {
+  cardMap: CardMap,
+  categoryMaps: CategoryMaps,
+): LocalizedCardInfo | null {
   if (!card) {
     return null;
   }
 
-  const [localizedCardMap, localizedCategoryMap] = await Promise.all([
-    getEmotionCardMap(locale),
-    getEmotionCategoryMap(locale),
-  ]);
-
-  const localizedCard = localizedCardMap.get(card.id);
+  const localizedCard = cardMap.get(card.id);
   const localizedCategory =
     (card.category?.slug
-      ? localizedCategoryMap.bySlug.get(card.category.slug)
+      ? categoryMaps.bySlug.get(card.category.slug)
       : undefined) ??
-    localizedCategoryMap.byId.get(card.category?.id ?? card.category_id);
+    categoryMaps.byId.get(card.category?.id ?? card.category_id);
 
   return {
     ...card,
@@ -86,17 +97,13 @@ export async function localizeRecord(
   record: RawRecordWithCards,
   locale: Locale,
 ): Promise<LocalizedRecordItem> {
-  const [card1, card2, card3] = await Promise.all([
-    localizeCardInfo(record.card_1, locale),
-    localizeCardInfo(record.card_2, locale),
-    localizeCardInfo(record.card_3, locale),
-  ]);
+  const { cardMap, categoryMaps } = await buildLocalizationMaps(locale);
 
   return {
     ...record,
-    card_1: card1,
-    card_2: card2,
-    card_3: card3,
+    card_1: localizeCard(record.card_1, cardMap, categoryMaps),
+    card_2: localizeCard(record.card_2, cardMap, categoryMaps),
+    card_3: localizeCard(record.card_3, cardMap, categoryMaps),
   };
 }
 
@@ -104,44 +111,12 @@ export async function localizeRecordCollection<T extends RawRecordWithCards>(
   records: T[],
   locale: Locale,
 ): Promise<Array<T & LocalizedRecordItem>> {
-  const localizedCardMap = await getEmotionCardMap(locale);
-  const localizedCategoryMap = await getEmotionCategoryMap(locale);
-
-  const localizeCard = (card: RawCardInfo | null | undefined): LocalizedCardInfo | null => {
-    if (!card) {
-      return null;
-    }
-
-    const localizedCard = localizedCardMap.get(card.id);
-    const localizedCategory =
-      (card.category?.slug
-        ? localizedCategoryMap.bySlug.get(card.category.slug)
-        : undefined) ??
-      localizedCategoryMap.byId.get(card.category?.id ?? card.category_id);
-
-    return {
-      ...card,
-      name: localizedCard?.name ?? card.name ?? '',
-      category: card.category
-        ? {
-            id: card.category.id,
-            slug: localizedCategory?.slug ?? card.category.slug ?? '',
-            name: localizedCategory?.name ?? card.category.name ?? '',
-          }
-        : localizedCategory
-          ? {
-              id: localizedCategory.id,
-              slug: localizedCategory.slug,
-              name: localizedCategory.name,
-            }
-          : null,
-    };
-  };
+  const { cardMap, categoryMaps } = await buildLocalizationMaps(locale);
 
   return records.map((record) => ({
     ...record,
-    card_1: localizeCard(record.card_1),
-    card_2: localizeCard(record.card_2),
-    card_3: localizeCard(record.card_3),
+    card_1: localizeCard(record.card_1, cardMap, categoryMaps),
+    card_2: localizeCard(record.card_2, cardMap, categoryMaps),
+    card_3: localizeCard(record.card_3, cardMap, categoryMaps),
   }));
 }
