@@ -9,7 +9,7 @@ import type {
   LocalizedEmotionCategoryRecord,
 } from '@/types/emotion-data';
 import type { Locale } from '@/lib/i18n/locale';
-import { createServerClient } from './supabase';
+import { createAnonClient } from './supabase';
 
 // Types - simplified interfaces for the app
 export interface EmotionCategory {
@@ -238,7 +238,7 @@ export async function getEmotionCardsGroupedByCategory(
  * Get about emotions content
  */
 export async function getAboutEmotions(): Promise<AboutEmotion[]> {
-  const supabase = createServerClient();
+  const supabase = createAnonClient();
   
   if (!supabase) {
     console.warn('Supabase not configured, using fallback data');
@@ -262,7 +262,7 @@ export async function getAboutEmotions(): Promise<AboutEmotion[]> {
  * Get about emotion by key
  */
 export async function getAboutEmotionByKey(key: string): Promise<AboutEmotion | null> {
-  const supabase = createServerClient();
+  const supabase = createAnonClient();
   
   if (!supabase) {
     console.warn('Supabase not configured, using fallback data');

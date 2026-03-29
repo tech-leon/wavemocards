@@ -6,7 +6,8 @@ import {
   LOCALE_COOKIE_NAME,
 } from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
-import { createServerClient } from '@/lib/supabase';
+import { withAuthContext } from '@/lib/auth-context';
+import { createAdminClient } from '@/lib/supabase';
 import type { Database } from '@/types/database';
 
 type LocalePreference = 'zh-TW' | 'en' | 'ja';
@@ -26,38 +27,32 @@ function isThemePreference(value: unknown): value is ThemePreference {
  */
 export async function GET() {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
-    // Verify authentication
-    let user = null;
-    try {
-      const auth = await withAuth();
-      user = auth.user;
-    } catch {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
+    const ctx = await withAuthContext();
 
-    if (!user) {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
+    if (!ctx.ok) {
+      // Profile not found — try to create one (needs admin client)
+      if (ctx.status === 404) {
+        const locale = await getRequestLocale();
+        const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+        const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
 
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
+        let user = null;
+        try {
+          const auth = await withAuth();
+          user = auth.user;
+        } catch {
+          return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
+        }
+        if (!user) {
+          return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
+        }
 
-    // Fetch user profile
-    const { data: profile, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('workos_user_id', user.id)
-      .single();
+        const adminClient = createAdminClient();
+        if (!adminClient) {
+          return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
+        }
 
-    if (error) {
-      // Profile not found - create one
-      if (error.code === 'PGRST116') {
-        const { data: newProfile, error: insertError } = await supabase
+        const { data: newProfile, error: insertError } = await adminClient
           .from('profiles')
           .insert({
             workos_user_id: user.id,
@@ -80,13 +75,25 @@ export async function GET() {
         });
       }
 
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    // Fetch full profile with user-scoped client
+    const { data: profile, error } = await ctx.supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', ctx.profileId)
+      .single();
+
+    if (error) {
       console.error('Error fetching profile:', error);
+      const tProfile = await getTranslations({ locale: ctx.locale, namespace: 'apiErrors.profile' });
       return NextResponse.json({ error: tProfile('fetchFailed') }, { status: 500 });
     }
 
     return NextResponse.json({
       profile,
-      email: user.email,
+      email: ctx.email,
     });
   } catch (error) {
     console.error('Unexpected error in GET /api/user:', error);
@@ -102,21 +109,13 @@ export async function GET() {
  */
 export async function PUT(request: NextRequest) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
-    // Verify authentication
-    let user = null;
-    try {
-      const auth = await withAuth();
-      user = auth.user;
-    } catch {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
     }
 
-    if (!user) {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
+    const tProfile = await getTranslations({ locale: ctx.locale, namespace: 'apiErrors.profile' });
+    const tCommon = await getTranslations({ locale: ctx.locale, namespace: 'apiErrors.common' });
 
     let body: unknown;
     try {
@@ -127,11 +126,6 @@ export async function PUT(request: NextRequest) {
 
     if (!body || typeof body !== 'object' || Array.isArray(body)) {
       return NextResponse.json({ error: tCommon('invalidRequestBody') }, { status: 400 });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
     }
 
     const payload = body as Record<string, unknown>;
@@ -197,11 +191,11 @@ export async function PUT(request: NextRequest) {
 
     updates.updated_at = new Date().toISOString();
 
-    // Update profile
-    const { data: updatedProfile, error } = await supabase
+    // Update profile with user-scoped client
+    const { data: updatedProfile, error } = await ctx.supabase
       .from('profiles')
       .update(updates)
-      .eq('workos_user_id', user.id)
+      .eq('id', ctx.profileId)
       .select()
       .single();
 

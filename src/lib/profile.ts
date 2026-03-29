@@ -1,7 +1,8 @@
 "use server";
 
-import { createServerClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase";
 import { withAuth } from "@workos-inc/authkit-nextjs";
+import { withAuthContext } from "@/lib/auth-context";
 import type {
   LocalePreference,
   Profile,
@@ -15,6 +16,8 @@ export type UserLocalePreference = LocalePreference;
 /**
  * Sync the WorkOS user with Supabase profiles table.
  * Creates a new profile if it doesn't exist, or returns the existing one.
+ *
+ * Uses admin client because the profile may not exist yet (chicken-and-egg).
  */
 export async function syncUserProfile(): Promise<UserProfile | null> {
   const { user } = await withAuth();
@@ -23,7 +26,7 @@ export async function syncUserProfile(): Promise<UserProfile | null> {
     return null;
   }
 
-  const supabase = createServerClient();
+  const supabase = createAdminClient();
   if (!supabase) {
     console.warn("Supabase not configured");
     return null;
@@ -44,7 +47,7 @@ export async function syncUserProfile(): Promise<UserProfile | null> {
 
   if (existingProfile) {
     // Update last login or any changed info
-    const { data: updatedProfile, error: updateError } = await supabase!
+    const { data: updatedProfile, error: updateError } = await supabase
       .from("profiles")
       .update({
         email: user.email,
@@ -65,7 +68,7 @@ export async function syncUserProfile(): Promise<UserProfile | null> {
   }
 
   // Create new profile for first-time users
-  const { data: newProfile, error: insertError } = await supabase!
+  const { data: newProfile, error: insertError } = await supabase
     .from("profiles")
     .insert({
       workos_user_id: user.id,
@@ -85,25 +88,18 @@ export async function syncUserProfile(): Promise<UserProfile | null> {
 }
 
 /**
- * Get the current user's profile from Supabase
+ * Get the current user's profile from Supabase (user-scoped)
  */
 export async function getUserProfile(): Promise<UserProfile | null> {
-  const { user } = await withAuth();
-
-  if (!user) {
+  const ctx = await withAuthContext();
+  if (!ctx.ok) {
     return null;
   }
 
-  const supabase = createServerClient();
-  if (!supabase) {
-    console.warn("Supabase not configured");
-    return null;
-  }
-
-  const { data: profile, error } = await supabase
+  const { data: profile, error } = await ctx.supabase
     .from("profiles")
     .select("*")
-    .eq("workos_user_id", user.id)
+    .eq("id", ctx.profileId)
     .single();
 
   if (error) {
@@ -115,30 +111,23 @@ export async function getUserProfile(): Promise<UserProfile | null> {
 }
 
 /**
- * Update the current user's profile
+ * Update the current user's profile (user-scoped)
  */
 export async function updateUserProfile(
   updates: Omit<ProfileUpdate, "id" | "workos_user_id" | "email" | "created_at" | "updated_at">
 ): Promise<UserProfile | null> {
-  const { user } = await withAuth();
-
-  if (!user) {
+  const ctx = await withAuthContext();
+  if (!ctx.ok) {
     return null;
   }
 
-  const supabase = createServerClient();
-  if (!supabase) {
-    console.warn("Supabase not configured");
-    return null;
-  }
-
-  const { data: profile, error } = await supabase
+  const { data: profile, error } = await ctx.supabase
     .from("profiles")
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
     })
-    .eq("workos_user_id", user.id)
+    .eq("id", ctx.profileId)
     .select()
     .single();
 

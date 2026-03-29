@@ -1,46 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { localizeRecord } from '@/lib/records';
-import { createServerClient } from '@/lib/supabase';
-
-/**
- * Helper: get authenticated user's profile ID
- */
-async function getAuthenticatedProfileId() {
-  const locale = await getRequestLocale();
-  const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-  const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
-  let user = null;
-  try {
-    const auth = await withAuth();
-    user = auth.user;
-  } catch {
-    return { error: tCommon('unauthorized'), status: 401, profileId: null };
-  }
-
-  if (!user) {
-    return { error: tCommon('unauthorized'), status: 401, profileId: null };
-  }
-
-  const supabase = createServerClient();
-  if (!supabase) {
-    return { error: tCommon('databaseNotConfigured'), status: 500, profileId: null };
-  }
-
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('id')
-    .eq('workos_user_id', user.id)
-    .single();
-
-  if (profileError || !profile) {
-    return { error: tProfile('notFound'), status: 404, profileId: null };
-  }
-
-  return { error: null, status: 200, profileId: profile.id };
-}
+import { withAuthContext } from '@/lib/auth-context';
 
 /**
  * GET /api/records/[id]
@@ -51,20 +13,14 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
-    const { error, status, profileId } = await getAuthenticatedProfileId();
-
-    if (error) {
-      return NextResponse.json({ error }, { status });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
 
     const { data: record, error: queryError } = await supabase
       .from('emotion_records')
@@ -81,7 +37,7 @@ export async function GET(
         )
       `)
       .eq('id', id)
-      .eq('user_id', profileId!)
+      .eq('user_id', profileId)
       .single();
 
     if (queryError || !record) {
@@ -108,20 +64,14 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
-    const { error, status, profileId } = await getAuthenticatedProfileId();
-
-    if (error) {
-      return NextResponse.json({ error }, { status });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
 
     const body = await request.json();
     const { story, actions, results, feelings, reaction } = body;
@@ -138,7 +88,7 @@ export async function PUT(
         updated_at: new Date().toISOString(),
       })
       .eq('id', id)
-      .eq('user_id', profileId!)
+      .eq('user_id', profileId)
       .select()
       .single();
 
@@ -169,26 +119,20 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
     const { id } = await params;
-    const { error, status, profileId } = await getAuthenticatedProfileId();
-
-    if (error) {
-      return NextResponse.json({ error }, { status });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
 
     const { error: deleteError } = await supabase
       .from('emotion_records')
       .delete()
       .eq('id', id)
-      .eq('user_id', profileId!);
+      .eq('user_id', profileId);
 
     if (deleteError) {
       console.error('Error deleting record:', deleteError);

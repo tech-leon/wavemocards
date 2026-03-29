@@ -10,12 +10,15 @@ import {
   RECORDS_WITH_CARDS_SELECT,
 } from '@/lib/records-query';
 import { buildSearchTokens, resolveMatchingCardIds } from '@/lib/records-search';
-import { createServerClient } from '@/lib/supabase';
+import { withAuthContext } from '@/lib/auth-context';
+import { createAdminClient } from '@/lib/supabase';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '@/types/database';
 import type { SearchEmotionRecordsRow } from '@/types/database';
 
 async function fetchRecordsByIds(
   recordIds: string[],
-  supabase: NonNullable<ReturnType<typeof createServerClient>>,
+  supabase: SupabaseClient<Database>,
 ) {
   if (recordIds.length === 0) {
     return [];
@@ -31,7 +34,9 @@ async function fetchRecordsByIds(
   }
 
   const recordsById = new Map((data ?? []).map((record) => [record.id, record]));
-  return recordIds.map((recordId) => recordsById.get(recordId)).filter(Boolean);
+  return recordIds
+    .map((recordId) => recordsById.get(recordId))
+    .filter((r): r is NonNullable<typeof r> => r != null);
 }
 
 /**
@@ -41,38 +46,13 @@ async function fetchRecordsByIds(
  */
 export async function GET(request: NextRequest) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
-    // Verify authentication
-    let user = null;
-    try {
-      const auth = await withAuth();
-      user = auth.user;
-    } catch {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
-
-    if (!user) {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
-
-    // Get user profile
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('workos_user_id', user.id)
-      .single();
-
-    if (profileError || !profile) {
-      return NextResponse.json({ error: tProfile('notFound') }, { status: 404 });
-    }
 
     const params = parseRecordsListParams(request.nextUrl.searchParams);
     const { startDate, endDate, keyword, page, perPage } = params;
@@ -83,7 +63,7 @@ export async function GET(request: NextRequest) {
 
       const { data: records, error: queryError, count } = await buildBaseRecordsQuery(
         supabase,
-        profile.id,
+        profileId,
         startDate,
         endDate,
       ).range(rangeFrom, rangeTo);
@@ -106,7 +86,7 @@ export async function GET(request: NextRequest) {
     const { data: searchResults, error: searchError } = await supabase.rpc(
       'search_emotion_records_paginated',
       {
-        p_user_id: profile.id,
+        p_user_id: profileId,
         p_locale: locale,
         p_start_date: startDate ? `${startDate}T00:00:00.000Z` : null,
         p_end_date: endDate ? `${endDate}T23:59:59.999Z` : null,
@@ -147,71 +127,42 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
-    // Verify authentication
-    let user = null;
-    try {
-      const auth = await withAuth();
-      user = auth.user;
-    } catch {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
+    const ctx = await withAuthContext();
 
-    if (!user) {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
+    // If profile not found, try to create one with admin client
+    if (!ctx.ok && ctx.status === 404) {
+      const locale = await getRequestLocale();
+      const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
+      const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
 
-    const body = await request.json();
-    const {
-      cards,
-      beforeLevels,
-      afterLevels,
-      storyBackground,
-      storyAction,
-      storyResult,
-      storyFeeling,
-      storyExpect,
-      storyBetterAction,
-    } = body;
+      let user = null;
+      try {
+        const auth = await withAuth();
+        user = auth.user;
+      } catch {
+        return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
+      }
+      if (!user) {
+        return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
+      }
 
-    // Validate required fields
-    if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-      return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
-    }
+      const adminClient = createAdminClient();
+      if (!adminClient) {
+        return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
+      }
 
-    // Map cards to card_1_id, card_2_id, card_3_id
-    const card1Id = cards[0] || null;
-    const card2Id = cards[1] || null;
-    const card3Id = cards[2] || null;
+      const body = await request.json();
+      const {
+        cards, beforeLevels, afterLevels,
+        storyBackground, storyAction, storyResult,
+        storyFeeling, storyExpect, storyBetterAction,
+      } = body;
 
-    // Map before levels
-    const beforeLevel1 = card1Id ? beforeLevels?.[card1Id] || null : null;
-    const beforeLevel2 = card2Id ? beforeLevels?.[card2Id] || null : null;
-    const beforeLevel3 = card3Id ? beforeLevels?.[card3Id] || null : null;
+      if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
+        return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+      }
 
-    // Map after levels (optional)
-    const afterLevel1 = card1Id ? afterLevels?.[card1Id] || null : null;
-    const afterLevel2 = card2Id ? afterLevels?.[card2Id] || null : null;
-    const afterLevel3 = card3Id ? afterLevels?.[card3Id] || null : null;
-
-    // Get user profile from Supabase
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
-
-    // Get the profile by workos_user_id
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('workos_user_id', user.id)
-      .single();
-
-    if (profileError || !profile) {
-      // If no profile, try to create one
-      const { data: newProfile, error: createError } = await supabase
+      const { data: newProfile, error: createError } = await adminClient
         .from('profiles')
         .insert({
           workos_user_id: user.id,
@@ -227,22 +178,23 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: tRecords('profileCreateFailed') }, { status: 500 });
       }
 
-      // Use the new profile
-      const userId = newProfile.id;
+      const card1Id = cards[0] || null;
+      const card2Id = cards[1] || null;
+      const card3Id = cards[2] || null;
 
-      const { error: insertError } = await supabase
+      const { error: insertError } = await adminClient
         .from('emotion_records')
         .insert({
-          user_id: userId,
+          user_id: newProfile.id,
           card_1_id: card1Id,
           card_2_id: card2Id,
           card_3_id: card3Id,
-          before_level_1: beforeLevel1,
-          before_level_2: beforeLevel2,
-          before_level_3: beforeLevel3,
-          after_level_1: afterLevel1,
-          after_level_2: afterLevel2,
-          after_level_3: afterLevel3,
+          before_level_1: card1Id ? beforeLevels?.[card1Id] || null : null,
+          before_level_2: card2Id ? beforeLevels?.[card2Id] || null : null,
+          before_level_3: card3Id ? beforeLevels?.[card3Id] || null : null,
+          after_level_1: card1Id ? afterLevels?.[card1Id] || null : null,
+          after_level_2: card2Id ? afterLevels?.[card2Id] || null : null,
+          after_level_3: card3Id ? afterLevels?.[card3Id] || null : null,
           story: storyBackground || null,
           actions: storyAction || null,
           results: storyResult || null,
@@ -259,20 +211,41 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Record saved successfully' });
     }
 
-    // Insert the emotion record
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
+    const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
+
+    const body = await request.json();
+    const {
+      cards, beforeLevels, afterLevels,
+      storyBackground, storyAction, storyResult,
+      storyFeeling, storyExpect, storyBetterAction,
+    } = body;
+
+    if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
+      return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+    }
+
+    const card1Id = cards[0] || null;
+    const card2Id = cards[1] || null;
+    const card3Id = cards[2] || null;
+
     const { error: insertError } = await supabase
       .from('emotion_records')
       .insert({
-        user_id: profile.id,
+        user_id: profileId,
         card_1_id: card1Id,
         card_2_id: card2Id,
         card_3_id: card3Id,
-        before_level_1: beforeLevel1,
-        before_level_2: beforeLevel2,
-        before_level_3: beforeLevel3,
-        after_level_1: afterLevel1,
-        after_level_2: afterLevel2,
-        after_level_3: afterLevel3,
+        before_level_1: card1Id ? beforeLevels?.[card1Id] || null : null,
+        before_level_2: card2Id ? beforeLevels?.[card2Id] || null : null,
+        before_level_3: card3Id ? beforeLevels?.[card3Id] || null : null,
+        after_level_1: card1Id ? afterLevels?.[card1Id] || null : null,
+        after_level_2: card2Id ? afterLevels?.[card2Id] || null : null,
+        after_level_3: card3Id ? afterLevels?.[card3Id] || null : null,
         story: storyBackground || null,
         actions: storyAction || null,
         results: storyResult || null,

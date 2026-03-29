@@ -47,8 +47,7 @@ AGENTS.md
 /scripts/output/
 supabase/migrations/*
 !supabase/migrations/20260329_optimize_records_list_pagination.sql
-!supabase/migrations/20260329_add_records_search_vector.sql
-!supabase/migrations/20260329_patch_records_search_for_cjk.sql
+!supabase/migrations/20260329*
 
 # typescript
 *.tsbuildinfo

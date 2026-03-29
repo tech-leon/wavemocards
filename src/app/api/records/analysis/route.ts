@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
-import { createServerClient } from '@/lib/supabase';
 import { categoryRepresentativeCards } from '@/lib/emotions';
+import { withAuthContext } from '@/lib/auth-context';
 
 /**
  * GET /api/records/analysis
@@ -11,38 +10,13 @@ import { categoryRepresentativeCards } from '@/lib/emotions';
  */
 export async function GET(request: NextRequest) {
   try {
-    const locale = await getRequestLocale();
-    const tCommon = await getTranslations({ locale, namespace: 'apiErrors.common' });
-    const tProfile = await getTranslations({ locale, namespace: 'apiErrors.profile' });
+    const ctx = await withAuthContext();
+    if (!ctx.ok) {
+      return NextResponse.json({ error: ctx.error }, { status: ctx.status });
+    }
+
+    const { profileId, supabase, locale } = ctx;
     const tAnalysis = await getTranslations({ locale, namespace: 'apiErrors.analysis' });
-    // Verify authentication
-    let user = null;
-    try {
-      const auth = await withAuth();
-      user = auth.user;
-    } catch {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
-
-    if (!user) {
-      return NextResponse.json({ error: tCommon('unauthorized') }, { status: 401 });
-    }
-
-    const supabase = createServerClient();
-    if (!supabase) {
-      return NextResponse.json({ error: tCommon('databaseNotConfigured') }, { status: 500 });
-    }
-
-    // Get user profile
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('workos_user_id', user.id)
-      .single();
-
-    if (profileError || !profile) {
-      return NextResponse.json({ error: tProfile('notFound') }, { status: 404 });
-    }
 
     // Parse date range params
     const { searchParams } = new URL(request.url);
@@ -70,7 +44,7 @@ export async function GET(request: NextRequest) {
           category:emotion_categories!emotion_cards_category_id_fkey(slug)
         )
       `)
-      .eq('user_id', profile.id)
+      .eq('user_id', profileId)
       .gte('created_at', `${startDate}T00:00:00.000Z`)
       .lte('created_at', `${endDate}T23:59:59.999Z`);
 

@@ -23,36 +23,28 @@ if (!supabaseServiceRoleKey) {
 }
 
 /**
- * Supabase client for client-side usage
- * Uses anon key with RLS policies
+ * Create a Supabase client with the anon key for public table reads.
+ * Suitable for: emotion_categories, emotion_cards, about_emotions.
  */
-export const supabase = isSupabaseConfigured
-  ? createClient<Database>(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: false, // We use WorkOS for auth
-      },
-    })
-  : (null as unknown as SupabaseClient<Database>);
+export function createAnonClient(): SupabaseClient<Database> | null {
+  if (!isSupabaseConfigured) {
+    console.warn('Supabase is not configured - returning null');
+    return null;
+  }
+  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+    },
+  });
+}
 
 /**
- * Supabase admin client for server-side usage
- * Uses service role key to bypass RLS
- * WARNING: Only use in server-side code (API routes, Server Actions)
+ * Create a Supabase admin client using the service role key (bypasses RLS).
+ * Only use for operations that genuinely require elevated privileges:
+ * - Profile creation/sync (user doesn't exist yet in Supabase)
+ * - Middleware locale lookups
  */
-export const supabaseAdmin = isSupabaseConfigured && supabaseServiceRoleKey
-  ? createClient<Database>(supabaseUrl, supabaseServiceRoleKey, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-    })
-  : (null as unknown as SupabaseClient<Database>);
-
-/**
- * Create a Supabase client for server-side usage
- * This is useful for Server Components and Server Actions
- */
-export function createServerClient(): SupabaseClient<Database> | null {
+export function createAdminClient(): SupabaseClient<Database> | null {
   if (!isSupabaseConfigured || !supabaseServiceRoleKey) {
     console.warn('Supabase is not configured - returning null');
     return null;
@@ -66,17 +58,16 @@ export function createServerClient(): SupabaseClient<Database> | null {
 }
 
 /**
- * Create a Supabase client for client-side usage
- * This is useful for Client Components
+ * Create a user-scoped Supabase client using a WorkOS access token.
+ * Supabase verifies the token via WorkOS's JWKS endpoint (third-party auth).
+ * RLS policies can use auth.jwt() ->> 'sub' to enforce ownership.
  */
-export function createBrowserClient(): SupabaseClient<Database> | null {
+export function createUserClient(accessToken: string): SupabaseClient<Database> | null {
   if (!isSupabaseConfigured) {
     console.warn('Supabase is not configured - returning null');
     return null;
   }
   return createClient<Database>(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: false,
-    },
+    accessToken: async () => accessToken,
   });
 }

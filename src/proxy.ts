@@ -5,7 +5,7 @@ import {
 } from "@workos-inc/authkit-nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { createServerClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase";
 import {
   DEFAULT_LOCALE,
   extractLocaleFromPathname,
@@ -41,7 +41,7 @@ async function getProfileLocalePreference(
     return null;
   }
 
-  const supabase = createServerClient();
+  const supabase = createAdminClient();
   if (!supabase) {
     return null;
   }
