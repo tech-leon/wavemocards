@@ -9,7 +9,7 @@ import {
   parseRecordsListParams,
   RECORDS_WITH_CARDS_SELECT,
 } from '@/lib/records-query';
-import { resolveMatchingCardIds } from '@/lib/records-search';
+import { buildSearchTokens, resolveMatchingCardIds } from '@/lib/records-search';
 import { createServerClient } from '@/lib/supabase';
 import type { SearchEmotionRecordsRow } from '@/types/database';
 
@@ -102,6 +102,7 @@ export async function GET(request: NextRequest) {
     }
 
     const matchingCardIds = await resolveMatchingCardIds({ keyword, locale });
+    const keywordTokens = buildSearchTokens({ keyword, locale });
     const { data: searchResults, error: searchError } = await supabase.rpc(
       'search_emotion_records_paginated',
       {
@@ -110,6 +111,7 @@ export async function GET(request: NextRequest) {
         p_start_date: startDate ? `${startDate}T00:00:00.000Z` : null,
         p_end_date: endDate ? `${endDate}T23:59:59.999Z` : null,
         p_keyword_query: keyword,
+        p_keyword_tokens: keywordTokens,
         p_matching_card_ids: matchingCardIds,
         p_page: page,
         p_per_page: perPage,

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import type { ChangeEvent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -66,22 +67,42 @@ export function RecordsList() {
 
   // Current page
   const [currentPage, setCurrentPage] = useState(1);
+  const latestRequestIdRef = useRef(0);
+  const fetchRecordsRef = useRef<
+    (page?: number, overrides?: { startDate?: string; endDate?: string; keyword?: string }) => Promise<void>
+  >(async () => {});
 
   // Get today's date string for max attribute
   const today = new Date().toISOString().split('T')[0];
 
-  const fetchRecords = useCallback(async (page = 1) => {
+  const fetchRecords = useCallback(async (
+    page = 1,
+    overrides?: {
+      startDate?: string;
+      endDate?: string;
+      keyword?: string;
+    },
+  ) => {
+    const requestId = ++latestRequestIdRef.current;
+    const effectiveStartDate = overrides?.startDate ?? startDate;
+    const effectiveEndDate = overrides?.endDate ?? endDate;
+    const effectiveKeyword = overrides?.keyword ?? keyword;
+
     setLoading(true);
     try {
       const params = new URLSearchParams();
       params.set('page', String(page));
       params.set('perPage', '10');
-      if (startDate) params.set('startDate', startDate);
-      if (endDate) params.set('endDate', endDate);
-      if (keyword.trim()) params.set('keyword', keyword.trim());
+      if (effectiveStartDate) params.set('startDate', effectiveStartDate);
+      if (effectiveEndDate) params.set('endDate', effectiveEndDate);
+      if (effectiveKeyword.trim()) params.set('keyword', effectiveKeyword.trim());
 
       const res = await fetch(`/api/records?${params.toString()}`);
       const data = await res.json();
+
+      if (requestId !== latestRequestIdRef.current) {
+        return;
+      }
 
       if (res.ok) {
         setRecords(data.records || []);
@@ -92,19 +113,36 @@ export function RecordsList() {
         toast.error(data.error || tToast('loadFailed'));
       }
     } catch {
-      toast.error(tToast('loadUnexpected'));
+      if (requestId === latestRequestIdRef.current) {
+        toast.error(tToast('loadUnexpected'));
+      }
     } finally {
-      setLoading(false);
+      if (requestId === latestRequestIdRef.current) {
+        setLoading(false);
+      }
     }
   }, [startDate, endDate, keyword, tToast]);
 
   useEffect(() => {
-    fetchRecords(1);
+    fetchRecordsRef.current = fetchRecords;
   }, [fetchRecords]);
+
+  useEffect(() => {
+    fetchRecordsRef.current(1);
+  }, []);
 
   // Handle search
   const handleSearch = () => {
     fetchRecords(1);
+  };
+
+  const handleKeywordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextKeyword = event.target.value;
+    setKeyword(nextKeyword);
+
+    if (nextKeyword === '') {
+      fetchRecords(1, { keyword: '' });
+    }
   };
 
   // Handle reset
@@ -112,8 +150,11 @@ export function RecordsList() {
     setStartDate('');
     setEndDate('');
     setKeyword('');
-    // Reset and fetch with cleared params
-    setTimeout(() => fetchRecords(1), 0);
+    fetchRecords(1, {
+      startDate: '',
+      endDate: '',
+      keyword: '',
+    });
   };
 
   // Handle checkbox toggle
@@ -240,7 +281,7 @@ export function RecordsList() {
               className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               placeholder={t('search.keywordPlaceholder')}
               value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
+              onChange={handleKeywordChange}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
           </div>

@@ -14,12 +14,18 @@ export function tokenizeKeyword(keyword: string): string[] {
   return keyword.split(/\s+/).map((token) => token.trim()).filter(Boolean);
 }
 
+export function buildSearchTokens({
+  keyword,
+  locale,
+}: RecordsSearchInput): string[] {
+  return tokenizeKeyword(normalizeKeyword(keyword, locale));
+}
+
 export async function resolveMatchingCardIds({
   keyword,
   locale,
 }: RecordsSearchInput): Promise<number[]> {
-  const normalizedKeyword = normalizeKeyword(keyword, locale);
-  const tokens = tokenizeKeyword(normalizedKeyword);
+  const tokens = buildSearchTokens({ keyword, locale });
 
   if (tokens.length === 0) {
     return [];

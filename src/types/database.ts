@@ -267,6 +267,7 @@ export interface Database {
           p_start_date?: string | null;
           p_end_date?: string | null;
           p_keyword_query?: string | null;
+          p_keyword_tokens?: string[] | null;
           p_matching_card_ids?: number[] | null;
           p_page?: number;
           p_per_page?: number;
