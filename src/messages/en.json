@@ -371,6 +371,7 @@
         "stepsTitle": "Discovery steps",
         "browseTitle": "How to browse mood cards",
         "categoryCardsHint": "🔍 There are 9 category cards below. Click on a category card to enter the emotion card page of that category.",
+        "tableHint": "🔎 Click on each emotion word below to view detailed emotion information.",
         "steps": [
           "Scroll down the page to start browsing mood cards.",
           "Click the \"+\" button on the upper right side of the emotion card to put the emotion card into \"My Emotion Card Holder\".",

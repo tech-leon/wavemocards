@@ -68,3 +68,33 @@ export function formatEmotionCardName(name: string) {
 export function getEmotionCardImageSrc(card: Pick<EmotionCardData, 'id' | 'imagePath'>) {
   return card.imagePath || `/images/emoCards/${card.id}.svg`;
 }
+
+/**
+ * Category representative card IDs for folded view.
+ */
+export const categoryRepCards: Record<string, number> = {
+  happy: 2,
+  expectation: 8,
+  relieved: 15,
+  unstable: 21,
+  amazed: 26,
+  sadness: 34,
+  hate: 44,
+  anger: 51,
+  others: 55,
+};
+
+/**
+ * Category button colors (70% opacity base + full opacity on hover).
+ */
+export const categoryBtnColors: Record<string, string> = {
+  happy: 'bg-happy/70 hover:bg-happy',
+  expectation: 'bg-expectation/70 hover:bg-expectation',
+  relieved: 'bg-relived/70 hover:bg-relived',
+  unstable: 'bg-unstable/70 hover:bg-unstable',
+  amazed: 'bg-amazed/70 hover:bg-amazed',
+  sadness: 'bg-sadness/70 hover:bg-sadness',
+  hate: 'bg-hate/70 hover:bg-hate',
+  anger: 'bg-anger/70 hover:bg-anger',
+  others: 'bg-others/70 hover:bg-others',
+};
