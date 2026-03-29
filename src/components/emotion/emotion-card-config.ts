@@ -70,21 +70,6 @@ export function getEmotionCardImageSrc(card: Pick<EmotionCardData, 'id' | 'image
 }
 
 /**
- * Category representative card IDs for folded view.
- */
-export const categoryRepCards: Record<string, number> = {
-  happy: 2,
-  expectation: 8,
-  relieved: 15,
-  unstable: 21,
-  amazed: 26,
-  sadness: 34,
-  hate: 44,
-  anger: 51,
-  others: 55,
-};
-
-/**
  * Category button colors (70% opacity base + full opacity on hover).
  */
 export const categoryBtnColors: Record<string, string> = {

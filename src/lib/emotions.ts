@@ -128,6 +128,9 @@ export const categoryNames: Record<string, string> = Object.fromEntries(
   localizedCategories['zh-TW'].map((category) => [category.slug, category.name]),
 );
 
+/** Maximum number of emotion cards that can be selected in the Explore flow. */
+export const MAX_SELECTED_CARDS = 3;
+
 // Category slug to representative card ID mapping (for display)
 export const categoryRepresentativeCards: Record<string, number> = {
   happy: 2,

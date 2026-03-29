@@ -1,24 +1,24 @@
 'use client';
 
 import { useState, useMemo, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import { toEmotionCardData } from '@/lib/emotion-card';
+import { MAX_SELECTED_CARDS } from '@/lib/emotions';
 import { useExploreStore } from '@/store/exploreStore';
+import { useOpenHolder } from '@/hooks/useOpenHolder';
 import type { EmotionCategory, EmotionCard as EmotionCardRecord } from '@/lib/emotions';
 import type { EmotionCardData } from '@/types/emotion-card';
 
 type ViewMode = 'expanded' | 'folded' | 'table';
 
 export function useExploreCards(categories: EmotionCategory[], cards: EmotionCardRecord[]) {
-  const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('expanded');
   const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
-  const [showError, setShowError] = useState<'tooFew' | 'tooMany' | null>(null);
+  const { showError, setShowError, handleOpenHolder } = useOpenHolder();
 
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
   const selectedCount = selectedCards.length;
-  const isSelectionFull = selectedCount >= 3;
+  const isSelectionFull = selectedCount >= MAX_SELECTED_CARDS;
 
   // Group cards by category
   const cardsByCategory = useMemo(() => {
@@ -39,18 +39,6 @@ export function useExploreCards(categories: EmotionCategory[], cards: EmotionCar
     },
     [categories, hasCard, addCard]
   );
-
-  const handleOpenHolder = useCallback(() => {
-    if (selectedCards.length === 0) {
-      setShowError('tooFew');
-      return;
-    }
-    if (selectedCards.length > 3) {
-      setShowError('tooMany');
-      return;
-    }
-    router.push('/explore/strength/1');
-  }, [selectedCards.length, router]);
 
   return {
     viewMode,

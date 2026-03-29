@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { emotionCardCategoryStyles, categoryRepCards } from '@/components/emotion/emotion-card-config';
+import { emotionCardCategoryStyles } from '@/components/emotion/emotion-card-config';
+import { categoryRepresentativeCards } from '@/lib/emotions';
 import type { EmotionCategory } from '@/lib/emotions';
 
 interface FoldedViewProps {
@@ -24,7 +25,7 @@ export function FoldedView({ categories, t }: FoldedViewProps) {
             bg: 'bg-gray-200',
             hoverBorder: 'hover:border-gray-400',
           };
-          const repCardId = categoryRepCards[slug];
+          const repCardId = categoryRepresentativeCards[slug];
 
           return (
             <Link
