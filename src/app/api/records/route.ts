@@ -3,12 +3,35 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { localizeRecordCollection } from '@/lib/records';
+import {
+  buildBaseRecordsQuery,
+  buildPagination,
+  parseRecordsListParams,
+  RECORDS_WITH_CARDS_SELECT,
+} from '@/lib/records-query';
+import { resolveMatchingCardIds } from '@/lib/records-search';
 import { createServerClient } from '@/lib/supabase';
+import type { SearchEmotionRecordsRow } from '@/types/database';
 
-function getLocalizedCardCategoryName(card: {
-  category?: { name: string } | null;
-} | null | undefined): string | null {
-  return card?.category?.name ?? null;
+async function fetchRecordsByIds(
+  recordIds: string[],
+  supabase: NonNullable<ReturnType<typeof createServerClient>>,
+) {
+  if (recordIds.length === 0) {
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from('emotion_records')
+    .select(RECORDS_WITH_CARDS_SELECT)
+    .in('id', recordIds);
+
+  if (error) {
+    throw error;
+  }
+
+  const recordsById = new Map((data ?? []).map((record) => [record.id, record]));
+  return recordIds.map((recordId) => recordsById.get(recordId)).filter(Boolean);
 }
 
 /**
@@ -51,96 +74,62 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: tProfile('notFound') }, { status: 404 });
     }
 
-    // Parse query params
-    const { searchParams } = new URL(request.url);
-    const startDate = searchParams.get('startDate');
-    const endDate = searchParams.get('endDate');
-    const keyword = searchParams.get('keyword');
-    const page = parseInt(searchParams.get('page') || '1', 10);
-    const perPage = parseInt(searchParams.get('perPage') || '10', 10);
+    const params = parseRecordsListParams(request.nextUrl.searchParams);
+    const { startDate, endDate, keyword, page, perPage } = params;
 
-    // Build query - fetch records with card info
-    let query = supabase
-      .from('emotion_records')
-      .select(`
-        *,
-        card_1:emotion_cards!emotion_records_card_1_id_fkey(id, name, category_id, description, image_path,
-          category:emotion_categories!emotion_cards_category_id_fkey(id, name, slug)
-        ),
-        card_2:emotion_cards!emotion_records_card_2_id_fkey(id, name, category_id, description, image_path,
-          category:emotion_categories!emotion_cards_category_id_fkey(id, name, slug)
-        ),
-        card_3:emotion_cards!emotion_records_card_3_id_fkey(id, name, category_id, description, image_path,
-          category:emotion_categories!emotion_cards_category_id_fkey(id, name, slug)
-        )
-      `, { count: 'exact' })
-      .eq('user_id', profile.id)
-      .order('created_at', { ascending: false });
+    if (!keyword) {
+      const rangeFrom = (page - 1) * perPage;
+      const rangeTo = rangeFrom + perPage - 1;
 
-    // Date filtering
-    if (startDate) {
-      query = query.gte('created_at', `${startDate}T00:00:00.000Z`);
-    }
-    if (endDate) {
-      query = query.lte('created_at', `${endDate}T23:59:59.999Z`);
-    }
+      const { data: records, error: queryError, count } = await buildBaseRecordsQuery(
+        supabase,
+        profile.id,
+        startDate,
+        endDate,
+      ).range(rangeFrom, rangeTo);
 
-    // Execute query (keyword filtering will be done client-side for now
-    // because Supabase doesn't support OR across multiple text columns easily)
-    const { data: records, error: queryError } = await query;
+      if (queryError) {
+        console.error('Error fetching paginated records:', queryError);
+        return NextResponse.json({ error: tRecords('fetchFailed') }, { status: 500 });
+      }
 
-    if (queryError) {
-      console.error('Error fetching records:', queryError);
-      return NextResponse.json({ error: tRecords('fetchFailed') }, { status: 500 });
-    }
+      const localizedRecords = await localizeRecordCollection(records || [], locale);
 
-    // Keyword filtering (client-side)
-    const localizedRecords = await localizeRecordCollection(records || [], locale);
-
-    let filteredRecords = localizedRecords;
-    if (keyword && keyword.trim()) {
-      const keywords = keyword
-        .trim()
-        .toLocaleLowerCase(locale)
-        .split(/\s+/);
-      filteredRecords = filteredRecords.filter((record) => {
-        const searchableText = [
-          record.story,
-          record.actions,
-          record.results,
-          record.feelings,
-          record.reaction,
-          record.card_1?.name,
-          record.card_2?.name,
-          record.card_3?.name,
-          getLocalizedCardCategoryName(record.card_1),
-          getLocalizedCardCategoryName(record.card_2),
-          getLocalizedCardCategoryName(record.card_3),
-        ]
-          .filter(Boolean)
-          .join(' ');
-
-        return keywords.some((kw) =>
-          searchableText.toLocaleLowerCase(locale).includes(kw)
-        );
+      return NextResponse.json({
+        records: localizedRecords,
+        pagination: buildPagination(page, perPage, count ?? 0),
       });
     }
 
-    // Pagination
-    const totalRecords = filteredRecords.length;
-    const totalPages = Math.ceil(totalRecords / perPage);
-    const start = (page - 1) * perPage;
-    const end = start + perPage;
-    const paginatedRecords = filteredRecords.slice(start, end);
+    const matchingCardIds = await resolveMatchingCardIds({ keyword, locale });
+    const { data: searchResults, error: searchError } = await supabase.rpc(
+      'search_emotion_records_paginated',
+      {
+        p_user_id: profile.id,
+        p_locale: locale,
+        p_start_date: startDate ? `${startDate}T00:00:00.000Z` : null,
+        p_end_date: endDate ? `${endDate}T23:59:59.999Z` : null,
+        p_keyword_query: keyword,
+        p_matching_card_ids: matchingCardIds,
+        p_page: page,
+        p_per_page: perPage,
+      },
+    );
+
+    if (searchError) {
+      console.error('Error searching records:', searchError);
+      return NextResponse.json({ error: tRecords('fetchFailed') }, { status: 500 });
+    }
+
+    const typedSearchResults = (searchResults ?? []) as SearchEmotionRecordsRow[];
+    const recordIds = typedSearchResults.map((record) => record.id);
+    const totalRecords = typedSearchResults[0]?.total_count ?? 0;
+    const records = await fetchRecordsByIds(recordIds, supabase);
+    const localizedRecords = await localizeRecordCollection(records, locale);
 
     return NextResponse.json({
-      records: paginatedRecords,
-      pagination: {
-        page,
-        perPage,
-        totalRecords,
-        totalPages,
-      },
+      records: localizedRecords,
+      pagination: buildPagination(page, perPage, totalRecords),
     });
   } catch (error) {
     console.error('Unexpected error in GET /api/records:', error);

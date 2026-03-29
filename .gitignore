@@ -45,7 +45,9 @@ AGENTS.md
 # migrations
 /scripts/
 /scripts/output/
-supabase/migrations/
+supabase/migrations/*
+!supabase/migrations/20260329_optimize_records_list_pagination.sql
+!supabase/migrations/20260329_add_records_search_vector.sql
 
 # typescript
 *.tsbuildinfo

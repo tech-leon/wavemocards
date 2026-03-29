@@ -260,7 +260,41 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      search_emotion_records_paginated: {
+        Args: {
+          p_user_id: string;
+          p_locale?: string | null;
+          p_start_date?: string | null;
+          p_end_date?: string | null;
+          p_keyword_query?: string | null;
+          p_matching_card_ids?: number[] | null;
+          p_page?: number;
+          p_per_page?: number;
+        };
+        Returns: {
+          id: string;
+          user_id: string;
+          story: string | null;
+          reaction: string | null;
+          results: string | null;
+          feelings: string | null;
+          expect: string | null;
+          actions: string | null;
+          card_1_id: number | null;
+          card_2_id: number | null;
+          card_3_id: number | null;
+          before_level_1: number | null;
+          before_level_2: number | null;
+          before_level_3: number | null;
+          after_level_1: number | null;
+          after_level_2: number | null;
+          after_level_3: number | null;
+          is_shared: boolean;
+          created_at: string;
+          updated_at: string;
+          total_count: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -295,6 +329,8 @@ export type EmotionCardUpdate = Database['public']['Tables']['emotion_cards']['U
 export type AboutEmotionUpdate = Database['public']['Tables']['about_emotions']['Update'];
 export type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
 export type EmotionRecordUpdate = Database['public']['Tables']['emotion_records']['Update'];
+export type SearchEmotionRecordsRow =
+  Database['public']['Functions']['search_emotion_records_paginated']['Returns'][number];
 
 // ============================================
 // Extended Types with Relations
