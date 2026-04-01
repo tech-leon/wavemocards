@@ -94,7 +94,7 @@ export function RecordsList() {
     try {
       const params = new URLSearchParams();
       params.set('page', String(page));
-      params.set('perPage', '10');
+      params.set('perPage', '15');
       if (effectiveStartDate) params.set('startDate', effectiveStartDate);
       if (effectiveEndDate) params.set('endDate', effectiveEndDate);
       if (effectiveKeyword.trim()) params.set('keyword', effectiveKeyword.trim());
@@ -231,7 +231,7 @@ export function RecordsList() {
   };
 
   return (
-    <section>
+    <section className="grow">
     <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
       <div className="container mx-auto pt-4 px-3 sm:px-0">
         {/* Title */}

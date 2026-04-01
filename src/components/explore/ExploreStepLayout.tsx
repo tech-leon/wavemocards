@@ -52,7 +52,7 @@ export function ExploreStepLayout({
       </div>
 
       {/* Content area */}
-      <div className="container mx-auto px-3 pb-10 sm:px-0 md:pb-12">
+      <div className="grow container mx-auto px-3 pb-10 sm:px-0 md:pb-12">
         {children}
       </div>
     </>

@@ -35,7 +35,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   };
 
   return (
-    <section aria-label={t('aria.categorySection', { category: category.name })}>
+    <section className="grow" aria-label={t('aria.categorySection', { category: category.name })}>
       {/* Sticky header */}
       <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm`}>
         <div className="container mx-auto pt-4 px-3 sm:px-0">

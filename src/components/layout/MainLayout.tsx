@@ -27,7 +27,7 @@ export async function MainLayout({ children, locale, user }: MainLayoutProps) {
         {t('skipToMainContent')}
       </a>
       <Header locale={locale} user={user} />
-      <main id="main-content" className="min-h-0 bg-gray-100 dark:bg-gray-900" role="main">
+      <main id="main-content" className="min-h-0 flex flex-col min-h-[calc(100dvh-68px)] lg:min-h-[calc(100dvh-77px)] bg-gray-100 dark:bg-gray-900" role="main">
         {children}
       </main>
       <Footer locale={locale} />

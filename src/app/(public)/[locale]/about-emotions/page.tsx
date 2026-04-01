@@ -65,7 +65,7 @@ export default async function AboutEmotionsPage() {
 
   return (
     <>
-      <section>
+      <section className="grow">
         <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
           <div className="container mx-auto pt-4 px-3 sm:px-0">
             <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">

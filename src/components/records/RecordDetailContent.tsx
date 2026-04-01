@@ -38,7 +38,7 @@ export function RecordDetailContent({
   const na = t('empty.notAvailable');
 
   return (
-    <div className="px-3 sm:px-0">
+    <div className="grow px-3 sm:px-0">
       <div className="container mx-auto pb-20">
         {/* Date and emotion strength section */}
         <div className="mt-4 space-y-2">

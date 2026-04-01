@@ -34,8 +34,8 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
   const signUpHref = buildAuthHref('sign-up', buildCurrentReturnTo(pathname, searchParams));
 
   return (
-    <main
-      className="homepage flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
+    <div
+      className="homepage grow flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage }}
     >
       <div className="container px-4 md:px-[72px]">
@@ -78,6 +78,6 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
           )}
         </motion.div>
       </div>
-    </main>
+    </div>
   );
 }

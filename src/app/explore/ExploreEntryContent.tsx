@@ -17,7 +17,7 @@ export function ExploreEntryContent() {
   };
 
   return (
-    <section className="mx-15 px-3 sm:px-0" aria-label={t("aria.section")}>
+    <section className="grow mx-15 px-3 sm:px-0" aria-label={t("aria.section")}>
       <div className="container mx-auto py-4 pt-8 pb-10 md:pb-12" id="top">
         {/* Title bar */}
         <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between">
@@ -103,7 +103,7 @@ export function ExploreEntryContent() {
         <div>
           {/* Desktop start button */}
           <FadeIn
-            className="hidden md:flex mt-6 justify-center w-full"
+            className="hidden md:flex mt-16 justify-center w-full"
             delay={0.5}
           >
             <button

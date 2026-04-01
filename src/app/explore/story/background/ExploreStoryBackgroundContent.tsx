@@ -52,7 +52,7 @@ export function ExploreStoryBackgroundContent({
         </>
       }
     >
-      <ul className="type-body-sm ml-1 mt-3 mb-6 space-y-1 text-gray-800 dark:text-gray-100">
+      <ul className="type-body-sm ml-1 mt-8 mb-10 space-y-1 text-gray-800 dark:text-gray-100">
         <li>
           {t('greeting', { userName })}
         </li>
@@ -76,7 +76,7 @@ export function ExploreStoryBackgroundContent({
             id="whatHappened"
             value={storyBackground}
             onChange={(e) => setStoryBackground(e.target.value)}
-            className="min-h-[120px] resize-y"
+            className="min-h-[200px] resize-y"
             placeholder={t('placeholder')}
           />
         </div>

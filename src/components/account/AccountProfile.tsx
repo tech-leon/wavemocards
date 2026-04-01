@@ -88,60 +88,58 @@ export function AccountProfile({ initialProfile, email }: AccountProfileProps) {
       </div>
 
       {/* Content */}
-      <div className="px-3 sm:px-0">
-        <div className="container mx-auto pt-4 pb-20">
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-16">
-            {/* Left: Illustration */}
-            <div className="w-full max-w-[300px] md:max-w-[280px] shrink-0">
-              <Image
-                src="/images/account_illu.svg"
-                alt="Account illustration"
-                width={280}
-                height={280}
-                className="w-full mb-4"
-                priority
-              />
-              <p className="type-caption text-gray-800 dark:text-gray-100">
-                Illustration by{' '}
-                <a
-                  className="text-gray-800 dark:text-gray-100 hover:text-main underline"
-                  href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Tanya Krasutska
-                </a>{' '}
-                from{' '}
-                <a
-                  className="text-gray-800 dark:text-gray-100 hover:text-main underline"
-                  href="https://icons8.com/illustrations"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Ouch!
-                </a>
-              </p>
-            </div>
-
-            {/* Right: Profile fields */}
-            <ProfileFormFields
-              email={email}
-              profile={profile}
-              isEditing={isEditing}
-              formLastName={formLastName}
-              setFormLastName={setFormLastName}
-              formFirstName={formFirstName}
-              setFormFirstName={setFormFirstName}
-              formBirthday={formBirthday}
-              setFormBirthday={setFormBirthday}
-              formTitle={formTitle}
-              setFormTitle={setFormTitle}
-              lastNameError={lastNameError}
-              firstNameError={firstNameError}
-              validateLastName={validateLastName}
-              validateFirstName={validateFirstName}
+      <div className="grow px-3 sm:px-0 flex flex-col items-center pt-6">
+        <div className="w-full max-w-2xl px-3 sm:px-0">
+          {/* Illustration */}
+          <div className="flex flex-col items-center mb-6">
+            <Image
+              src="/images/account_illu.svg"
+              alt="Account illustration"
+              width={180}
+              height={180}
+              className="w-36 sm:w-44"
+              priority
             />
+            <p className="type-caption mt-2 text-gray-500 dark:text-gray-400">
+              Illustration by{' '}
+              <a
+                className="hover:text-main underline"
+                href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tanya Krasutska
+              </a>{' '}
+              from{' '}
+              <a
+                className="hover:text-main underline"
+                href="https://icons8.com/illustrations"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ouch!
+              </a>
+            </p>
           </div>
+
+          {/* Profile fields */}
+          <ProfileFormFields
+            email={email}
+            profile={profile}
+            isEditing={isEditing}
+            formLastName={formLastName}
+            setFormLastName={setFormLastName}
+            formFirstName={formFirstName}
+            setFormFirstName={setFormFirstName}
+            formBirthday={formBirthday}
+            setFormBirthday={setFormBirthday}
+            formTitle={formTitle}
+            setFormTitle={setFormTitle}
+            lastNameError={lastNameError}
+            firstNameError={firstNameError}
+            validateLastName={validateLastName}
+            validateFirstName={validateFirstName}
+          />
         </div>
       </div>
 

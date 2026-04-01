@@ -48,7 +48,7 @@ export function CategoryCardsContent({
 
   return (
     <>
-      <main className="px-3 sm:px-0">
+      <div className="grow px-3 sm:px-0">
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
@@ -74,7 +74,7 @@ export function CategoryCardsContent({
             ))}
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Emotion Card Modal */}
       <EmotionCardModal

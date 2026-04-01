@@ -147,7 +147,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
   };
 
   return (
-    <section>
+    <section className="grow">
     <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
       <div className="container mx-auto pt-4 px-3 sm:px-0">
         {/* Title */}
@@ -200,7 +200,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
       </div>
     </div>
     <div className="px-3 sm:px-0">
-    <div className="container mx-auto pb-10 md:pb-12">
+    <div className="container mx-auto pt-8 pb-10 md:pb-12">
 
       {/* No data message */}
       {noData && (

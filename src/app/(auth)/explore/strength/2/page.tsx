@@ -88,7 +88,7 @@ export default function ExploreStrength2Page() {
       }
     >
       {/* Instructions */}
-      <ul className="type-body-sm ml-1 mt-3 mb-9 text-gray-800 dark:text-gray-100 space-y-1">
+      <ul className="type-body-sm ml-1 mt-8 mb-12 text-gray-800 dark:text-gray-100 space-y-1">
         <li>{t('instructions.line1')}</li>
         <li>
           <span className="text-main font-medium">{t('instructions.line2')}</span>
