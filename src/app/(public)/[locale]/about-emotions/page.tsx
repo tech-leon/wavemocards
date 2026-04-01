@@ -10,6 +10,8 @@ import { getAboutEmotions } from '@/lib/emotions';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
 import { localizeHref, resolveLocale } from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { cn } from '@/lib/utils';
 
 interface AboutEmotionsPageProps {
   params: Promise<{
@@ -63,29 +65,34 @@ export default async function AboutEmotionsPage() {
 
   return (
     <>
-      <main className="px-3 sm:px-0">
-        <div className="container mx-auto pb-4 pt-9">
-          <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">
-            <h2>{t('pageTitle')}</h2>
-            <div className="flex justify-end gap-4">
-              <span className="px-4 py-2 font-medium text-gray-500 dark:text-gray-300">
-                {t('tabs.aboutEmotions')}
-              </span>
-              {user ? (
-                <Link
-                  href={emoCardsHref}
-                  className="rounded-full border border-main px-4 py-2 font-medium text-main transition-colors hover:bg-main hover:text-white"
-                >
-                  {t('tabs.emoCards')}
-                </Link>
-              ) : (
-                <EmoCardsLoginButton
-                  href={buildAuthHref('sign-in', emoCardsHref)}
-                  label={t('tabs.emoCards')}
-                />
-              )}
+      <section>
+        <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+          <div className="container mx-auto pt-4 px-3 sm:px-0">
+            <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">
+              <h2>{t('pageTitle')}</h2>
+              <div className="flex justify-end gap-4">
+                <span className="px-4 py-2 font-medium text-gray-500 dark:text-gray-300">
+                  {t('tabs.aboutEmotions')}
+                </span>
+                {user ? (
+                  <Link
+                    href={emoCardsHref}
+                    className="rounded-full border border-main px-4 py-2 font-medium text-main transition-colors hover:bg-main hover:text-white"
+                  >
+                    {t('tabs.emoCards')}
+                  </Link>
+                ) : (
+                  <EmoCardsLoginButton
+                    href={buildAuthHref('sign-in', emoCardsHref)}
+                    label={t('tabs.emoCards')}
+                  />
+                )}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="px-3 sm:px-0">
+        <div className="container mx-auto pb-4">
 
           <div className="py-4">
             <section className="mb-14">
@@ -149,7 +156,8 @@ export default async function AboutEmotionsPage() {
             </div>
           </div>
         </div>
-      </main>
+        </div>
+      </section>
 
       <BackToTopButton />
     </>

@@ -9,6 +9,8 @@ import { Search, RotateCcw, Trash2, ChevronLeft, ChevronRight } from 'lucide-rea
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { cn } from '@/lib/utils';
 
 // Types for the API response
 interface CardInfo {
@@ -229,89 +231,94 @@ export function RecordsList() {
   };
 
   return (
-    <div className="px-3 sm:px-0">
-    <div className="container mx-auto pt-4 pb-10 md:pb-12">
-      {/* Title */}
-      <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2>{t('title')}</h2>
-        <div className="flex gap-2">
-          <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
-            {t('tabs.records')}
+    <section>
+    <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+      <div className="container mx-auto pt-4 px-3 sm:px-0">
+        {/* Title */}
+        <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
+          <h2>{t('title')}</h2>
+          <div className="flex gap-2">
+            <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
+              {t('tabs.records')}
+            </div>
+            <Link href="/records/analysis">
+              <Button
+                variant="outline"
+                className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
+              >
+                {t('tabs.analysis')}
+              </Button>
+            </Link>
           </div>
-          <Link href="/records/analysis">
-            <Button
-              variant="outline"
-              className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
-            >
-              {t('tabs.analysis')}
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      {/* Search area */}
-      <div className="w-full mb-3 md:mb-6 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
-        {/* Date range */}
-        <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
-          <input
-            type="date"
-            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
-            value={startDate}
-            max={today}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <span className="text-main-tint01">{t('search.dateRangeSeparator')}</span>
-          <input
-            type="date"
-            className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
-            value={endDate}
-            max={today}
-            min={startDate || undefined}
-            disabled={!startDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
         </div>
 
-        {/* Keyword search + actions */}
-        <div className="flex w-full sm:flex-1 min-w-0 items-center gap-2">
-          <div className="relative flex-1 min-w-0">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
+        {/* Search area */}
+        <div className="w-full mb-3 md:mb-6 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
+          {/* Date range */}
+          <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
             <input
-              type="search"
-              className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
-              placeholder={t('search.keywordPlaceholder')}
-              value={keyword}
-              onChange={handleKeywordChange}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              type="date"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+              value={startDate}
+              max={today}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <span className="text-main-tint01">{t('search.dateRangeSeparator')}</span>
+            <input
+              type="date"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+              value={endDate}
+              max={today}
+              min={startDate || undefined}
+              disabled={!startDate}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <Button
-              onClick={handleSearch}
-              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
-            >
-              {t('search.search')}
-            </Button>
-            <button
-              onClick={handleReset}
-              className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title={t('search.reset')}
-              aria-label={t('search.reset')}
-            >
-              <RotateCcw className="w-5 h-5" />
-            </button>
-            {/* Delete button */}
-            <button
-              onClick={handleBatchDelete}
-              className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title={t('actions.delete')}
-              aria-label={tAria('delete')}
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
+
+          {/* Keyword search + actions */}
+          <div className="flex w-full sm:flex-1 min-w-0 items-center gap-2">
+            <div className="relative flex-1 min-w-0">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
+              <input
+                type="search"
+                className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                placeholder={t('search.keywordPlaceholder')}
+                value={keyword}
+                onChange={handleKeywordChange}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              />
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <Button
+                onClick={handleSearch}
+                className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
+              >
+                {t('search.search')}
+              </Button>
+              <button
+                onClick={handleReset}
+                className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
+                title={t('search.reset')}
+                aria-label={t('search.reset')}
+              >
+                <RotateCcw className="w-5 h-5" />
+              </button>
+              {/* Delete button */}
+              <button
+                onClick={handleBatchDelete}
+                className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
+                title={t('actions.delete')}
+                aria-label={tAria('delete')}
+              >
+                <Trash2 className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div className="px-3 sm:px-0">
+    <div className="container mx-auto pb-10 md:pb-12">
 
       {/* Table */}
       {loading ? (
@@ -460,5 +467,6 @@ export function RecordsList() {
       )}
     </div>
     </div>
+    </section>
   );
 }

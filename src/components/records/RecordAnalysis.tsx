@@ -19,6 +19,8 @@ import {
 } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { cn } from '@/lib/utils';
 
 interface EmotionCategorySummary {
   id: number;
@@ -65,8 +67,14 @@ interface RecordAnalysisProps {
 export function RecordAnalysis({ categories }: RecordAnalysisProps) {
   const t = useTranslations('records.analysis');
   const tToast = useTranslations('toast.analysis');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 30);
+    return d.toISOString().split('T')[0];
+  });
+  const [endDate, setEndDate] = useState(() => {
+    return new Date().toISOString().split('T')[0];
+  });
   const [chartData, setChartData] = useState<ChartData[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [noData, setNoData] = useState(false);
@@ -139,55 +147,60 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
   };
 
   return (
-    <div className="px-3 sm:px-0">
-    <div className="container mx-auto pt-4 pb-10 md:pb-12">
-      {/* Title */}
-      <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
-        <h2>{t('title')}</h2>
-        <div className="flex gap-2">
-          <Link href="/records">
-            <Button
-              variant="outline"
-              className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
-            >
-              {t('tabs.records')}
-            </Button>
-          </Link>
-          <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
-            {t('tabs.analysis')}
+    <section>
+    <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+      <div className="container mx-auto pt-4 px-3 sm:px-0">
+        {/* Title */}
+        <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
+          <h2>{t('title')}</h2>
+          <div className="flex gap-2">
+            <Link href="/records">
+              <Button
+                variant="outline"
+                className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
+              >
+                {t('tabs.records')}
+              </Button>
+            </Link>
+            <div className="type-button px-4 py-2 font-bold text-white bg-main rounded-full cursor-default">
+              {t('tabs.analysis')}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Search area */}
-      <form onSubmit={handleAnalyze}>
-        <div className="mb-6 flex flex-col md:flex-row items-center gap-3">
-          <div className="flex flex-col sm:flex-row items-center gap-2">
-            <input
-              type="date"
-              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              required
-            />
-            <span className="text-main-tint01">{t('dateRangeSeparator')}</span>
-            <input
-              type="date"
-              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              required
-            />
+        {/* Search area */}
+        <form onSubmit={handleAnalyze}>
+          <div className="mb-6 flex flex-col md:flex-row items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center gap-2">
+              <input
+                type="date"
+                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                required
+              />
+              <span className="text-main-tint01">{t('dateRangeSeparator')}</span>
+              <input
+                type="date"
+                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
+              disabled={loading}
+            >
+              {loading ? t('loading') : t('analyze')}
+            </Button>
           </div>
-          <Button
-            type="submit"
-            className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
-            disabled={loading}
-          >
-            {loading ? t('loading') : t('analyze')}
-          </Button>
-        </div>
-      </form>
+        </form>
+      </div>
+    </div>
+    <div className="px-3 sm:px-0">
+    <div className="container mx-auto pb-10 md:pb-12">
 
       {/* No data message */}
       {noData && (
@@ -229,6 +242,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                   />
                   <RechartsTooltip
                     formatter={(value) => [t('charts.frequency.tooltipValue', { value: String(value) }), '']}
+                    separator=""
                     labelFormatter={(label) => String(label)}
                     contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
                   />
@@ -274,6 +288,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                   </Pie>
                   <RechartsTooltip
                     formatter={(value) => [t('charts.ratio.tooltipValue', { value: String(value) }), '']}
+                    separator=""
                     contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
                   />
                   <Legend
@@ -322,5 +337,6 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
       )}
     </div>
     </div>
+    </section>
   );
 }
