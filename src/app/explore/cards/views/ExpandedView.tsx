@@ -45,7 +45,7 @@ export function ExpandedView({
             <Link
               href={`/explore/cards/${slug}`}
               className={cn(
-                'shrink-0 w-[72px] h-[140px] mt-3 rounded-xl',
+                'shrink-0 md:w-[72px] w-10 h-[140px] mt-3 rounded-xl',
                 'flex flex-col items-center justify-center',
                 'type-subsection-title',
                 'transition-colors duration-200',

@@ -37,6 +37,7 @@ yarn-error.log*
 PLAN.md
 .clinerules/
 .codex/
+.claude/
 AGENTS.md
 
 # vercel

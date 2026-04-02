@@ -187,7 +187,7 @@ export function EmoCardsContent({
                     <Link
                       href={localizeHref(`/emo-cards/${category.slug}`, locale)}
                       className={cn(
-                        'flex-shrink-0 w-[72px] h-[140px] rounded-xl',
+                        'shrink-0 md:w-[72px] w-10 h-[140px] rounded-xl',
                         'flex flex-col items-center justify-center',
                         'type-subsection-title',
                         'transition-colors duration-200',

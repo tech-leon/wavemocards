@@ -88,7 +88,7 @@ export function EmotionTable({
                   key={card.id}
                   onClick={() => onCardClick(card, category.slug)}
                   className={cn(
-                    'flex-shrink-0 px-3 py-2 rounded-lg',
+                    'shrink-0 px-3 py-2 rounded-lg',
                     'type-button font-medium text-gray-800 dark:text-gray-900 whitespace-nowrap',
                     'transition-colors duration-200',
                     cardStyle

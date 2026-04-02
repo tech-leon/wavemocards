@@ -70,7 +70,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
               <button
                 type="button"
                 onClick={handleOpenHolder}
-                className="type-button group px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex items-center gap-1 transition-colors"
+                className="type-button group w-60 px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex justify-center items-center gap-1 transition-colors"
               >
                 <Folder className="w-4 h-4 group-hover:hidden" />
                 <FolderOpen className="w-4 h-4 hidden group-hover:block" />
