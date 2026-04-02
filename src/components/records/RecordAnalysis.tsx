@@ -171,7 +171,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
         {/* Search area */}
         <form onSubmit={handleAnalyze}>
           <div className="mb-6 flex flex-col md:flex-row items-center gap-3">
-            <div className="flex flex-col sm:flex-row items-center gap-2">
+            <div className="flex flex-row items-center gap-2">
               <input
                 type="date"
                 className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
@@ -190,7 +190,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             </div>
             <Button
               type="submit"
-              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
+              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold w-full md:w-auto"
               disabled={loading}
             >
               {loading ? t('loading') : t('analyze')}
@@ -267,9 +267,9 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             <p className="type-body-sm mb-8 text-gray-800 dark:text-gray-100">
               {t('charts.ratio.description2')}
             </p>
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] overflow-visible [&_*]:outline-none [&_*]:[-webkit-tap-highlight-color:transparent]">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart margin={{ top: 10, right: 30, left: 30, bottom: 10 }}>
                   <Pie
                     data={chartData}
                     dataKey="percentage"

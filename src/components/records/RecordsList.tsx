@@ -273,6 +273,14 @@ export function RecordsList() {
               disabled={!startDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
+            <button
+              onClick={handleBatchDelete}
+              className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
+              title={t('actions.delete')}
+              aria-label={tAria('delete')}
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
           </div>
 
           {/* Keyword search + actions */}
@@ -303,15 +311,6 @@ export function RecordsList() {
               >
                 <RotateCcw className="w-5 h-5" />
               </button>
-              {/* Delete button */}
-              <button
-                onClick={handleBatchDelete}
-                className="hidden md:block p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-                title={t('actions.delete')}
-                aria-label={tAria('delete')}
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
             </div>
           </div>
         </div>
@@ -338,7 +337,7 @@ export function RecordsList() {
                   <th className="py-2 px-3 w-10">
                     <span className="sr-only">{t('table.select')}</span>
                   </th>
-                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium">{t('table.date')}</th>
+                  <th className="type-button py-2 px-3 whitespace-nowrap font-medium w-[1%]">{t('table.date')}</th>
                   <th className="type-button py-2 px-3 whitespace-nowrap font-medium">{t('table.emotionAndStrength')}</th>
                 </tr>
               </thead>
@@ -361,14 +360,14 @@ export function RecordsList() {
                           className="w-4 h-4 accent-main cursor-pointer"
                         />
                       </td>
-                      <td className="type-body-sm py-3 px-3 whitespace-nowrap">
+                      <td className="type-body-sm py-3 px-3 whitespace-nowrap w-[1%]">
                         {formatDate(record.created_at)}
                       </td>
                       <td className="type-body-sm py-3 px-3">
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1">
+                        <div className="flex flex-row flex-wrap items-center justify-center gap-1">
                           {emotions.map((emo, i) => (
                             <span key={i}>
-                              {i > 0 && <span className="hidden sm:inline text-gray-400">・</span>}
+                              {i > 0 && <span className="text-gray-400">・</span>}
                               {emo.name} {emo.level}
                             </span>
                           ))}
@@ -381,17 +380,6 @@ export function RecordsList() {
             </table>
           </div>
 
-          {/* Mobile delete button */}
-          <div className="md:hidden flex justify-end mb-4">
-            <button
-              onClick={handleBatchDelete}
-              className="p-2 rounded-full text-main hover:bg-main-tint03 transition-colors"
-              title={t('actions.delete')}
-              aria-label={tAria('delete')}
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
-          </div>
 
           {/* Pagination */}
           {pagination && pagination.totalPages > 1 && (
