@@ -130,7 +130,7 @@ export async function Footer({ locale }: FooterProps) {
       </div>
 
       <div className="bg-slate-300 text-slate-700 dark:bg-slate-900 dark:text-slate-100">
-        <div className="mx-auto flex h-12 max-w-7xl items-center justify-center px-4 text-center whitespace-nowrap sm:px-6">
+        <div className="mx-auto flex min-h-12 max-w-7xl items-center justify-center px-4 py-2 text-center sm:whitespace-nowrap sm:px-6">
           {t('copyright', { year })}
         </div>
       </div>

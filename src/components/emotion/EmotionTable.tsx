@@ -82,7 +82,7 @@ export function EmotionTable({
             </Link>
 
             {/* Card Buttons */}
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <div className="flex gap-3 overflow-x-auto pb-2 min-w-0">
               {cards.map((card) => (
                 <button
                   key={card.id}

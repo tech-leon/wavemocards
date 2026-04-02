@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_JP, Noto_Sans_TC } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
@@ -29,6 +29,11 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://wavemocards.com";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getRequestLocale();
@@ -89,7 +94,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoSansTC.variable} ${notoSansJP.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${notoSansTC.variable} ${notoSansJP.variable} font-sans antialiased overflow-x-hidden`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <ThemeSyncer userId={user?.id ?? null} />

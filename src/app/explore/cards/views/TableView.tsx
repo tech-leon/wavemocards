@@ -49,7 +49,7 @@ export function TableView({
             >
               {cat.name}
             </Link>
-            <div className="flex items-center overflow-x-auto pt-3 mb-1 gap-4">
+            <div className="flex items-center overflow-x-auto pt-3 mb-1 gap-4 min-w-0">
               {catCards.map((card) => {
                 const isAdded = hasCard(card.id);
                 const isLocked = !isAdded && isSelectionFull;

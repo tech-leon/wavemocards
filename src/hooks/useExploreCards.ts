@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { MAX_SELECTED_CARDS } from '@/lib/emotions';
 import { useExploreStore } from '@/store/exploreStore';
@@ -15,6 +15,11 @@ export function useExploreCards(categories: EmotionCategory[], cards: EmotionCar
   const [showGuide, setShowGuide] = useState(false);
   const [modalCard, setModalCard] = useState<EmotionCardData | null>(null);
   const { showError, setShowError, handleOpenHolder } = useOpenHolder();
+
+  // Rehydrate Zustand persist store after mount to avoid SSR/client mismatch
+  useEffect(() => {
+    useExploreStore.persist.rehydrate();
+  }, []);
 
   const { selectedCards, addCard, removeCard, hasCard } = useExploreStore();
   const selectedCount = selectedCards.length;

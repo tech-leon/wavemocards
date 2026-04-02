@@ -59,7 +59,7 @@ export function ExpandedView({
             </Link>
 
             {/* Cards Horizontal Scroll */}
-            <div className="flex gap-4 overflow-x-auto pt-3 pr-2 pb-2">
+            <div className="flex gap-4 overflow-x-auto pt-3 pr-2 pb-2 min-w-0">
               {catCards.map((card) => {
                 const isAdded = hasCard(card.id);
                 const action = isAdded

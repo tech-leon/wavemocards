@@ -73,10 +73,10 @@ export function EmoCardsContent({
 
   return (
     <>
-      <div className="grow px-3 sm:px-0">
+      <div className="grow px-3 sm:px-0 min-w-0">
         <div className="container mx-auto py-4 pt-9 pb-18" id="top">
           {/* Header */}
-          <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
+          <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <h2>{t('pageTitle')}</h2>
             <div className="flex justify-end gap-4">
               <Link
@@ -201,7 +201,7 @@ export function EmoCardsContent({
                     </Link>
 
                     {/* Cards Horizontal Scroll */}
-                    <div className="flex gap-4 overflow-x-auto pb-2">
+                    <div className="flex gap-4 overflow-x-auto pb-2 min-w-0">
                       {cards.map((card) => (
                         <EmotionCard
                           key={card.id}

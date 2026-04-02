@@ -131,6 +131,7 @@ export const useExploreStore = create<ExploreState>()(
     }),
     {
       name: 'wavemo-explore',
+      skipHydration: true,
     }
   )
 );
