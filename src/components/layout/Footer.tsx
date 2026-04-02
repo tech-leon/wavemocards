@@ -102,7 +102,7 @@ export async function Footer({ locale }: FooterProps) {
 
             <section className="md:max-w-60">
               <h3 className="mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">{t('sections.usefulLinks')}</h3>
-              <ul className="space-y-2">
+              <ul className="flex flex-wrap gap-x-4 gap-y-2 justify-center md:flex-col">
                 <li>
                   <Link href={aboutHref} className="inline-flex transition-colors hover:text-main">
                     {t('links.aboutEmotions')}
