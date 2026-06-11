@@ -3,8 +3,12 @@
 import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { buildAuthHref, buildCurrentReturnTo } from '@/lib/auth-routing';
 import type { Profile } from '@/types/database';
+
+const KNOWN_TITLES = ['Student', 'Teacher'];
 
 function getTitleDisplay(title: string | null, t: (key: string) => string): string {
   switch (title) {
@@ -17,8 +21,24 @@ function getTitleDisplay(title: string | null, t: (key: string) => string): stri
   }
 }
 
+const sectionTitleClassName = 'type-subsection-title mb-4 border-b-2 border-main-tint02 px-2 py-1';
+const labelClassName = 'type-body-sm block mb-1.5 px-1 text-muted-foreground';
+// View value and edit input share the same pill geometry so toggling
+// edit mode only changes the surface, never the layout.
+const valuePillClassName =
+  'type-body w-full px-5 py-2 rounded-full border-2 border-transparent bg-muted';
+const inputPillClassName =
+  'type-body w-full px-5 py-2 rounded-full border-2 border-input bg-background focus:outline-none focus:border-main transition-colors';
+
+function ValuePill({ value, fallback }: { value: string | null; fallback: string }) {
+  return (
+    <p className={cn(valuePillClassName, !value && 'text-muted-foreground')}>
+      {value || fallback}
+    </p>
+  );
+}
+
 interface ProfileFormFieldsProps {
-  email: string;
   profile: Profile;
   isEditing: boolean;
   // Form fields
@@ -38,7 +58,6 @@ interface ProfileFormFieldsProps {
 }
 
 export function ProfileFormFields({
-  email,
   profile,
   isEditing,
   formLastName,
@@ -62,112 +81,115 @@ export function ProfileFormFields({
     force: true,
   });
 
+  const notAvailable = t('empty.notAvailable');
+
   return (
     <div className="w-full flex-1">
-      {/* Email - always read only */}
-      <div className="mb-6">
-        <span className="type-body-sm block mb-2 text-foreground">{t('fields.email')}</span>
-        <p className="type-body ml-1 font-bold">{email}</p>
-      </div>
+      {/* Personal details */}
+      <section>
+        <div className={sectionTitleClassName}>{t('sections.personal')}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+          {/* Last Name */}
+          <div>
+            <span className={labelClassName}>{t('fields.lastName')}</span>
+            {isEditing ? (
+              <div>
+                <input
+                  type="text"
+                  className={inputPillClassName}
+                  value={formLastName}
+                  onChange={(e) => {
+                    setFormLastName(e.target.value);
+                    validateLastName(e.target.value);
+                  }}
+                  placeholder={t('placeholders.lastName')}
+                />
+                {lastNameError && (
+                  <p className="type-caption mt-1 ml-3 text-pink">{lastNameError}</p>
+                )}
+              </div>
+            ) : (
+              <ValuePill value={profile.last_name} fallback={notAvailable} />
+            )}
+          </div>
 
-      {/* Password */}
-      <div className="mb-6">
-        <span className="type-body-sm block mb-2 text-foreground">{t('fields.password')}</span>
-        <div className="flex justify-between items-center">
-          <p className="type-body ml-1 font-bold">{t('passwordMask')}</p>
-          {!isEditing && (
-            <AuthNavigationButton
-              href={passwordResetHref}
-              className="type-button px-4 py-1 rounded-full bg-pink-tint01 text-white hover:bg-pink transition-colors"
-            >
-              {t('resetPassword')}
-            </AuthNavigationButton>
-          )}
-        </div>
-      </div>
+          {/* First Name */}
+          <div>
+            <span className={labelClassName}>{t('fields.firstName')}</span>
+            {isEditing ? (
+              <div>
+                <input
+                  type="text"
+                  className={inputPillClassName}
+                  value={formFirstName}
+                  onChange={(e) => {
+                    setFormFirstName(e.target.value);
+                    validateFirstName(e.target.value);
+                  }}
+                  placeholder={t('placeholders.firstName')}
+                />
+                {firstNameError && (
+                  <p className="type-caption mt-1 ml-3 text-pink">{firstNameError}</p>
+                )}
+              </div>
+            ) : (
+              <ValuePill value={profile.first_name} fallback={notAvailable} />
+            )}
+          </div>
 
-      {/* Last Name & First Name */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
-        {/* Last Name */}
-        <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-foreground">{t('fields.lastName')}</span>
-          {isEditing ? (
-            <div>
+          {/* Birthday */}
+          <div>
+            <span className={labelClassName}>{t('fields.birthDate')}</span>
+            {isEditing ? (
               <input
-                type="text"
-                className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
-                value={formLastName}
-                onChange={(e) => {
-                  setFormLastName(e.target.value);
-                  validateLastName(e.target.value);
-                }}
-                placeholder={t('placeholders.lastName')}
+                type="date"
+                className={inputPillClassName}
+                value={formBirthday}
+                onChange={(e) => setFormBirthday(e.target.value)}
               />
-              {lastNameError && <p className="type-caption mt-1 ml-3 text-pink">{lastNameError}</p>}
-            </div>
-          ) : (
-            <p className="type-body ml-1 font-bold">{profile.last_name || t('empty.notAvailable')}</p>
-          )}
-        </div>
+            ) : (
+              <ValuePill value={profile.day_of_birth} fallback={notAvailable} />
+            )}
+          </div>
 
-        {/* First Name */}
-        <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-foreground">{t('fields.firstName')}</span>
-          {isEditing ? (
-            <div>
-              <input
-                type="text"
-                className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
-                value={formFirstName}
-                onChange={(e) => {
-                  setFormFirstName(e.target.value);
-                  validateFirstName(e.target.value);
-                }}
-                placeholder={t('placeholders.firstName')}
-              />
-              {firstNameError && <p className="type-caption mt-1 ml-3 text-pink">{firstNameError}</p>}
-            </div>
-          ) : (
-            <p className="type-body ml-1 font-bold">{profile.first_name || t('empty.notAvailable')}</p>
-          )}
+          {/* Title (身份) */}
+          <div>
+            <span className={labelClassName}>{t('fields.role')}</span>
+            {isEditing ? (
+              <select
+                className={inputPillClassName}
+                value={KNOWN_TITLES.includes(formTitle) ? formTitle : 'Null'}
+                onChange={(e) => setFormTitle(e.target.value)}
+              >
+                <option value="Student">{t('options.student')}</option>
+                <option value="Teacher">{t('options.teacher')}</option>
+                <option value="Null">{t('options.other')}</option>
+              </select>
+            ) : (
+              <ValuePill value={getTitleDisplay(profile.title, t)} fallback={notAvailable} />
+            )}
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Birthday & Title */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
-        {/* Birthday */}
-        <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-foreground">{t('fields.birthDate')}</span>
-          {isEditing ? (
-            <input
-              type="date"
-              className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
-              value={formBirthday}
-              onChange={(e) => setFormBirthday(e.target.value)}
-            />
-          ) : (
-            <p className="type-body ml-1 font-bold">{profile.day_of_birth || t('empty.notAvailable')}</p>
-          )}
+      {/* Password & security */}
+      <section className="mt-10">
+        <div className={sectionTitleClassName}>{t('sections.security')}</div>
+        <div>
+          <span className={labelClassName}>{t('fields.password')}</span>
+          <div className="flex items-center gap-3">
+            <p className={cn(valuePillClassName, 'flex-1 min-w-0')}>{t('passwordMask')}</p>
+            {!isEditing && (
+              <AuthNavigationButton
+                href={passwordResetHref}
+                className={cn(buttonVariants({ variant: 'main-outline' }), 'shrink-0')}
+              >
+                {t('resetPassword')}
+              </AuthNavigationButton>
+            )}
+          </div>
         </div>
-
-        {/* Title (身份) */}
-        <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-foreground">{t('fields.role')}</span>
-          {isEditing ? (
-            <select
-              className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
-              value={formTitle}
-              onChange={(e) => setFormTitle(e.target.value)}
-            >
-              <option value="Student">{t('options.student')}</option>
-              <option value="Teacher">{t('options.teacher')}</option>
-              <option value="Null">{t('options.other')}</option>
-            </select>
-          ) : (
-            <p className="type-body ml-1 font-bold">{getTitleDisplay(profile.title, t)}</p>
-          )}
-        </div>
-      </div>
+      </section>
     </div>
   );
 }

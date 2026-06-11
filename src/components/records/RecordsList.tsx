@@ -288,7 +288,7 @@ export function RecordsList() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
               <input
                 type="search"
-                className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-background placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-background placeholder:text-muted-foreground"
                 placeholder={t('search.keywordPlaceholder')}
                 value={keyword}
                 onChange={handleKeywordChange}
@@ -347,8 +347,8 @@ export function RecordsList() {
                     <tr
                       key={record.id}
                       onClick={() => router.push(`/records/${record.id}`)}
-                      className={`text-center border-b border-gray-200 dark:border-gray-700 hover:bg-main-tint03/50 transition-colors cursor-pointer ${
-                        index % 2 !== 0 ? 'bg-main-tint03/30' : ''
+                      className={`text-center border-b border-border hover:bg-main-tint03/50 dark:hover:bg-main/20 transition-colors cursor-pointer ${
+                        index % 2 !== 0 ? 'bg-main-tint03/30 dark:bg-main/10' : ''
                       }`}
                     >
                       <td className="py-3 px-3" onClick={(e) => e.stopPropagation()}>
@@ -366,7 +366,7 @@ export function RecordsList() {
                         <div className="flex flex-row flex-wrap items-center justify-center gap-1">
                           {emotions.map((emo, i) => (
                             <span key={i}>
-                              {i > 0 && <span className="text-gray-400">・</span>}
+                              {i > 0 && <span className="text-muted-foreground">・</span>}
                               {emo.name} {emo.level}
                             </span>
                           ))}

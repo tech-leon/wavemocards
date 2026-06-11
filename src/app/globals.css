@@ -218,6 +218,11 @@ h3 {
   color: var(--color-main);
 }
 
+.type-identity {
+  font-size: var(--type-h2);
+  font-weight: 700;
+}
+
 .type-body-lg {
   font-size: var(--type-h4);
 }
