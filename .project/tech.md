@@ -1,6 +1,6 @@
-# Tach Stack
+# Tech Stack
 
-Framework: Next.js 16.1.1 with App Router
+Framework: Next.js 16.1.2 with App Router
 Language: TypeScript
 Styling: Tailwind CSS 4
 UI: Shadcn/ui
