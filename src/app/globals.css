@@ -47,13 +47,25 @@
   /* Emotion colors */
   --color-happy: #FFE589;
   --color-expectation: #F8C18F;
-  --color-relived: #CEE5AF;
+  --color-relieved: #CEE5AF;
   --color-unstable: #E0CACA;
   --color-amazed: #B4B9E7;
   --color-sadness: #C5DDE8;
   --color-hate: #D6CAC0;
   --color-anger: #E0AEAE;
   --color-others: #EBEBEB;
+
+  /* Emotion accent shades — one step darker than the base emotion color.
+     Used for card borders and hover feedback on emotion surfaces. */
+  --color-happy-dark: #EBD175;
+  --color-expectation-dark: #EAB27E;
+  --color-relieved-dark: #B0CC8B;
+  --color-unstable-dark: #D7B3B3;
+  --color-amazed-dark: #969DD7;
+  --color-sadness-dark: #A2C5D6;
+  --color-hate-dark: #C1B1A4;
+  --color-anger-dark: #D19292;
+  --color-others-dark: #CBCBCB;
   
   /* Gray scale */
   --color-gray-100: #f8f9fa;
@@ -86,41 +98,44 @@
   --type-hero-cta-md: 1.875rem;
   --type-card-display: 1.875rem;
   --type-card-display-hover: 2.25rem;
-  --background: #F3F4F6;
-  --foreground: #111827;
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Semantic layer — aligned with the custom gray ramp above.
+     background/foreground/muted/etc. are the canonical neutrals;
+     never hand-pair gray-* with dark:gray-* for these roles. */
+  --background: #f8f9fa;        /* gray-100 */
+  --foreground: #343a40;        /* gray-800 */
+  --popover: #f8f9fa;           /* gray-100 */
+  --popover-foreground: #343a40;
+  --primary: #3C9DAE;           /* brand main */
+  --primary-foreground: #f8f9fa;
+  --secondary: #f2f6f8;         /* gray-200 */
+  --secondary-foreground: #343a40;
+  --muted: #f2f6f8;             /* gray-200 */
+  --muted-foreground: #adb5bd;  /* gray-500 */
+  --accent: #f2f6f8;            /* gray-200 */
+  --accent-foreground: #343a40;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #dee2e6;            /* gray-300 */
+  --input: #dee2e6;             /* gray-300 */
+  --ring: #3C9DAE;              /* brand main */
 }
 
 .dark {
-  --background: #111827;
-  --foreground: #F3F4F6;
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #212529;        /* gray-900 */
+  --foreground: #f8f9fa;        /* gray-100 */
+  --popover: #212529;           /* gray-900 */
+  --popover-foreground: #f8f9fa;
+  --primary: #3C9DAE;           /* brand main */
+  --primary-foreground: #f8f9fa;
+  --secondary: #343a40;         /* gray-800 */
+  --secondary-foreground: #f8f9fa;
+  --muted: #343a40;             /* gray-800 */
+  --muted-foreground: #dee2e6;  /* gray-300 */
+  --accent: #343a40;            /* gray-800 */
+  --accent-foreground: #f8f9fa;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: #495057;            /* gray-700 */
+  --input: #6c757d;             /* gray-600 */
+  --ring: #85C5D6;              /* main-tint01 */
 }
 
 @layer base {
@@ -203,6 +218,10 @@ h3 {
   color: var(--color-main);
 }
 
+.type-body-lg {
+  font-size: var(--type-h4);
+}
+
 .type-body {
   font-size: var(--type-body);
 }
@@ -244,6 +263,11 @@ h3 {
   font-size: var(--type-card-display-hover);
 }
 
+/* Large display title inside modals (e.g. emotion card detail) */
+.type-modal-display {
+  font-size: var(--type-card-display);
+}
+
 @media (min-width: 48rem) {
   .type-hero-display {
     font-size: var(--type-hero-display-md);
@@ -251,5 +275,9 @@ h3 {
 
   .type-hero-cta {
     font-size: var(--type-hero-cta-md);
+  }
+
+  .type-modal-display {
+    font-size: var(--type-hero-display);
   }
 }

@@ -25,16 +25,16 @@ export function DeleteConfirmModal({ open, deleting, onClose, onConfirm }: Delet
       actions={
         <>
           <Button
-            variant="outline"
+            variant="pink-outline"
             onClick={onClose}
-            className="rounded-full border-2 border-pink text-pink hover:bg-pink/10 px-6"
+            className="px-6"
             disabled={deleting}
           >
             {t('confirmDelete.cancel')}
           </Button>
           <Button
             onClick={onConfirm}
-            className="rounded-full bg-pink hover:bg-pink-dark text-white px-6"
+            variant="pink" className="px-6"
             disabled={deleting}
           >
             {deleting ? t('confirmDelete.deleting') : t('confirmDelete.confirm')}

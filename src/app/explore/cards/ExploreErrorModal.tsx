@@ -18,18 +18,18 @@ export function ExploreErrorModal({ error, onClose }: ExploreErrorModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/50" />
       <div
-        className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center"
+        className="relative bg-background rounded-2xl max-w-sm w-full p-6 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         <p className="type-page-title mb-3 text-pink">
           {error === 'tooFew' ? t('errors.tooFewTitle') : t('errors.tooManyTitle')}
         </p>
         {error === 'tooFew' ? (
-          <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+          <p className="type-body-sm mb-4 text-foreground">
             {t('errors.tooFewDescription')}
           </p>
         ) : (
-          <div className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+          <div className="type-body-sm mb-4 text-foreground">
             <p>{t('errors.tooManyDescriptionLine1')}</p>
             <p>{t('errors.tooManyDescriptionLine2')}</p>
           </div>

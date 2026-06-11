@@ -22,10 +22,10 @@ export function SaveResultModal({ open, success, onClose }: SaveResultModalProps
       description={
         !success ? (
           <>
-            <p className="type-body-sm mt-3 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mt-3 text-foreground">
               {t('saveResult.failureDescription')}
             </p>
-            <p className="type-body-sm mt-2 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mt-2 text-foreground">
               {t('saveResult.contactUsPrompt')}{' '}
               <a className="text-pink hover:underline" href="mailto:info@wavemocards.com">
                 {t('saveResult.contactUs')}
@@ -39,9 +39,8 @@ export function SaveResultModal({ open, success, onClose }: SaveResultModalProps
       actions={
         <Button
           onClick={onClose}
-          className={`rounded-full px-8 py-2 text-white font-bold ${
-            success ? 'bg-main hover:bg-main-dark' : 'bg-pink hover:bg-pink-dark'
-          }`}
+          variant={success ? 'main' : 'pink'}
+          className="px-8 py-2 font-bold"
         >
           {t('saveResult.acknowledge')}
         </Button>

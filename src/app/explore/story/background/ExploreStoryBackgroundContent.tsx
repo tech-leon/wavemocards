@@ -52,12 +52,12 @@ export function ExploreStoryBackgroundContent({
         </>
       }
     >
-      <ul className="type-body-sm ml-1 mt-8 mb-10 space-y-1 text-gray-800 dark:text-gray-100">
+      <ul className="type-body-sm ml-1 mt-8 mb-10 space-y-1 text-foreground">
         <li>
           {t('greeting', { userName })}
         </li>
         <li>{t('instructions.line2')}</li>
-        <li className="type-caption text-gray-500 dark:text-gray-300">
+        <li className="type-caption text-muted-foreground">
           {t('instructions.skipHint')}
         </li>
       </ul>
@@ -91,7 +91,7 @@ export function ExploreStoryBackgroundContent({
         </div>
       </div>
 
-      <div className="type-caption text-right text-gray-500 dark:text-gray-300">
+      <div className="type-caption text-right text-muted-foreground">
         Illustration by{' '}
         <a
           className="text-gray-500 hover:text-main dark:text-gray-300"

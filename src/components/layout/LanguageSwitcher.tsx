@@ -134,7 +134,7 @@ export function LanguageSwitcher({
             variant="outline"
             size="icon"
             className={cn(
-              'rounded-full border-slate-300 bg-transparent text-slate-800 shadow-none transition-colors hover:border-main hover:bg-slate-200/70 hover:text-main data-[state=open]:border-main data-[state=open]:bg-slate-200/80 data-[state=open]:text-main dark:border-slate-600 dark:bg-transparent dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-main dark:data-[state=open]:bg-slate-800',
+              'rounded-full border-input bg-transparent text-foreground shadow-none transition-colors hover:border-main hover:bg-accent/70 hover:text-main data-[state=open]:border-main data-[state=open]:bg-accent/80 data-[state=open]:text-main dark:bg-transparent dark:hover:text-main',
               triggerClassName
             )}
             aria-label={t('ariaLabel')}
@@ -160,7 +160,7 @@ export function LanguageSwitcher({
                   void handleChange(localeOption);
                 }}
                 className={cn(
-                  'type-button justify-start gap-3 px-3 py-2 text-slate-700 hover:text-main dark:text-slate-100 dark:hover:text-main',
+                  'type-button justify-start gap-3 px-3 py-2 text-foreground hover:text-main',
                   isSelected && 'bg-main/10 text-main dark:bg-main/15'
                 )}
               >

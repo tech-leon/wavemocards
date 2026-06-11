@@ -20,7 +20,7 @@ export default async function AccountPage() {
   if (!profile) {
     const t = await getTranslations('account.profile');
     return (
-      <div className="py-20 text-center text-gray-500 dark:text-gray-300 text-lg">{t('empty.loadFailed')}</div>
+      <div className="py-20 text-center text-muted-foreground type-body-lg">{t('empty.loadFailed')}</div>
     );
   }
 

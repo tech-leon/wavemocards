@@ -46,7 +46,7 @@ export function RecordDetail({ recordId, initialRecord }: RecordDetailProps) {
   return (
     <>
       {/* Sticky title bar */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0`}>
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background px-3 sm:px-0`}>
         <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
@@ -68,16 +68,14 @@ export function RecordDetail({ recordId, initialRecord }: RecordDetailProps) {
                     <Trash2 className="w-5 h-5" />
                   </button>
                   <Button
-                    variant="outline"
+                    variant="main-outline"
                     onClick={() => router.push('/records')}
-                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                   >
                     {t('actions.back')}
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="main-outline"
                     onClick={handleEdit}
-                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                   >
                     {t('actions.edit')}
                   </Button>
@@ -85,16 +83,15 @@ export function RecordDetail({ recordId, initialRecord }: RecordDetailProps) {
               ) : (
                 <>
                   <Button
-                    variant="outline"
+                    variant="main-outline"
                     onClick={handleCancel}
-                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
                     disabled={saving}
                   >
                     {t('actions.cancel')}
                   </Button>
                   <Button
                     onClick={handleSave}
-                    className="type-button rounded-full bg-main hover:bg-main-dark text-white px-6 font-bold"
+                    variant="main" className="px-6"
                     disabled={saving}
                   >
                     {saving ? t('actions.saving') : t('actions.save')}

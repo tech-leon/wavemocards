@@ -15,7 +15,7 @@ interface FoldedViewProps {
 export function FoldedView({ categories, t }: FoldedViewProps) {
   return (
     <div className="mt-6 mb-16">
-      <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
+      <ul className="type-body-sm mb-9 text-foreground">
         <li>{t('guide.categoryCardsHint')}</li>
       </ul>
       <div className="flex flex-wrap justify-center md:justify-start gap-4">
