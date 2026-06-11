@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-11T00:00:00+08:00",
+  "title": "Design System: Wave Emotion Cards 浪潮情緒卡",
+  "extensions": {
+    "colorMeta": {
+      "main": { "role": "primary", "displayName": "Main Teal", "canonical": "#3C9DAE", "tonalRamp": ["#417C88", "#3C9DAE", "#85C5D6", "#B1DBE5", "#E6F6FA"] },
+      "pink": { "role": "secondary", "displayName": "Warm Pink", "canonical": "#C37979", "tonalRamp": ["#B17075", "#C37979", "#D89591", "#E8B0AC"] },
+      "happy": { "role": "tertiary", "displayName": "快樂 Happy", "canonical": "#FFE589", "tonalRamp": ["#EBD175", "#FFE589"] },
+      "expectation": { "role": "tertiary", "displayName": "期待 Expectation", "canonical": "#F8C18F", "tonalRamp": ["#EAB27E", "#F8C18F"] },
+      "relieved": { "role": "tertiary", "displayName": "安心 Relieved", "canonical": "#CEE5AF", "tonalRamp": ["#B0CC8B", "#CEE5AF"] },
+      "unstable": { "role": "tertiary", "displayName": "不安 Unstable", "canonical": "#E0CACA", "tonalRamp": ["#D7B3B3", "#E0CACA"] },
+      "amazed": { "role": "tertiary", "displayName": "驚訝 Amazed", "canonical": "#B4B9E7", "tonalRamp": ["#969DD7", "#B4B9E7"] },
+      "sadness": { "role": "tertiary", "displayName": "悲傷 Sadness", "canonical": "#C5DDE8", "tonalRamp": ["#A2C5D6", "#C5DDE8"] },
+      "hate": { "role": "tertiary", "displayName": "厭惡 Hate", "canonical": "#D6CAC0", "tonalRamp": ["#C1B1A4", "#D6CAC0"] },
+      "anger": { "role": "tertiary", "displayName": "憤怒 Anger", "canonical": "#E0AEAE", "tonalRamp": ["#D19292", "#E0AEAE"] },
+      "others": { "role": "tertiary", "displayName": "其他 Others", "canonical": "#EBEBEB", "tonalRamp": ["#CBCBCB", "#EBEBEB"] },
+      "background": { "role": "neutral", "displayName": "Background（dark: #212529）", "canonical": "#f8f9fa", "tonalRamp": ["#212529", "#343a40", "#495057", "#6c757d", "#adb5bd", "#ced4da", "#dee2e6", "#f2f6f8", "#f8f9fa"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Hero Display", "purpose": "首頁 hero 專用，responsive 3rem 到 6rem。" },
+      "headline": { "displayName": "Page Title", "purpose": ".type-page-title，頁面標題，品牌色加粗。" },
+      "title": { "displayName": "Section Title", "purpose": ".type-section-title / .type-subsection-title，區塊標題。" },
+      "body": { "displayName": "Body", "purpose": ".type-body 與 -lg / -sm 三階內文。" },
+      "label": { "displayName": "Caption", "purpose": ".type-caption，註解與輔助文字。" }
+    },
+    "shadows": [
+      { "name": "sticky-chrome", "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", "purpose": "Sticky header（shadow-md）。" },
+      { "name": "floating-control", "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)", "purpose": "漂浮小圓鈕（shadow）。" },
+      { "name": "popover", "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)", "purpose": "Dropdown 與 popover（shadow-lg）。" }
+    ],
+    "motion": [
+      { "name": "ease-out-default", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "framer-motion easeOut，所有進場動畫。" },
+      { "name": "duration-state", "value": "200ms", "purpose": "hover / 狀態轉換（transition-colors duration-200）。" },
+      { "name": "duration-entrance", "value": "400ms-700ms", "purpose": "fadeIn / fadeInUp / hero 進場。" }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Main Button",
+      "kind": "button",
+      "refersTo": "button-main",
+      "description": "預設主要動作：實心 teal 藥丸。",
+      "html": "<button class=\"ds-btn-main\">開始探索</button>",
+      "css": ".ds-btn-main { background: var(--color-main, #3C9DAE); color: #fff; font-size: 1rem; font-weight: 700; border: none; border-radius: 9999px; padding: 8px 24px; transition: background-color 0.2s; } .ds-btn-main:hover { background: var(--color-main-dark, #417C88); } .ds-btn-main:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(60 157 174 / 0.5); }"
+    },
+    {
+      "name": "Main Outline Button",
+      "kind": "button",
+      "refersTo": "button-main-outline",
+      "description": "次要動作：teal 外框藥丸，hover 填滿。",
+      "html": "<button class=\"ds-btn-main-outline\">查看紀錄</button>",
+      "css": ".ds-btn-main-outline { background: transparent; color: var(--color-main, #3C9DAE); font-size: 1rem; font-weight: 700; border: 2px solid var(--color-main, #3C9DAE); border-radius: 9999px; padding: 6px 22px; transition: background-color 0.2s, color 0.2s; } .ds-btn-main-outline:hover { background: var(--color-main, #3C9DAE); color: #fff; }"
+    },
+    {
+      "name": "Pink Button",
+      "kind": "button",
+      "refersTo": "button-pink",
+      "description": "高情感 CTA 與確認刪除。",
+      "html": "<button class=\"ds-btn-pink\">立即註冊</button>",
+      "css": ".ds-btn-pink { background: var(--color-pink, #C37979); color: #fff; font-size: 1rem; font-weight: 500; border: none; border-radius: 9999px; padding: 8px 24px; transition: background-color 0.2s; } .ds-btn-pink:hover { background: var(--color-pink-dark, #B17075); }"
+    },
+    {
+      "name": "Pill Input",
+      "kind": "input",
+      "refersTo": "input-pill",
+      "description": "表單欄位：藥丸形，focus 轉品牌色邊框。",
+      "html": "<input class=\"ds-input-pill\" placeholder=\"輸入暱稱\" />",
+      "css": ".ds-input-pill { background: var(--background, #f8f9fa); color: var(--foreground, #343a40); font-size: 1rem; border: 2px solid var(--input, #dee2e6); border-radius: 9999px; padding: 8px 20px; transition: border-color 0.2s; } .ds-input-pill:focus { outline: none; border-color: var(--color-main, #3C9DAE); }"
+    },
+    {
+      "name": "Emotion Card",
+      "kind": "card",
+      "description": "140×140 情緒卡：分類底色、hover 顯示深一階 border。",
+      "html": "<button class=\"ds-emotion-card\"><span class=\"ds-emotion-card-img\">😊</span><span class=\"ds-emotion-card-name\">快 樂</span></button>",
+      "css": ".ds-emotion-card { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 140px; height: 140px; background: var(--color-happy, #FFE589); border: 4px solid transparent; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s; } .ds-emotion-card:hover { border-color: var(--color-happy-dark, #EBD175); padding: 8px; } .ds-emotion-card-img { width: 64px; height: 64px; border-radius: 9999px; background: #fff8; display: flex; align-items: center; justify-content: center; font-size: 2rem; } .ds-emotion-card-name { margin-top: 8px; font-size: 1.25rem; font-weight: 700; color: var(--color-main, #3C9DAE); }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "description": "Header 導覽連結：foreground 起手，hover 與 current 轉品牌色。",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-current\" href=\"#\">情緒探索</a><a class=\"ds-nav-link\" href=\"#\">我的紀錄</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 4px; background: var(--muted, #f2f6f8); padding: 12px 16px; } .ds-nav-link { font-size: 1rem; font-weight: 500; color: var(--foreground, #343a40); padding: 8px 12px; border-radius: 8px; text-decoration: none; transition: color 0.2s; } .ds-nav-link:hover { color: var(--color-main, #3C9DAE); } .ds-nav-link-current { color: var(--color-main, #3C9DAE); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "溫柔的浪潮（The Gentle Tide）",
+    "overview": "視覺語言像退潮後平靜的海面：大面積的柔灰水面（gray ramp 語意層）、一道清楚但不刺眼的 teal 浪頭引導動作，以及只在情緒出現時才浮現的九色 pastel 卡片。介面本身退位，情緒卡與手繪插圖才是主角。明確拒絕醫療系統的冰冷、遊戲化的計分壓力、SaaS dashboard 的數據密集感。",
+    "keyCharacteristics": [
+      "藥丸（pill）按鈕是唯一的主要動作形狀",
+      "一套自訂 gray ramp + 語意 token，無第二套灰階",
+      "情緒九色只用於情緒分類本身",
+      "扁平為主，陰影只給漂浮元素",
+      "三語（zh-TW / ja / en）字級與排版皆成立"
+    ],
+    "rules": [
+      { "name": "The Emotion-Only Rule", "body": "情緒九色只能出現在情緒卡、分類按鈕、情緒圖表。禁止挪作一般介面裝飾或狀態色。", "section": "colors" },
+      { "name": "The One-Gray Rule", "body": "中性色只用自家 gray ramp 與語意 token。slate、zinc、stone、neutral 一律禁止。", "section": "colors" },
+      { "name": "The Semantic-Pair Rule", "body": "凡是「亮色配 dark: 暗色」的成對寫法都該用語意 token 取代。新 code 不允許再手寫這種配對。", "section": "colors" },
+      { "name": "The Type-Class Rule", "body": "禁止 Tailwind 字級 utility 與 arbitrary 字級。字級只能來自 .type-* classes。", "section": "typography" },
+      { "name": "The Flat-Surface Rule", "body": "內容卡片與面板不加陰影；會浮起來的（sticky header、popover、floating button）才有影子。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 品牌色一律用 utility；新色票先進 globals.css 的 @theme 再使用。",
+      "Do 用語意 token 處理明暗：text-foreground、text-muted-foreground、bg-background、bg-muted、border-border、border-input。",
+      "Do 主要動作用 <Button variant=\"main|main-outline|pink|pink-outline\">。",
+      "Do 字級只用 .type-* classes。",
+      "Do 圖表顏色從 emotionCategoryColors 取得並與 globals.css 同步。",
+      "Do 動畫用 motion.tsx 的共用 variants，0.2 到 0.7 秒、ease-out。"
+    ],
+    "donts": [
+      "Don't 使用 raw hex 或 arbitrary color value（圖表 SVG attribute 例外，須註明對應 token）。",
+      "Don't 使用 slate、zinc、stone、neutral 等非自家中性色。",
+      "Don't 手寫 text-gray-800 dark:text-gray-100 這類成對明暗。",
+      "Don't 使用 text-md 或 Tailwind 字級 utility。",
+      "Don't 把情緒九色用在非情緒用途。",
+      "Don't 重刻 modal overlay、確認對話框、分類色票 map。",
+      "Don't 做成醫療系統冰冷感、遊戲化計分、KPI dashboard 風。",
+      "Don't 在卡片上用粗色條側邊框或 gradient 文字。"
+    ]
+  }
+}

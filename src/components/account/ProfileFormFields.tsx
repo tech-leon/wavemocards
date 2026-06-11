@@ -66,13 +66,13 @@ export function ProfileFormFields({
     <div className="w-full flex-1">
       {/* Email - always read only */}
       <div className="mb-6">
-        <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.email')}</span>
+        <span className="type-body-sm block mb-2 text-foreground">{t('fields.email')}</span>
         <p className="type-body ml-1 font-bold">{email}</p>
       </div>
 
       {/* Password */}
       <div className="mb-6">
-        <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.password')}</span>
+        <span className="type-body-sm block mb-2 text-foreground">{t('fields.password')}</span>
         <div className="flex justify-between items-center">
           <p className="type-body ml-1 font-bold">{t('passwordMask')}</p>
           {!isEditing && (
@@ -90,12 +90,12 @@ export function ProfileFormFields({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
         {/* Last Name */}
         <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.lastName')}</span>
+          <span className="type-body-sm block mb-2 text-foreground">{t('fields.lastName')}</span>
           {isEditing ? (
             <div>
               <input
                 type="text"
-                className="type-body w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
+                className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
                 value={formLastName}
                 onChange={(e) => {
                   setFormLastName(e.target.value);
@@ -112,12 +112,12 @@ export function ProfileFormFields({
 
         {/* First Name */}
         <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.firstName')}</span>
+          <span className="type-body-sm block mb-2 text-foreground">{t('fields.firstName')}</span>
           {isEditing ? (
             <div>
               <input
                 type="text"
-                className="type-body w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
+                className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
                 value={formFirstName}
                 onChange={(e) => {
                   setFormFirstName(e.target.value);
@@ -137,11 +137,11 @@ export function ProfileFormFields({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
         {/* Birthday */}
         <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.birthDate')}</span>
+          <span className="type-body-sm block mb-2 text-foreground">{t('fields.birthDate')}</span>
           {isEditing ? (
             <input
               type="date"
-              className="type-body w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
+              className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
               value={formBirthday}
               onChange={(e) => setFormBirthday(e.target.value)}
             />
@@ -152,10 +152,10 @@ export function ProfileFormFields({
 
         {/* Title (身份) */}
         <div className="mb-6">
-          <span className="type-body-sm block mb-2 text-gray-800 dark:text-gray-100">{t('fields.role')}</span>
+          <span className="type-body-sm block mb-2 text-foreground">{t('fields.role')}</span>
           {isEditing ? (
             <select
-              className="type-body w-full px-5 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-900 focus:outline-none focus:border-main transition-colors"
+              className="type-body w-full px-5 py-2 border-2 border-input rounded-full bg-background focus:outline-none focus:border-main transition-colors"
               value={formTitle}
               onChange={(e) => setFormTitle(e.target.value)}
             >

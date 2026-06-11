@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Do not run `open` after finishing tasks.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
 - Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
+- The design system lives in `DESIGN.md` (visual spec) and `PRODUCT.md` (strategy); `.project/style.md` is the quick reference. Follow them for any UI work.
 
 ## Commands
 
@@ -106,6 +107,10 @@ Zustand (`src/store/exploreStore.ts`) holds the multi-step explore flow state, h
 
 ### Styling
 
-Brand accent color is `#3C9DAE`, exposed as the `--color-main` token in `globals.css` — always use the `text-main` utility class, never raw hex. Dark mode uses Tailwind `class` strategy via next-themes.
+The full design system is documented in `DESIGN.md` (tokens are normative in `src/app/globals.css`). Hard rules:
 
-Do not add `text-[...]` arbitrary values, `text-md`, or raw brand hex colors. Use the semantic typography classes defined in `src/app/globals.css` (`.type-body`, `.type-caption`, `.type-button`, etc.); `.project/style.md` documents the palette.
+- Brand accent is `#3C9DAE`, exposed as `--color-main` — always use token utilities (`text-main`, `bg-pink`, `bg-happy`), never raw hex or arbitrary color values.
+- Light/dark theming goes through semantic tokens (`bg-background`, `text-foreground`, `bg-muted`, `text-muted-foreground`, `border-border`, `border-input`). Never hand-pair `gray-*` with `dark:gray-*`. Only the custom gray ramp is allowed as neutrals (no slate/zinc/stone). Dark mode uses Tailwind `class` strategy via next-themes.
+- Font sizes only via the semantic typography classes in `globals.css` (`.type-body`, `.type-caption`, etc.) — no `text-md`, no Tailwind size utilities, no arbitrary sizes.
+- Primary actions use the `Button` component's brand variants (`main`, `main-outline`, `pink`, `pink-outline`); do not hand-roll pill buttons. Confirmation dialogs compose `ConfirmModal`.
+- Emotion category colors (and their `-dark` border shades) are reserved for emotion cards, category buttons, and charts; chart code reads them from `emotionCategoryColors` in `emotion-card-config.ts`.

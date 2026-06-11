@@ -93,7 +93,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
             >
               <div className="mb-4 border-b border-gray-300 pb-4 dark:border-gray-700">
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="type-button text-gray-700 dark:text-gray-100">{tLanguage('label')}</p>
+                  <p className="type-button text-foreground">{tLanguage('label')}</p>
                   <LanguageSwitcher
                     locale={locale}
                     isAuthenticated={Boolean(user)}

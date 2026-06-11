@@ -31,7 +31,7 @@ export function TableView({
 }: TableViewProps) {
   return (
     <div className="mt-6 mb-16">
-      <p className="type-body-sm mb-8 px-1 md:px-3 text-gray-800 dark:text-gray-100">
+      <p className="type-body-sm mb-8 px-1 md:px-3 text-foreground">
         {t('guide.tableHint')}
       </p>
       {categories.map((cat) => {

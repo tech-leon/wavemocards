@@ -19,6 +19,10 @@ import {
 } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import {
+  emotionCategoryColors,
+  emotionCategoryOrder,
+} from '@/components/emotion/emotion-card-config';
 import { AUTH_STICKY_TOP } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 
@@ -28,29 +32,10 @@ interface EmotionCategorySummary {
   name: string;
 }
 
-const CATEGORY_COLORS: Record<string, string> = {
-  happy: '#FFE589',
-  expectation: '#F8C18F',
-  relieved: '#CEE5AF',
-  unstable: '#E0CACA',
-  amazed: '#B4B9E7',
-  sadness: '#C5DDE8',
-  hate: '#D6CAC0',
-  anger: '#E0AEAE',
-  others: '#EBEBEB',
-};
-
-const CATEGORY_ORDER = [
-  'happy',
-  'expectation',
-  'relieved',
-  'unstable',
-  'amazed',
-  'sadness',
-  'hate',
-  'anger',
-  'others',
-] as const;
+// Chart strokes are SVG attributes and cannot take CSS variables;
+// values mirror the gray ramp in globals.css.
+const CHART_AXIS_STROKE = '#343a40'; // gray-800
+const CHART_LABEL_LINE_STROKE = '#adb5bd'; // gray-500
 
 interface ChartData {
   slug: string;
@@ -127,13 +112,13 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
         categories.map((category) => [category.slug, category.name])
       );
 
-      const result: ChartData[] = CATEGORY_ORDER
+      const result: ChartData[] = emotionCategoryOrder
         .filter((slug) => (categoryCounts as Record<string, number>)[slug] > 0)
         .map((slug) => ({
           slug,
           name: categoryNameMap.get(slug) || slug,
           count: (categoryCounts as Record<string, number>)[slug],
-          color: CATEGORY_COLORS[slug] || '#EBEBEB',
+          color: emotionCategoryColors[slug] || '#EBEBEB',
           percentage: Number((((categoryCounts as Record<string, number>)[slug] / total) * 100).toFixed(1)),
         }));
 
@@ -148,7 +133,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
 
   return (
     <section className="grow">
-    <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+    <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
       <div className="container mx-auto pt-4 px-3 sm:px-0">
         {/* Title */}
         <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
@@ -156,8 +141,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
           <div className="flex gap-2">
             <Link href="/records">
               <Button
-                variant="outline"
-                className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
+                variant="main-outline"
               >
                 {t('tabs.records')}
               </Button>
@@ -174,7 +158,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             <div className="flex flex-row items-center gap-2">
               <input
                 type="date"
-                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-background"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
                 required
@@ -182,7 +166,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
               <span className="text-main-tint01">{t('dateRangeSeparator')}</span>
               <input
                 type="date"
-                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+                className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-background"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
                 required
@@ -190,7 +174,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             </div>
             <Button
               type="submit"
-              className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold w-full md:w-auto"
+              variant="main" className="px-6 py-2 w-full md:w-auto"
               disabled={loading}
             >
               {loading ? t('loading') : t('analyze')}
@@ -204,7 +188,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
 
       {/* No data message */}
       {noData && (
-        <div className="type-page-title py-12 text-center text-gray-500 dark:text-gray-300">
+        <div className="type-page-title py-12 text-center text-muted-foreground">
           {t('empty.noData')}
         </div>
       )}
@@ -217,10 +201,10 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             <h3 className="type-subsection-title mb-2 py-1 border-b border-main-tint02">
               {t('charts.frequency.title')}
             </h3>
-            <p className="type-body-sm mb-1 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mb-1 text-foreground">
               {t('charts.frequency.description1')}
             </p>
-            <p className="type-body-sm mb-8 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mb-8 text-foreground">
               {t('charts.frequency.description2')}
             </p>
             <div className="w-full h-[350px]">
@@ -230,7 +214,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                   <XAxis
                     dataKey="name"
                     tick={{ fontSize: 'var(--type-body-sm)', fontWeight: 700 }}
-                    axisLine={{ stroke: '#313131', strokeWidth: 2 }}
+                    axisLine={{ stroke: CHART_AXIS_STROKE, strokeWidth: 2 }}
                     tickLine={false}
                   />
                   <YAxis
@@ -238,13 +222,13 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                     tick={{ fontSize: 'var(--type-body-sm)' }}
                     axisLine={false}
                     tickLine={false}
-                    label={{ value: t('charts.frequency.unit'), position: 'top', offset: 10, style: { fontSize: 'var(--type-caption)', fill: '#818181' } }}
+                    label={{ value: t('charts.frequency.unit'), position: 'top', offset: 10, style: { fontSize: 'var(--type-caption)', fill: 'var(--color-gray-600)' } }}
                   />
                   <RechartsTooltip
                     formatter={(value) => [t('charts.frequency.tooltipValue', { value: String(value) }), '']}
                     separator=""
                     labelFormatter={(label) => String(label)}
-                    contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
+                    contentStyle={{ borderRadius: '8px', border: '1px solid var(--border)' }}
                   />
                   <Bar dataKey="count" radius={[50, 50, 0, 0]} barSize={28}>
                     {chartData.map((entry, index) => (
@@ -261,10 +245,10 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             <h3 className="type-subsection-title mb-2 py-1 border-b border-main-tint02">
               {t('charts.ratio.title')}
             </h3>
-            <p className="type-body-sm mb-1 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mb-1 text-foreground">
               {t('charts.ratio.description1')}
             </p>
-            <p className="type-body-sm mb-8 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mb-8 text-foreground">
               {t('charts.ratio.description2')}
             </p>
             <div className="w-full h-[350px] overflow-visible [&_*]:outline-none [&_*]:[-webkit-tap-highlight-color:transparent]">
@@ -280,7 +264,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                     outerRadius="80%"
                     paddingAngle={2}
                     label={({ name, payload }) => `${name} ${payload?.percentage ?? ''}%`}
-                    labelLine={{ stroke: '#aaa', strokeWidth: 1 }}
+                    labelLine={{ stroke: CHART_LABEL_LINE_STROKE, strokeWidth: 1 }}
                   >
                     {chartData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -289,13 +273,13 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                   <RechartsTooltip
                     formatter={(value) => [t('charts.ratio.tooltipValue', { value: String(value) }), '']}
                     separator=""
-                    contentStyle={{ borderRadius: '8px', border: '1px solid #ddd' }}
+                    contentStyle={{ borderRadius: '8px', border: '1px solid var(--border)' }}
                   />
                   <Legend
                     verticalAlign="bottom"
                     iconType="circle"
                     formatter={(value: string) => (
-                      <span className="type-body-sm text-gray-800 dark:text-gray-100">{value}</span>
+                      <span className="type-body-sm text-foreground">{value}</span>
                     )}
                   />
                 </PieChart>
@@ -312,10 +296,10 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
             <Image src="/images/lime-analyze.svg" alt={t('illustrationAlt')} width={300} height={300} className="max-w-[300px]" />
           </div>
           <div className="text-right mb-8">
-            <span className="type-caption text-gray-500 dark:text-gray-300">
+            <span className="type-caption text-muted-foreground">
               Illustration by{' '}
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-main hover:underline"
+                className="text-muted-foreground hover:text-main hover:underline"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noreferrer"
@@ -324,7 +308,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
               </a>{' '}
               from{' '}
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-main hover:underline"
+                className="text-muted-foreground hover:text-main hover:underline"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noreferrer"

@@ -26,7 +26,7 @@ export default async function RecordDetailPage({
   if (!record) {
     const t = await getTranslations('records.detail');
     return (
-      <div className="type-subsection-title py-20 text-center text-gray-500 dark:text-gray-300">
+      <div className="type-subsection-title py-20 text-center text-muted-foreground">
         {t('empty.notFound')}
       </div>
     );

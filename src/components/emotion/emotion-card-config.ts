@@ -1,5 +1,35 @@
 import type { EmotionCardData } from '@/types/emotion-card';
 
+/** Canonical display order of the nine emotion categories. */
+export const emotionCategoryOrder = [
+  'happy',
+  'expectation',
+  'relieved',
+  'unstable',
+  'amazed',
+  'sadness',
+  'hate',
+  'anger',
+  'others',
+] as const;
+
+/**
+ * Emotion category base colors as literal values, for SVG/chart libraries
+ * that cannot resolve CSS variables (e.g. Recharts attributes).
+ * Must stay in sync with the `--color-{slug}` tokens in src/app/globals.css.
+ */
+export const emotionCategoryColors: Record<string, string> = {
+  happy: '#FFE589',
+  expectation: '#F8C18F',
+  relieved: '#CEE5AF',
+  unstable: '#E0CACA',
+  amazed: '#B4B9E7',
+  sadness: '#C5DDE8',
+  hate: '#D6CAC0',
+  anger: '#E0AEAE',
+  others: '#EBEBEB',
+};
+
 const defaultCategoryStyle = {
   bg: 'bg-gray-200',
   hoverBorder: 'hover:border-gray-400',
@@ -12,48 +42,48 @@ export const emotionCardCategoryStyles: Record<
 > = {
   happy: {
     bg: 'bg-happy',
-    hoverBorder: 'hover:border-[#EBD175]',
-    border: 'border-[#EBD175]',
+    hoverBorder: 'hover:border-happy-dark',
+    border: 'border-happy-dark',
   },
   expectation: {
     bg: 'bg-expectation',
-    hoverBorder: 'hover:border-[#EAB27E]',
-    border: 'border-[#EAB27E]',
+    hoverBorder: 'hover:border-expectation-dark',
+    border: 'border-expectation-dark',
   },
   relieved: {
-    bg: 'bg-relived',
-    hoverBorder: 'hover:border-[#B0CC8B]',
-    border: 'border-[#B0CC8B]',
+    bg: 'bg-relieved',
+    hoverBorder: 'hover:border-relieved-dark',
+    border: 'border-relieved-dark',
   },
   unstable: {
     bg: 'bg-unstable',
-    hoverBorder: 'hover:border-[#D7B3B3]',
-    border: 'border-[#D7B3B3]',
+    hoverBorder: 'hover:border-unstable-dark',
+    border: 'border-unstable-dark',
   },
   amazed: {
     bg: 'bg-amazed',
-    hoverBorder: 'hover:border-[#969DD7]',
-    border: 'border-[#969DD7]',
+    hoverBorder: 'hover:border-amazed-dark',
+    border: 'border-amazed-dark',
   },
   sadness: {
     bg: 'bg-sadness',
-    hoverBorder: 'hover:border-[#A2C5D6]',
-    border: 'border-[#A2C5D6]',
+    hoverBorder: 'hover:border-sadness-dark',
+    border: 'border-sadness-dark',
   },
   hate: {
     bg: 'bg-hate',
-    hoverBorder: 'hover:border-[#C1B1A4]',
-    border: 'border-[#C1B1A4]',
+    hoverBorder: 'hover:border-hate-dark',
+    border: 'border-hate-dark',
   },
   anger: {
     bg: 'bg-anger',
-    hoverBorder: 'hover:border-[#D19292]',
-    border: 'border-[#D19292]',
+    hoverBorder: 'hover:border-anger-dark',
+    border: 'border-anger-dark',
   },
   others: {
     bg: 'bg-others',
-    hoverBorder: 'hover:border-[#CBCBCB]',
-    border: 'border-[#CBCBCB]',
+    hoverBorder: 'hover:border-others-dark',
+    border: 'border-others-dark',
   },
 };
 
@@ -75,7 +105,7 @@ export function getEmotionCardImageSrc(card: Pick<EmotionCardData, 'id' | 'image
 export const categoryBtnColors: Record<string, string> = {
   happy: 'bg-happy/70 hover:bg-happy',
   expectation: 'bg-expectation/70 hover:bg-expectation',
-  relieved: 'bg-relived/70 hover:bg-relived',
+  relieved: 'bg-relieved/70 hover:bg-relieved',
   unstable: 'bg-unstable/70 hover:bg-unstable',
   amazed: 'bg-amazed/70 hover:bg-amazed',
   sadness: 'bg-sadness/70 hover:bg-sadness',

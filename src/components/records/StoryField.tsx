@@ -25,7 +25,7 @@ export function StoryField({ label, value, editValue, isEditing, onChange, empty
           />
         </div>
       ) : (
-        <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm min-h-[40px] flex items-center">
+        <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-muted rounded-sm min-h-[40px] flex items-center">
           {value || emptyValue}
         </div>
       )}
