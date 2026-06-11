@@ -59,7 +59,7 @@
 
 ---
 
-## 📝 備注
+## 📝 備註
 
 - 唯一自訂品牌色為 **`#3C9DAE`（Teal）**，全站統一使用。
 - Dark mode 切換機制採 Tailwind `class` strategy（`darkMode: ["class"]`）+ next-themes。
