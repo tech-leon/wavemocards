@@ -33,8 +33,7 @@ interface EmotionCategorySummary {
 }
 
 // Chart strokes are SVG attributes and cannot take CSS variables;
-// values mirror the gray ramp in globals.css.
-const CHART_AXIS_STROKE = '#343a40'; // gray-800
+// gray-500 stays legible on both light and dark backgrounds.
 const CHART_LABEL_LINE_STROKE = '#adb5bd'; // gray-500
 
 interface ChartData {
@@ -213,13 +212,13 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 'var(--type-body-sm)', fontWeight: 700 }}
-                    axisLine={{ stroke: CHART_AXIS_STROKE, strokeWidth: 2 }}
+                    tick={{ fontSize: 'var(--type-body-sm)', fontWeight: 700, fill: 'currentColor' }}
+                    axisLine={{ stroke: 'currentColor', strokeWidth: 2 }}
                     tickLine={false}
                   />
                   <YAxis
                     allowDecimals={false}
-                    tick={{ fontSize: 'var(--type-body-sm)' }}
+                    tick={{ fontSize: 'var(--type-body-sm)', fill: 'currentColor' }}
                     axisLine={false}
                     tickLine={false}
                     label={{ value: t('charts.frequency.unit'), position: 'top', offset: 10, style: { fontSize: 'var(--type-caption)', fill: 'var(--color-gray-600)' } }}
@@ -229,6 +228,8 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                     separator=""
                     labelFormatter={(label) => String(label)}
                     contentStyle={{ borderRadius: '8px', border: '1px solid var(--border)' }}
+                    labelStyle={{ color: 'var(--color-gray-800)' }}
+                    itemStyle={{ color: 'var(--color-gray-800)' }}
                   />
                   <Bar dataKey="count" radius={[50, 50, 0, 0]} barSize={28}>
                     {chartData.map((entry, index) => (
@@ -263,7 +264,18 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                     innerRadius="50%"
                     outerRadius="80%"
                     paddingAngle={2}
-                    label={({ name, payload }) => `${name} ${payload?.percentage ?? ''}%`}
+                    label={({ x, y, textAnchor, name, payload }) => (
+                      <text
+                        x={x}
+                        y={y}
+                        textAnchor={textAnchor}
+                        dominantBaseline="central"
+                        fill="currentColor"
+                        style={{ fontSize: 'var(--type-body-sm)' }}
+                      >
+                        {`${name} ${payload?.percentage ?? ''}%`}
+                      </text>
+                    )}
                     labelLine={{ stroke: CHART_LABEL_LINE_STROKE, strokeWidth: 1 }}
                   >
                     {chartData.map((entry, index) => (
@@ -274,6 +286,8 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
                     formatter={(value) => [t('charts.ratio.tooltipValue', { value: String(value) }), '']}
                     separator=""
                     contentStyle={{ borderRadius: '8px', border: '1px solid var(--border)' }}
+                    labelStyle={{ color: 'var(--color-gray-800)' }}
+                    itemStyle={{ color: 'var(--color-gray-800)' }}
                   />
                   <Legend
                     verticalAlign="bottom"
