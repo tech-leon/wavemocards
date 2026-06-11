@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { getEmotionCardCategoryStyle } from './emotion-card-config';
 
 export interface EmotionCategory {
   id: number;
@@ -17,24 +18,8 @@ interface EmotionCategoryCardProps {
   className?: string;
 }
 
-// Category colors mapping
-const categoryStyles: Record<string, { bg: string; hoverBorder: string }> = {
-  happy: { bg: 'bg-happy', hoverBorder: 'hover:border-[#EBD175]' },
-  expectation: { bg: 'bg-expectation', hoverBorder: 'hover:border-[#EAB27E]' },
-  relived: { bg: 'bg-relived', hoverBorder: 'hover:border-[#B0CC8B]' },
-  unstable: { bg: 'bg-unstable', hoverBorder: 'hover:border-[#D7B3B3]' },
-  amazed: { bg: 'bg-amazed', hoverBorder: 'hover:border-[#969DD7]' },
-  sadness: { bg: 'bg-sadness', hoverBorder: 'hover:border-[#A2C5D6]' },
-  hate: { bg: 'bg-hate', hoverBorder: 'hover:border-[#C1B1A4]' },
-  anger: { bg: 'bg-anger', hoverBorder: 'hover:border-[#D19292]' },
-  others: { bg: 'bg-others', hoverBorder: 'hover:border-[#CBCBCB]' },
-};
-
 export function EmotionCategoryCard({ category, href, className }: EmotionCategoryCardProps) {
-  const styles = categoryStyles[category.slug] || {
-    bg: 'bg-gray-200',
-    hoverBorder: 'hover:border-gray-400',
-  };
+  const styles = getEmotionCardCategoryStyle(category.slug);
 
   return (
     <Link href={href} className="group">

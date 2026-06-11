@@ -48,7 +48,7 @@ export function AccountProfile({ initialProfile, email }: AccountProfileProps) {
   return (
     <>
       {/* Sticky title bar */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-gray-100 dark:bg-gray-900 px-3 sm:px-0`}>
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background px-3 sm:px-0`}>
         <div className="container mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             <h2>{t('title')}</h2>
@@ -57,25 +57,23 @@ export function AccountProfile({ initialProfile, email }: AccountProfileProps) {
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {!isEditing ? (
                 <Button
-                  variant="outline"
+                  variant="main-outline"
                   onClick={handleEdit}
-                  className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 font-bold"
                 >
                   {t('actions.edit')}
                 </Button>
               ) : (
                 <>
                   <Button
-                    variant="outline"
+                    variant="main-outline"
                     onClick={handleCancelClick}
-                    className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white dark:hover:text-zinc-800 font-bold"
                     disabled={saving}
                   >
                     {t('actions.cancel')}
                   </Button>
                   <Button
                     onClick={handleSave}
-                    className="type-button rounded-full bg-main hover:bg-main-dark text-white px-6 font-bold"
+                    variant="main" className="px-6"
                     disabled={saving}
                   >
                     {saving ? t('actions.saving') : t('actions.save')}

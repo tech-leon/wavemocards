@@ -37,13 +37,13 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   return (
     <section className="grow" aria-label={t('aria.categorySection', { category: category.name })}>
       {/* Sticky header */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm`}>
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-1 bg-background/75 backdrop-blur-sm`}>
         <div className="container mx-auto pt-4 px-3 sm:px-0">
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <Link
                 href="/explore/cards"
-                className="text-gray-800 dark:text-gray-100 hover:text-main transition-colors"
+                className="text-foreground hover:text-main transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>
@@ -58,7 +58,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
               <FolderOpen className="w-4 h-4 hidden group-hover:block" />
               <span>{t('actions.openHolder')}</span>
               {selectedCards.length > 0 && (
-                <span className="type-caption ml-1 bg-gray-100 dark:bg-gray-900 text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="type-caption ml-1 bg-background text-main font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {selectedCards.length}
                 </span>
               )}

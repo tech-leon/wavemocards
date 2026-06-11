@@ -40,12 +40,12 @@ export function Header({ locale, user }: HeaderProps) {
     `type-button rounded-md px-3 py-2 transition-colors ${
       isCurrent(href)
         ? 'text-main'
-        : 'text-slate-800 hover:text-main dark:text-slate-100 dark:hover:text-main-tint01'
+        : 'text-foreground hover:text-main dark:hover:text-main-tint01'
     }`;
 
   return (
     <header
-      className="sticky top-0 z-50 shadow-md backdrop-blur-sm bg-slate-100 dark:bg-slate-800"
+      className="sticky top-0 z-50 shadow-md backdrop-blur-sm bg-muted"
       role="banner"
     >
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
@@ -88,7 +88,7 @@ export function Header({ locale, user }: HeaderProps) {
                   className={`inline-flex rounded-md p-2 transition-colors ${
                     isCurrent('/account')
                       ? 'text-main'
-                      : 'text-slate-800 hover:text-main dark:text-slate-100 dark:hover:text-main-tint01'
+                      : 'text-foreground hover:text-main dark:hover:text-main-tint01'
                   }`}
                 >
                   <Settings className="size-5" strokeWidth={pathname === '/account' ? 2.5 : 2} />
@@ -96,7 +96,7 @@ export function Header({ locale, user }: HeaderProps) {
                 </Link>
                 <AuthNavigationButton
                   href={signOutHref}
-                  className="inline-flex rounded-md p-2 text-slate-800 transition-colors hover:text-main dark:text-slate-100 dark:hover:text-main-tint01"
+                  className="inline-flex rounded-md p-2 text-foreground transition-colors hover:text-main dark:hover:text-main-tint01"
                 >
                   <LogOut className="size-5" />
                   <span className="sr-only">{t('sr.signOut')}</span>
@@ -106,7 +106,7 @@ export function Header({ locale, user }: HeaderProps) {
               <>
                 <AuthNavigationButton
                   href={signInHref}
-                  className="type-button inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-slate-900"
+                  className="type-button inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-gray-900"
                 >
                   {t('links.signIn')}
                 </AuthNavigationButton>
@@ -122,7 +122,7 @@ export function Header({ locale, user }: HeaderProps) {
               locale={locale}
               isAuthenticated={isAuthenticated}
               className="inline-flex"
-              triggerClassName="h-9 w-9 border-slate-300 text-slate-800 dark:border-slate-600 dark:text-slate-100"
+              triggerClassName="h-9 w-9"
             />
             <ThemeToggle isAuthenticated={isAuthenticated} />
           </div>

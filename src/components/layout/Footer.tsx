@@ -60,8 +60,8 @@ export async function Footer({ locale }: FooterProps) {
   const aboutHref = localizeHref('/about-emotions', locale);
 
   return (
-    <footer className="border-t border-slate-300 dark:border-slate-700" role="contentinfo">
-      <div className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-white">
+    <footer className="border-t border-border" role="contentinfo">
+      <div className="bg-muted text-foreground">
         <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-10 md:flex-row md:items-start md:justify-between">
           <div className="mx-auto flex w-full max-w-sm flex-col items-center text-center md:mx-0 md:items-start md:text-left">
             <Link href={homeHref} className="block h-[45px] w-[200px]">
@@ -71,7 +71,7 @@ export async function Footer({ locale }: FooterProps) {
                 className="block h-full w-full bg-[url('/images/logo_name.svg')] bg-contain bg-left bg-no-repeat"
               />
             </Link>
-            <p className="mt-3 text-slate-700 dark:text-slate-200">{t('tagline')}</p>
+            <p className="mt-3">{t('tagline')}</p>
             <a
               className="mt-1 transition-colors hover:text-main"
               href="mailto:info@wavemocards.com"
@@ -82,7 +82,7 @@ export async function Footer({ locale }: FooterProps) {
 
           <div className="grid justify-center w-full flex-1 gap-16 lg:grid-cols-2">
             <section className="w-70">
-              <h3 className="mb-3 border-b border-slate-300 pb-2 dark:border-slate-600">{t('sections.team')}</h3>
+              <h3 className="mb-3 border-b border-border pb-2">{t('sections.team')}</h3>
               <ul className="space-y-1.5">
                 {CONTRIBUTORS.map((member) => (
                   <li key={`${member.roleKey}-${member.name}`}>
@@ -101,7 +101,7 @@ export async function Footer({ locale }: FooterProps) {
             </section>
 
             <section className="md:max-w-60">
-              <h3 className="mb-3 border-b border-slate-300 pb-2 font-semibold dark:border-slate-600">{t('sections.usefulLinks')}</h3>
+              <h3 className="mb-3 border-b border-border pb-2 font-semibold">{t('sections.usefulLinks')}</h3>
               <ul className="flex flex-wrap gap-x-4 gap-y-2 justify-center md:flex-col">
                 <li>
                   <Link href={aboutHref} className="inline-flex transition-colors hover:text-main">
@@ -129,7 +129,7 @@ export async function Footer({ locale }: FooterProps) {
         </div>
       </div>
 
-      <div className="bg-slate-300 text-slate-700 dark:bg-slate-900 dark:text-slate-100">
+      <div className="bg-gray-300 text-foreground dark:bg-gray-900">
         <div className="mx-auto flex min-h-12 max-w-7xl items-center justify-center px-4 py-2 text-center sm:whitespace-nowrap sm:px-6">
           {t('copyright', { year })}
         </div>

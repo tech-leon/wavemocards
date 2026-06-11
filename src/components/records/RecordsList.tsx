@@ -232,7 +232,7 @@ export function RecordsList() {
 
   return (
     <section className="grow">
-    <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+    <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
       <div className="container mx-auto pt-4 px-3 sm:px-0">
         {/* Title */}
         <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
@@ -243,8 +243,7 @@ export function RecordsList() {
             </div>
             <Link href="/records/analysis">
               <Button
-                variant="outline"
-                className="type-button rounded-full border-2 border-main text-main hover:bg-main hover:text-white font-bold"
+                variant="main-outline"
               >
                 {t('tabs.analysis')}
               </Button>
@@ -258,7 +257,7 @@ export function RecordsList() {
           <div className="flex w-full sm:w-auto shrink-0 items-center justify-center sm:justify-start gap-2">
             <input
               type="date"
-              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-background"
               value={startDate}
               max={today}
               onChange={(e) => setStartDate(e.target.value)}
@@ -266,7 +265,7 @@ export function RecordsList() {
             <span className="text-main-tint01">{t('search.dateRangeSeparator')}</span>
             <input
               type="date"
-              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-gray-100 dark:bg-gray-900"
+              className="type-button px-4 py-1.5 border-2 border-main-tint02 rounded-full text-main-tint01 text-center bg-background"
               value={endDate}
               max={today}
               min={startDate || undefined}
@@ -289,7 +288,7 @@ export function RecordsList() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-main-tint01" />
               <input
                 type="search"
-                className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-gray-100 dark:bg-gray-900 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="type-button w-full pl-9 pr-4 py-2.5 border-2 border-main-tint02 rounded-full bg-background placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder={t('search.keywordPlaceholder')}
                 value={keyword}
                 onChange={handleKeywordChange}
@@ -299,7 +298,7 @@ export function RecordsList() {
             <div className="flex shrink-0 items-center gap-2">
               <Button
                 onClick={handleSearch}
-                className="type-button bg-main hover:bg-main-dark text-white rounded-full px-6 py-2 font-bold"
+                variant="main" className="px-6 py-2"
               >
                 {t('search.search')}
               </Button>
@@ -325,7 +324,7 @@ export function RecordsList() {
           <div className="w-8 h-8 border-4 border-main-tint02 border-t-main rounded-full animate-spin" />
         </div>
       ) : records.length === 0 ? (
-        <div className="type-subsection-title py-20 text-center text-gray-500 dark:text-gray-300">
+        <div className="type-subsection-title py-20 text-center text-muted-foreground">
           {t('empty.noRecords')}
         </div>
       ) : (
@@ -425,9 +424,9 @@ export function RecordsList() {
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
+          <div className="bg-background rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center">
             <p className="type-page-title mb-3 text-pink">{t('confirmDelete.title')}</p>
-            <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+            <p className="type-body-sm mb-4 text-foreground">
               {t('confirmDelete.description', { count: selectedIds.size })}
             </p>
             <div className="w-[45%] mb-4">
@@ -435,16 +434,16 @@ export function RecordsList() {
             </div>
             <div className="flex gap-4">
               <Button
-                variant="outline"
+                variant="pink-outline"
                 onClick={() => setShowDeleteDialog(false)}
-                className="rounded-full border-2 border-pink text-pink hover:bg-pink/10 px-6"
+                className="px-6"
                 disabled={deleting}
               >
                 {t('confirmDelete.cancel')}
               </Button>
               <Button
                 onClick={confirmDelete}
-                className="rounded-full bg-pink hover:bg-pink-dark text-white px-6"
+                variant="pink" className="px-6"
                 disabled={deleting}
               >
                 {deleting ? t('confirmDelete.deleting') : t('confirmDelete.confirm')}

@@ -31,7 +31,7 @@ interface EmotionTableProps {
 const categoryButtonStyles: Record<string, string> = {
   happy: 'bg-happy hover:bg-happy-dark border-happy-dark',
   expectation: 'bg-expectation hover:bg-expectation-dark border-expectation-dark',
-  relieved: 'bg-relived hover:bg-relived-dark border-relived-dark',
+  relieved: 'bg-relieved hover:bg-relieved-dark border-relieved-dark',
   unstable: 'bg-unstable hover:bg-unstable-dark border-unstable-dark',
   amazed: 'bg-amazed hover:bg-amazed-dark border-amazed-dark',
   sadness: 'bg-sadness hover:bg-sadness-dark border-sadness-dark',
@@ -43,7 +43,7 @@ const categoryButtonStyles: Record<string, string> = {
 const cardButtonStyles: Record<string, string> = {
   happy: 'bg-happy/80 hover:bg-happy border-happy',
   expectation: 'bg-expectation/80 hover:bg-expectation border-expectation',
-  relieved: 'bg-relived/80 hover:bg-relived border-relived',
+  relieved: 'bg-relieved/80 hover:bg-relieved border-relieved',
   unstable: 'bg-unstable/80 hover:bg-unstable border-unstable',
   amazed: 'bg-amazed/80 hover:bg-amazed border-amazed',
   sadness: 'bg-sadness/80 hover:bg-sadness border-sadness',

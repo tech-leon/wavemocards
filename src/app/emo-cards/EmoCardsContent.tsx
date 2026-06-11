@@ -85,12 +85,12 @@ export function EmoCardsContent({
               >
                 {t('tabs.aboutEmotions')}
               </Link>
-              <span className="px-4 py-2 text-gray-500 dark:text-gray-300 font-medium">{t('tabs.emoCards')}</span>
+              <span className="px-4 py-2 text-muted-foreground font-medium">{t('tabs.emoCards')}</span>
             </div>
           </div>
 
           {/* View Mode Buttons */}
-          <div className="sticky top-[77px] z-40 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm">
+          <div className="sticky top-[77px] z-40 bg-background/75 backdrop-blur-sm">
             <div className="py-6 flex justify-end items-center gap-2 md:gap-3">
               <button
                 onClick={() => setViewMode('expanded')}
@@ -98,7 +98,7 @@ export function EmoCardsContent({
                 className={cn(
                   'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
                   viewMode === 'expanded'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed'
+                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
@@ -110,7 +110,7 @@ export function EmoCardsContent({
                 className={cn(
                   'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
                   viewMode === 'folded'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed'
+                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
@@ -122,7 +122,7 @@ export function EmoCardsContent({
                 className={cn(
                   'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
                   viewMode === 'table'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed'
+                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
                     : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
                 )}
               >
@@ -135,39 +135,39 @@ export function EmoCardsContent({
           <Accordion type="single" collapsible className="mb-12">
             <AccordionItem
               value="instructions"
-              className="border-2 border-main-tint02 rounded-lg bg-gray-100 dark:bg-gray-900 last:border-b-2"
+              className="border-2 border-main-tint02 rounded-lg bg-background last:border-b-2"
             >
               <AccordionTrigger className="px-4 py-3 text-main font-bold hover:no-underline">
                 {t('guide.title')}
               </AccordionTrigger>
               <AccordionContent className="type-body-sm px-4 pb-4">
-                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">{t('guide.interfaceTypes')}</h3>
-                <ol className="pl-6 mb-6 text-gray-700 dark:text-gray-100 list-decimal space-y-1">
+                <h3 className="type-body-sm mb-2 font-bold text-foreground">{t('guide.interfaceTypes')}</h3>
+                <ol className="pl-6 mb-6 text-foreground list-decimal space-y-1">
                   <li>{t('guide.switchViewDescription')}</li>
                   <li>{t('guide.tableDescription')}</li>
                 </ol>
-                <h3 className="type-body-sm mb-2 font-bold text-gray-800 dark:text-gray-100">{t('guide.usageByView')}</h3>
-                <ol className="pl-6 mb-6 text-gray-800 dark:text-gray-100 list-decimal space-y-2">
+                <h3 className="type-body-sm mb-2 font-bold text-foreground">{t('guide.usageByView')}</h3>
+                <ol className="pl-6 mb-6 text-foreground list-decimal space-y-2">
                   <li>
                     <span className="font-bold">{t('guide.expand.title')}</span>：
-                    <p className="text-gray-700 dark:text-gray-100">
+                    <p className="text-foreground">
                       {t('guide.expand.description')}
                     </p>
                   </li>
                   <li>
                     <span className="font-bold">{t('guide.collapse.title')}</span>：
-                    <p className="text-gray-700 dark:text-gray-100">
+                    <p className="text-foreground">
                       {t('guide.collapse.description')}
                     </p>
                   </li>
                   <li>
                     <span className="font-bold">{t('guide.table.title')}</span>：
-                    <p className="text-gray-700 dark:text-gray-100">
+                    <p className="text-foreground">
                       {t('guide.table.description')}
                     </p>
                   </li>
                 </ol>
-                <p className="type-caption text-gray-700 dark:text-gray-100">
+                <p className="type-caption text-foreground">
                   {t('guide.hint')}
                 </p>
               </AccordionContent>
@@ -219,7 +219,7 @@ export function EmoCardsContent({
           {/* Folded View - Category Cards */}
           {viewMode === 'folded' && (
             <div className="mt-6 mb-18">
-              <ul className="type-body-sm mb-9 text-gray-800 dark:text-gray-100">
+              <ul className="type-body-sm mb-9 text-foreground">
                 <li>{t('categoryCardsHint')}</li>
               </ul>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">

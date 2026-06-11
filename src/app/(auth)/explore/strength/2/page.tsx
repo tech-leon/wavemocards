@@ -88,13 +88,13 @@ export default function ExploreStrength2Page() {
       }
     >
       {/* Instructions */}
-      <ul className="type-body-sm ml-1 mt-8 mb-12 text-gray-800 dark:text-gray-100 space-y-1">
+      <ul className="type-body-sm ml-1 mt-8 mb-12 text-foreground space-y-1">
         <li>{t('instructions.line1')}</li>
         <li>
           <span className="text-main font-medium">{t('instructions.line2')}</span>
-          <span className="type-caption text-gray-500 dark:text-gray-300">{t('instructions.scoreHint')}</span>
+          <span className="type-caption text-muted-foreground">{t('instructions.scoreHint')}</span>
         </li>
-        <li className="type-caption text-gray-500 dark:text-gray-300">{t('instructions.skipHint')}</li>
+        <li className="type-caption text-muted-foreground">{t('instructions.skipHint')}</li>
       </ul>
 
       {/* Strength selectors for each card */}

@@ -23,7 +23,7 @@ export function ExploreStepLayout({
   return (
     <>
       {/* Sticky header area */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-gray-100 dark:bg-gray-900`}>
+      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background`}>
         <div className="container mx-auto px-3 sm:px-0">
           {showProgressBar && <ProgressBar currentStep={currentStep} />}
 

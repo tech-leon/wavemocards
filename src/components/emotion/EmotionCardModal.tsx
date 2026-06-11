@@ -83,10 +83,10 @@ export function EmotionCardModal({
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
                 aria-label={t('close')}
               >
-                <X className="w-5 h-5 text-gray-800 dark:text-gray-100" />
+                <X className="w-5 h-5 text-foreground" />
               </button>
             )}
 
@@ -119,13 +119,13 @@ export function EmotionCardModal({
                 </div>
 
                 {/* Title */}
-                <h2 className="text-3xl md:text-5xl font-bold text-main mb-5 text-center sm:text-left">
+                <h2 className="type-modal-display mb-5 text-center sm:text-left">
                   {card.name}
                 </h2>
 
                 {/* Description */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-main mb-1">{t('meaning')}</h3>
+                  <h3 className="mb-1">{t('meaning')}</h3>
                   <p className="text-gray-700 leading-relaxed">
                     {card.description || t('empty.noDescription')}
                   </p>
@@ -133,7 +133,7 @@ export function EmotionCardModal({
 
                 {/* Example */}
                 <div>
-                  <h3 className="text-xl font-bold text-main mb-1">{t('example')}</h3>
+                  <h3 className="mb-1">{t('example')}</h3>
                   <p className="text-gray-700 leading-relaxed">
                     {card.example || t('empty.noExample')}
                   </p>
