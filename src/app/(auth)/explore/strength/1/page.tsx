@@ -58,14 +58,14 @@ export default function ExploreStrength1Page() {
       }
     >
       {/* Instructions */}
-      <ul className="type-body-sm ml-1 mt-8 mb-12 text-gray-800 dark:text-gray-100 space-y-1">
+      <ul className="type-body-sm ml-1 mt-8 mb-12 text-foreground space-y-1">
         <li>{t('instructions.line1')}</li>
         <li>
           {t('instructions.line2')}
         </li>
         <li className="mt-4">
           {t('instructions.line3')}
-          <span className="type-caption text-gray-500 dark:text-gray-300">{t('instructions.scoreHint')}</span>
+          <span className="type-caption text-muted-foreground">{t('instructions.scoreHint')}</span>
         </li>
         <li>{t('instructions.line4')}</li>
       </ul>
@@ -102,21 +102,21 @@ export default function ExploreStrength1Page() {
       {showError && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowError(null)}>
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative bg-gray-100 dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-background rounded-2xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
             <p className="type-page-title mb-3 text-pink">
               {showError === 'count' ? t('errors.countTitle') : t('errors.levelsTitle')}
             </p>
             {showError === 'count' ? (
               selectedCards.length === 0 ? (
-                <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">{t('errors.tooFewDescription')}</p>
+                <p className="type-body-sm mb-4 text-foreground">{t('errors.tooFewDescription')}</p>
               ) : (
-                <div className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">
+                <div className="type-body-sm mb-4 text-foreground">
                   <p>{t('errors.tooManyDescriptionLine1')}</p>
                   <p>{t('errors.tooManyDescriptionLine2')}</p>
                 </div>
               )
             ) : (
-              <p className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">{t('errors.levelsDescription')}</p>
+              <p className="type-body-sm mb-4 text-foreground">{t('errors.levelsDescription')}</p>
             )}
             <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
             <button

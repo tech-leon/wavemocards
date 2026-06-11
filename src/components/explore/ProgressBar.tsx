@@ -56,8 +56,8 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                   'flex items-center justify-center',
                   'transition-all duration-200',
                   isCompleted && 'bg-main-tint01 text-white cursor-pointer hover:bg-main',
-                  isCurrent && 'bg-gray-100 dark:bg-gray-900 border-2 border-main-tint01 text-main-tint01',
-                  !isCompleted && !isCurrent && 'bg-gray-100 dark:bg-gray-900 border-2 border-gray-450 text-gray-450 dark:text-gray-300',
+                  isCurrent && 'bg-background border-2 border-main-tint01 text-main-tint01',
+                  !isCompleted && !isCurrent && 'bg-background border-2 border-gray-450 text-gray-450 dark:text-gray-300',
                   isClickable && 'cursor-pointer'
                 )}
                 style={{ left: `${position}%` }}

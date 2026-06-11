@@ -24,25 +24,25 @@ export function CancelConfirmModal({ open, onClose, onConfirm }: CancelConfirmMo
       actions={
         <>
           <Button
-            variant="outline"
+            variant="pink-outline"
             onClick={onClose}
-            className="rounded-full border-2 border-pink text-pink hover:bg-pink/10 px-6"
+            className="px-6"
           >
             {t('confirmCancel.continueEditing')}
           </Button>
           <Button
             onClick={onConfirm}
-            className="rounded-full bg-pink hover:bg-pink-dark text-white px-6"
+            variant="pink" className="px-6"
           >
             {t('confirmCancel.discard')}
           </Button>
         </>
       }
     >
-      <span className="type-caption mb-4 text-gray-500 dark:text-gray-300">
+      <span className="type-caption mb-4 text-muted-foreground">
         Illustration by{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-main"
+          className="text-muted-foreground hover:text-main"
           href="https://blush.design/artists/RyUTVuP8G4QeAAEEQgug/pablo-stanley"
           target="_blank"
           rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export function CancelConfirmModal({ open, onClose, onConfirm }: CancelConfirmMo
         </a>{' '}
         from{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-main"
+          className="text-muted-foreground hover:text-main"
           href="https://blush.design/"
           target="_blank"
           rel="noopener noreferrer"

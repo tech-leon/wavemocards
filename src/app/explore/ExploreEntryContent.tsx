@@ -77,10 +77,10 @@ export function ExploreEntryContent() {
               className="w-48 md:w-60"
             />
             {/* Illustration credit */}
-            <div className="type-caption mt-4 mb-8 flex justify-center text-gray-500 dark:text-gray-300 md:mb-0">
+            <div className="type-caption mt-4 mb-8 flex justify-center text-muted-foreground md:mb-0">
               Illustration by{" "}
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-main ml-1"
+                className="text-muted-foreground hover:text-main ml-1"
                 href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -89,7 +89,7 @@ export function ExploreEntryContent() {
               </a>{" "}
               <span className="mx-1">from</span>
               <a
-                className="text-gray-500 dark:text-gray-300 hover:text-main"
+                className="text-muted-foreground hover:text-main"
                 href="https://icons8.com/illustrations"
                 target="_blank"
                 rel="noopener noreferrer"

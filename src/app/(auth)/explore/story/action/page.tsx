@@ -60,10 +60,10 @@ export default function ExploreStoryActionPage() {
       }
     >
       {/* Instructions */}
-      <ul className="type-body-sm ml-1 mt-3 mb-6 text-gray-800 dark:text-gray-100 space-y-1">
+      <ul className="type-body-sm ml-1 mt-3 mb-6 text-foreground space-y-1">
         <li>{t('intro.line1')}</li>
         <li>{t('intro.line2')}</li>
-        <li className="type-caption text-gray-500 dark:text-gray-300">{t('intro.skipHint')}</li>
+        <li className="type-caption text-muted-foreground">{t('intro.skipHint')}</li>
       </ul>
 
       {/* Q1: What did you do? */}
@@ -205,13 +205,13 @@ export default function ExploreStoryActionPage() {
       </div>
 
       {/* Credit */}
-      <div className="type-caption hidden md:block text-right text-gray-500 dark:text-gray-300 mb-16">
+      <div className="type-caption hidden md:block text-right text-muted-foreground mb-16">
         Illustration by{' '}
-        <a className="text-gray-500 dark:text-gray-300 hover:text-main" href="https://icons8.com/illustrations/author/iAdLsFJOKDrk" target="_blank" rel="noopener noreferrer">
+        <a className="text-muted-foreground hover:text-main" href="https://icons8.com/illustrations/author/iAdLsFJOKDrk" target="_blank" rel="noopener noreferrer">
           Tanya Krasutska
         </a>{' '}
         from{' '}
-        <a className="text-gray-500 dark:text-gray-300 hover:text-main" href="https://icons8.com/illustrations" target="_blank" rel="noopener noreferrer">
+        <a className="text-muted-foreground hover:text-main" href="https://icons8.com/illustrations" target="_blank" rel="noopener noreferrer">
           Ouch!
         </a>
       </div>

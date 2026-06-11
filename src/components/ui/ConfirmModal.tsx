@@ -30,12 +30,12 @@ export function ConfirmModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
       <div
-        className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center"
+        className="bg-background rounded-2xl p-8 max-w-md w-full mx-4 flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
         {title && <p className={`type-page-title mb-3 ${titleColor}`}>{title}</p>}
         {description && (
-          <div className="type-body-sm mb-4 text-gray-800 dark:text-gray-100">{description}</div>
+          <div className="type-body-sm mb-4 text-foreground">{description}</div>
         )}
         {imageSrc && (
           <div className="w-[45%] mb-4">

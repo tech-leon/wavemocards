@@ -45,7 +45,7 @@ export function RecordDetailContent({
           {/* Date */}
           <div className="flex flex-col lg:flex-row gap-0 lg:gap-0">
             <div className={detailLabelClassName}>{t('fields.date')}</div>
-            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-muted rounded-sm">
               {formatRecordDate(record.created_at)}
             </div>
           </div>
@@ -53,7 +53,7 @@ export function RecordDetailContent({
           {/* Emotion strength before */}
           <div className="flex flex-col lg:flex-row gap-0">
             <div className={detailLabelClassName}>{t('fields.strengthBefore')}</div>
-            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-muted rounded-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -69,7 +69,7 @@ export function RecordDetailContent({
           {/* Emotion strength after */}
           <div className="flex flex-col lg:flex-row gap-0">
             <div className={detailLabelClassName}>{t('fields.strengthAfter')}</div>
-            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm">
+            <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-muted rounded-sm">
               {buildStrengthDisplay(
                 record.card_1,
                 record.card_2,
@@ -131,7 +131,7 @@ export function RecordDetailContent({
             {/* Expect - read only */}
             <div className="flex flex-col lg:flex-row gap-0">
               <div className={detailLabelClassName}>{t('fields.expectedResult')}</div>
-              <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-gray-200 dark:bg-gray-800 rounded-sm flex items-center">
+              <div className="type-body-sm lg:w-3/4 px-3 py-2 bg-muted rounded-sm flex items-center">
                 {getExpectText(record.expect, t)}
               </div>
             </div>

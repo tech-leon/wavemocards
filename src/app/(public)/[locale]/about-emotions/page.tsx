@@ -66,12 +66,12 @@ export default async function AboutEmotionsPage() {
   return (
     <>
       <section className="grow">
-        <div className={cn('sticky z-30 pb-1 bg-gray-100/75 dark:bg-gray-900/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
+        <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
           <div className="container mx-auto pt-4 px-3 sm:px-0">
             <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">
               <h2>{t('pageTitle')}</h2>
               <div className="flex justify-end gap-4">
-                <span className="px-4 py-2 font-medium text-gray-500 dark:text-gray-300">
+                <span className="px-4 py-2 font-medium text-muted-foreground">
                   {t('tabs.aboutEmotions')}
                 </span>
                 {user ? (
@@ -97,7 +97,7 @@ export default async function AboutEmotionsPage() {
           <div className="py-4">
             <section className="mb-14">
               <h2 className="type-section-title mb-3">{t('sections.whatIsEmotion.title')}</h2>
-              <p className="leading-relaxed text-gray-800 dark:text-gray-100">
+              <p className="leading-relaxed text-foreground">
                 {getSectionContent(whatIsEmotion?.content, 'sections.whatIsEmotion.content')}
               </p>
             </section>
@@ -116,13 +116,13 @@ export default async function AboutEmotionsPage() {
                         className="h-full w-full object-contain"
                       />
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-100">
+                    <span className="font-medium text-foreground">
                       {t(`basicEmotions.${emotion.key}`)}
                     </span>
                   </div>
                 ))}
               </div>
-              <p className="leading-relaxed text-gray-800 dark:text-gray-100">
+              <p className="leading-relaxed text-foreground">
                 {getSectionContent(
                   sixBasicEmotions?.content,
                   'sections.sixBasicEmotions.content'
@@ -132,14 +132,14 @@ export default async function AboutEmotionsPage() {
 
             <section className="mb-14">
               <h2 className="type-section-title mb-3">{t('sections.goodOrBad.title')}</h2>
-              <p className="leading-relaxed text-gray-800 dark:text-gray-100">
+              <p className="leading-relaxed text-foreground">
                 {getSectionContent(goodOrBad?.content, 'sections.goodOrBad.content')}
               </p>
             </section>
 
             <section className="mb-14">
               <h2 className="type-section-title mb-3">{t('sections.healthyEmotion.title')}</h2>
-              <p className="leading-relaxed text-gray-800 dark:text-gray-100">
+              <p className="leading-relaxed text-foreground">
                 {getSectionContent(healthyEmotion?.content, 'sections.healthyEmotion.content')}
               </p>
             </section>

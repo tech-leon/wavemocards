@@ -26,14 +26,14 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       }
     >
       <ul className="ml-1 mt-3 mb-9 space-y-1">
-        <li className="type-subsection-title text-gray-800 dark:text-gray-100">
+        <li className="type-subsection-title text-foreground">
           {t('greeting', { userName })}
           {t('saveSuccess')}
         </li>
-        <li className="type-subsection-title text-gray-800 dark:text-gray-100">
+        <li className="type-subsection-title text-foreground">
           {t('thanks')}
         </li>
-        <li className="type-subsection-title mb-3 text-gray-800 dark:text-gray-100">{t('selfTalkIntro')}</li>
+        <li className="type-subsection-title mb-3 text-foreground">{t('selfTalkIntro')}</li>
         <li className="type-subsection-title font-medium">{t('selfTalkLead')}</li>
         <li className="type-subsection-title hidden md:block font-medium">
           {t('selfTalkFull')}
@@ -44,7 +44,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
         <li className="type-subsection-title md:hidden font-medium">
           {t('selfTalkLine2')}
         </li>
-        <li className="type-caption mt-2 text-gray-500 dark:text-gray-300">
+        <li className="type-caption mt-2 text-muted-foreground">
           {t('hint')}
         </li>
       </ul>
@@ -60,10 +60,10 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       </div>
 
       {/* Credit */}
-      <div className="type-caption text-right text-gray-500 dark:text-gray-300">
+      <div className="type-caption text-right text-muted-foreground">
         Illustration by{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-main"
+          className="text-muted-foreground hover:text-main"
           href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
           target="_blank"
           rel="noopener noreferrer"
@@ -72,7 +72,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
         </a>{' '}
         from{' '}
         <a
-          className="text-gray-500 dark:text-gray-300 hover:text-main"
+          className="text-muted-foreground hover:text-main"
           href="https://icons8.com/illustrations"
           target="_blank"
           rel="noopener noreferrer"
