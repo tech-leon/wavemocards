@@ -1,4 +1,4 @@
-# Wave Emotion Cards | 浪潮情绪卡 v2.1
+# Wave Emotion Cards | 浪潮情緒卡 v2.1
 
 Wave Emotion Cards is an online app for emotion cards and personal emotion records.
 
