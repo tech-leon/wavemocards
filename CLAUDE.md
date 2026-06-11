@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Do not create `.md` conclusion files after tasks.
 - Do not run `open` after finishing tasks.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
-- Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `PLAN.md` for the migration plan from the legacy FastAPI backend.
+- Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
 
 ## Commands
 
@@ -57,6 +57,8 @@ Three Supabase client factories in `src/lib/supabase.ts` (each returns `null` wh
 ### Database
 
 Migrations live in `supabase/migrations/`, applied in filename order. Do not delete applied migrations.
+
+Only schema-only migrations (`20260329_*`) are tracked in git. Earlier migrations (001–005, 20260322) exist locally but are deliberately gitignored because 003/004 contain real migrated user PII — never commit or weaken that ignore rule.
 
 Key tables: `profiles`, `emotion_records`, `emotion_categories`, `emotion_cards`, `about_emotions`.
 
