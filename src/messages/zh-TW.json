@@ -681,6 +681,11 @@
       },
       "passwordMask": "********",
       "resetPassword": "重設密碼",
+      "nameDisplay": "{lastName}{firstName}",
+      "sections": {
+        "personal": "個人資料",
+        "security": "密碼與安全"
+      },
       "confirmCancel": {
         "title": "確定要取消編輯嗎？",
         "description": "取消編輯後，將不會儲存您所做的變更，確定要取消編輯嗎？",

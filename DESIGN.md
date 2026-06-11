@@ -150,6 +150,7 @@ components:
 - **Display**（`.type-hero-display`，3rem，md 6rem，700）：首頁 hero 專用。
 - **Headline**（`.type-page-title`，1.5rem，700，main 色）：頁面標題。
 - **Title**（`.type-section-title` / `.type-subsection-title`，1.25rem，700，main 色）：區塊與子區塊標題。
+- **Identity**（`.type-identity`，1.5rem，700，foreground 色）：使用者名稱等身分標識（如 account 頁）。
 - **Modal Display**（`.type-modal-display`，1.875rem，md 3rem）：modal 內的卡片大標。
 - **Body**（`.type-body` 1rem / `.type-body-lg` 1.125rem / `.type-body-sm` 0.875rem）：內文三階。
 - **Label**（`.type-caption`，0.75rem）：註解、輔助文字。

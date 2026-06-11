@@ -680,7 +680,12 @@
         "notAvailable": "—"
       },
       "passwordMask": "**********",
-      "resetPassword": "パスワードをリセットする",
+      "resetPassword": "パスワードをリセット",
+      "nameDisplay": "{lastName} {firstName}",
+      "sections": {
+        "personal": "プロフィール",
+        "security": "パスワードとセキュリティ"
+      },
       "confirmCancel": {
         "title": "編集をキャンセルしてもよろしいですか?",
         "description": "編集をキャンセルすると、変更は保存されません。編集をキャンセルしてもよろしいですか?",

@@ -680,7 +680,12 @@
         "notAvailable": "—"
       },
       "passwordMask": "**********",
-      "resetPassword": "reset password",
+      "resetPassword": "Reset password",
+      "nameDisplay": "{firstName} {lastName}",
+      "sections": {
+        "personal": "Personal details",
+        "security": "Password & security"
+      },
       "confirmCancel": {
         "title": "Are you sure you want to cancel editing?",
         "description": "After canceling the edit, your changes will not be saved. Are you sure you want to cancel the edit?",
