@@ -92,9 +92,16 @@ export default async function RootLayout({
   const locale = await getRequestLocale();
   const messages = await getMessages();
 
+  // Font variables live on <html> so the :lang() font-family rules in
+  // globals.css can resolve them; on <body> they are invisible to the
+  // root element and the whole chain collapses to the browser default.
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoSansTC.variable} ${notoSansJP.variable} font-sans antialiased overflow-x-hidden`}>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${inter.variable} ${notoSansTC.variable} ${notoSansJP.variable}`}
+    >
+      <body className="font-sans antialiased overflow-x-hidden">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <ThemeSyncer userId={user?.id ?? null} />
