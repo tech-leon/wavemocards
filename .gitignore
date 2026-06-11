@@ -35,10 +35,8 @@ yarn-error.log*
 .env*
 !.env.example
 PLAN.md
-.clinerules/
 .codex/
 .claude/
-AGENTS.md
 
 # vercel
 .vercel
