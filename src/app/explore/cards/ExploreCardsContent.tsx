@@ -2,10 +2,11 @@
 
 import { Folder, FolderOpen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 import { useExploreCards } from '@/hooks/useExploreCards';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
+import { Button } from '@/components/ui/button';
 import { ExpandedView, FoldedView, TableView } from './views';
 import { ExploreErrorModal } from './ExploreErrorModal';
 import type { EmotionCategory, EmotionCard as EmotionCardRecord } from '@/lib/emotions';
@@ -39,8 +40,8 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
   return (
     <section className="grow min-w-0" aria-label={t('aria.section')}>
       {/* Sticky header */}
-      <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
-        <div className="container mx-auto pt-4 px-3 sm:px-0">
+      <div className={STICKY_TITLE_BAR}>
+        <div className={cn(PAGE_CONTAINER, 'pt-4')}>
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
             <div>
               <h2 className="md:hidden">{t('titles.mobile')}</h2>
@@ -49,22 +50,16 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
             <div className="flex flex-col md:flex-row justify-end items-end md:items-center gap-2">
               <div className="flex items-center gap-2">
                 {(['expanded', 'folded', 'table'] as const).map((mode) => (
-                  <button
+                  <Button
                     key={mode}
-                    type="button"
+                    variant={viewMode === mode ? 'main' : 'main-outline'}
+                    aria-pressed={viewMode === mode}
                     onClick={() => setViewMode(mode)}
-                    disabled={viewMode === mode}
-                    className={cn(
-                      'type-button px-4 py-1.5 font-bold rounded-full border-2 transition-colors',
-                      viewMode === mode
-                        ? 'bg-gray-300 dark:bg-gray-700 text-muted-foreground border-gray-300 dark:border-gray-700 cursor-not-allowed'
-                        : 'border-main-tint01 text-main-tint01 hover:bg-main-tint03'
-                    )}
                   >
                     {mode === 'expanded' && t('view.expand')}
                     {mode === 'folded' && t('view.collapse')}
                     {mode === 'table' && t('view.table')}
-                  </button>
+                  </Button>
                 ))}
               </div>
               <button
@@ -86,7 +81,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
         </div>
       </div>
 
-      <div className="container mx-auto py-4 px-3 sm:px-0">
+      <div className={cn(PAGE_CONTAINER, 'py-4')}>
         {/* Guide accordion */}
         <div className="mb-9">
           <div className="border-2 border-main-tint02 rounded-lg bg-background">

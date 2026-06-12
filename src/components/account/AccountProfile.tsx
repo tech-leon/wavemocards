@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { STICKY_TITLE_BAR } from '@/lib/layout';
 import { useProfileForm } from '@/hooks/useProfileForm';
 import { ProfileFormFields } from './ProfileFormFields';
 import { CancelConfirmModal } from './CancelConfirmModal';
@@ -61,7 +61,7 @@ export function AccountProfile({ initialProfile, email }: AccountProfileProps) {
     <>
       {/* Sticky title bar — constrained to the content column so the title,
           actions and underline align with the fields below. */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background px-3 sm:px-0`}>
+      <div className={`${STICKY_TITLE_BAR} px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-2xl mx-auto pt-4">
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             <h2>{t('title')}</h2>
@@ -99,7 +99,7 @@ export function AccountProfile({ initialProfile, email }: AccountProfileProps) {
       </div>
 
       {/* Content */}
-      <div className="grow px-3 sm:px-0 flex flex-col items-center pt-8 pb-16">
+      <div className="grow px-4 sm:px-6 lg:px-8 flex flex-col items-center pt-8 pb-16">
         <div className="w-full max-w-2xl">
           {/* Identity header */}
           <div className="mb-10 flex items-center justify-between gap-6">

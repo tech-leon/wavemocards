@@ -1,6 +1,6 @@
 'use client';
 
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { ProgressBar } from './ProgressBar';
 
 interface ExploreStepLayoutProps {
@@ -23,8 +23,8 @@ export function ExploreStepLayout({
   return (
     <>
       {/* Sticky header area */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background`}>
-        <div className="container mx-auto px-3 sm:px-0">
+      <div className={STICKY_TITLE_BAR}>
+        <div className={PAGE_CONTAINER}>
           {showProgressBar && <ProgressBar currentStep={currentStep} />}
 
           {/* Title bar */}
@@ -52,7 +52,7 @@ export function ExploreStepLayout({
       </div>
 
       {/* Content area */}
-      <div className="grow container mx-auto px-3 pb-10 sm:px-0 md:pb-12">
+      <div className={`grow ${PAGE_CONTAINER} pb-10 md:pb-12`}>
         {children}
       </div>
     </>
