@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useExploreStore } from "@/store/exploreStore";
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from "@/lib/layout";
 import { FadeIn } from "@/components/ui/motion";
 
 export function ExploreEntryContent() {
@@ -17,13 +18,17 @@ export function ExploreEntryContent() {
   };
 
   return (
-    <section className="grow mx-15 px-3 sm:px-0" aria-label={t("aria.section")}>
-      <div className="container mx-auto py-4 pt-8 pb-10 md:pb-12" id="top">
-        {/* Title bar */}
-        <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between">
-          <h2>{t("title")}</h2>
+    <section className="grow" aria-label={t("aria.section")}>
+      {/* Sticky title bar */}
+      <div className={STICKY_TITLE_BAR}>
+        <div className={`${PAGE_CONTAINER} pt-4`}>
+          <div className="pb-2 border-b-2 border-main-tint02 flex justify-between">
+            <h2>{t("title")}</h2>
+          </div>
         </div>
+      </div>
 
+      <div className={`${PAGE_CONTAINER} pt-4 pb-10 md:pb-12`} id="top">
         <div className="flex flex-col md:flex-row items-center">
           {/* Guide text */}
           <FadeIn className="md:w-2/3 mb-6 md:mb-0" delay={0.1}>

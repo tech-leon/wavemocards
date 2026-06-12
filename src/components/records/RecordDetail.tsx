@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { useRecordEdit } from '@/hooks/useRecordEdit';
 import { RecordDetailContent } from './RecordDetailContent';
 import { DeleteConfirmModal } from './DeleteConfirmModal';
@@ -46,8 +46,8 @@ export function RecordDetail({ recordId, initialRecord }: RecordDetailProps) {
   return (
     <>
       {/* Sticky title bar */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-2 bg-background px-3 sm:px-0`}>
-        <div className="container mx-auto pt-4">
+      <div className={STICKY_TITLE_BAR}>
+        <div className={`${PAGE_CONTAINER} pt-4`}>
           <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center gap-2">
             {/* Title */}
             <h2 className="hidden md:block">{t('title')}</h2>

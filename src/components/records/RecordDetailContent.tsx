@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { PAGE_CONTAINER } from '@/lib/layout';
 import { StoryField, detailLabelClassName } from './StoryField';
 import { formatRecordDate, buildStrengthDisplay, getExpectText } from '@/lib/record-utils';
 import type { RecordData } from '@/types/record-detail';
@@ -38,8 +39,8 @@ export function RecordDetailContent({
   const na = t('empty.notAvailable');
 
   return (
-    <div className="grow px-3 sm:px-0">
-      <div className="container mx-auto pb-20">
+    <div className="grow">
+      <div className={`${PAGE_CONTAINER} pb-20`}>
         {/* Date and emotion strength section */}
         <div className="mt-4 space-y-2">
           {/* Date */}
