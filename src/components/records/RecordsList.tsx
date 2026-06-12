@@ -9,7 +9,7 @@ import { Search, RotateCcw, Trash2, ChevronLeft, ChevronRight } from 'lucide-rea
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 
 // Types for the API response
@@ -232,8 +232,8 @@ export function RecordsList() {
 
   return (
     <section className="grow">
-    <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
-      <div className="container mx-auto pt-4 px-3 sm:px-0">
+    <div className={STICKY_TITLE_BAR}>
+      <div className={cn(PAGE_CONTAINER, 'pt-4')}>
         {/* Title */}
         <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
           <h2>{t('title')}</h2>
@@ -315,8 +315,8 @@ export function RecordsList() {
         </div>
       </div>
     </div>
-    <div className="px-3 sm:px-0">
-    <div className="container mx-auto pb-10 md:pb-12">
+    <div>
+    <div className={cn(PAGE_CONTAINER, 'pb-10 md:pb-12')}>
 
       {/* Table */}
       {loading ? (

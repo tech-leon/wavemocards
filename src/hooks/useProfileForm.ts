@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { toast } from 'sonner';
 import { updateUserProfile } from '@/lib/profile';
 import type { Profile } from '@/types/database';
 

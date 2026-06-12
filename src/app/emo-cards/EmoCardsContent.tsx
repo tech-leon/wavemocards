@@ -12,7 +12,9 @@ import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import { getEmotionCardCategoryStyle } from '@/components/emotion/emotion-card-config';
 import { EmotionTable } from '@/components/emotion/EmotionTable';
 import { BackToTopButton } from '@/components/ui/BackToTopButton';
+import { Button } from '@/components/ui/button';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import type { EmotionCardData } from '@/types/emotion-card';
 import {
   Accordion,
@@ -73,64 +75,42 @@ export function EmoCardsContent({
 
   return (
     <>
-      <div className="grow px-3 sm:px-0 min-w-0">
-        <div className="container mx-auto py-4 pt-9 pb-18" id="top">
-          {/* Header */}
-          <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
-            <h2>{t('pageTitle')}</h2>
-            <div className="flex justify-end gap-4">
-              <Link
-                href={localizeHref('/about-emotions', locale)}
-                className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
-              >
-                {t('tabs.aboutEmotions')}
-              </Link>
-              <span className="px-4 py-2 text-muted-foreground font-medium">{t('tabs.emoCards')}</span>
+      <div className="grow min-w-0">
+        {/* Sticky header: title + view-mode buttons */}
+        <div className={STICKY_TITLE_BAR}>
+          <div className={`${PAGE_CONTAINER} pt-4`}>
+            <div className="pb-2 border-b-2 border-main-tint02 flex justify-between items-center flex-wrap gap-2">
+              <h2>{t('pageTitle')}</h2>
+              <div className="flex justify-end gap-4">
+                <Link
+                  href={localizeHref('/about-emotions', locale)}
+                  className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
+                >
+                  {t('tabs.aboutEmotions')}
+                </Link>
+                <span className="px-4 py-2 text-muted-foreground font-medium">{t('tabs.emoCards')}</span>
+              </div>
+            </div>
+
+            {/* View Mode Buttons */}
+            <div className="py-4 flex justify-end items-center gap-2 md:gap-3">
+              {(['expanded', 'folded', 'table'] as const).map((mode) => (
+                <Button
+                  key={mode}
+                  variant={viewMode === mode ? 'main' : 'main-outline'}
+                  aria-pressed={viewMode === mode}
+                  onClick={() => setViewMode(mode)}
+                >
+                  {mode === 'expanded' && t('view.expand')}
+                  {mode === 'folded' && t('view.collapse')}
+                  {mode === 'table' && t('view.table')}
+                </Button>
+              ))}
             </div>
           </div>
+        </div>
 
-          {/* View Mode Buttons */}
-          <div className="sticky top-[77px] z-40 bg-background/75 backdrop-blur-sm">
-            <div className="py-6 flex justify-end items-center gap-2 md:gap-3">
-              <button
-                onClick={() => setViewMode('expanded')}
-                disabled={viewMode === 'expanded'}
-                className={cn(
-                  'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
-                  viewMode === 'expanded'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
-                    : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
-                )}
-              >
-                {t('view.expand')}
-              </button>
-              <button
-                onClick={() => setViewMode('folded')}
-                disabled={viewMode === 'folded'}
-                className={cn(
-                  'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
-                  viewMode === 'folded'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
-                    : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
-                )}
-              >
-                {t('view.collapse')}
-              </button>
-              <button
-                onClick={() => setViewMode('table')}
-                disabled={viewMode === 'table'}
-                className={cn(
-                  'px-4 py-2 rounded-full font-bold text-nowrap transition-colors',
-                  viewMode === 'table'
-                    ? 'bg-gray-200 dark:bg-gray-700 text-muted-foreground cursor-not-allowed'
-                    : 'border border-main-tint01 text-main-tint01 hover:bg-main-tint01 hover:text-white'
-                )}
-              >
-                {t('view.table')}
-              </button>
-            </div>
-          </div>
-
+        <div className={`${PAGE_CONTAINER} pb-18`} id="top">
           {/* Instructions Accordion */}
           <Accordion type="single" collapsible className="mb-12">
             <AccordionItem

@@ -23,7 +23,7 @@ import {
   emotionCategoryColors,
   emotionCategoryOrder,
 } from '@/components/emotion/emotion-card-config';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 
 interface EmotionCategorySummary {
@@ -132,8 +132,8 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
 
   return (
     <section className="grow">
-    <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
-      <div className="container mx-auto pt-4 px-3 sm:px-0">
+    <div className={STICKY_TITLE_BAR}>
+      <div className={cn(PAGE_CONTAINER, 'pt-4')}>
         {/* Title */}
         <div className="mb-5 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
           <h2>{t('title')}</h2>
@@ -182,8 +182,8 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
         </form>
       </div>
     </div>
-    <div className="px-3 sm:px-0">
-    <div className="container mx-auto pt-8 pb-10 md:pb-12">
+    <div>
+    <div className={cn(PAGE_CONTAINER, 'pt-8 pb-10 md:pb-12')}>
 
       {/* No data message */}
       {noData && (
@@ -305,7 +305,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
 
       {/* Illustration (shown when no chart) */}
       {!chartData && !noData && (
-        <div className="px-3 sm:px-0">
+        <div>
           <div className="flex justify-end">
             <Image src="/images/lime-analyze.svg" alt={t('illustrationAlt')} width={300} height={300} className="max-w-[300px]" />
           </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -24,6 +25,21 @@ interface HeaderProps {
 export function Header({ locale, user }: HeaderProps) {
   const t = useTranslations('layout.header');
   const tAria = useTranslations('aria');
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Publish the real header height as --header-height so sticky offsets
+  // (AUTH_STICKY_TOP) and viewport math track it even when the nav wraps
+  // to extra lines in wordier locales. CSS provides the SSR fallback.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () =>
+      document.documentElement.style.setProperty('--header-height', `${el.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isAuthenticated = Boolean(user);
@@ -45,6 +61,7 @@ export function Header({ locale, user }: HeaderProps) {
 
   return (
     <header
+      ref={headerRef}
       className="sticky top-0 z-50 shadow-md backdrop-blur-sm bg-muted"
       role="banner"
     >
@@ -70,7 +87,9 @@ export function Header({ locale, user }: HeaderProps) {
             )}
           </nav>
 
-          <h1>
+          {/* mb-0 cancels the global h1 margin so the logo doesn't inflate
+              the header height. */}
+          <h1 className="mb-0">
             <Link href={homeHref} className="group block h-[45px] w-[200px]">
               <span className="sr-only">{tAria('brand')}</span>
               <span
