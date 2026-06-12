@@ -10,7 +10,7 @@ import { getAboutEmotions } from '@/lib/emotions';
 import { createPublicMetadata } from '@/lib/i18n/metadata';
 import { localizeHref, resolveLocale } from '@/lib/i18n/locale';
 import { getRequestLocale } from '@/lib/i18n/request';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { cn } from '@/lib/utils';
 
 interface AboutEmotionsPageProps {
@@ -66,8 +66,8 @@ export default async function AboutEmotionsPage() {
   return (
     <>
       <section className="grow">
-        <div className={cn('sticky z-30 pb-1 bg-background/75 backdrop-blur-sm', AUTH_STICKY_TOP)}>
-          <div className="container mx-auto pt-4 px-3 sm:px-0">
+        <div className={STICKY_TITLE_BAR}>
+          <div className={cn(PAGE_CONTAINER, 'pt-4')}>
             <div className="mb-4 flex items-center justify-between border-b-2 border-main-tint02 pb-2">
               <h2>{t('pageTitle')}</h2>
               <div className="flex justify-end gap-4">
@@ -91,8 +91,8 @@ export default async function AboutEmotionsPage() {
             </div>
           </div>
         </div>
-        <div className="px-3 sm:px-0">
-        <div className="container mx-auto pb-4">
+        <div>
+        <div className={`${PAGE_CONTAINER} pb-4`}>
 
           <div className="py-4">
             <section className="mb-14">

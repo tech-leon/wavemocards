@@ -38,7 +38,7 @@ export function HomeHero({ isLoggedIn, locale }: HomeHeroProps) {
       className="homepage grow flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage }}
     >
-      <div className="container px-4 md:px-[72px]">
+      <div className="container mx-auto px-4 md:px-[72px]">
         <motion.h2
           className="type-hero-display mb-0 pt-14 text-left font-bold !text-white text-nowrap"
           initial={{ opacity: 0, x: -30 }}

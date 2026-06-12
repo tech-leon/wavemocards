@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Folder, FolderOpen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { AUTH_STICKY_TOP } from '@/lib/layout';
+import { PAGE_CONTAINER, STICKY_TITLE_BAR } from '@/lib/layout';
 import { MAX_SELECTED_CARDS } from '@/lib/emotions';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { useExploreStore } from '@/store/exploreStore';
@@ -37,8 +37,8 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
   return (
     <section className="grow" aria-label={t('aria.categorySection', { category: category.name })}>
       {/* Sticky header */}
-      <div className={`sticky ${AUTH_STICKY_TOP} z-30 pb-1 bg-background/75 backdrop-blur-sm`}>
-        <div className="container mx-auto pt-4 px-3 sm:px-0">
+      <div className={STICKY_TITLE_BAR}>
+        <div className={`${PAGE_CONTAINER} pt-4`}>
           <div className="mb-4 pb-2 border-b-2 border-main-tint02 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <Link
@@ -67,7 +67,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
         </div>
       </div>
 
-      <div className="container mx-auto py-4 px-3 sm:px-0">
+      <div className={`${PAGE_CONTAINER} py-4`}>
         <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 pt-2 pr-2 mb-16">
           {cards.map((card) => {
             const isAdded = hasCard(card.id);

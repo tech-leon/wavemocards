@@ -81,6 +81,10 @@
 }
 
 :root {
+  /* Actual rendered Header height. Header.tsx keeps it in sync with a
+     ResizeObserver (nav can wrap and grow taller in some locales); these
+     values are SSR fallbacks matching the nominal design heights. */
+  --header-height: 68px;
   --radius: 0.625rem;
   --font-sans-en: var(--font-inter), Arial, Helvetica, sans-serif;
   --font-sans-zh: var(--font-noto-sans-tc), "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
@@ -117,6 +121,12 @@
   --border: #dee2e6;            /* gray-300 */
   --input: #dee2e6;             /* gray-300 */
   --ring: #3C9DAE;              /* brand main */
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 77px;
+  }
 }
 
 .dark {
@@ -177,26 +187,28 @@
   :lang(zh) {
     font-family: var(--font-sans-zh);
   }
-}
 
-h1,
-h2,
-h3 {
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  color: var(--color-main);
-}
+  /* Element defaults live in the base layer so utilities (e.g. mb-0)
+     can override them; unlayered rules would beat every utility. */
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--color-main);
+  }
 
-h1 {
-  font-size: var(--type-h1);
-}
+  h1 {
+    font-size: var(--type-h1);
+  }
 
-h2 {
-  font-size: var(--type-h2);
-}
+  h2 {
+    font-size: var(--type-h2);
+  }
 
-h3 {
-  font-size: var(--type-h3);
+  h3 {
+    font-size: var(--type-h3);
+  }
 }
 
 .type-page-title {
