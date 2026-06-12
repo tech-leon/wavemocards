@@ -1,9 +1,7 @@
 'use server';
 
 import { withAuthContext } from '@/lib/auth-context';
-import { getRequestLocale } from '@/lib/i18n/request';
 import { localizeRecord } from '@/lib/records';
-import type { Locale } from '@/lib/i18n/locale';
 import type { RecordData } from '@/types/record-detail';
 
 /**

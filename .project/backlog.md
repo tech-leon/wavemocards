@@ -7,6 +7,7 @@
 - [ ] **手刻藥丸按鈕遷移至 Button variants**（2026-06-11 設計系統統一的後續）：約 20 個檔案仍有手刻 `rounded-full bg-main/bg-pink` 按鈕或連結（explore 流程、emo-cards、Header/MobileNav 的登入註冊、HomeHero CTA 等）。逐步改用 `<Button variant="main|main-outline|pink|pink-outline">`（連結用 `asChild`），視覺規格見 `DESIGN.md` Components。
 - [ ] **`prefers-reduced-motion` 支援**：motion.tsx 的共用 variants 與 framer-motion 進場動畫尚未尊重 reduced motion 偏好。
 - [ ] **EmoCardsContent 與 explore/cards views 的卡片 markup 重複**：`EmoCardsContent.tsx` 內重複了 `ExpandedView`/`FoldedView` 的 140px 卡片排版，可抽成共用元件。
+- [ ] **全站既有 `gray-* dark:gray-*` 手動配對 token 化**（2026-06-11 UI 巡檢遺留）：MobileNav、Footer、StoryTextarea、ThemeToggle 等仍手動配對（grep `dark:` 可列出），應改用 semantic tokens（`border-border`、`text-muted-foreground` 等）。巡檢時視覺上皆可讀，屬獨立重構工作。
 
 - [ ] **i18n 全情境驗證**（PLAN.md i18n 第 18 項）：驗證公開頁 locale prefix 導向正確、私有頁永遠無 prefix、已登入使用者沿用語言偏好、切換語言後 cookie 與資料庫同步、情緒卡內容可在 zh-TW / en / ja 三語切換。
 - [ ] **評估移除 `tsconfig.json` 的 `allowJs: true`**：目前仍存在（tsconfig.json:29），全專案皆為 TypeScript，保留會放鬆型別邊界。
