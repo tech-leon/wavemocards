@@ -69,7 +69,7 @@ export default function ExploreStrength2Page() {
           <Button
             type="button"
             variant="main-tint-outline"
-            className="px-6 py-1.5"
+            className="h-auto px-6 py-1.5"
             onClick={handleBack}
           >
             {t('actions.previous')}
@@ -77,7 +77,7 @@ export default function ExploreStrength2Page() {
           <Button
             type="button"
             variant="main"
-            className="px-6 py-1.5"
+            className="h-auto px-6 py-1.5"
             onClick={handleSave}
             disabled={saving}
           >

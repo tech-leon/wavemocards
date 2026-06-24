@@ -44,7 +44,7 @@ export default function ExploreStrength1Page() {
           <Button
             type="button"
             variant="main-tint-outline"
-            className="px-6 py-1.5"
+            className="h-auto px-6 py-1.5"
             onClick={handleBack}
           >
             {t('actions.previous')}
@@ -52,7 +52,7 @@ export default function ExploreStrength1Page() {
           <Button
             type="button"
             variant="main"
-            className="px-6 py-1.5"
+            className="h-auto px-6 py-1.5"
             onClick={handleNext}
           >
             {t('actions.next')}
@@ -125,7 +125,7 @@ export default function ExploreStrength1Page() {
             <Button
               type="button"
               variant="pink"
-              className="px-6 py-2 font-bold"
+              className="h-auto px-6 py-2 font-bold"
               onClick={() => setShowError(null)}
             >
               {t('acknowledge')}

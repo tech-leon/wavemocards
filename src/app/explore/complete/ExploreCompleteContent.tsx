@@ -18,7 +18,7 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
-        <Button asChild variant="main" className="px-8 py-1.5">
+        <Button asChild variant="main" className="h-auto px-8 py-1.5">
           <Link href="/records">{t('actions.complete')}</Link>
         </Button>
       }

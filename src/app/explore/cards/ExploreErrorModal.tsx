@@ -39,7 +39,7 @@ export function ExploreErrorModal({ error, onClose }: ExploreErrorModalProps) {
         <Button
           type="button"
           variant="pink"
-          className="px-6 py-2 font-bold"
+          className="h-auto px-6 py-2 font-bold"
           onClick={onClose}
         >
           {tCommon('confirm')}
