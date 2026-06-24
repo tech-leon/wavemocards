@@ -61,8 +61,9 @@
 6. records POST 補 level 範圍與敘事長度驗證(#3)
 → 兩項先各寫一個對應測試再改,正好啟動 Phase 3
 
-**Phase 3 — 測試地基(持續,隨功能滾入)**
-7. 加 `vitest`,先測 4 個純函式模組(#4);之後每修一個 bug 先補一個重現測試
+**Phase 3 — 測試地基(已建立,持續隨功能滾入)** ✅ 2026-06-24
+7. 加 `vitest`(node 環境、`@` alias、無 mock),測 6 個純函式模組共 76 case:`records-validation`(信任邊界)、`i18n/locale`、`records-query`、`record-utils`、`records-search`(純 tokenizer)、`profile-insert`(守 #2 欄位漂移)。`pnpm test` 綠燈,反向 mutation 驗證測試確實咬合。
+   → 之後每修一個 bug 先補一個重現測試;元件 / 整合測試待有需求再引入 jsdom
 
 **Phase 4 — UI token 統一(設計系統收尾,可延後,已在 backlog)**
 8. `gray-*` 配對 token 化(#7)、pill 按鈕遷移(#8)、EmoCards 卡片抽元件(#10)
