@@ -81,10 +81,18 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 pnpm dev               # Start dev server
 pnpm build             # Production build
 pnpm lint              # ESLint
+pnpm test              # Run vitest suite (pure-function unit tests)
+pnpm test:watch        # Vitest in watch mode
 pnpm validate:cards    # Validate card/category translations across all 3 locales
 ```
 
-No test runner yet — when adding tests, set up vitest first (see `.project/tech-debt-2026-06.md` Phase 3).
+## Testing
+
+Vitest is set up. Tests are co-located `*.test.ts`, node environment, pure functions only — no DB / network / mocks. See the existing suites in `src/lib/` for the pattern.
+
+- **Run `pnpm test` after finishing each development phase or feature, before calling it done.** Treat a green suite (plus `pnpm lint` and `pnpm build`) as the completion bar.
+- **New features and bug fixes ship with tests.** A new pure function gets its own `*.test.ts`; a bug fix gets a test that reproduces the bug first, then make it pass (see guideline 4 above).
+- Component / integration tests are deferred until needed (would require jsdom). Don't test Supabase-backed async functions in unit tests.
 
 ## Environment setup
 
