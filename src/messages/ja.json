@@ -804,7 +804,9 @@
       "updateFailed": "レコードの更新に失敗しました",
       "deleteFailed": "レコードの削除に失敗しました",
       "invalidCards": "カードは 1 枚から 3 枚までの配列である必要があります",
-      "profileCreateFailed": "プロフィールの作成に失敗しました"
+      "profileCreateFailed": "プロフィールの作成に失敗しました",
+      "invalidLevels": "感情の強さは 1 から 10 の整数である必要があります",
+      "fieldTooLong": "テキストが最大文字数を超えています"
     },
     "analysis": {
       "missingDateRange": "開始日と終了日を指定してください",

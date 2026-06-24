@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { getRequestLocale } from '@/lib/i18n/request';
 import { localizeRecord } from '@/lib/records';
 import { withAuthContext } from '@/lib/auth-context';
+import { MAX_NARRATIVE_LENGTH } from '@/lib/records-validation';
 
 /**
  * GET /api/records/[id]
@@ -75,6 +76,15 @@ export async function PUT(
 
     const body = await request.json();
     const { story, actions, results, feelings, reaction } = body;
+
+    // Cap free-text length at the trust boundary, same limit as POST.
+    if (
+      [story, actions, results, feelings, reaction].some(
+        (value) => typeof value === 'string' && value.length > MAX_NARRATIVE_LENGTH,
+      )
+    ) {
+      return NextResponse.json({ error: tRecords('fieldTooLong') }, { status: 400 });
+    }
 
     // Only allow updating story-related fields (same as old version)
     const { data: updatedRecord, error: updateError } = await supabase
