@@ -39,6 +39,44 @@ async function fetchRecordsByIds(
     .filter((r): r is NonNullable<typeof r> => r != null);
 }
 
+interface RecordInput {
+  cards: number[];
+  beforeLevels?: Record<number, number>;
+  afterLevels?: Record<number, number>;
+  storyBackground?: string;
+  storyAction?: string;
+  storyResult?: string;
+  storyFeeling?: string;
+  storyExpect?: unknown;
+  storyBetterAction?: string;
+}
+
+/** Shape an emotion_records insert row from the request body, shared by both POST paths. */
+function buildRecordRow(input: RecordInput, userId: string) {
+  const card1Id = input.cards[0] || null;
+  const card2Id = input.cards[1] || null;
+  const card3Id = input.cards[2] || null;
+
+  return {
+    user_id: userId,
+    card_1_id: card1Id,
+    card_2_id: card2Id,
+    card_3_id: card3Id,
+    before_level_1: card1Id ? input.beforeLevels?.[card1Id] || null : null,
+    before_level_2: card2Id ? input.beforeLevels?.[card2Id] || null : null,
+    before_level_3: card3Id ? input.beforeLevels?.[card3Id] || null : null,
+    after_level_1: card1Id ? input.afterLevels?.[card1Id] || null : null,
+    after_level_2: card2Id ? input.afterLevels?.[card2Id] || null : null,
+    after_level_3: card3Id ? input.afterLevels?.[card3Id] || null : null,
+    story: input.storyBackground || null,
+    actions: input.storyAction || null,
+    results: input.storyResult || null,
+    feelings: input.storyFeeling || null,
+    expect: input.storyExpect !== null && input.storyExpect !== undefined ? String(input.storyExpect) : null,
+    reaction: input.storyBetterAction || null,
+  };
+}
+
 /**
  * GET /api/records
  * Get emotion records for the current user
@@ -152,11 +190,7 @@ export async function POST(request: NextRequest) {
       }
 
       const body = await request.json();
-      const {
-        cards, beforeLevels, afterLevels,
-        storyBackground, storyAction, storyResult,
-        storyFeeling, storyExpect, storyBetterAction,
-      } = body;
+      const { cards } = body;
 
       if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
         return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
@@ -178,30 +212,9 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: tRecords('profileCreateFailed') }, { status: 500 });
       }
 
-      const card1Id = cards[0] || null;
-      const card2Id = cards[1] || null;
-      const card3Id = cards[2] || null;
-
       const { error: insertError } = await adminClient
         .from('emotion_records')
-        .insert({
-          user_id: newProfile.id,
-          card_1_id: card1Id,
-          card_2_id: card2Id,
-          card_3_id: card3Id,
-          before_level_1: card1Id ? beforeLevels?.[card1Id] || null : null,
-          before_level_2: card2Id ? beforeLevels?.[card2Id] || null : null,
-          before_level_3: card3Id ? beforeLevels?.[card3Id] || null : null,
-          after_level_1: card1Id ? afterLevels?.[card1Id] || null : null,
-          after_level_2: card2Id ? afterLevels?.[card2Id] || null : null,
-          after_level_3: card3Id ? afterLevels?.[card3Id] || null : null,
-          story: storyBackground || null,
-          actions: storyAction || null,
-          results: storyResult || null,
-          feelings: storyFeeling || null,
-          expect: storyExpect !== null && storyExpect !== undefined ? String(storyExpect) : null,
-          reaction: storyBetterAction || null,
-        });
+        .insert(buildRecordRow(body, newProfile.id));
 
       if (insertError) {
         console.error('Error inserting emotion record:', insertError);
@@ -219,40 +232,15 @@ export async function POST(request: NextRequest) {
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
 
     const body = await request.json();
-    const {
-      cards, beforeLevels, afterLevels,
-      storyBackground, storyAction, storyResult,
-      storyFeeling, storyExpect, storyBetterAction,
-    } = body;
+    const { cards } = body;
 
     if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
       return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
     }
 
-    const card1Id = cards[0] || null;
-    const card2Id = cards[1] || null;
-    const card3Id = cards[2] || null;
-
     const { error: insertError } = await supabase
       .from('emotion_records')
-      .insert({
-        user_id: profileId,
-        card_1_id: card1Id,
-        card_2_id: card2Id,
-        card_3_id: card3Id,
-        before_level_1: card1Id ? beforeLevels?.[card1Id] || null : null,
-        before_level_2: card2Id ? beforeLevels?.[card2Id] || null : null,
-        before_level_3: card3Id ? beforeLevels?.[card3Id] || null : null,
-        after_level_1: card1Id ? afterLevels?.[card1Id] || null : null,
-        after_level_2: card2Id ? afterLevels?.[card2Id] || null : null,
-        after_level_3: card3Id ? afterLevels?.[card3Id] || null : null,
-        story: storyBackground || null,
-        actions: storyAction || null,
-        results: storyResult || null,
-        feelings: storyFeeling || null,
-        expect: storyExpect !== null && storyExpect !== undefined ? String(storyExpect) : null,
-        reaction: storyBetterAction || null,
-      });
+      .insert(buildRecordRow(body, profileId));
 
     if (insertError) {
       console.error('Error inserting emotion record:', insertError);
