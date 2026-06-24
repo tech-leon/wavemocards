@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useExploreStore } from "@/store/exploreStore";
 import { PAGE_CONTAINER, STICKY_TITLE_BAR } from "@/lib/layout";
 import { FadeIn } from "@/components/ui/motion";
+import { Button } from "@/components/ui/button";
 
 export function ExploreEntryContent() {
   const t = useTranslations("explore.entry");
@@ -60,13 +61,14 @@ export function ExploreEntryContent() {
             className="md:hidden mt-2 flex justify-center w-full"
             delay={0.4}
           >
-            <button
+            <Button
               type="button"
+              variant="main"
+              className="type-button-lg h-auto w-3/4 py-6 shadow-md duration-200"
               onClick={handleStart}
-              className="type-button-lg w-3/4 py-6 bg-main hover:bg-main-dark text-white rounded-full transition-colors duration-200 shadow-md"
             >
               {t("startButton")}
-            </button>
+            </Button>
           </FadeIn>
 
           {/* Illustration */}
@@ -111,13 +113,14 @@ export function ExploreEntryContent() {
             className="hidden md:flex mt-16 justify-center w-full"
             delay={0.5}
           >
-            <button
+            <Button
               type="button"
+              variant="main"
+              className="type-button-lg h-auto w-3/4 max-w-md py-6 shadow-md duration-200"
               onClick={handleStart}
-              className="type-button-lg w-3/4 max-w-md py-6 bg-main hover:bg-main-dark text-white rounded-full transition-colors duration-200 shadow-md"
             >
               {t("startButton")}
-            </button>
+            </Button>
           </FadeIn>
         </div>
       </div>

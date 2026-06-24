@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { categoryRepresentativeCards } from '@/lib/emotions';
+import { CategoryRepresentativeCard } from '@/components/emotion/CategoryRepresentativeCard';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
 import { getEmotionCardCategoryStyle } from '@/components/emotion/emotion-card-config';
@@ -203,39 +203,15 @@ export function EmoCardsContent({
                 <li>{t('categoryCardsHint')}</li>
               </ul>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                {categories.map((category) => {
-                  const styles = getEmotionCardCategoryStyle(category.slug);
-                  const representativeCardId =
-                    categoryRepresentativeCards[category.slug] || category.id;
-
-                  return (
-                    <Link
-                      key={category.id}
-                      href={localizeHref(`/emo-cards/${category.slug}`, locale)}
-                      className={cn(
-                        'group w-[140px] h-[140px] rounded-xl',
-                        'flex flex-col items-center justify-center p-3',
-                        'transition-all duration-200',
-                        styles.bg,
-                        styles.hoverBorder,
-                        'hover:border-4 hover:p-2'
-                      )}
-                    >
-                      <div className="w-16 h-16 rounded-full overflow-hidden">
-                        <Image
-                          src={`/images/emoCards/${representativeCardId}.svg`}
-                          alt={category.name}
-                          width={64}
-                          height={64}
-                          className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
-                        />
-                      </div>
-                      <p className="type-subsection-title mt-2">
-                        {category.name[0]}&nbsp;{category.name[1]}
-                      </p>
-                    </Link>
-                  );
-                })}
+                {categories.map((category) => (
+                  <CategoryRepresentativeCard
+                    key={category.id}
+                    slug={category.slug}
+                    name={category.name}
+                    href={localizeHref(`/emo-cards/${category.slug}`, locale)}
+                    imageId={categoryRepresentativeCards[category.slug] || category.id}
+                  />
+                ))}
               </div>
             </div>
           )}

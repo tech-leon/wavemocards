@@ -62,10 +62,11 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                   </Button>
                 ))}
               </div>
-              <button
+              <Button
                 type="button"
+                variant="main"
+                className="group h-auto w-60 gap-1 px-4 py-1.5"
                 onClick={handleOpenHolder}
-                className="type-button group w-60 px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex justify-center items-center gap-1 transition-colors"
               >
                 <Folder className="w-4 h-4 group-hover:hidden" />
                 <FolderOpen className="w-4 h-4 hidden group-hover:block" />
@@ -75,7 +76,7 @@ export function ExploreCardsContent({ categories, cards }: ExploreCardsContentPr
                     {selectedCards.length}
                   </span>
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

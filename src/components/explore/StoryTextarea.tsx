@@ -15,7 +15,7 @@ export function StoryTextarea({
       <textarea
         {...props}
         className={cn(
-          'block w-full box-border rounded border border-gray-500 bg-gray-100 px-3 py-3 text-gray-900 focus:border-main focus:outline-none dark:border-gray-400 dark:bg-gray-900 dark:text-gray-100',
+          'block w-full box-border rounded border border-input bg-background px-3 py-3 text-foreground focus:border-main focus:outline-none',
           className
         )}
       />

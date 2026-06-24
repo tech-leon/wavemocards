@@ -24,6 +24,8 @@ const buttonVariants = cva(
         main: "rounded-full bg-main font-bold text-white hover:bg-main-dark",
         "main-outline":
           "rounded-full border-2 border-main bg-transparent font-bold text-main hover:bg-main hover:text-white dark:hover:text-gray-900",
+        "main-tint-outline":
+          "rounded-full border-2 border-main-tint01 bg-transparent font-bold text-main-tint01 hover:bg-main-tint03",
         pink: "rounded-full bg-pink text-white hover:bg-pink-dark",
         "pink-outline":
           "rounded-full border-2 border-pink bg-transparent text-pink hover:bg-pink/10",

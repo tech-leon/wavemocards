@@ -129,7 +129,7 @@ export async function Footer({ locale }: FooterProps) {
         </div>
       </div>
 
-      <div className="bg-gray-300 text-foreground dark:bg-gray-900">
+      <div className="bg-muted text-foreground">
         <div className="mx-auto flex min-h-12 max-w-7xl items-center justify-center px-4 py-2 text-center sm:whitespace-nowrap sm:px-6">
           {t('copyright', { year })}
         </div>

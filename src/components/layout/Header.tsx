@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Settings, LogOut } from 'lucide-react';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
+import { buttonVariants } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
@@ -125,13 +126,13 @@ export function Header({ locale, user }: HeaderProps) {
               <>
                 <AuthNavigationButton
                   href={signInHref}
-                  className="type-button inline-flex h-9 items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main dark:hover:text-gray-900"
+                  className={buttonVariants({ variant: 'main-outline' })}
                 >
                   {t('links.signIn')}
                 </AuthNavigationButton>
                 <AuthNavigationButton
                   href={signUpHref}
-                  className="type-button inline-flex h-9 items-center justify-center rounded-full bg-pink px-4 py-2 text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
+                  className={buttonVariants({ variant: 'pink' })}
                 >
                   {t('links.signUp')}
                 </AuthNavigationButton>
