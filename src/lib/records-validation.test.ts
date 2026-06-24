@@ -33,6 +33,8 @@ describe('validateRecordInput', () => {
     ['missing cards', { beforeLevels: { 1: 5 } }],
     ['non-integer card', { cards: [1.5] }],
     ['non-number card', { cards: ['1'] }],
+    ['card id 0', { cards: [0] }],
+    ['negative card id', { cards: [-1] }],
   ])('rejects %s as invalidCards', (_label, body) => {
     const result = validateRecordInput(body);
     expect(result).toEqual({ ok: false, key: 'invalidCards' });

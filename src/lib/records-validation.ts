@@ -39,7 +39,7 @@ export function validateRecordInput(
   const cards = payload.cards;
   if (
     !Array.isArray(cards) || cards.length === 0 || cards.length > 3 ||
-    !cards.every((c) => typeof c === 'number' && Number.isInteger(c))
+    !cards.every((c) => typeof c === 'number' && Number.isInteger(c) && c > 0)
   ) {
     return { ok: false, key: 'invalidCards' };
   }
