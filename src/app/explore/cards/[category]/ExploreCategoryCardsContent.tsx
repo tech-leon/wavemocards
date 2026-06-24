@@ -11,6 +11,7 @@ import { useExploreStore } from '@/store/exploreStore';
 import { useOpenHolder } from '@/hooks/useOpenHolder';
 import { EmotionCard as EmotionCardComponent } from '@/components/emotion/EmotionCard';
 import { EmotionCardModal } from '@/components/emotion/EmotionCardModal';
+import { Button } from '@/components/ui/button';
 import { ExploreErrorModal } from '../ExploreErrorModal';
 import type { EmotionCategory, EmotionCard as EmotionCardRecord } from '@/lib/emotions';
 import type { EmotionCardData } from '@/types/emotion-card';
@@ -49,10 +50,11 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
               </Link>
               <h2>{t('titles.category', { category: category.name })}</h2>
             </div>
-            <button
+            <Button
               type="button"
+              variant="main"
+              className="group gap-1 px-4 py-1.5"
               onClick={handleOpenHolder}
-              className="type-button group px-4 py-1.5 bg-main hover:bg-main-dark text-white font-bold rounded-full flex items-center gap-1 transition-colors"
             >
               <Folder className="w-4 h-4 group-hover:hidden" />
               <FolderOpen className="w-4 h-4 hidden group-hover:block" />
@@ -62,7 +64,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
                   {selectedCards.length}
                 </span>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
