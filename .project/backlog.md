@@ -6,6 +6,7 @@
 
 - [ ] **手刻藥丸按鈕遷移至 Button variants（剩餘批次，低優先）**（2026-06-11 設計系統統一的後續）：2026-06-24 Phase 4 已遷移 explore 流程與 Header/MobileNav 登入註冊。剩下這些評估後判定非乾淨藥丸、強遷視覺風險 > 收益，刻意保留：HomeHero hero CTA（超大尺寸 + `border-4 border-white`）、`BackToTopButton`（`motion.button` + `bg-main-tint01`）、三個分頁式 tab 連結（`border` 1px + `font-medium`，改 `main-outline` 會變粗體粗邊框）、`RecordsList`/`RecordDetail`/`RecordAnalysis`（按鈕雜需逐顆目視）。要動的話以視覺驗證為主。
 - [ ] **`prefers-reduced-motion` 支援**：motion.tsx 的共用 variants 與 framer-motion 進場動畫尚未尊重 reduced motion 偏好。
+- [ ] **records 驗證未對 `cards` 去重**（PR #10 review 觀察，非該 PR 引入）：`records-validation.ts` 允許 `cards: [1,1,1]` 通過，會讓 `buildRecordRow` 把 card1/2/3 指向同一張卡。explore 流程客戶端 `addCard` 已擋重複,僅 crafted request 可觸發,影響低。修法:驗證時 `[...new Set(cards)]` 去重或拒絕重複。
 
 - [ ] **i18n 全情境驗證**（PLAN.md i18n 第 18 項）：驗證公開頁 locale prefix 導向正確、私有頁永遠無 prefix、已登入使用者沿用語言偏好、切換語言後 cookie 與資料庫同步、情緒卡內容可在 zh-TW / en / ja 三語切換。
 - [ ] **處理 `next build` workspace root 警告**：上層目錄（`/Users/leon`）存在另一個 `pnpm-lock.yaml`，導致 workspace root 被誤推。設定 `turbopack.root` 或整理上層 lockfile。（狀態未重新驗證，修復前先跑一次 `pnpm build` 確認）
