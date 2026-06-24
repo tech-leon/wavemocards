@@ -149,7 +149,7 @@ export default async function AboutEmotionsPage() {
                 href="https://wmc.hkfyg.org.hk/emo1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="type-body-sm text-gray-500 transition-colors hover:text-main dark:text-gray-300"
+                className="type-body-sm text-muted-foreground transition-colors hover:text-main"
               >
                 {t('sourceLabel')} {t('sourceName')}
               </a>

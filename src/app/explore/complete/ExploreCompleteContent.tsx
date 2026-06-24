@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { ExploreStepLayout } from '@/components/explore';
+import { Button } from '@/components/ui/button';
 
 interface ExploreCompleteContentProps {
   userName: string;
@@ -17,12 +18,9 @@ export function ExploreCompleteContent({ userName }: ExploreCompleteContentProps
       title={t('title')}
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
-        <Link
-          href="/records"
-          className="type-button px-8 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
-        >
-          {t('actions.complete')}
-        </Link>
+        <Button asChild variant="main" className="h-auto px-8 py-1.5">
+          <Link href="/records">{t('actions.complete')}</Link>
+        </Button>
       }
     >
       <ul className="ml-1 mt-3 mb-9 space-y-1">

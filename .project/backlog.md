@@ -4,13 +4,19 @@
 
 ## 待辦
 
-- [ ] **手刻藥丸按鈕遷移至 Button variants**（2026-06-11 設計系統統一的後續）：約 20 個檔案仍有手刻 `rounded-full bg-main/bg-pink` 按鈕或連結（explore 流程、emo-cards、Header/MobileNav 的登入註冊、HomeHero CTA 等）。逐步改用 `<Button variant="main|main-outline|pink|pink-outline">`（連結用 `asChild`），視覺規格見 `DESIGN.md` Components。
+- [ ] **手刻藥丸按鈕遷移至 Button variants（剩餘批次，低優先）**（2026-06-11 設計系統統一的後續）：2026-06-24 Phase 4 已遷移 explore 流程與 Header/MobileNav 登入註冊。剩下這些評估後判定非乾淨藥丸、強遷視覺風險 > 收益，刻意保留：HomeHero hero CTA（超大尺寸 + `border-4 border-white`）、`BackToTopButton`（`motion.button` + `bg-main-tint01`）、三個分頁式 tab 連結（`border` 1px + `font-medium`，改 `main-outline` 會變粗體粗邊框）、`RecordsList`/`RecordDetail`/`RecordAnalysis`（按鈕雜需逐顆目視）。要動的話以視覺驗證為主。
 - [ ] **`prefers-reduced-motion` 支援**：motion.tsx 的共用 variants 與 framer-motion 進場動畫尚未尊重 reduced motion 偏好。
-- [ ] **EmoCardsContent 與 explore/cards views 的卡片 markup 重複**：`EmoCardsContent.tsx` 內重複了 `ExpandedView`/`FoldedView` 的 140px 卡片排版，可抽成共用元件。
-- [ ] **全站既有 `gray-* dark:gray-*` 手動配對 token 化**（2026-06-11 UI 巡檢遺留）：MobileNav、Footer、StoryTextarea、ThemeToggle 等仍手動配對（grep `dark:` 可列出），應改用 semantic tokens（`border-border`、`text-muted-foreground` 等）。巡檢時視覺上皆可讀，屬獨立重構工作。
+- [ ] **records 驗證未對 `cards` 去重**（PR #10 review 觀察，非該 PR 引入）：`records-validation.ts` 允許 `cards: [1,1,1]` 通過，會讓 `buildRecordRow` 把 card1/2/3 指向同一張卡。explore 流程客戶端 `addCard` 已擋重複,僅 crafted request 可觸發,影響低。修法:驗證時 `[...new Set(cards)]` 去重或拒絕重複。
 
 - [ ] **i18n 全情境驗證**（PLAN.md i18n 第 18 項）：驗證公開頁 locale prefix 導向正確、私有頁永遠無 prefix、已登入使用者沿用語言偏好、切換語言後 cookie 與資料庫同步、情緒卡內容可在 zh-TW / en / ja 三語切換。
 - [ ] **處理 `next build` workspace root 警告**：上層目錄（`/Users/leon`）存在另一個 `pnpm-lock.yaml`，導致 workspace root 被誤推。設定 `turbopack.root` 或整理上層 lockfile。（狀態未重新驗證，修復前先跑一次 `pnpm build` 確認）
+
+## 已完成（2026-06-24 Phase 4 UI token 統一）
+
+- **`gray-* dark:gray-*` 手動配對 token 化**：ThemeToggle、SignOutButton、ExploreStoryBackgroundContent、about-emotions、Footer、StoryTextarea、MobileNav 改用 semantic tokens。刻意保留非中性灰（EmotionTable 情緒色卡文字、EmotionCardModal、各 fallback 預設、ProgressBar/StrengthSelector 客製灰階），換了會在 dark mode 翻色。
+- **EmoCardsContent 與 FoldedView 卡片 markup 重複**：抽出 `src/components/emotion/CategoryRepresentativeCard.tsx`，取代兩處重複的 140px 代表卡，消約 50 行。Chrome 驗證 light/dark 皆與原本一致。
+- **`main-tint-outline` variant**：`button.tsx` 新增，收編 explore「上一步」鈕（`border-main-tint01`）。
+- **Header/MobileNav 登入鈕 dark mode**：原為殘留的 shadcn input 樣式（`border-input` + `bg-input/30`），改用 `main-outline`（品牌青色邊框）。Chrome 已驗證 dark mode 外觀正確。
 
 ## 已確認修復（原 PLAN.md 提及，現況已不存在）
 

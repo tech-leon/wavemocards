@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StrengthSelector } from '@/components/explore';
+import { Button } from '@/components/ui/button';
 
 export default function ExploreStrength1Page() {
   const t = useTranslations('explore.strength1');
@@ -40,20 +41,22 @@ export default function ExploreStrength1Page() {
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
-          <button
+          <Button
             type="button"
+            variant="main-tint-outline"
+            className="h-auto px-6 py-1.5"
             onClick={handleBack}
-            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             {t('actions.previous')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="main"
+            className="h-auto px-6 py-1.5"
             onClick={handleNext}
-            className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
             {t('actions.next')}
-          </button>
+          </Button>
         </>
       }
     >
@@ -119,13 +122,14 @@ export default function ExploreStrength1Page() {
               <p className="type-body-sm mb-4 text-foreground">{t('errors.levelsDescription')}</p>
             )}
             <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
-            <button
+            <Button
               type="button"
+              variant="pink"
+              className="h-auto px-6 py-2 font-bold"
               onClick={() => setShowError(null)}
-              className="type-button px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
             >
               {t('acknowledge')}
-            </button>
+            </Button>
           </div>
         </div>
       )}
