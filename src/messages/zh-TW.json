@@ -804,7 +804,9 @@
       "updateFailed": "更新紀錄失敗",
       "deleteFailed": "刪除紀錄失敗",
       "invalidCards": "卡片必須是 1 到 3 張的陣列",
-      "profileCreateFailed": "建立使用者資料失敗"
+      "profileCreateFailed": "建立使用者資料失敗",
+      "invalidLevels": "情緒強度必須是 1 到 10 的整數",
+      "fieldTooLong": "文字內容超過長度上限"
     },
     "analysis": {
       "missingDateRange": "必須提供開始與結束日期",

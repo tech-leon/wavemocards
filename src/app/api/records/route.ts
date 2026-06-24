@@ -12,6 +12,8 @@ import {
 import { buildSearchTokens, resolveMatchingCardIds } from '@/lib/records-search';
 import { withAuthContext } from '@/lib/auth-context';
 import { createAdminClient } from '@/lib/supabase';
+import { buildProfileInsert } from '@/lib/profile-insert';
+import { validateRecordInput, type RecordInput } from '@/lib/records-validation';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/database';
 import type { SearchEmotionRecordsRow } from '@/types/database';
@@ -37,18 +39,6 @@ async function fetchRecordsByIds(
   return recordIds
     .map((recordId) => recordsById.get(recordId))
     .filter((r): r is NonNullable<typeof r> => r != null);
-}
-
-interface RecordInput {
-  cards: number[];
-  beforeLevels?: Record<number, number>;
-  afterLevels?: Record<number, number>;
-  storyBackground?: string;
-  storyAction?: string;
-  storyResult?: string;
-  storyFeeling?: string;
-  storyExpect?: unknown;
-  storyBetterAction?: string;
 }
 
 /** Shape an emotion_records insert row from the request body, shared by both POST paths. */
@@ -190,20 +180,14 @@ export async function POST(request: NextRequest) {
       }
 
       const body = await request.json();
-      const { cards } = body;
-
-      if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-        return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+      const validation = validateRecordInput(body);
+      if (!validation.ok) {
+        return NextResponse.json({ error: tRecords(validation.key) }, { status: 400 });
       }
 
       const { data: newProfile, error: createError } = await adminClient
         .from('profiles')
-        .insert({
-          workos_user_id: user.id,
-          email: user.email,
-          first_name: user.firstName || null,
-          last_name: user.lastName || null,
-        })
+        .insert(buildProfileInsert(user))
         .select('id')
         .single();
 
@@ -214,7 +198,7 @@ export async function POST(request: NextRequest) {
 
       const { error: insertError } = await adminClient
         .from('emotion_records')
-        .insert(buildRecordRow(body, newProfile.id));
+        .insert(buildRecordRow(validation.input, newProfile.id));
 
       if (insertError) {
         console.error('Error inserting emotion record:', insertError);
@@ -232,15 +216,14 @@ export async function POST(request: NextRequest) {
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
 
     const body = await request.json();
-    const { cards } = body;
-
-    if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-      return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+    const validation = validateRecordInput(body);
+    if (!validation.ok) {
+      return NextResponse.json({ error: tRecords(validation.key) }, { status: 400 });
     }
 
     const { error: insertError } = await supabase
       .from('emotion_records')
-      .insert(buildRecordRow(body, profileId));
+      .insert(buildRecordRow(validation.input, profileId));
 
     if (insertError) {
       console.error('Error inserting emotion record:', insertError);
