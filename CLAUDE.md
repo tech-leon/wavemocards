@@ -7,8 +7,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Use English for code and comments. Plans should be written in Traditional Chinese.
 - Do not use Simplified Chinese anywhere.
 - Use pnpm to manage packages — never npm.
-- Do not create `.md` conclusion files after tasks.
-- Do not run `open` after finishing tasks.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
 - Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
 - The design system lives in `DESIGN.md` (visual spec) and `PRODUCT.md` (strategy); `.project/style.md` is the quick reference. Follow them for any UI work.
