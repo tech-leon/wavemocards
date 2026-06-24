@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
-import { cn } from '@/lib/utils';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StrengthSelector } from '@/components/explore';
+import { Button } from '@/components/ui/button';
 
 export default function ExploreStrength2Page() {
   const t = useTranslations('explore.strength2');
@@ -66,24 +66,23 @@ export default function ExploreStrength2Page() {
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
-          <button
+          <Button
             type="button"
+            variant="main-tint-outline"
+            className="px-6 py-1.5"
             onClick={handleBack}
-            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             {t('actions.previous')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="main"
+            className="px-6 py-1.5"
             onClick={handleSave}
             disabled={saving}
-            className={cn(
-              'type-button px-6 py-1.5 font-bold rounded-full bg-main text-white transition-colors',
-              saving ? 'cursor-not-allowed opacity-60' : 'hover:bg-main-dark'
-            )}
           >
             {saving ? t('actions.saving') : t('actions.saveRecord')}
-          </button>
+          </Button>
         </>
       }
     >

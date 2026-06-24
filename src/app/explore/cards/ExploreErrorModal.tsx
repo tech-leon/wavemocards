@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 interface ExploreErrorModalProps {
   error: 'tooFew' | 'tooMany' | null;
@@ -35,13 +36,14 @@ export function ExploreErrorModal({ error, onClose }: ExploreErrorModalProps) {
           </div>
         )}
         <Image src="/images/addCardFail.svg" alt="" width={150} height={150} className="mx-auto mb-4" />
-        <button
+        <Button
           type="button"
+          variant="pink"
+          className="px-6 py-2 font-bold"
           onClick={onClose}
-          className="type-button px-6 py-2 rounded-full bg-pink hover:bg-pink-dark text-white font-bold"
         >
           {tCommon('confirm')}
-        </button>
+        </Button>
       </div>
     </div>
   );

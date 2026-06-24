@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
+import { Button } from '@/components/ui/button';
 
 interface ExploreStoryBackgroundContentProps {
   userName: string;
@@ -35,20 +36,22 @@ export function ExploreStoryBackgroundContent({
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
-          <button
+          <Button
             type="button"
+            variant="main-tint-outline"
+            className="px-6 py-1.5"
             onClick={handleBack}
-            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             {t('actions.previous')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="main"
+            className="px-6 py-1.5"
             onClick={handleNext}
-            className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
             {t('actions.next')}
-          </button>
+          </Button>
         </>
       }
     >
@@ -94,7 +97,7 @@ export function ExploreStoryBackgroundContent({
       <div className="type-caption text-right text-muted-foreground">
         Illustration by{' '}
         <a
-          className="text-gray-500 hover:text-main dark:text-gray-300"
+          className="text-muted-foreground hover:text-main"
           href="https://icons8.com/illustrations/author/iAdLsFJOKDrk"
           target="_blank"
           rel="noopener noreferrer"
@@ -103,7 +106,7 @@ export function ExploreStoryBackgroundContent({
         </a>{' '}
         from{' '}
         <a
-          className="text-gray-500 hover:text-main dark:text-gray-300"
+          className="text-muted-foreground hover:text-main"
           href="https://icons8.com/illustrations"
           target="_blank"
           rel="noopener noreferrer"

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useExploreStore } from '@/store/exploreStore';
 import { ExploreStepLayout, StoryTextarea } from '@/components/explore';
+import { Button } from '@/components/ui/button';
 
 export default function ExploreStoryActionPage() {
   const t = useTranslations('explore.storyAction');
@@ -42,20 +43,22 @@ export default function ExploreStoryActionPage() {
       titleMobile={{ line1: t('titleMobile.line1'), line2: t('titleMobile.line2') }}
       actions={
         <>
-          <button
+          <Button
             type="button"
+            variant="main-tint-outline"
+            className="px-6 py-1.5"
             onClick={handleBack}
-            className="type-button px-6 py-1.5 font-bold rounded-full border-2 border-main-tint01 text-main-tint01 hover:bg-main-tint03 transition-colors"
           >
             {t('actions.previous')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="main"
+            className="px-6 py-1.5"
             onClick={handleNext}
-            className="type-button px-6 py-1.5 font-bold rounded-full bg-main hover:bg-main-dark text-white transition-colors"
           >
             {t('actions.next')}
-          </button>
+          </Button>
         </>
       }
     >

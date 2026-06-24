@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Menu, X, Settings, LogOut, Home, Heart, BookOpen, FolderOpen } from 'lucide-react';
 import { AuthNavigationButton } from '@/components/auth/AuthNavigationButton';
+import { buttonVariants } from '@/components/ui/button';
 import { buildAuthHref, buildCurrentReturnTo, buildSignOutHref } from '@/lib/auth-routing';
 import { motion, AnimatePresence } from '@/components/ui/motion';
 import { localizeHref, type Locale } from '@/lib/i18n/locale';
@@ -55,14 +56,14 @@ export function MobileNav({ locale, user }: MobileNavProps) {
   }, [isOpen]);
 
   const mobileItemClass =
-    'flex items-center gap-3 rounded-lg px-3 py-2 text-gray-800 transition-colors hover:bg-gray-200/70 hover:text-main dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-main-tint01';
+    'flex items-center gap-3 rounded-lg px-3 py-2 text-foreground transition-colors hover:bg-muted/70 hover:text-main dark:hover:text-main-tint01';
 
   return (
     <>
       <button
         type="button"
         onClick={toggleMenu}
-        className="inline-flex rounded-md p-2 text-gray-800 transition-colors hover:bg-gray-200/70 hover:text-main dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-main-tint01"
+        className="inline-flex rounded-md p-2 text-foreground transition-colors hover:bg-muted/70 hover:text-main dark:hover:text-main-tint01"
         aria-label={tAria('toggleMenu')}
         aria-expanded={isOpen}
       >
@@ -82,7 +83,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
             />
 
             <motion.div
-              className="fixed right-0 top-[73px] z-50 h-[calc(100dvh-73px)] w-[min(85vw,360px)] overflow-y-auto border-l border-gray-200 bg-gray-100 p-6 shadow-xl dark:border-gray-700 dark:bg-gray-900 lg:hidden"
+              className="fixed right-0 top-[73px] z-50 h-[calc(100dvh-73px)] w-[min(85vw,360px)] overflow-y-auto border-l border-border bg-background p-6 shadow-xl lg:hidden"
               role="dialog"
               aria-modal="true"
               aria-label={tAria('mobileNavigationMenu')}
@@ -91,7 +92,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
               exit={{ x: '100%' }}
               transition={{ duration: 0.26, ease: 'easeOut' }}
             >
-              <div className="mb-4 border-b border-gray-300 pb-4 dark:border-gray-700">
+              <div className="mb-4 border-b border-border pb-4">
                 <div className="mb-3 flex items-center justify-between">
                   <p className="type-button text-foreground">{tLanguage('label')}</p>
                   <LanguageSwitcher
@@ -99,7 +100,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                     isAuthenticated={Boolean(user)}
                     onChanged={closeMenu}
                     className="inline-flex"
-                    triggerClassName="h-10 w-10 border-gray-300 text-gray-800 dark:border-gray-600 dark:text-gray-100"
+                    triggerClassName="h-10 w-10 border-input text-foreground"
                   />
                 </div>
               </div>
@@ -130,7 +131,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                         <span>{t('links.emoCards')}</span>
                       </Link>
                     </li>
-                    <li className="mt-4 border-t border-gray-300 pt-4 dark:border-gray-700">
+                    <li className="mt-4 border-t border-border pt-4">
                       <Link href="/account" onClick={closeMenu} className={mobileItemClass}>
                         <Settings className="size-5" />
                         <span>{t('links.account')}</span>
@@ -167,11 +168,11 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                         <span>{t('links.emoCards')}</span>
                       </Link>
                     </li>
-                    <li className="mt-4 border-t border-gray-300 pt-4 dark:border-gray-700">
+                    <li className="mt-4 border-t border-border pt-4">
                       <AuthNavigationButton
                         href={signInHref}
                         onNavigate={closeMenu}
-                        className="type-button inline-flex h-9 w-full items-center justify-center rounded-full border-2 border-main bg-background px-4 py-2 text-main shadow-xs transition-all hover:bg-main hover:text-white disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30 dark:border-input dark:hover:bg-main"
+                        className={`${buttonVariants({ variant: 'main-outline' })} w-full`}
                       >
                         {t('links.signIn')}
                       </AuthNavigationButton>
@@ -180,7 +181,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
                       <AuthNavigationButton
                         href={signUpHref}
                         onNavigate={closeMenu}
-                        className="type-button inline-flex h-9 w-full items-center justify-center rounded-full bg-pink px-4 py-2 text-white transition-all hover:bg-pink-dark disabled:pointer-events-none disabled:opacity-50"
+                        className={`${buttonVariants({ variant: 'pink' })} w-full`}
                       >
                         {t('links.signUp')}
                       </AuthNavigationButton>
