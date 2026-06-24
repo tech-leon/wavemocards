@@ -1,17 +1,79 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Behavioral guidelines to reduce common LLM coding mistakes.
+
+## 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
 
 ## Repository conventions
 
 - Use English for code and comments. Plans should be written in Traditional Chinese.
 - Do not use Simplified Chinese anywhere.
 - Use pnpm to manage packages — never npm.
-- Do not create `.md` conclusion files after tasks.
-- Do not run `open` after finishing tasks.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
 - Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
 - The design system lives in `DESIGN.md` (visual spec) and `PRODUCT.md` (strategy); `.project/style.md` is the quick reference. Follow them for any UI work.
+- **Plan**: Write your plan in Traditional Chinese.
+- **Memories**: You manage your own memory. Record and update it to ensure that essential information is not forgotten across different sessions, and unnecessary memories can be deleted. DO NOT ask "Do you want to add xxx memory?"
 
 ## Commands
 
@@ -22,7 +84,7 @@ pnpm lint              # ESLint
 pnpm validate:cards    # Validate card/category translations across all 3 locales
 ```
 
-No test runner is configured.
+No test runner yet — when adding tests, set up vitest first (see `.project/tech-debt-2026-06.md` Phase 3).
 
 ## Environment setup
 
@@ -100,6 +162,17 @@ Three locales: `en`, `ja`, `zh-TW`.
 /api/user                             GET profile
 /api/auth/callback                    WorkOS OAuth callback
 ```
+
+Each `(auth)/explore/.../page.tsx` is a thin route wrapper; its UI lives in a sibling `*Content.tsx` under `src/app/explore/` (e.g. `ExploreCardsContent.tsx`). The two trees are not a route conflict — only the `(auth)` tree has `page.tsx` files.
+
+### API input validation
+
+All API route handlers validate request bodies at the trust boundary before any DB write:
+- Range-check numeric inputs (e.g. emotion levels must be 1–10).
+- Cap free-text field length before insert.
+- Reject malformed shapes with a 400 and a translated `apiErrors.*` message.
+
+`src/app/api/user/route.ts` (PUT) is the reference implementation.
 
 ### State management
 

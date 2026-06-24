@@ -117,7 +117,7 @@ export function RecordAnalysis({ categories }: RecordAnalysisProps) {
           slug,
           name: categoryNameMap.get(slug) || slug,
           count: (categoryCounts as Record<string, number>)[slug],
-          color: emotionCategoryColors[slug] || '#EBEBEB',
+          color: emotionCategoryColors[slug] || emotionCategoryColors.others,
           percentage: Number((((categoryCounts as Record<string, number>)[slug] / total) * 100).toFixed(1)),
         }));
 
