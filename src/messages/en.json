@@ -804,7 +804,9 @@
       "updateFailed": "Failed to update record",
       "deleteFailed": "Failed to delete record",
       "invalidCards": "Cards must be an array containing 1 to 3 cards",
-      "profileCreateFailed": "Failed to create profile"
+      "profileCreateFailed": "Failed to create profile",
+      "invalidLevels": "Emotion levels must be integers between 1 and 10",
+      "fieldTooLong": "Text content exceeds the maximum length"
     },
     "analysis": {
       "missingDateRange": "Both start date and end date are required",

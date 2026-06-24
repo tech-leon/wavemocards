@@ -12,6 +12,7 @@ import {
 import { buildSearchTokens, resolveMatchingCardIds } from '@/lib/records-search';
 import { withAuthContext } from '@/lib/auth-context';
 import { createAdminClient } from '@/lib/supabase';
+import { buildProfileInsert } from '@/lib/profile-insert';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/database';
 import type { SearchEmotionRecordsRow } from '@/types/database';
@@ -75,6 +76,63 @@ function buildRecordRow(input: RecordInput, userId: string) {
     expect: input.storyExpect !== null && input.storyExpect !== undefined ? String(input.storyExpect) : null,
     reaction: input.storyBetterAction || null,
   };
+}
+
+/** Max length for each free-text narrative field, capped before insert to avoid abuse. */
+const MAX_NARRATIVE_LENGTH = 5000;
+
+const NARRATIVE_FIELDS = [
+  'storyBackground', 'storyAction', 'storyResult',
+  'storyFeeling', 'storyExpect', 'storyBetterAction',
+] as const;
+
+type RecordValidationError = 'invalidCards' | 'invalidLevels' | 'fieldTooLong';
+
+function isValidLevel(value: unknown): boolean {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 10;
+}
+
+/**
+ * Validate a POST /api/records body at the trust boundary.
+ * Pure function (no request/locale) — returns a translation key on failure.
+ */
+function validateRecordInput(
+  body: unknown,
+): { ok: true; input: RecordInput } | { ok: false; key: RecordValidationError } {
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return { ok: false, key: 'invalidCards' };
+  }
+  const payload = body as Record<string, unknown>;
+
+  const cards = payload.cards;
+  if (
+    !Array.isArray(cards) || cards.length === 0 || cards.length > 3 ||
+    !cards.every((c) => typeof c === 'number' && Number.isInteger(c))
+  ) {
+    return { ok: false, key: 'invalidCards' };
+  }
+
+  // Levels are optional; when present for a selected card they must be an integer 1–10.
+  const beforeLevels = payload.beforeLevels as Record<number, unknown> | undefined;
+  const afterLevels = payload.afterLevels as Record<number, unknown> | undefined;
+  for (const cardId of cards) {
+    for (const levels of [beforeLevels, afterLevels]) {
+      const value = levels?.[cardId];
+      if (value !== undefined && value !== null && !isValidLevel(value)) {
+        return { ok: false, key: 'invalidLevels' };
+      }
+    }
+  }
+
+  // Cap free-text length.
+  for (const field of NARRATIVE_FIELDS) {
+    const value = payload[field];
+    if (value !== undefined && value !== null && String(value).length > MAX_NARRATIVE_LENGTH) {
+      return { ok: false, key: 'fieldTooLong' };
+    }
+  }
+
+  return { ok: true, input: payload as unknown as RecordInput };
 }
 
 /**
@@ -190,20 +248,14 @@ export async function POST(request: NextRequest) {
       }
 
       const body = await request.json();
-      const { cards } = body;
-
-      if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-        return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+      const validation = validateRecordInput(body);
+      if (!validation.ok) {
+        return NextResponse.json({ error: tRecords(validation.key) }, { status: 400 });
       }
 
       const { data: newProfile, error: createError } = await adminClient
         .from('profiles')
-        .insert({
-          workos_user_id: user.id,
-          email: user.email,
-          first_name: user.firstName || null,
-          last_name: user.lastName || null,
-        })
+        .insert(buildProfileInsert(user))
         .select('id')
         .single();
 
@@ -214,7 +266,7 @@ export async function POST(request: NextRequest) {
 
       const { error: insertError } = await adminClient
         .from('emotion_records')
-        .insert(buildRecordRow(body, newProfile.id));
+        .insert(buildRecordRow(validation.input, newProfile.id));
 
       if (insertError) {
         console.error('Error inserting emotion record:', insertError);
@@ -232,15 +284,14 @@ export async function POST(request: NextRequest) {
     const tRecords = await getTranslations({ locale, namespace: 'apiErrors.records' });
 
     const body = await request.json();
-    const { cards } = body;
-
-    if (!cards || !Array.isArray(cards) || cards.length === 0 || cards.length > 3) {
-      return NextResponse.json({ error: tRecords('invalidCards') }, { status: 400 });
+    const validation = validateRecordInput(body);
+    if (!validation.ok) {
+      return NextResponse.json({ error: tRecords(validation.key) }, { status: 400 });
     }
 
     const { error: insertError } = await supabase
       .from('emotion_records')
-      .insert(buildRecordRow(body, profileId));
+      .insert(buildRecordRow(validation.input, profileId));
 
     if (insertError) {
       console.error('Error inserting emotion record:', insertError);

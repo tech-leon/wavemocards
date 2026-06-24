@@ -8,6 +8,7 @@ import {
 import { getRequestLocale } from '@/lib/i18n/request';
 import { withAuthContext } from '@/lib/auth-context';
 import { createAdminClient } from '@/lib/supabase';
+import { buildProfileInsert } from '@/lib/profile-insert';
 import type { Database } from '@/types/database';
 
 type LocalePreference = 'zh-TW' | 'en' | 'ja';
@@ -54,13 +55,7 @@ export async function GET() {
 
         const { data: newProfile, error: insertError } = await adminClient
           .from('profiles')
-          .insert({
-            workos_user_id: user.id,
-            email: user.email,
-            locale_preference: 'zh-TW',
-            first_name: user.firstName || null,
-            last_name: user.lastName || null,
-          })
+          .insert(buildProfileInsert(user))
           .select()
           .single();
 
