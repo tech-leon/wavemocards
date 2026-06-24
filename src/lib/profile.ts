@@ -3,6 +3,7 @@
 import { createAdminClient } from "@/lib/supabase";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import { withAuthContext } from "@/lib/auth-context";
+import { buildProfileInsert } from "@/lib/profile-insert";
 import type {
   LocalePreference,
   Profile,
@@ -70,12 +71,7 @@ export async function syncUserProfile(): Promise<UserProfile | null> {
   // Create new profile for first-time users
   const { data: newProfile, error: insertError } = await supabase
     .from("profiles")
-    .insert({
-      workos_user_id: user.id,
-      email: user.email,
-      first_name: user.firstName,
-      last_name: user.lastName,
-    })
+    .insert(buildProfileInsert(user))
     .select()
     .single();
 
