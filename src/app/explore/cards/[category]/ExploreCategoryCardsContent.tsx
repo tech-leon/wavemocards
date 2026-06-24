@@ -53,7 +53,7 @@ export function ExploreCategoryCardsContent({ category, cards }: ExploreCategory
             <Button
               type="button"
               variant="main"
-              className="group gap-1 px-4 py-1.5"
+              className="group h-auto gap-1 px-4 py-1.5"
               onClick={handleOpenHolder}
             >
               <Folder className="w-4 h-4 group-hover:hidden" />
