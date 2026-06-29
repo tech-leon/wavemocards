@@ -43,7 +43,7 @@ export function BackToTopButton({ className }: BackToTopButtonProps) {
           onClick={scrollToTop}
           className={cn(
             'fixed bottom-4 right-4 z-50',
-            'w-14 h-14 rounded-full shadow-lg',
+            'w-14 h-14 rounded-full shadow-float',
             'bg-main-tint01 hover:bg-main transition-colors',
             'flex flex-col items-center justify-center',
             'type-caption text-white font-bold',
