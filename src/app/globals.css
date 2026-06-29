@@ -37,6 +37,7 @@
   --color-main-tint02: #B1DBE5;
   --color-main-tint03: #E6F6FA;
   --color-main-dark: #417C88;
+  --color-main-deep: #3893A3; /* main, slightly darkened, keeps teal saturation */
   
   /* Pink palette */
   --color-pink: #C37979;
@@ -78,6 +79,12 @@
   --color-gray-700: #495057;
   --color-gray-800: #343a40;
   --color-gray-900: #212529;
+
+  /* Soft brand-tinted elevation (the "gentle tide" aesthetic) — teal-hued,
+     low opacity, layered. shadow-soft: sticky chrome; shadow-float: floating
+     round controls. Content cards stay flat (Flat-Surface Rule). */
+  --shadow-soft: 0 1px 2px rgb(60 157 174 / 0.04), 0 4px 12px rgb(60 157 174 / 0.06);
+  --shadow-float: 0 2px 4px rgb(60 157 174 / 0.05), 0 8px 24px rgb(60 157 174 / 0.08);
 }
 
 :root {
@@ -114,7 +121,7 @@
   --secondary: #f2f6f8;         /* gray-200 */
   --secondary-foreground: #343a40;
   --muted: #f2f6f8;             /* gray-200 */
-  --muted-foreground: #adb5bd;  /* gray-500 */
+  --muted-foreground: #6c757d;  /* gray-600 — AA on light bg (gray-500 #adb5bd was 1.97:1) */
   --accent: #f2f6f8;            /* gray-200 */
   --accent-foreground: #343a40;
   --destructive: oklch(0.577 0.245 27.325);
@@ -195,6 +202,7 @@
   h3 {
     margin-bottom: 0.5rem;
     font-weight: 700;
+    line-height: 1.3;
     color: var(--color-main);
   }
 
@@ -215,64 +223,85 @@
   margin-bottom: 0.5rem;
   font-size: var(--type-h2);
   font-weight: 700;
+  line-height: 1.3;
   color: var(--color-main);
 }
 
 .type-section-title {
   font-size: var(--type-h3);
   font-weight: 700;
+  line-height: 1.3;
   color: var(--color-main);
 }
 
 .type-subsection-title {
   font-size: var(--type-h3);
   font-weight: 700;
+  line-height: 1.3;
   color: var(--color-main);
+}
+
+/* Emotion card names sit on pastel category backgrounds; the brand teal is
+   too light for comfortable reading there, so deepen it a touch (main-deep).
+   Colour-only sibling so it overrides the unlayered .type-subsection-title
+   colour (a text-* utility would not win). */
+.type-card-name {
+  color: var(--color-main-deep);
 }
 
 .type-identity {
   font-size: var(--type-h2);
   font-weight: 700;
+  line-height: 1.3;
 }
 
 .type-body-lg {
   font-size: var(--type-h4);
+  line-height: 1.7;
 }
 
 .type-body {
   font-size: var(--type-body);
+  line-height: 1.7;
 }
 
 .type-body-sm {
   font-size: var(--type-body-sm);
+  line-height: 1.6;
 }
 
 .type-caption {
   font-size: var(--type-caption);
+  line-height: 1.5;
 }
 
 .type-button {
   font-size: var(--type-body);
   font-weight: 500;
+  line-height: 1;
 }
 
 .type-button-lg {
   font-size: var(--type-h4);
   font-weight: 700;
+  line-height: 1;
 }
 
 .type-hero-display {
   font-size: var(--type-hero-display);
+  line-height: 1.05;
 }
 
 .type-hero-cta {
   font-size: var(--type-hero-cta);
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .type-card-display {
   font-size: var(--type-card-display);
   font-weight: 700;
+  line-height: 1.15;
 }
 
 .type-card-display-hover:hover,
@@ -283,6 +312,7 @@
 /* Large display title inside modals (e.g. emotion card detail) */
 .type-modal-display {
   font-size: var(--type-card-display);
+  line-height: 1.15;
 }
 
 @media (min-width: 48rem) {
@@ -296,5 +326,19 @@
 
   .type-modal-display {
     font-size: var(--type-hero-display);
+  }
+}
+
+/* Respect the OS "reduce motion" preference: near-instant CSS transitions and
+   animations (covers hover scale, .type-card-display-hover, smooth scroll).
+   framer-motion is handled separately via <MotionConfig reducedMotion="user">. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

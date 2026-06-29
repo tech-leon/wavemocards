@@ -44,7 +44,7 @@ export function CategoryRepresentativeCard({
           className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
         />
       </div>
-      <p className="type-subsection-title mt-2">
+      <p className="type-subsection-title type-card-name mt-2">
         {name[0]}&nbsp;{name[1]}
       </p>
     </Link>

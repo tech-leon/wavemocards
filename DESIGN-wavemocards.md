@@ -9,6 +9,7 @@ colors:
   main-tint02: "#B1DBE5"
   main-tint03: "#E6F6FA"
   main-dark: "#417C88"
+  main-deep: "#3893A3"
   pink: "#C37979"
   pink-tint01: "#D89591"
   pink-tint02: "#E8B0AC"
@@ -44,7 +45,7 @@ colors:
   background: "#f8f9fa"
   foreground: "#343a40"
   muted: "#f2f6f8"
-  muted-foreground: "#adb5bd"
+  muted-foreground: "#6c757d"
   border: "#dee2e6"
   input: "#dee2e6"
   primary: "#3C9DAE"
@@ -214,7 +215,7 @@ components:
   header:
     backgroundColor: "{colors.muted}"
     typography: "{typography.button}"
-    shadow: "shadow-md + backdrop-blur"
+    shadow: "shadow-soft + backdrop-blur"
     height: "68px (lg: 77px)"
 ---
 
@@ -294,7 +295,7 @@ Defined in `:root` and `.dark`. Every light/dark divergence is resolved through 
 |---|---|---|
 | `bg-background` / `text-foreground` | gray-100 / gray-800 | gray-900 / gray-100 |
 | `bg-muted` | gray-200 `#f2f6f8` | gray-800 `#343a40` |
-| `text-muted-foreground` | gray-500 `#adb5bd` | gray-300 `#dee2e6` |
+| `text-muted-foreground` | gray-600 `#6c757d` | gray-300 `#dee2e6` |
 | `border-border` | gray-300 `#dee2e6` | gray-700 `#495057` |
 | `border-input` | gray-300 `#dee2e6` | gray-600 `#6c757d` |
 | `--primary` / `--ring` | main `#3C9DAE` | main `#3C9DAE` / main-tint01 `#85C5D6` |
@@ -335,6 +336,9 @@ A single sans-serif family, with hierarchy made from type scale and weight. The 
 | `{typography.button-lg}` `.type-button-lg` | 1.125rem | 700 | inherit | large button text |
 | `{typography.caption}` `.type-caption` | 0.75rem | 400 | inherit | captions, support text, ProgressBar numbers |
 
+### Line Height
+Every `.type-*` class sets its own `line-height` (not just `font-size`), so reading rhythm is part of the type system rather than a per-component afterthought. Body roles run loose for three-locale CJK comfort; display and button roles stay tight: body `.type-body` / `.type-body-lg` 1.7 · `.type-body-sm` 1.6 · `.type-caption` 1.5 · `h1`–`h3` and the title classes 1.3 · `.type-hero-cta` 1.2 · `.type-card-display` / `.type-modal-display` 1.15 · `.type-hero-display` 1.05 · `.type-button` / `.type-button-lg` 1. Don't re-set line-height per component; if a role needs a different value, change it on the class in `globals.css`.
+
 ### Named Rules
 - **The Type-Class Rule.** Tailwind size utilities like `text-sm`, `text-xl`, and any arbitrary sizes are forbidden. Sizes may only come from `.type-*` classes or `h1`–`h3`; if a step is missing, register it in `globals.css` first, then use it.
 - **All three locales matter equally.** Every type-scale decision must hold up in zh-TW, ja, and en.
@@ -357,9 +361,11 @@ The system is primarily flat and layered by tone (tonal layering): the page is `
 | Level | Treatment | Use |
 |---|---|---|
 | 0 (flat) | no shadow; separated with `bg-muted` or `border-border` / `border-main-tint02` | content cards, panels |
-| Sticky chrome | `shadow-md` + `backdrop-blur-sm` | the fixed top Header |
-| Floating control | `shadow` | small round buttons floating on cards (emotion card add/remove buttons), the back-to-top button |
+| Sticky chrome | `shadow-soft` + `backdrop-blur-sm` | the fixed top Header |
+| Floating control | `shadow-float` (back-to-top) / `shadow` (small card buttons) | the back-to-top button; small round buttons floating on cards (emotion card add/remove buttons) |
 | Popover | `shadow-lg` | the dropdown and popover layer |
+
+`shadow-soft` and `shadow-float` are brand-tinted elevation tokens (teal hue, low opacity, layered — defined in `globals.css`), so the "floating" surfaces lift gently in keeping with the gentle-tide aesthetic rather than dropping a hard neutral-grey shadow. Shadcn-internal layers (dropdown, drawer) keep their default `shadow-md` / `shadow-lg`.
 
 ### Named Rules
 - **The Flat-Surface Rule.** Content cards and panels get no shadow. Only things that float (sticky header, popover, floating button) have shadows.
@@ -418,7 +424,7 @@ The Shadcn native variants (`default`, `outline`, `ghost`, `link`, `secondary`, 
 - **ConfirmModal** (`src/components/ui/ConfirmModal.tsx`) is the only confirmation-dialog base: `bg-background {rounded.2xl} p-8`, centred illustration, configurable title color (default pink), with actions placed in `Button` brand variants. New confirmation flows (delete, unsubscribe, save results, etc.) must compose it and must not re-build the overlay.
 
 ### Navigation
-- **Header (`src/components/layout/Header.tsx`):** sticky `top-0 z-50`, `bg-muted` + `shadow-md` + `backdrop-blur-sm`, `max-w-7xl` container. Desktop is a three-column grid (nav | logo | actions); mobile is logo + ThemeToggle + MobileNav.
+- **Header (`src/components/layout/Header.tsx`):** sticky `top-0 z-50`, `bg-muted` + `shadow-soft` + `backdrop-blur-sm`, `max-w-7xl` container. Desktop is a three-column grid (nav | logo | actions); mobile is logo + ThemeToggle + MobileNav.
 - **Nav link:** `.type-button rounded-md px-3 py-2`, default `text-foreground`, hover and current turn `text-main` (dark hover uses `{colors.main-tint01}`).
 - **Logged-out actions:** sign-in is a `main-outline` pill, sign-up is a `pink` pill.
 
@@ -439,7 +445,7 @@ Shared variants are defined in `src/components/ui/motion.tsx` (framer-motion). D
 
 ### Named Rules
 - **The Shared-Motion Rule.** Animations use the shared variants in motion.tsx (fadeIn / fadeInUp / scaleIn / stagger); do not write separate transition values inside components.
-- Full `prefers-reduced-motion` support is on the backlog.
+- **Reduced motion is respected.** `<MotionConfig reducedMotion="user">` (in `ThemeProvider.tsx`) makes every framer-motion animation honour the OS "reduce motion" setting — transform/layout motion is dropped, opacity is kept. A `@media (prefers-reduced-motion: reduce)` block in `globals.css` near-instantly collapses CSS transitions/animations and smooth scroll. New motion inherits this automatically; don't bypass it.
 
 ## 9. Do's and Don'ts
 
@@ -485,3 +491,14 @@ Shared variants are defined in `src/components/ui/motion.tsx` (framer-motion). D
 5. Default body text is `.type-body` (1rem); support text is `.type-caption`.
 6. Always route light/dark through semantic tokens; never hand-write `dark:` grayscale pairs.
 7. The nine emotion colors are content colors, not interface colors — this rule cannot be broken.
+
+## 12. Known Gaps
+
+Honest list of what the system does not yet fully solve (mirrors the reference design docs' "Known Gaps" convention).
+
+- **`text-muted-foreground` on the page background is borderline.** Light-mode muted-foreground is gray-600 (`#6c757d`), which is 4.69:1 on white cards and `bg-muted` but ~4.45:1 directly on `bg-background` — effectively AA, fractionally under the 4.5 line on the lightest surface. We hold gray-600 deliberately (it is the correct in-house ramp step; a bespoke off-ramp hex would break the One-Gray Rule). Don't darken further unless an audit demands it.
+- **ProgressBar incomplete-step number is decorative-contrast only.** The `gray-450` digit on `bg-background` is ~1.58:1. It marks a not-yet-reached step (state is also carried by position and the active dot), so it is treated as non-essential decoration rather than readable text. Revisit if the step numbers ever need to be read on their own.
+- **`hover:text-main` link flashes below AA.** Inline links rest in `text-foreground` / `text-muted-foreground` (readable) and only turn `main` (`#3C9DAE`, ~3.01:1) on hover. The hover tint is a transient affordance, not a reading state, so it is left as-is; if a persistent body-size link in `main` is ever introduced, use `main-dark` instead.
+- **Letter-spacing is not tokenised.** Line-height is now part of every type role, but tracking is left at the font default. CJK does not want negative tracking; only the EN-locale `.type-hero-display` is a candidate for a small negative value, and it has not been added.
+- **Emotion-card names stay brand teal despite low contrast (deliberate).** Emotion-card and category names on the pastel fills use `.type-subsection-title` (brand `main` teal), which fails WCAG AA on every category (1.6–2.5:1). This is kept on purpose: the unified teal voice across cards, titles, and actions is a core part of the brand's tonal cohesion, and it takes priority over the contrast target on these decorative labels. Note that a `text-*` utility cannot recolour these (the unlayered `.type-subsection-title { color: main }` beats any utility); an accessible variant would need a sibling type-class at a fixed dark neutral (e.g. `gray-800`, which clears AA at 5.9–9.2:1) — available if ever wanted, at the cost of the brand tone.
+- **Component / integration visual regression is manual.** There is no automated visual-diff; type-scale, contrast, and dark-mode parity are verified by hand in-browser (see the project verification workflow).
