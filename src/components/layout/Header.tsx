@@ -63,7 +63,7 @@ export function Header({ locale, user }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 shadow-md backdrop-blur-sm bg-muted"
+      className="sticky top-0 z-50 shadow-soft backdrop-blur-sm bg-muted"
       role="banner"
     >
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">

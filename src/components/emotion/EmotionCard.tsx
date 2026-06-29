@@ -89,7 +89,7 @@ export function EmotionCard({
           )}
         />
       </div>
-      <p className="type-subsection-title mt-2 text-center">
+      <p className="type-subsection-title type-card-name mt-2 text-center">
         {formatEmotionCardName(card.name)}
       </p>
     </>

@@ -17,6 +17,7 @@
 | `--color-main-tint02` | `#B1DBE5` | 主色淺階 2（招牌容器框線） |
 | `--color-main-tint03` | `#E6F6FA` | 主色淺階 3（背景） |
 | `--color-main-dark` | `#417C88` | 主色深階（hover） |
+| `--color-main-deep` | `#3893A3` | 主色微深階、保留飽和度（情緒卡片名稱 `.type-card-name`，pastel 底色上較好讀） |
 | `--color-pink` | `#C37979` | 高情感 CTA、刪除確認 |
 | `--color-pink-dark` | `#B17075` | pink hover |
 
@@ -51,7 +52,7 @@ Pink 另有 tint01 `#D89591`、tint02 `#E8B0AC`。
 | `bg-background` | gray-100 | gray-900 | 頁面與 sticky 區底色 |
 | `text-foreground` | gray-800 | gray-100 | 主文字 |
 | `bg-muted` | gray-200 | gray-800 | Header、Footer、欄位底、面板 |
-| `text-muted-foreground` | gray-500 | gray-300 | 輔助文字 |
+| `text-muted-foreground` | gray-600 | gray-300 | 輔助文字（light 用 gray-600 以過 WCAG AA） |
 | `border-border` | gray-300 | gray-700 | 分隔線、容器邊框 |
 | `border-input` | gray-300 | gray-600 | 表單控件邊框 |
 
@@ -77,6 +78,8 @@ Pink 另有 tint01 `#D89591`、tint02 `#E8B0AC`。
 | `.type-hero-cta` | 1.5rem / md 1.875rem | 首頁 hero CTA |
 | `.type-card-display`（+ `-hover`） | 1.875rem（hover 2.25rem） | 分類卡展示字 |
 | `.type-modal-display` | 1.875rem / md 3rem | Modal 內大標 |
+
+每個 `.type-*` 都自帶 `line-height`（內文 1.6–1.7 利於三語 CJK 閱讀,標題 1.3,展示字 1.05–1.15,按鈕 1）。不要在元件內另設行高,要改就改 `globals.css` 的 class。
 
 字型依 locale 切換（`html:lang()`）：en 用 Inter、zh-TW 用 Noto Sans TC、ja 用 Noto Sans JP。
 
@@ -112,3 +115,5 @@ Pink 另有 tint01 `#D89591`、tint02 `#E8B0AC`。
 3. 明暗用語意 token，不手寫 gray 配對；中性色只有自家 gray ramp。
 4. 主要動作用 `Button` 品牌 variants，不手刻藥丸按鈕。
 5. 新增色票或字級：先在 `globals.css` 的 `@theme` / `:root` 註冊，再以 utility 或 `.type-*` 使用，並同步 `DESIGN.md`。
+6. 動效尊重 `prefers-reduced-motion`：framer-motion 由 `ThemeProvider` 的 `<MotionConfig reducedMotion="user">` 全域處理,CSS 動畫由 `globals.css` 的 media query 收掉。新動畫自動繼承,勿繞過。
+7. 浮層用品牌青調陰影 token：sticky chrome 用 `shadow-soft`、浮動圓鈕用 `shadow-float`;內容卡維持無陰影（Flat-Surface Rule）。
