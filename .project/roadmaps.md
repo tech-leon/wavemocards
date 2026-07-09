@@ -2,6 +2,8 @@
 
 This is a research-then-implement document for continuously improving the Wave Emotion Cards application.
 
+The document maps onto the branch flow (`research` → `improvement` → `main`): the **Research** section is worked on the `research` branch (docs/evidence only), decided items move to **Implements** and are built and tested on `improvement`, and verified work merges into `main` for release. See CLAUDE.md "Repository conventions" for the authoritative rule.
+
 ## Research
 
 ### Usage instrumentation (do first — later research depends on this data)

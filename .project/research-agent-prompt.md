@@ -79,11 +79,21 @@ can make decisions.
 - Report at the end of each run: which question you worked on, papers added,
   and whether a proposed decision is ready.
 
+## Persistence
+
+- You run on Leon's local machine. Work on the `research` branch. If it doesn't
+  exist, create it from the latest `main`. Never commit to `main` or any other
+  branch.
+- At the end of each run, commit the changed files (`.project/roadmaps.md` and
+  `.project/research/**` only) with a message like
+  `docs(research): <topic-slug> — add N papers`, then push the `research` branch
+  to the remote.
+- Merging is not your job. The flow is: when research reaches a milestone or a
+  decision is confirmed, Leon merges `research` → `improvement`, and after
+  verification `improvement` → `main`. Never open PRs or merge branches yourself.
+
 ---
 
 ## Open scheduling decisions (settle when creating the schedule)
 
 - Cadence (weekly? until Research section is exhausted?).
-- Where it runs: local `/loop` vs cloud routine — affects whether the Consensus
-  connector and the repo working tree are available.
-- Persistence: commit to a branch per run, or leave changes in the working tree.

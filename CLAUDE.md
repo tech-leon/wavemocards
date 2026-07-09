@@ -72,6 +72,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
 - Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
 - `.project/roadmaps.md` is the research-then-implement log: open questions go under **Research** (Question / Findings / Decision), decided work moves to **Implements**. Record findings there before implementing; existing entries show the format.
+- Branch flow: `research` → `improvement` → `main`. Research happens on `research` (docs/evidence only, no app code); once evidence is sufficient and a decision is made, it merges into `improvement`, where the decision is implemented in the app and tested; only verified work merges from `improvement` into `main` for release. Leon does the merges.
 - The design system lives in `DESIGN.md` (visual spec) and `PRODUCT.md` (strategy); `.project/style.md` is the quick reference. Follow them for any UI work.
 - **Plan**: Write your plan in Traditional Chinese.
 - **Memories**: You manage your own memory. Record and update it to ensure that essential information is not forgotten across different sessions, and unnecessary memories can be deleted. DO NOT ask "Do you want to add xxx memory?"
