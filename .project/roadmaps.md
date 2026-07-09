@@ -30,8 +30,9 @@ Is the current explore flow the right shape for users from junior-high students 
 - **Question 1 — Flow length vs adherence**: The explore flow is ~6–7 steps (cards → strength → story background → action → complete). What does EMA (ecological momentary assessment) / mood-tracking-app literature say about recording burden vs long-term adherence? Combine with our own funnel data (how many users enter explore vs reach complete, and where they drop off) — papers answer "what works", only our data answers "where our users get stuck".
 - **Question 2 — Efficacy basis of card selection**: Does affect-labelling / emotional-granularity research (Lieberman, Feldman Barrett, etc.) support "pick a card + name the emotion" as the core mechanic, and does it suggest ways to make it more effective?
 - **Question 3 — Separate journal vs simplified flow**: Should we add an Apple Journal-style lightweight daily journal as a separate feature, or simplify the existing emotion-record flow? Start from expressive-writing research (Pennebaker); literature leans toward "quick log by default, deep writing as opt-in" progressive designs — verify and decide.
-- **Findings**: (pending)
-- **Decision**: (pending)
+- **Findings**:
+  - 2026-07-09: Question 1 (flow length vs adherence) researched — see `.project/research/flow-length-vs-adherence.md` (8 papers: 3 meta-analyses/systematic reviews on EMA burden↔compliance, 1 experimental item-shortening study, 3 real-world app-engagement observational studies, 1 adolescent-specific meta-analysis). Core result: item/step count is a weak, inconsistent predictor of compliance in the EMA literature, and the one experimental test of shortening a single assessment found no significant compliance change. The literature does not support shortening our flow speculatively; real-world retention is low across all self-report apps regardless of design, so within-session drop-off is better diagnosed from our own funnel data once collected. Questions 2 and 3 still pending.
+- **Decision**: (pending) — see proposed decision for Question 1 in the research file; Questions 2–3 still need research before an overall decision.
 
 ## Deferred (not yet researched)
 
