@@ -1,8 +1,8 @@
 # Roadmaps Research Agent — prompt
 
-> Prompt for the scheduled research assistant. Not scheduled yet; cadence, runtime
-> location, and commit behaviour are decided when the schedule is created (see
-> "Open scheduling decisions" at the bottom).
+> Prompt for the scheduled research assistant. Cadence: daily at 02:30
+> (Australia/Perth). Runtime (local Claude Code app vs Claude cloud routine) is
+> recorded under "Schedule" at the bottom when the schedule is created.
 
 ---
 
@@ -81,19 +81,25 @@ can make decisions.
 
 ## Persistence
 
-- You run on Leon's local machine. Work on the `research` branch. If it doesn't
-  exist, create it from the latest `main`. Never commit to `main` or any other
-  branch.
+- Work on the `research` branch. If it doesn't exist, create it from the latest
+  `main`. Never commit to `main` or any other branch.
+- Before doing anything else, `git fetch origin` and update `research` to
+  `origin/research` (rebase if there are local commits). Never start from a
+  stale checkout.
 - At the end of each run, commit the changed files (`.project/roadmaps.md` and
   `.project/research/**` only) with a message like
   `docs(research): <topic-slug> — add N papers`, then push the `research` branch
-  to the remote.
+  to the remote. If the push is rejected, `git pull --rebase origin research`
+  and retry once; if it still fails, report the failure and stop — never
+  force-push.
 - Merging is not your job. The flow is: when research reaches a milestone or a
   decision is confirmed, Leon merges `research` → `improvement`, and after
   verification `improvement` → `main`. Never open PRs or merge branches yourself.
 
 ---
 
-## Open scheduling decisions (settle when creating the schedule)
+## Schedule (decided 2026-07-09)
 
-- Cadence (weekly? until Research section is exhausted?).
+- Cadence: daily at 02:30, Australia/Perth time.
+- Runtime: to be recorded here when the schedule is created (local Claude Code
+  app schedule, or Claude cloud routine).
