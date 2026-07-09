@@ -101,5 +101,6 @@ can make decisions.
 ## Schedule (decided 2026-07-09)
 
 - Cadence: daily at 02:30, Australia/Perth time.
-- Runtime: to be recorded here when the schedule is created (local Claude Code
-  app schedule, or Claude cloud routine).
+- Runtime: Claude cloud routine (claude.ai/code/routines), repo cloned fresh
+  each run from `main` — the routine prompt must check out `research` before
+  reading this file.
