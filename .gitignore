@@ -58,3 +58,4 @@ next-env.d.ts
 # impeccable design tokens (local only)
 .impeccable/
 .research/
+!supabase/migrations/20260717_analytics_route_daily.sql
