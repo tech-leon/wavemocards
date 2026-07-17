@@ -54,3 +54,7 @@ supabase/migrations/*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable design tokens (local only)
+.impeccable/
+.research/
