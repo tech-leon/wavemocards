@@ -70,8 +70,11 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Do not use Simplified Chinese anywhere.
 - Use pnpm to manage packages — never npm.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
-- Reference `.project/tech.md` and `.project/style.md` for tech stack and style decisions, and `.project/backlog.md` for known outstanding work.
-- The design system lives in `DESIGN.md` (visual spec) and `PRODUCT.md` (strategy); `.project/style.md` is the quick reference. Follow them for any UI work.
+- Reference `.project/tech.md` for tech stack decisions, and `.research/backlog.md` for known outstanding work.
+- `.research/roadmaps.md` is the research-then-implement log: open questions go under **Research** (Question / Findings / Decision), decided work moves to **Implements**. Record findings there before implementing; existing entries show the format.
+- `.research/` is its own separate git repo, deliberately ignored by this root repo — automation checks out both repos together. Never commit `.research/` files here; commit them inside `.research/` itself.
+- Branch flow: `research` → `improvement` → `main`. Research happens on `research` (docs/evidence only, no app code); once evidence is sufficient and a decision is made, it merges into `improvement`, where the decision is implemented in the app and tested; only verified work merges from `improvement` into `main` for release. Leon does the merges.
+- The design system lives in `.project/DESIGN-wavemocards.md` (visual spec) and `PRODUCT.md` (strategy). Follow them for any UI work.
 - **Plan**: Write your plan in Traditional Chinese.
 - **Memories**: You manage your own memory. Record and update it to ensure that essential information is not forgotten across different sessions, and unnecessary memories can be deleted. DO NOT ask "Do you want to add xxx memory?"
 
@@ -188,7 +191,7 @@ Zustand (`src/store/exploreStore.ts`) holds the multi-step explore flow state, h
 
 ### Styling
 
-The full design system is documented in `DESIGN.md` (tokens are normative in `src/app/globals.css`). Hard rules:
+The full design system is documented in `.project/DESIGN-wavemocards.md` (tokens are normative in `src/app/globals.css`). Hard rules:
 
 - Brand accent is `#3C9DAE`, exposed as `--color-main` — always use token utilities (`text-main`, `bg-pink`, `bg-happy`), never raw hex or arbitrary color values.
 - Light/dark theming goes through semantic tokens (`bg-background`, `text-foreground`, `bg-muted`, `text-muted-foreground`, `border-border`, `border-input`). Never hand-pair `gray-*` with `dark:gray-*`. Only the custom gray ramp is allowed as neutrals (no slate/zinc/stone). Dark mode uses Tailwind `class` strategy via next-themes.
