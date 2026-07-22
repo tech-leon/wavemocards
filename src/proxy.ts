@@ -7,7 +7,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase";
 import {
-  DEFAULT_LOCALE,
   extractLocaleFromPathname,
   isPublicPath,
   isLocale,
@@ -17,7 +16,7 @@ import {
   localizeHref,
   type Locale,
   normalizePathname,
-  resolveLocale,
+  resolveRequestLocale,
 } from "@/lib/i18n/locale";
 
 const PRIVATE_ROUTE_PREFIXES = ["/account", "/records", "/explore"] as const;
@@ -74,17 +73,12 @@ export default async function proxy(request: NextRequest) {
     !apiPath && validCookieLocale === null
       ? await getProfileLocalePreference(session.user?.id)
       : null;
-  // Anonymous visitors: on public paths the URL prefix is the clearest
-  // statement of intent (shared /en/... links must render English); the header
-  // language switcher updates the cookie when they want something else. Gated
-  // on publicPath so a stray prefixed private URL (/en/records, stripped
-  // below) cannot overwrite the cookie. Signed-in users keep preference-first
-  // resolution and get redirected to their locale's URL.
-  const locale =
-    (!session.user && publicPath && localePrefix) ||
-    (validCookieLocale ??
-      profileLocalePreference ??
-      (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale)));
+  const locale = resolveRequestLocale({
+    pathname,
+    isSignedIn: Boolean(session.user),
+    cookieLocale,
+    profileLocalePreference,
+  });
   const { requestHeaders, responseHeaders } = partitionAuthkitHeaders(
     request,
     authkitHeaders

@@ -4,6 +4,7 @@ import {
   stripLocaleFromPathname,
   isPublicPath,
   resolveLocale,
+  resolveRequestLocale,
   localizeHref,
   getOpenGraphLocale,
   DEFAULT_LOCALE,
@@ -56,10 +57,51 @@ describe('isPublicPath', () => {
     (p) => expect(isPublicPath(p)).toBe(true),
   );
 
-  it.each(['/records', '/explore', '/account', '/explore/cards'])(
+  it.each(['/records', '/explore', '/account', '/explore/cards', '/privacy-temp', '/terms-of-trade'])(
     'treats %s as private',
     (p) => expect(isPublicPath(p)).toBe(false),
   );
+});
+
+describe('resolveRequestLocale', () => {
+  it('lets the URL prefix win for anonymous visitors on public paths', () => {
+    expect(
+      resolveRequestLocale({ pathname: '/en/privacy', isSignedIn: false, cookieLocale: 'zh-TW' }),
+    ).toBe('en');
+  });
+
+  it('ignores the prefix on private paths so it cannot clobber the cookie', () => {
+    expect(
+      resolveRequestLocale({ pathname: '/en/records', isSignedIn: false, cookieLocale: 'zh-TW' }),
+    ).toBe('zh-TW');
+  });
+
+  it('keeps preference-first resolution for signed-in users', () => {
+    expect(
+      resolveRequestLocale({ pathname: '/en/privacy', isSignedIn: true, cookieLocale: 'zh-TW' }),
+    ).toBe('zh-TW');
+  });
+
+  it('falls back to the profile preference for signed-in users without a cookie', () => {
+    expect(
+      resolveRequestLocale({
+        pathname: '/en/privacy',
+        isSignedIn: true,
+        profileLocalePreference: 'ja',
+      }),
+    ).toBe('ja');
+  });
+
+  it('uses the prefix for anonymous visitors without a cookie', () => {
+    expect(resolveRequestLocale({ pathname: '/ja/terms', isSignedIn: false })).toBe('ja');
+  });
+
+  it('defaults when no source resolves', () => {
+    expect(resolveRequestLocale({ pathname: '/records', isSignedIn: true })).toBe(DEFAULT_LOCALE);
+    expect(
+      resolveRequestLocale({ pathname: '/privacy', isSignedIn: false, cookieLocale: 'xx' }),
+    ).toBe(DEFAULT_LOCALE);
+  });
 });
 
 describe('resolveLocale', () => {
