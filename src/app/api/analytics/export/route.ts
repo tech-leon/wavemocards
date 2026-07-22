@@ -69,7 +69,10 @@ export async function GET(request: NextRequest) {
 
     const { error } = await supabase
       .from('analytics_route_daily')
-      .upsert(rows.map((row) => ({ ...row, updated_at: exportedAt })));
+      .upsert(
+        rows.map((row) => ({ ...row, updated_at: exportedAt })),
+        { onConflict: 'day,route' }
+      );
     if (error) {
       console.error(`Analytics export: upsert for ${day} failed:`, error);
       failures.push(day);
