@@ -74,10 +74,15 @@ export default async function proxy(request: NextRequest) {
     !apiPath && validCookieLocale === null
       ? await getProfileLocalePreference(session.user?.id)
       : null;
+  // Anonymous visitors: the URL prefix is the clearest statement of intent
+  // (shared /en/... links must render English); the header language switcher
+  // updates the cookie when they want something else. Signed-in users keep
+  // preference-first resolution and get redirected to their locale's URL.
   const locale =
-    validCookieLocale ??
-    profileLocalePreference ??
-    (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale));
+    (!session.user && localePrefix) ||
+    (validCookieLocale ??
+      profileLocalePreference ??
+      (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale)));
   const { requestHeaders, responseHeaders } = partitionAuthkitHeaders(
     request,
     authkitHeaders

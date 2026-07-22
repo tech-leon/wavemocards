@@ -113,7 +113,7 @@ Copy `.env.example` to `.env.local` and fill in:
 Replaces Next.js middleware. On every matched request it runs WorkOS `authkit()`, then handles locale routing:
 
 - **Public pages are locale-prefixed** (`/{locale}/...`); **private pages are not** (`/explore`, `/records`, `/account`).
-- Locale resolution order: locale cookie → profile `locale_preference` (admin client lookup) → default/accept-language.
+- Locale resolution order: for anonymous visitors a public-path URL locale prefix wins first; then locale cookie → profile `locale_preference` (admin client lookup) → default/accept-language.
 - It redirects `/` to the localized home, adds missing locale prefixes on public paths, and strips locale prefixes from private paths.
 - The resolved locale is passed to the app via a request header and persisted in a cookie.
 
