@@ -40,30 +40,30 @@ export async function LegalPage({ page }: LegalPageProps) {
             <p className="type-body-sm mb-8 text-muted-foreground">
               {t(`${page}.effectiveDate`)}
             </p>
-            {intro.map((paragraph) => (
-              <p key={paragraph} className="mb-3 leading-relaxed text-foreground">
+            {intro.map((paragraph, index) => (
+              <p key={index} className="mb-3 leading-relaxed text-foreground">
                 {paragraph}
               </p>
             ))}
             {sections.map((section, index) => (
-              <section key={section.title} className="mt-10">
+              <section key={index} className="mt-10">
                 <h2 className="type-section-title mb-3">
                   {`${index + 1}. ${section.title}`}
                 </h2>
-                {section.body?.map((paragraph) => (
-                  <p key={paragraph} className="mb-3 leading-relaxed text-foreground">
+                {section.body?.map((paragraph, bodyIndex) => (
+                  <p key={bodyIndex} className="mb-3 leading-relaxed text-foreground">
                     {paragraph}
                   </p>
                 ))}
                 {section.items && (
                   <ul className="mb-3 list-disc space-y-2 pl-6 leading-relaxed text-foreground">
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
+                    {section.items.map((item, itemIndex) => (
+                      <li key={itemIndex}>{item}</li>
                     ))}
                   </ul>
                 )}
-                {section.after?.map((paragraph) => (
-                  <p key={paragraph} className="mb-3 leading-relaxed text-foreground">
+                {section.after?.map((paragraph, afterIndex) => (
+                  <p key={afterIndex} className="mb-3 leading-relaxed text-foreground">
                     {paragraph}
                   </p>
                 ))}
