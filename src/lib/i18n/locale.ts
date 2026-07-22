@@ -9,7 +9,7 @@ export const LOCALE_HEADER_NAME = 'x-wavemocards-locale';
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export type PublicLocale = Locale;
 
-const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards'] as const;
+const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards', '/privacy', '/terms'] as const;
 
 export function getLocaleCookieOptions() {
   return {
@@ -103,6 +103,41 @@ export function resolveLocale(pathname: string, cookieLocale?: string | null): L
 
   if (isLocale(cookieLocale)) {
     return cookieLocale;
+  }
+
+  return DEFAULT_LOCALE;
+}
+
+// Request-locale resolution for the proxy. Anonymous visitors: on public
+// paths the URL locale prefix is the clearest statement of intent (shared
+// /en/... links must render English); the header language switcher updates
+// the cookie when they want something else. Gated on isPublicPath so a stray
+// prefixed private URL (/en/records, stripped by the proxy) cannot overwrite
+// the cookie. Signed-in users keep preference-first resolution and get
+// redirected to their locale's URL by the proxy.
+export function resolveRequestLocale({
+  pathname,
+  isSignedIn,
+  cookieLocale,
+  profileLocalePreference,
+}: {
+  pathname: string;
+  isSignedIn: boolean;
+  cookieLocale?: string | null;
+  profileLocalePreference?: Locale | null;
+}): Locale {
+  const { locale: localePrefix } = extractLocaleFromPathname(pathname);
+
+  if (!isSignedIn && localePrefix && isPublicPath(pathname)) {
+    return localePrefix;
+  }
+
+  if (isLocale(cookieLocale)) {
+    return cookieLocale;
+  }
+
+  if (profileLocalePreference) {
+    return profileLocalePreference;
   }
 
   return DEFAULT_LOCALE;

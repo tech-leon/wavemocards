@@ -7,7 +7,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase";
 import {
-  DEFAULT_LOCALE,
   extractLocaleFromPathname,
   isPublicPath,
   isLocale,
@@ -17,7 +16,7 @@ import {
   localizeHref,
   type Locale,
   normalizePathname,
-  resolveLocale,
+  resolveRequestLocale,
 } from "@/lib/i18n/locale";
 
 const PRIVATE_ROUTE_PREFIXES = ["/account", "/records", "/explore"] as const;
@@ -74,10 +73,12 @@ export default async function proxy(request: NextRequest) {
     !apiPath && validCookieLocale === null
       ? await getProfileLocalePreference(session.user?.id)
       : null;
-  const locale =
-    validCookieLocale ??
-    profileLocalePreference ??
-    (session.user ? DEFAULT_LOCALE : resolveLocale(pathname, cookieLocale));
+  const locale = resolveRequestLocale({
+    pathname,
+    isSignedIn: Boolean(session.user),
+    cookieLocale,
+    profileLocalePreference,
+  });
   const { requestHeaders, responseHeaders } = partitionAuthkitHeaders(
     request,
     authkitHeaders
@@ -146,6 +147,8 @@ export const config = {
     "/about-emotions",
     "/emo-cards",
     "/emo-cards/(.*)",
+    "/privacy",
+    "/terms",
     "/zh-TW/:path*",
     "/en/:path*",
     "/ja/:path*",

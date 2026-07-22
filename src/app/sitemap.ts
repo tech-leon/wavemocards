@@ -23,6 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     createEntry('/', 1),
     createEntry('/about-emotions', 0.8),
     createEntry('/emo-cards', 0.8),
+    createEntry('/privacy', 0.3),
+    createEntry('/terms', 0.3),
   ];
 
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) =>

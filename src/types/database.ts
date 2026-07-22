@@ -107,6 +107,30 @@ export interface Database {
         };
         Relationships: [];
       };
+      analytics_route_daily: {
+        Row: {
+          day: string;
+          route: string;
+          pageviews: number;
+          visitors: number;
+          updated_at: string;
+        };
+        Insert: {
+          day: string;
+          route: string;
+          pageviews?: number;
+          visitors?: number;
+          updated_at?: string;
+        };
+        Update: {
+          day?: string;
+          route?: string;
+          pageviews?: number;
+          visitors?: number;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
           id: string;

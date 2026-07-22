@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/analytics/export",
+      "schedule": "0 3 * * 1"
+    }
+  ]
+}

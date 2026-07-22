@@ -101,6 +101,14 @@
       "title": "Wavemocards | My Account",
       "description": "Manage your account settings and profile"
     },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "How Wavemocards collects, uses, and protects your personal information."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "The terms and conditions that govern your use of Wavemocards."
+    },
     "ogImageAlt": "Wavemocards"
   },
   "common": {
@@ -198,7 +206,9 @@
       "links": {
         "aboutEmotions": "Understanding Emotions",
         "contactUs": "Contact us",
-        "reportIssue": "Report an issue"
+        "reportIssue": "Report an issue",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
       },
       "contributors": {
         "projectManager": "Project Manager",
@@ -259,6 +269,182 @@
       "disgust": "disgust",
       "anger": "anger",
       "surprise": "surprise"
+    }
+  },
+  "legal": {
+    "seeAlso": "See also:",
+    "privacy": {
+      "pageTitle": "Privacy Policy",
+      "effectiveDate": "Last updated: 22 July 2026",
+      "intro": [
+        "Wavemocards (\"we\", \"us\") respects your privacy. This Privacy Policy explains what information we collect when you use wavemocards.com (the \"Service\"), how we use it, and the rights and choices you have."
+      ],
+      "sections": [
+        {
+          "title": "Information we collect",
+          "body": [
+            "We collect the following information when you use the Service:"
+          ],
+          "items": [
+            "Account information: when you sign up or sign in (including with Google), we receive your name, email address, and profile picture through our authentication provider, WorkOS.",
+            "Emotion records: the emotion cards you select, your before and after emotion levels, and the stories and reflections you write are stored so you can review them later.",
+            "Preferences: your language and display settings.",
+            "Usage analytics: we use Vercel Web Analytics to collect anonymised, aggregated usage statistics such as page views. It does not use cookies and cannot identify you personally.",
+            "Cookies: we use only essential cookies, to keep you signed in and to remember your language."
+          ]
+        },
+        {
+          "title": "How we use your information",
+          "body": [
+            "We use your information solely to:"
+          ],
+          "items": [
+            "provide and operate the Service",
+            "authenticate you and keep you signed in",
+            "store your emotion records and display them to you",
+            "improve the Service using anonymised, aggregated statistics",
+            "respond to your enquiries and feedback"
+          ],
+          "after": [
+            "We do not sell your personal information, and we do not use it for advertising."
+          ]
+        },
+        {
+          "title": "Google user data",
+          "body": [
+            "If you sign in with Google, we only receive your basic profile information: your name, email address, and profile picture. We use this information solely to create and authenticate your account.",
+            "Wavemocards' use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including its Limited Use requirements. We do not share, transfer, or sell Google user data to third parties, and we do not use it for advertising."
+          ]
+        },
+        {
+          "title": "Where your data is stored and how it is protected",
+          "body": [
+            "Your data is stored in a PostgreSQL database hosted by Supabase and protected by row-level security, so your emotion records can only be read and modified by you. All data is transmitted over encrypted (HTTPS) connections."
+          ]
+        },
+        {
+          "title": "Sharing your information",
+          "body": [
+            "We never sell your personal information. We share it only:"
+          ],
+          "items": [
+            "with service providers: WorkOS (authentication), Supabase (database), and Vercel (hosting and anonymised analytics), each of which processes data only as needed to provide the Service",
+            "when required by law, a court order, or a lawful request from a government authority"
+          ]
+        },
+        {
+          "title": "Data retention and deletion",
+          "body": [
+            "Your emotion records are kept until you delete them. You can delete individual records at any time from the Records page. To delete your account and all associated data, contact us at info@wavemocards.com and we will complete the deletion within 30 days."
+          ]
+        },
+        {
+          "title": "Children's privacy",
+          "body": [
+            "The Service is designed for emotional education and is suitable for a general audience. If you are under the age of digital consent in your region, please use the Service with the consent of a parent or guardian. We do not knowingly collect personal information from children without such consent."
+          ]
+        },
+        {
+          "title": "Changes to this policy",
+          "body": [
+            "We may update this policy from time to time. If we make material changes, we will announce them on this page and update the \"Last updated\" date. Continuing to use the Service after a change means you accept the updated policy."
+          ]
+        },
+        {
+          "title": "Contact us",
+          "body": [
+            "If you have any questions about this policy or how your personal information is handled, please email us at info@wavemocards.com."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "pageTitle": "Terms of Service",
+      "effectiveDate": "Last updated: 22 July 2026",
+      "intro": [
+        "These Terms of Service (\"Terms\") govern your use of wavemocards.com (the \"Service\"). By using the Service, you agree to these Terms. If you do not agree, please do not use the Service."
+      ],
+      "sections": [
+        {
+          "title": "About the Service",
+          "body": [
+            "Wavemocards helps you recognise, explore, and record your emotions through 65 emotion cards. You can select cards, record the intensity of your emotions, write emotional stories, and review how your emotions change over time."
+          ]
+        },
+        {
+          "title": "Not professional advice",
+          "body": [
+            "The Service is a self-help tool for emotional awareness and education. It is not a medical device and does not provide medical, psychological, or psychiatric advice, diagnosis, or treatment. The Service is not a substitute for professional mental health care. If you are in distress, or have thoughts of harming yourself or others, please seek help from a qualified professional or your local crisis support service immediately."
+          ]
+        },
+        {
+          "title": "Your account",
+          "body": [
+            "Please provide accurate information when you register and keep your sign-in method secure. You are responsible for all activity under your account. If you become aware of any unauthorised use of your account, please contact us immediately."
+          ]
+        },
+        {
+          "title": "Your content",
+          "body": [
+            "The emotion records you create in the Service belong to you. You grant us permission to store and process this content, but only as needed to provide the Service to you. We do not access the content of your records except where necessary to operate the Service or as required by law."
+          ]
+        },
+        {
+          "title": "Acceptable use",
+          "body": [
+            "When using the Service, you agree not to:"
+          ],
+          "items": [
+            "use the Service for any unlawful purpose",
+            "interfere with or disrupt the operation or security of the Service",
+            "attempt to gain unauthorised access to other users' data or to our systems",
+            "extract content from the Service in bulk by automated means",
+            "impersonate another person or provide false information"
+          ]
+        },
+        {
+          "title": "Intellectual property",
+          "body": [
+            "The emotion cards, illustrations, text, design, and software of the Service are the intellectual property of Wavemocards and its licensors. You may use the Service for personal, non-commercial purposes only; you may not reproduce, distribute, or commercially exploit it without our written consent."
+          ]
+        },
+        {
+          "title": "Changes to and availability of the Service",
+          "body": [
+            "We continuously improve the Service and may add, change, or remove features from time to time. We aim to keep the Service stable, but we do not guarantee that it will be uninterrupted or error-free."
+          ]
+        },
+        {
+          "title": "Disclaimer and limitation of liability",
+          "body": [
+            "The Service is provided on an \"as is\" and \"as available\" basis. To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of, or inability to use, the Service."
+          ]
+        },
+        {
+          "title": "Termination",
+          "body": [
+            "We may suspend or terminate your access to the Service if you breach these Terms. You may stop using the Service at any time and may request deletion of your account as described in the Privacy Policy."
+          ]
+        },
+        {
+          "title": "Changes to these Terms",
+          "body": [
+            "We may revise these Terms from time to time. If we make material changes, we will announce them on this page and update the \"Last updated\" date. Continuing to use the Service after a change means you accept the revised Terms."
+          ]
+        },
+        {
+          "title": "Governing law",
+          "body": [
+            "These Terms are governed by the laws of Australia. Nothing in these Terms limits any rights you may have under mandatory consumer protection laws that apply to you."
+          ]
+        },
+        {
+          "title": "Contact us",
+          "body": [
+            "If you have any questions about these Terms, please email us at info@wavemocards.com."
+          ]
+        }
+      ]
     }
   },
   "emoCards": {
