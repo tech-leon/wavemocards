@@ -9,7 +9,7 @@ export const LOCALE_HEADER_NAME = 'x-wavemocards-locale';
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export type PublicLocale = Locale;
 
-const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards'] as const;
+const PUBLIC_ROUTE_PREFIXES = ['/about-emotions', '/emo-cards', '/privacy', '/terms'] as const;
 
 export function getLocaleCookieOptions() {
   return {

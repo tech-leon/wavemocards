@@ -51,7 +51,7 @@ describe('stripLocaleFromPathname', () => {
 });
 
 describe('isPublicPath', () => {
-  it.each(['/', '/emo-cards', '/emo-cards/anger', '/about-emotions', '/en/emo-cards'])(
+  it.each(['/', '/emo-cards', '/emo-cards/anger', '/about-emotions', '/en/emo-cards', '/privacy', '/terms', '/ja/privacy'])(
     'treats %s as public',
     (p) => expect(isPublicPath(p)).toBe(true),
   );

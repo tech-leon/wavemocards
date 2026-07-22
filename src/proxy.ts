@@ -146,6 +146,8 @@ export const config = {
     "/about-emotions",
     "/emo-cards",
     "/emo-cards/(.*)",
+    "/privacy",
+    "/terms",
     "/zh-TW/:path*",
     "/en/:path*",
     "/ja/:path*",

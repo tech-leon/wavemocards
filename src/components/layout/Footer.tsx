@@ -58,6 +58,8 @@ export async function Footer({ locale }: FooterProps) {
   const year = new Date().getFullYear();
   const homeHref = localizeHref('/', locale);
   const aboutHref = localizeHref('/about-emotions', locale);
+  const privacyHref = localizeHref('/privacy', locale);
+  const termsHref = localizeHref('/terms', locale);
 
   return (
     <footer className="border-t border-border" role="contentinfo">
@@ -122,6 +124,16 @@ export async function Footer({ locale }: FooterProps) {
                   >
                     {t('links.reportIssue')}
                   </a>
+                </li>
+                <li>
+                  <Link href={privacyHref} className="inline-flex transition-colors hover:text-main">
+                    {t('links.privacy')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={termsHref} className="inline-flex transition-colors hover:text-main">
+                    {t('links.terms')}
+                  </Link>
                 </li>
               </ul>
             </section>
