@@ -36,6 +36,9 @@ export async function GET(request: NextRequest) {
   }
 
   const days = listExportDays(new Date(), LOOKBACK_DAYS);
+  // DEFAULT now() only covers inserts; on the ON CONFLICT update path
+  // updated_at keeps its old value unless the payload sets it.
+  const exportedAt = new Date().toISOString();
   let upserted = 0;
   const failures: string[] = [];
 
@@ -64,7 +67,9 @@ export async function GET(request: NextRequest) {
     const rows = toDailyRows(day, data);
     if (rows.length === 0) continue;
 
-    const { error } = await supabase.from('analytics_route_daily').upsert(rows);
+    const { error } = await supabase
+      .from('analytics_route_daily')
+      .upsert(rows.map((row) => ({ ...row, updated_at: exportedAt })));
     if (error) {
       console.error(`Analytics export: upsert for ${day} failed:`, error);
       failures.push(day);
