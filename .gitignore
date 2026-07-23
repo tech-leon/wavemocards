@@ -56,3 +56,4 @@ next-env.d.ts
 # impeccable design tokens (local only)
 .impeccable/
 .research/
+graphify-out/
