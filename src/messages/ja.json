@@ -150,7 +150,8 @@
       "unknown": "わからない",
       "email": "Email",
       "password": "パスワード",
-      "date": "日付"
+      "date": "日付",
+      "defaultUserName": "あなた"
     },
     "illustrationCredit": {
       "by": "イラスト：",
@@ -510,6 +511,15 @@
     }
   },
   "explore": {
+    "progress": {
+      "steps": {
+        "strength1": "1回目の感情の強さ",
+        "storyBackground": "背景編",
+        "storyAction": "行動編",
+        "strength2": "2回目の感情の強さ",
+        "complete": "自分に感謝"
+      }
+    },
     "entry": {
       "aria": {
         "section": "感情のポータルを探索する"

@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 interface ProgressBarProps {
@@ -8,14 +9,15 @@ interface ProgressBarProps {
 }
 
 const steps = [
-  { label: '1st情緒強度', path: '/explore/strength/1' },
-  { label: '背景篇', path: '/explore/story/background' },
-  { label: '行動篇', path: '/explore/story/action' },
-  { label: '2nd情緒強度', path: '/explore/strength/2' },
-  { label: '感謝自我', path: '/explore/complete' },
-];
+  { key: 'strength1', path: '/explore/strength/1' },
+  { key: 'storyBackground', path: '/explore/story/background' },
+  { key: 'storyAction', path: '/explore/story/action' },
+  { key: 'strength2', path: '/explore/strength/2' },
+  { key: 'complete', path: '/explore/complete' },
+] as const;
 
 export function ProgressBar({ currentStep }: ProgressBarProps) {
+  const t = useTranslations('explore.progress.steps');
   const router = useRouter();
   const progressPercent = ((currentStep - 1) / (steps.length - 1)) * 100;
 
@@ -43,7 +45,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
               <button
                 key={stepNum}
                 type="button"
-                title={step.label}
+                title={t(step.key)}
                 disabled={!isClickable}
                 onClick={() => {
                   if (isClickable) {

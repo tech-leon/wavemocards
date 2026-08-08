@@ -1,4 +1,5 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { getRequestLocale } from '@/lib/i18n/request';
 import {
@@ -16,9 +17,10 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await getRequestLocale();
   const categoryData = await getEmotionCategoryBySlug(category, locale);
   const name = categoryData?.name || category;
+  const t = await getTranslations('meta.explore.category');
   return {
-    title: `浪潮情緒卡｜探索情緒｜${name}`,
-    description: `瀏覽${name}類情緒卡，選擇放入你的情緒卡夾。`,
+    title: t('title', { category: name }),
+    description: t('description', { category: name }),
   };
 }
 

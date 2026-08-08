@@ -14,7 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ExploreCompletePage() {
   const { user } = await withAuth({ ensureSignedIn: true });
-  const userName = user.firstName?.trim() || '你';
+  const tCommon = await getTranslations('common.labels');
+  const userName = user.firstName?.trim() || tCommon('defaultUserName');
 
   return <ExploreCompleteContent userName={userName} />;
 }

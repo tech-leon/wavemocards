@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { toEmotionCardData } from '@/lib/emotion-card';
 import { EmotionCard } from '@/components/emotion/EmotionCard';
@@ -37,6 +38,7 @@ export function CategoryCardsContent({
   cards,
   locale,
 }: CategoryCardsContentProps) {
+  const t = useTranslations('emoCards.category');
   const [selectedCard, setSelectedCard] = useState<EmotionCardData | null>(null);
 
   const handleCardClick = (card: EmotionCard) => {
@@ -60,7 +62,7 @@ export function CategoryCardsContent({
                   href={localizeHref('/emo-cards', locale)}
                   className="px-4 py-2 border border-main text-main rounded-full hover:bg-main hover:text-white transition-colors font-medium"
                 >
-                  返回
+                  {t('backToAllCards')}
                 </Link>
               </div>
             </div>

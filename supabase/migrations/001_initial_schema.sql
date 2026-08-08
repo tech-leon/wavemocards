@@ -99,15 +99,15 @@ CREATE TABLE IF NOT EXISTS emotion_records (
     card_2_id INT REFERENCES emotion_cards(id) ON DELETE SET NULL,
     card_3_id INT REFERENCES emotion_cards(id) ON DELETE SET NULL,
     
-    -- Emotion levels before reflection (1-10 scale)
-    before_level_1 INT CHECK (before_level_1 BETWEEN 1 AND 10),
-    before_level_2 INT CHECK (before_level_2 BETWEEN 1 AND 10),
-    before_level_3 INT CHECK (before_level_3 BETWEEN 1 AND 10),
+    -- Emotion levels before reflection (1-5 scale)
+    before_level_1 INT CHECK (before_level_1 BETWEEN 1 AND 5),
+    before_level_2 INT CHECK (before_level_2 BETWEEN 1 AND 5),
+    before_level_3 INT CHECK (before_level_3 BETWEEN 1 AND 5),
     
-    -- Emotion levels after reflection (1-10 scale)
-    after_level_1 INT CHECK (after_level_1 BETWEEN 1 AND 10),
-    after_level_2 INT CHECK (after_level_2 BETWEEN 1 AND 10),
-    after_level_3 INT CHECK (after_level_3 BETWEEN 1 AND 10),
+    -- Emotion levels after reflection (1-5 scale)
+    after_level_1 INT CHECK (after_level_1 BETWEEN 1 AND 5),
+    after_level_2 INT CHECK (after_level_2 BETWEEN 1 AND 5),
+    after_level_3 INT CHECK (after_level_3 BETWEEN 1 AND 5),
     
     -- Sharing settings
     is_shared BOOLEAN DEFAULT FALSE,
