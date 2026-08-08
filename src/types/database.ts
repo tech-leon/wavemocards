@@ -383,6 +383,6 @@ export interface EmotionRecordWithCards extends EmotionRecord {
 export type Gender = 'male' | 'female' | 'other' | 'prefer_not_to_say';
 
 /**
- * Emotion level (1-10 scale)
+ * Emotion level (1-5 scale)
  */
-export type EmotionLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type EmotionLevel = 1 | 2 | 3 | 4 | 5;
