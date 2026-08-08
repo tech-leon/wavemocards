@@ -70,8 +70,9 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Do not use Simplified Chinese anywhere.
 - Use pnpm to manage packages — never npm.
 - The `middleware` file convention is deprecated — `src/proxy.ts` fills that role.
-- Reference `.project/tech.md` for tech stack decisions, and `.research/backlog.md` for known outstanding work.
-- `.research/roadmaps.md` is the research-then-implement log: open questions go under **Research** (Question / Findings / Decision), decided work moves to **Implements**. Record findings there before implementing; existing entries show the format.
+- Reference `.project/tech.md` for tech stack decisions, and `.research/roadmaps.md` for known outstanding work.
+- `.research/roadmaps.md` is the research-then-implement log, written in Traditional Chinese: open questions go under **文獻研究** (literature) or **待釐清（需要實機）** (needs the app), each carrying 問題 / 發現 / 決定; decided work moves to **待辦**, split into **開發** and **實機驗證（user testing）**. Record findings there before implementing; existing entries show the format.
+- `.research/decisions.md` archives settled work, newest first. An item moves there once its 待辦 entries are all done — a decision that changes nothing goes straight there. This keeps `roadmaps.md` to live work only.
 - `.research/` is its own separate git repo, deliberately ignored by this root repo — automation checks out both repos together. Never commit `.research/` files here; commit them inside `.research/` itself.
 - Branch flow: `research` → `improvement` → `main`. Research happens on `research` (docs/evidence only, no app code); once evidence is sufficient and a decision is made, it merges into `improvement`, where the decision is implemented in the app and tested; only verified work merges from `improvement` into `main` for release. Leon does the merges.
 - The design system lives in `.project/DESIGN-wavemocards.md` (visual spec) and `.project/PRODUCT.md` (strategy). Follow them for any UI work.
