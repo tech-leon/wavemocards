@@ -21,7 +21,7 @@ const NARRATIVE_FIELDS = [
 ] as const;
 
 function isValidLevel(value: unknown): boolean {
-  return typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 10;
+  return typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 5;
 }
 
 /**
@@ -44,7 +44,7 @@ export function validateRecordInput(
     return { ok: false, key: 'invalidCards' };
   }
 
-  // Levels are optional; when present for a selected card they must be an integer 1–10.
+  // Levels are optional; when present for a selected card they must be an integer 1–5.
   const beforeLevels = payload.beforeLevels as Record<number, unknown> | undefined;
   const afterLevels = payload.afterLevels as Record<number, unknown> | undefined;
   for (const cardId of cards) {

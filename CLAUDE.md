@@ -135,7 +135,7 @@ Schema-only migrations are tracked in git. Migrations 003/004 exist locally but 
 
 Key tables: `profiles`, `emotion_records`, `emotion_categories`, `emotion_cards`, `about_emotions`.
 
-`emotion_records` stores narrative fields (story, reaction, results, feelings, expect, actions), up to 3 emotion card references, before/after emotion levels (1–10), and a `search_vector` for full-text search with CJK support.
+`emotion_records` stores narrative fields (story, reaction, results, feelings, expect, actions), up to 3 emotion card references, before/after emotion levels (1–5), and a `search_vector` for full-text search with CJK support.
 
 ### i18n
 
@@ -178,7 +178,7 @@ Each `(auth)/explore/.../page.tsx` is a thin route wrapper; its UI lives in a si
 ### API input validation
 
 All API route handlers validate request bodies at the trust boundary before any DB write:
-- Range-check numeric inputs (e.g. emotion levels must be 1–10).
+- Range-check numeric inputs (e.g. emotion levels must be 1–5).
 - Cap free-text field length before insert.
 - Reject malformed shapes with a 400 and a translated `apiErrors.*` message.
 

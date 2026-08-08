@@ -11,8 +11,8 @@ describe('validateRecordInput', () => {
   it('accepts up to 3 cards with valid levels and narratives', () => {
     const result = validateRecordInput({
       cards: [1, 2, 3],
-      beforeLevels: { 1: 1, 2: 5, 3: 10 },
-      afterLevels: { 1: 10 },
+      beforeLevels: { 1: 1, 2: 3, 3: 5 },
+      afterLevels: { 1: 5 },
       storyBackground: 'hello',
     });
     expect(result.ok).toBe(true);
@@ -42,7 +42,7 @@ describe('validateRecordInput', () => {
 
   it.each([
     ['below range', 0],
-    ['above range', 11],
+    ['above range', 6],
     ['non-integer', 5.5],
     ['non-number', 'high'],
   ])('rejects a %s level as invalidLevels', (_label, level) => {
