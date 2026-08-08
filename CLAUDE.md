@@ -76,7 +76,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Branch flow: `research` → `improvement` → `main`. Research happens on `research` (docs/evidence only, no app code); once evidence is sufficient and a decision is made, it merges into `improvement`, where the decision is implemented in the app and tested; only verified work merges from `improvement` into `main` for release. Leon does the merges.
 - The design system lives in `.project/DESIGN-wavemocards.md` (visual spec) and `.project/PRODUCT.md` (strategy). Follow them for any UI work.
 - **Plan**: Write your plan in Traditional Chinese.
-- **Memories**: You manage your own memory. Record and update it to ensure that essential information is not forgotten across different sessions, and unnecessary memories can be deleted. DO NOT ask "Do you want to add xxx memory?"
 
 ## Commands
 
