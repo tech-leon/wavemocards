@@ -27,7 +27,7 @@ Wave Emotion Cards（浪潮情緒卡）用九大類情緒卡引導使用者辨�
 
 ## Design Principles
 
-視覺與 token 規則一律以 `DESIGN-wavemocards.md` 為準：§1 Overview 的 Key Characteristics，以及 §2、§3、§4、§6 的 Named Rules。本文件不再重複列出，避免同一套規則散在多份文件裡各自漂移。
+視覺與 token 規則一律以 `DESIGN-wavemocards.md` 為準：§1 Overview 的 Key Characteristics，以及 §2、§3、§5、§8 的 Named Rules（圓角與形狀規則見 §6 Border Radius Scale）。本文件不再重複列出，避免同一套規則散在多份文件裡各自漂移。
 
 ## Accessibility & Inclusion
 
