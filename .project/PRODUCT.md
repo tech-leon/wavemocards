@@ -27,15 +27,11 @@ Wave Emotion Cards（浪潮情緒卡）用九大類情緒卡引導使用者辨�
 
 ## Design Principles
 
-1. **情緒色只屬於情緒。** 九個分類色票只用於情緒卡與其衍生（圖表、分類按鈕），絕不挪作一般介面裝飾。
-2. **圓潤即友善。** 主要動作一律是藥丸（rounded-full）按鈕；卡片與容器用大圓角。尖銳直角不屬於這個產品。
-3. **介面退位給內容。** 中性灰階做骨架，品牌 teal 做引導，插圖與情緒卡才是主角。
-4. **一套灰階，一個語意層。** 中性色只用自家 gray ramp 與語意 token（background、foreground、muted 等），不引入第二套灰。
-5. **三語並重。** 任何排版與字級決策必須在 zh-TW、ja、en 三種語言下都成立。
+視覺與 token 規則一律以 `DESIGN-wavemocards.md` 為準：§1 Overview 的 Key Characteristics，以及 §2、§3、§5、§8 的 Named Rules（圓角與形狀規則見 §6 Border Radius Scale）。本文件不再重複列出，避免同一套規則散在多份文件裡各自漂移。
 
 ## Accessibility & Inclusion
 
 - 目標 WCAG 2.1 AA。
 - Focus ring 使用品牌色（`--ring`），所有互動元件須有可見 focus 狀態。
 - 主題支援 light / dark / system，偏好存於使用者 profile。
-- 動畫皆為短時 ease-out 進場；`prefers-reduced-motion` 尚未全面支援，列於 backlog。
+- 動畫皆為短時 ease-out 進場；`prefers-reduced-motion` 已支援：`ThemeProvider.tsx` 的 `<MotionConfig reducedMotion="user">` 涵蓋 framer-motion，`globals.css` 的 media block 涵蓋 CSS transition 與 smooth scroll。
