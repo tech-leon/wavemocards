@@ -150,7 +150,8 @@
       "unknown": "不清楚",
       "email": "Email",
       "password": "密碼",
-      "date": "日期"
+      "date": "日期",
+      "defaultUserName": "你"
     },
     "illustrationCredit": {
       "by": "Illustration by",
@@ -510,6 +511,15 @@
     }
   },
   "explore": {
+    "progress": {
+      "steps": {
+        "strength1": "1st情緒強度",
+        "storyBackground": "背景篇",
+        "storyAction": "行動篇",
+        "strength2": "2nd情緒強度",
+        "complete": "感謝自我"
+      }
+    },
     "entry": {
       "aria": {
         "section": "探索情緒入口"

@@ -150,7 +150,8 @@
       "unknown": "Unknown",
       "email": "Email",
       "password": "Password",
-      "date": "Date"
+      "date": "Date",
+      "defaultUserName": "you"
     },
     "illustrationCredit": {
       "by": "Illustration by",
@@ -510,6 +511,15 @@
     }
   },
   "explore": {
+    "progress": {
+      "steps": {
+        "strength1": "1st intensity",
+        "storyBackground": "Background",
+        "storyAction": "Action",
+        "strength2": "2nd intensity",
+        "complete": "Thank yourself"
+      }
+    },
     "entry": {
       "aria": {
         "section": "Explore the emotional portal"
